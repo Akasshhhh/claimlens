@@ -160,6 +160,22 @@ async def _verify_trace(trace: LangfuseTracer, trace_id: str) -> dict[str, Any]:
     }
 
 
+async def _verify_traces(
+    trace: LangfuseTracer,
+    trace_ids: Sequence[str],
+    *,
+    spacing_seconds: float = 2.1,
+) -> list[dict[str, Any]]:
+    """Verify traces sequentially to stay below Langfuse's read rate limit."""
+
+    verified: list[dict[str, Any]] = []
+    for index, trace_id in enumerate(trace_ids):
+        if index:
+            await asyncio.sleep(spacing_seconds)
+        verified.append(await _verify_trace(trace, trace_id))
+    return verified
+
+
 async def run_split(
     agent_version: str,
     split: str,
@@ -321,15 +337,22 @@ async def run_split(
     if repository is not None:
         for outcome in outcomes:
             repository.save_outcome(run_id, outcome)
-        repository.finish_run(run_id, "completed", metadata["counts"], result.metrics.model_dump(mode="json"))
 
     await recorder.flush()
     await recorder.wait_for_flush()
     verification: list[dict[str, Any]] = []
-    if verify_traces and isinstance(base_tracer, LangfuseTracer):
-        verification = list(await asyncio.gather(*[_verify_trace(base_tracer, trace_id) for trace_id in trace_ids]))
-        if len(verification) != len(trace_ids):
-            raise RuntimeError("Langfuse trace verification returned incomplete results")
+    try:
+        if verify_traces and isinstance(base_tracer, LangfuseTracer):
+            verification = await _verify_traces(base_tracer, trace_ids)
+            if len(verification) != len(trace_ids):
+                raise RuntimeError("Langfuse trace verification returned incomplete results")
+    except Exception as exc:
+        _write_json(directory / "trace_verification_error.json", {"type": type(exc).__name__, "message": str(exc)})
+        if repository is not None:
+            repository.finish_run(run_id, "failed", metadata["counts"], None)
+        raise
+    if repository is not None:
+        repository.finish_run(run_id, "completed", metadata["counts"], result.metrics.model_dump(mode="json"))
     _write_json(directory / "trace_verification.json", verification)
     _write_json(directory / "trace_exports.json", verification)
     return {
