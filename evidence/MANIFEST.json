@@ -1,5 +1,5 @@
 {
-  "commit": "ea43732c97765ded233d2d174c52fb4f98eac8e8",
+  "commit": "e9a557ab6e05f6969a5a6e3436f7c0890529ba00",
   "csv_sha256": {
     "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
     "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
@@ -402,9 +402,9 @@
       "sha256": "43792203a88261cbdb6a40cb78b575c53de875c8b2b2e05c6bc51fefa52fde90"
     },
     {
-      "bytes": 14976,
-      "path": "evidence/MANIFEST.json",
-      "sha256": "2aa4b0c5f216ba161a79ece80e0ac281552ee3df6821c16e7250412deab60d0c"
+      "bytes": 247,
+      "path": "evidence/langfuse-health.txt",
+      "sha256": "18180144e14d879efa6dab543febd6980df3f051aae4707f9ed02a1b914b1677"
     },
     {
       "bytes": 1333,
