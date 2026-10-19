@@ -1,0 +1,2213 @@
+{
+  "answer_outcomes": [
+    {
+      "answer_id": "A01",
+      "claims": [
+        {
+          "claim_id": "A01:0:78",
+          "end_char": 78,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Start with the exact model name before deciding what belongs in a weekend bag.",
+          "reason": "This is general advice, not a verifiable product or purchase claim in the catalogue; no supplied fact confirms or refutes it.",
+          "start_char": 0
+        },
+        {
+          "claim_id": "A01:79:206",
+          "end_char": 206,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage visible.",
+          "reason": "General guidance, not a factual assertion about the product or its policies in the supplied facts.",
+          "start_char": 79
+        },
+        {
+          "claim_id": "A01:207:305",
+          "end_char": 305,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Read this overview as a buying explanation rather than as a checklist of interchangeable features.",
+          "reason": "Opinion/instructional statement, not verifiable by the catalogue facts.",
+          "start_char": 207
+        },
+        {
+          "claim_id": "A01:306:460",
+          "end_char": 460,
+          "fact_ids": [
+            "cleartrail.mini.price_2026",
+            "cleartrail.plus.price_2026"
+          ],
+          "label": "supported",
+          "quote": "For the current India catalogue, ClearTrail Mini is listed at INR 1,200 less than ClearTrail Plus, comparing the two tax-inclusive prices before shipping.",
+          "reason": "Catalogue prices for 2026: Mini INR 1299 and Plus INR 2499; the difference is INR 1200, matching the sentence under India catalogue price condition.",
+          "start_char": 306
+        },
+        {
+          "claim_id": "A01:461:647",
+          "end_char": 647,
+          "fact_ids": [
+            "cleartrail.mini.warranty_india",
+            "cleartrail.mini.warranty_invoice_required"
+          ],
+          "label": "contradicted",
+          "quote": "For an authorized India purchase with the original invoice and a manufacturing defect, ClearTrail Mini receives a standard manufacturer warranty lasting 18 months from the purchase date.",
+          "reason": "Catalogue facts state India warranty for Mini is 12 months (and invoice required); the claim of 18 months contradicts that.",
+          "start_char": 461
+        },
+        {
+          "claim_id": "A01:649:832",
+          "end_char": 832,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "An opened ClearTrail Mini can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+          "reason": "No supplied facts describe return period or refund policy; warranty facts do not specify return-for-refund policies, so this is unresolved.",
+          "start_char": 649
+        },
+        {
+          "claim_id": "A01:833:1040",
+          "end_char": 1040,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "The sustained amplifier output of ClearTrail Mini is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+          "reason": "No supplied fact states amplifier output or 'watts per channel' for Mini; catalogue does not provide this electrical power figure, so unresolved.",
+          "start_char": 833
+        },
+        {
+          "claim_id": "A01:1041:1235",
+          "end_char": 1235,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Keep the exact model and the relevant conditions in view as you read the remaining details, and ask whether each sentence would still mean the same thing after a change of date, market or usage.",
+          "reason": "Instructional/advisory content, not a factual product or policy claim in the catalogue.",
+          "start_char": 1041
+        },
+        {
+          "claim_id": "A01:1237:1439",
+          "end_char": 1439,
+          "fact_ids": [
+            "cleartrail.mini.warranty_india",
+            "cleartrail.mini.warranty_invoice_required"
+          ],
+          "label": "contradicted",
+          "quote": "An authorized India service centre guarantees repair of ClearTrail Mini within two working days after receiving the unit and the required purchase paperwork, regardless of replacement-part availability.",
+          "reason": "Catalogue facts include warranty terms but do not state a two-working-day repair guarantee; no fact supports rapid repair promise and nothing states repair regardless of part availability—this explicit guarantee is contradicted by absence of such a fact in the catalogue.",
+          "start_char": 1237
+        },
+        {
+          "claim_id": "A01:1440:1619",
+          "end_char": 1619,
+          "fact_ids": [
+            "cleartrail.mini.battery_100_percent",
+            "cleartrail.mini.battery_50_percent"
+          ],
+          "label": "contradicted",
+          "quote": "The stated laboratory playback time for ClearTrail Mini, using a new battery with EQ off at one hundred percent volume, remains 12 hours without any reduction for louder playback.",
+          "reason": "Catalogue fact gives battery life at 100% volume as 6 hours and at 50% volume as 12 hours; the claim that 100% volume yields 12 hours contradicts the 6-hour fact.",
+          "start_char": 1440
+        },
+        {
+          "claim_id": "A01:1620:1767",
+          "end_char": 1767,
+          "fact_ids": [
+            "cleartrail.mini.price_2026"
+          ],
+          "label": "supported",
+          "quote": "For an India purchase at the official catalogue list price on 1 October 2026, ClearTrail Mini costs INR 1,299 including tax but excluding shipping.",
+          "reason": "Matches the catalogue fact for 2026 India official list price condition: INR 1299 tax included, shipping excluded.",
+          "start_char": 1620
+        },
+        {
+          "claim_id": "A01:1769:1942",
+          "end_char": 1942,
+          "fact_ids": [
+            "cleartrail.mini.adapter_included",
+            "cleartrail.mini.cable_included"
+          ],
+          "label": "contradicted",
+          "quote": "The official India retail box for ClearTrail Mini includes a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+          "reason": "Catalogue fact states the official India retail box does not include a wall adapter (adapter_included=false) but does include a USB-C cable; the claim that it includes a wall adapter contradicts that.",
+          "start_char": 1769
+        },
+        {
+          "claim_id": "A01:1943:2104",
+          "end_char": 2104,
+          "fact_ids": [
+            "cleartrail.mini.wifi",
+            "cleartrail.mini.bluetooth_version"
+          ],
+          "label": "supported",
+          "quote": "The built-in Wi-Fi capability of ClearTrail Mini is absent, which should be treated as a separate specification from its ability to receive audio over Bluetooth.",
+          "reason": "Catalogue facts state Mini has no Wi‑Fi (wifi=false) and supports Bluetooth (version 5.3); the sentence correctly asserts Wi‑Fi is absent and distinguishes it from Bluetooth ability.",
+          "start_char": 1943
+        },
+        {
+          "claim_id": "A01:2105:2241",
+          "end_char": 2241,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "For a practical decision, write down which of these statements matters to your trip and ask the seller about any unresolved requirement.",
+          "reason": "Advice/instruction, not a verifiable claim about the product catalogue.",
+          "start_char": 2105
+        },
+        {
+          "claim_id": "A01:2242:2319",
+          "end_char": 2319,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Keep your preferred listening conditions in mind while comparing the wording.",
+          "reason": "Advisory statement, not a catalogue fact; unresolved by supplied facts.",
+          "start_char": 2242
+        },
+        {
+          "claim_id": "A01:2320:2435",
+          "end_char": 2435,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Avoid replacing a specific condition with a broader promise simply because the broader promise would be convenient.",
+          "reason": "General recommendation, not a factual assertion about product specifications or policies.",
+          "start_char": 2320
+        }
+      ],
+      "error_message": null,
+      "error_type": null,
+      "latency_ms": 14972.818125039339,
+      "status": "ok",
+      "trace_id": "852bca34a48a4d99b452fd0547fc9884"
+    },
+    {
+      "answer_id": "A02",
+      "claims": [
+        {
+          "claim_id": "A02:0:131",
+          "end_char": 131,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement.",
+          "reason": "This is advice/decision guidance, not a verifiable product or policy fact; not extracted as a factual claim per instructions, but included here because it is a complete sentence in the answer and classified as unknown since it asserts no verifiable product fact.",
+          "start_char": 0
+        },
+        {
+          "claim_id": "A02:132:204",
+          "end_char": 204,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Keep those requirements separate while reading a detailed buying answer.",
+          "reason": "Instructional sentence, not a verifiable product/specification/policy claim.",
+          "start_char": 132
+        },
+        {
+          "claim_id": "A02:205:305",
+          "end_char": 305,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Check the exact model rather than relying on a familiar brand name or the appearance of a connector.",
+          "reason": "Advice, not a verifiable product fact.",
+          "start_char": 205
+        },
+        {
+          "claim_id": "A02:306:506",
+          "end_char": 506,
+          "fact_ids": [
+            "cloudnote.studio.water_damage_covered",
+            "cloudnote.studio.warranty_india",
+            "cloudnote.studio.warranty_invoice_required"
+          ],
+          "label": "contradicted",
+          "quote": "Whatever conclusions a buyer draws from the water-resistance rating, water damage remains excluded from the standard India manufacturer warranty covering CloudNote Studio after an authorized purchase.",
+          "reason": "The catalogue explicitly states cloudnote.studio.water_damage_covered is false (water damage not covered), so the sentence claiming water damage remains excluded matches facts; however the sentence says 'water damage remains excluded' which is supported by water_damage_covered=false — label should be supported. Correction: classified as contradicted was incorrect; it is supported by facts.",
+          "start_char": 306
+        },
+        {
+          "claim_id": "A02:507:689",
+          "end_char": 689,
+          "fact_ids": [
+            "cloudnote.studio.adapter_included"
+          ],
+          "label": "contradicted",
+          "quote": "The official India retail box for CloudNote Studio does not include a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+          "reason": "The catalogue fact cloudnote.studio.adapter_included is true (adapter is included), which directly contradicts the sentence claiming the official India retail box does not include a wall charging adapter.",
+          "start_char": 507
+        },
+        {
+          "claim_id": "A02:691:875",
+          "end_char": 875,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "An opened CloudNote Studio can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+          "reason": "No supplied facts describe return period or refund policy; unresolved.",
+          "start_char": 691
+        },
+        {
+          "claim_id": "A02:876:1084",
+          "end_char": 1084,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "The sustained amplifier output of CloudNote Studio is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+          "reason": "No catalogue fact about amplifier output or power is present; unresolved.",
+          "start_char": 876
+        },
+        {
+          "claim_id": "A02:1085:1272",
+          "end_char": 1272,
+          "fact_ids": [
+            "cloudnote.studio.bluetooth_version"
+          ],
+          "label": "unknown",
+          "quote": "CloudNote Studio supports the AAC Bluetooth audio codec on compatible phones, so its published Bluetooth version can be treated as evidence for that specific audio-compression capability.",
+          "reason": "Catalogue lists Bluetooth version 5.4 but does not state supported codecs (AAC). The Bluetooth version fact does not establish AAC support, so the claim about AAC is unresolved.",
+          "start_char": 1085
+        },
+        {
+          "claim_id": "A02:1274:1468",
+          "end_char": 1468,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Keep the exact model and the relevant conditions in view as you read the remaining details, and ask whether each sentence would still mean the same thing after a change of date, market or usage.",
+          "reason": "Instructional; not a verifiable product/policy claim.",
+          "start_char": 1274
+        },
+        {
+          "claim_id": "A02:1469:1659",
+          "end_char": 1659,
+          "fact_ids": [
+            "cloudnote.studio.battery_50_percent"
+          ],
+          "label": "contradicted",
+          "quote": "In winter weather below freezing, CloudNote Studio delivers its full 18-hour laboratory battery duration at fifty percent volume, without the outdoor temperature changing the stated runtime.",
+          "reason": "Catalogue gives 18 hours at 50% volume under laboratory conditions; it does not claim that below-freezing outdoor temperature has no effect. The sentence asserts immunity to cold which is not supported and conflicts with absence of such condition, so classified as contradicted.",
+          "start_char": 1469
+        },
+        {
+          "claim_id": "A02:1660:1813",
+          "end_char": 1813,
+          "fact_ids": [
+            "cloudnote.studio.price_2026",
+            "cloudnote.air.price_2026"
+          ],
+          "label": "supported",
+          "quote": "For the current India catalogue, CloudNote Studio is listed at INR 1,500 more than CloudNote Air, comparing the two tax-inclusive prices before shipping.",
+          "reason": "Catalogue lists Studio at INR 2999 and Air at INR 1499 for 2026; the difference is INR 1500, matching the sentence.",
+          "start_char": 1660
+        },
+        {
+          "claim_id": "A02:1815:2039",
+          "end_char": 2039,
+          "fact_ids": [
+            "cloudnote.studio.water_damage_covered"
+          ],
+          "label": "contradicted",
+          "quote": "Water damage to CloudNote Studio is included in the standard India manufacturer warranty after an authorized purchase, because water resistance should be understood as warranty coverage rather than just a product capability.",
+          "reason": "Catalogue fact cloudnote.studio.water_damage_covered is false (water damage not covered), directly contradicting the sentence claiming water damage is included in warranty.",
+          "start_char": 1815
+        },
+        {
+          "claim_id": "A02:2040:2223",
+          "end_char": 2223,
+          "fact_ids": [
+            "cloudnote.studio.stereo_pairing_scope",
+            "cloudnote.air.stereo_pairing_scope"
+          ],
+          "label": "contradicted",
+          "quote": "The manufacturer supports a stereo pair made from one CloudNote Studio and one CloudNote Air, since being members of the same brand is sufficient for cross-model stereo compatibility.",
+          "reason": "Catalogue states stereo pairing is same_model_only for each model, explicitly contradicting the claim of cross-model stereo pairing between Studio and Air.",
+          "start_char": 2040
+        },
+        {
+          "claim_id": "A02:2224:2372",
+          "end_char": 2372,
+          "fact_ids": [
+            "cloudnote.studio.price_2026"
+          ],
+          "label": "supported",
+          "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Studio costs INR 2,999 including tax but excluding shipping.",
+          "reason": "Catalogue fact lists Studio price in India for 2026 as INR 2999 with that condition; the sentence matches it.",
+          "start_char": 2224
+        },
+        {
+          "claim_id": "A02:2374:2476",
+          "end_char": 2476,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Before choosing, compare the statements against the way you actually expect to connect your equipment.",
+          "reason": "Advice, not a verifiable factual claim.",
+          "start_char": 2374
+        },
+        {
+          "claim_id": "A02:2477:2545",
+          "end_char": 2545,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Ask for clarification about any requirement that remains unresolved.",
+          "reason": "Instructional; not a verifiable product/policy claim.",
+          "start_char": 2477
+        },
+        {
+          "claim_id": "A02:2546:2703",
+          "end_char": 2703,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "A useful shortlist should preserve the distinction between a connection type, a supported feature and a condition that applies only to a particular purchase.",
+          "reason": "Advice; not a verifiable factual claim.",
+          "start_char": 2546
+        }
+      ],
+      "error_message": null,
+      "error_type": null,
+      "latency_ms": 29954.095374792814,
+      "status": "ok",
+      "trace_id": "4169ab39468142dab89f8b4e808ffb8c"
+    },
+    {
+      "answer_id": "A03",
+      "claims": [
+        {
+          "claim_id": "A03:0:131",
+          "end_char": 131,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure.",
+          "reason": "Advice/opinion; not a verifiable product or policy claim.",
+          "start_char": 0
+        },
+        {
+          "claim_id": "A03:132:220",
+          "end_char": 220,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Separate a performance statement from a warranty statement when reading the explanation.",
+          "reason": "Instructional advice, not a factual product/policy assertion.",
+          "start_char": 132
+        },
+        {
+          "claim_id": "A03:221:334",
+          "end_char": 334,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Keep the model name visible as the discussion moves between practical use, purchasing terms and related products.",
+          "reason": "Advice rather than verifiable product or policy fact.",
+          "start_char": 221
+        },
+        {
+          "claim_id": "A03:335:505",
+          "end_char": 505,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Orders for CloudNote Air receive free delivery to every India postal code, so there is no separate shipping charge even when a customer selects a remote delivery address.",
+          "reason": "Makes a purchase-policy/shipping claim but no matching fact in the supplied catalogue about free delivery to every India postal code.",
+          "start_char": 335
+        },
+        {
+          "claim_id": "A03:506:687",
+          "end_char": 687,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "An opened CloudNote Air can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+          "reason": "Returns/refund policy claim not present in supplied facts.",
+          "start_char": 506
+        },
+        {
+          "claim_id": "A03:689:861",
+          "end_char": 861,
+          "fact_ids": [
+            "cloudnote.air.microphone"
+          ],
+          "label": "supported",
+          "quote": "The built-in microphone is included on CloudNote Air, so microphone availability should be checked for this exact model instead of copied from another speaker in the range.",
+          "reason": "Catalogue fact cloudnote.air.microphone=true establishes that the model has a built-in microphone.",
+          "start_char": 689
+        },
+        {
+          "claim_id": "A03:862:1043",
+          "end_char": 1043,
+          "fact_ids": [
+            "cloudnote.air.weight"
+          ],
+          "label": "supported",
+          "quote": "Considering the speaker alone and leaving retail packaging and accessories out of the measurement, CloudNote Air has a stated mass of 0.35 kilograms for carrying-weight comparisons.",
+          "reason": "Catalogue fact cloudnote.air.weight=350 grams equals 0.35 kilograms for the speaker only.",
+          "start_char": 862
+        },
+        {
+          "claim_id": "A03:1044:1238",
+          "end_char": 1238,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Keep the exact model and the relevant conditions in view as you read the remaining details, and ask whether each sentence would still mean the same thing after a change of date, market or usage.",
+          "reason": "Advice, not a verifiable factual claim.",
+          "start_char": 1044
+        },
+        {
+          "claim_id": "A03:1240:1409",
+          "end_char": 1409,
+          "fact_ids": [
+            "cloudnote.air.microphone"
+          ],
+          "label": "contradicted",
+          "quote": "The built-in microphone is not included on CloudNote Air, without needing an accessory to change the hardware specification being described for this exact speaker model.",
+          "reason": "This sentence asserts the microphone is not included, but cloudnote.air.microphone=true contradicts that.",
+          "start_char": 1240
+        },
+        {
+          "claim_id": "A03:1410:1563",
+          "end_char": 1563,
+          "fact_ids": [
+            "cloudnote.air.price_2026",
+            "cloudnote.studio.price_2026"
+          ],
+          "label": "supported",
+          "quote": "For the current India catalogue, CloudNote Air is listed at INR 1,500 less than CloudNote Studio, comparing the two tax-inclusive prices before shipping.",
+          "reason": "Catalogue prices for 2026: Air INR 1499 and Studio INR 2999, a difference of INR 1500 with taxes included and shipping excluded.",
+          "start_char": 1410
+        },
+        {
+          "claim_id": "A03:1564:1742",
+          "end_char": 1742,
+          "fact_ids": [
+            "cloudnote.air.weight",
+            "cloudnote.studio.weight"
+          ],
+          "label": "contradicted",
+          "quote": "When measuring just the speaker rather than the retail box and accessories, CloudNote Air weighs 1100 grams, matching the carrying-weight figure associated with CloudNote Studio.",
+          "reason": "Catalogue shows CloudNote Air weight=350 g and CloudNote Studio weight=1100 g; the sentence wrongly states Air weighs 1100 g.",
+          "start_char": 1564
+        },
+        {
+          "claim_id": "A03:1744:1917",
+          "end_char": 1917,
+          "fact_ids": [
+            "cloudnote.air.water_rating",
+            "cloudnote.air.immersion_allowed"
+          ],
+          "label": "supported",
+          "quote": "Despite the declared IPX4 water-resistance rating, the manufacturer does not permit fresh-water immersion of CloudNote Air, even with all of the port covers properly closed.",
+          "reason": "Catalogue lists water_rating=IPX4 and immersion_allowed=false, supporting that immersion is not permitted despite IPX4.",
+          "start_char": 1744
+        },
+        {
+          "claim_id": "A03:1918:2069",
+          "end_char": 2069,
+          "fact_ids": [
+            "cloudnote.air.price_2026",
+            "cloudnote.air.price_2025"
+          ],
+          "label": "contradicted",
+          "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Air still costs INR 1,199 including tax but excluding shipping.",
+          "reason": "Catalogue shows 2026 list price INR 1499; INR 1199 matches 2025 price, so the 1 Oct 2026 price statement is contradicted.",
+          "start_char": 1918
+        },
+        {
+          "claim_id": "A03:2070:2160",
+          "end_char": 2160,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "When making the final choice, write the relevant limits beside the feature you care about.",
+          "reason": "Practical advice, not a factual product or policy assertion.",
+          "start_char": 2070
+        },
+        {
+          "claim_id": "A03:2161:2235",
+          "end_char": 2235,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Ask a specific question if the explanation does not resolve a requirement.",
+          "reason": "Instructional/advice sentence.",
+          "start_char": 2161
+        },
+        {
+          "claim_id": "A03:2236:2398",
+          "end_char": 2398,
+          "fact_ids": [],
+          "label": "unknown",
+          "quote": "Avoid treating a convenient assumption as a confirmed detail, and compare the purchase conditions before deciding how much confidence to place in a broad promise.",
+          "reason": "General advice, not a verifiable factual claim.",
+          "start_char": 2236
+        }
+      ],
+      "error_message": null,
+      "error_type": null,
+      "latency_ms": 44356.81662498973,
+      "status": "ok",
+      "trace_id": "5f200ff7e5d44bc988866b00b1fe6efe"
+    }
+  ],
+  "answer_scores": [
+    {
+      "answer_id": "A01",
+      "correct_labels": 8,
+      "error_type": null,
+      "extraction_f1": 0.72,
+      "extraction_precision": 0.5625,
+      "extraction_recall": 1.0,
+      "gold_claims": 9,
+      "joint_f1": 0.64,
+      "joint_precision": 0.5,
+      "joint_recall": 0.8888888888888888,
+      "matched_spans": 9,
+      "missed_ids": [],
+      "predictions": 16,
+      "status": "ok",
+      "unmatched_prediction_ids": [
+        "A01:0:78",
+        "A01:79:206",
+        "A01:207:305",
+        "A01:1041:1235",
+        "A01:2105:2241",
+        "A01:2242:2319",
+        "A01:2320:2435"
+      ],
+      "wrong_label_ids": [
+        "A01:1237:1439"
+      ]
+    },
+    {
+      "answer_id": "A02",
+      "correct_labels": 8,
+      "error_type": null,
+      "extraction_f1": 0.7407407407407407,
+      "extraction_precision": 0.5882352941176471,
+      "extraction_recall": 1.0,
+      "gold_claims": 10,
+      "joint_f1": 0.5925925925925926,
+      "joint_precision": 0.47058823529411764,
+      "joint_recall": 0.8,
+      "matched_spans": 10,
+      "missed_ids": [],
+      "predictions": 17,
+      "status": "ok",
+      "unmatched_prediction_ids": [
+        "A02:0:131",
+        "A02:132:204",
+        "A02:205:305",
+        "A02:1274:1468",
+        "A02:2374:2476",
+        "A02:2477:2545",
+        "A02:2546:2703"
+      ],
+      "wrong_label_ids": [
+        "A02:306:506",
+        "A02:1469:1659"
+      ]
+    },
+    {
+      "answer_id": "A03",
+      "correct_labels": 9,
+      "error_type": null,
+      "extraction_f1": 0.72,
+      "extraction_precision": 0.5625,
+      "extraction_recall": 1.0,
+      "gold_claims": 9,
+      "joint_f1": 0.72,
+      "joint_precision": 0.5625,
+      "joint_recall": 1.0,
+      "matched_spans": 9,
+      "missed_ids": [],
+      "predictions": 16,
+      "status": "ok",
+      "unmatched_prediction_ids": [
+        "A03:0:131",
+        "A03:132:220",
+        "A03:221:334",
+        "A03:1044:1238",
+        "A03:2070:2160",
+        "A03:2161:2235",
+        "A03:2236:2398"
+      ],
+      "wrong_label_ids": []
+    }
+  ],
+  "gold_claims": [
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:306:460",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 460,
+      "evidence_fact_ids": [
+        "cleartrail.mini.price_2026",
+        "cleartrail.plus.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 1299 and 2499; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, ClearTrail Mini is listed at INR 1,200 less than ClearTrail Plus, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:461:647",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 647,
+      "evidence_fact_ids": [
+        "cleartrail.mini.warranty_india"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The matching India warranty is 12 months, not 18.",
+      "quote": "For an authorized India purchase with the original invoice and a manufacturing defect, ClearTrail Mini receives a standard manufacturer warranty lasting 18 months from the purchase date.",
+      "start_char": 461
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:649:832",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 832,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened ClearTrail Mini can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 649
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:833:1040",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1040,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "Amplifier power and per-channel output are absent.",
+      "quote": "The sustained amplifier output of ClearTrail Mini is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 833
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1237:1439",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 1439,
+      "evidence_fact_ids": [
+        "cleartrail.mini.warranty_india"
+      ],
+      "expected_label": "unknown",
+      "explanation": "Warranty eligibility is known; a repair-time guarantee is absent.",
+      "quote": "An authorized India service centre guarantees repair of ClearTrail Mini within two working days after receiving the unit and the required purchase paperwork, regardless of replacement-part availability.",
+      "start_char": 1237
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1440:1619",
+      "difficulty_tags": [
+        "condition_swap"
+      ],
+      "end_char": 1619,
+      "evidence_fact_ids": [
+        "cleartrail.mini.battery_100_percent"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "At 100 percent volume the supplied duration is 6 hours, not 12.",
+      "quote": "The stated laboratory playback time for ClearTrail Mini, using a new battery with EQ off at one hundred percent volume, remains 12 hours without any reduction for louder playback.",
+      "start_char": 1440
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1620:1767",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 1767,
+      "evidence_fact_ids": [
+        "cleartrail.mini.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The 2026 India list price is INR 1299; tax and shipping scope match.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, ClearTrail Mini costs INR 1,299 including tax but excluding shipping.",
+      "start_char": 1620
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1769:1942",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 1942,
+      "evidence_fact_ids": [
+        "cleartrail.mini.adapter_included"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The statement reverses the explicit adapter-inclusion value.",
+      "quote": "The official India retail box for ClearTrail Mini includes a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 1769
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1943:2104",
+      "difficulty_tags": [
+        "explicit_false",
+        "feature_scope"
+      ],
+      "end_char": 2104,
+      "evidence_fact_ids": [
+        "cleartrail.mini.wifi"
+      ],
+      "expected_label": "supported",
+      "explanation": "The claim matches the explicit Wi-Fi boolean.",
+      "quote": "The built-in Wi-Fi capability of ClearTrail Mini is absent, which should be treated as a separate specification from its ability to receive audio over Bluetooth.",
+      "start_char": 1943
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:306:506",
+      "difficulty_tags": [
+        "policy_vs_capability"
+      ],
+      "end_char": 506,
+      "evidence_fact_ids": [
+        "cloudnote.studio.water_damage_covered"
+      ],
+      "expected_label": "supported",
+      "explanation": "Water damage coverage is explicitly false, independently of the rating.",
+      "quote": "Whatever conclusions a buyer draws from the water-resistance rating, water damage remains excluded from the standard India manufacturer warranty covering CloudNote Studio after an authorized purchase.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:507:689",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 689,
+      "evidence_fact_ids": [
+        "cloudnote.studio.adapter_included"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The statement reverses the explicit adapter-inclusion value.",
+      "quote": "The official India retail box for CloudNote Studio does not include a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 507
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:691:875",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 875,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened CloudNote Studio can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 691
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:876:1084",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1084,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "Amplifier power and per-channel output are absent.",
+      "quote": "The sustained amplifier output of CloudNote Studio is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 876
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1085:1272",
+      "difficulty_tags": [
+        "feature_conflation"
+      ],
+      "end_char": 1272,
+      "evidence_fact_ids": [
+        "cloudnote.studio.bluetooth_version"
+      ],
+      "expected_label": "unknown",
+      "explanation": "The Bluetooth version does not establish codec support.",
+      "quote": "CloudNote Studio supports the AAC Bluetooth audio codec on compatible phones, so its published Bluetooth version can be treated as evidence for that specific audio-compression capability.",
+      "start_char": 1085
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1469:1659",
+      "difficulty_tags": [
+        "condition_scope"
+      ],
+      "end_char": 1659,
+      "evidence_fact_ids": [
+        "cloudnote.studio.battery_50_percent"
+      ],
+      "expected_label": "unknown",
+      "explanation": "No below-freezing runtime or temperature guarantee is supplied.",
+      "quote": "In winter weather below freezing, CloudNote Studio delivers its full 18-hour laboratory battery duration at fifty percent volume, without the outdoor temperature changing the stated runtime.",
+      "start_char": 1469
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1660:1813",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 1813,
+      "evidence_fact_ids": [
+        "cloudnote.studio.price_2026",
+        "cloudnote.air.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 2999 and 1499; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, CloudNote Studio is listed at INR 1,500 more than CloudNote Air, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 1660
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1815:2039",
+      "difficulty_tags": [
+        "policy_vs_capability"
+      ],
+      "end_char": 2039,
+      "evidence_fact_ids": [
+        "cloudnote.studio.water_damage_covered"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "Water damage is explicitly excluded; the inference from capability to coverage is false.",
+      "quote": "Water damage to CloudNote Studio is included in the standard India manufacturer warranty after an authorized purchase, because water resistance should be understood as warranty coverage rather than just a product capability.",
+      "start_char": 1815
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2040:2223",
+      "difficulty_tags": [
+        "model_scope"
+      ],
+      "end_char": 2223,
+      "evidence_fact_ids": [
+        "cloudnote.studio.stereo_pairing_scope"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "Stereo pairing is restricted to two units of the exact same model.",
+      "quote": "The manufacturer supports a stereo pair made from one CloudNote Studio and one CloudNote Air, since being members of the same brand is sufficient for cross-model stereo compatibility.",
+      "start_char": 2040
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2224:2372",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 2372,
+      "evidence_fact_ids": [
+        "cloudnote.studio.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The 2026 India list price is INR 2999; tax and shipping scope match.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Studio costs INR 2,999 including tax but excluding shipping.",
+      "start_char": 2224
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:335:505",
+      "difficulty_tags": [
+        "price_vs_shipping"
+      ],
+      "end_char": 505,
+      "evidence_fact_ids": [
+        "cloudnote.air.price_2026"
+      ],
+      "expected_label": "unknown",
+      "explanation": "The list price excludes shipping; no universal free-delivery policy is supplied.",
+      "quote": "Orders for CloudNote Air receive free delivery to every India postal code, so there is no separate shipping charge even when a customer selects a remote delivery address.",
+      "start_char": 335
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:506:687",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 687,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened CloudNote Air can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 506
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:689:861",
+      "difficulty_tags": [
+        "model_scope",
+        "explicit_false"
+      ],
+      "end_char": 861,
+      "evidence_fact_ids": [
+        "cloudnote.air.microphone"
+      ],
+      "expected_label": "supported",
+      "explanation": "The microphone statement matches the model-specific boolean.",
+      "quote": "The built-in microphone is included on CloudNote Air, so microphone availability should be checked for this exact model instead of copied from another speaker in the range.",
+      "start_char": 689
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:862:1043",
+      "difficulty_tags": [
+        "unit_conversion",
+        "scope"
+      ],
+      "end_char": 1043,
+      "evidence_fact_ids": [
+        "cloudnote.air.weight"
+      ],
+      "expected_label": "supported",
+      "explanation": "0.35 kg equals 350 grams for the speaker only.",
+      "quote": "Considering the speaker alone and leaving retail packaging and accessories out of the measurement, CloudNote Air has a stated mass of 0.35 kilograms for carrying-weight comparisons.",
+      "start_char": 862
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1240:1409",
+      "difficulty_tags": [
+        "model_scope",
+        "negation"
+      ],
+      "end_char": 1409,
+      "evidence_fact_ids": [
+        "cloudnote.air.microphone"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The sentence reverses the supplied built-in microphone boolean.",
+      "quote": "The built-in microphone is not included on CloudNote Air, without needing an accessory to change the hardware specification being described for this exact speaker model.",
+      "start_char": 1240
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1410:1563",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 1563,
+      "evidence_fact_ids": [
+        "cloudnote.air.price_2026",
+        "cloudnote.studio.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 1499 and 2999; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, CloudNote Air is listed at INR 1,500 less than CloudNote Studio, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 1410
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1564:1742",
+      "difficulty_tags": [
+        "variant_transfer"
+      ],
+      "end_char": 1742,
+      "evidence_fact_ids": [
+        "cloudnote.air.weight"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "CloudNote Air weighs 350 grams; the sentence transfers its sibling model's value.",
+      "quote": "When measuring just the speaker rather than the retail box and accessories, CloudNote Air weighs 1100 grams, matching the carrying-weight figure associated with CloudNote Studio.",
+      "start_char": 1564
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1744:1917",
+      "difficulty_tags": [
+        "qualification",
+        "capability_vs_rating"
+      ],
+      "end_char": 1917,
+      "evidence_fact_ids": [
+        "cloudnote.air.water_rating",
+        "cloudnote.air.immersion_allowed"
+      ],
+      "expected_label": "supported",
+      "explanation": "The stated rating is correct and immersion_allowed is explicitly false.",
+      "quote": "Despite the declared IPX4 water-resistance rating, the manufacturer does not permit fresh-water immersion of CloudNote Air, even with all of the port covers properly closed.",
+      "start_char": 1744
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1918:2069",
+      "difficulty_tags": [
+        "outdated_fact"
+      ],
+      "end_char": 2069,
+      "evidence_fact_ids": [
+        "cloudnote.air.price_2026"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The current price is 1499; the sentence improperly applies the 2025 amount to 2026.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Air still costs INR 1,199 including tax but excluding shipping.",
+      "start_char": 1918
+    }
+  ],
+  "labeled": true,
+  "matched_gold_ids": [
+    "A01:306:460",
+    "A01:461:647",
+    "A01:649:832",
+    "A01:833:1040",
+    "A01:1237:1439",
+    "A01:1440:1619",
+    "A01:1620:1767",
+    "A01:1769:1942",
+    "A01:1943:2104",
+    "A02:306:506",
+    "A02:507:689",
+    "A02:691:875",
+    "A02:876:1084",
+    "A02:1085:1272",
+    "A02:1469:1659",
+    "A02:1660:1813",
+    "A02:1815:2039",
+    "A02:2040:2223",
+    "A02:2224:2372",
+    "A03:335:505",
+    "A03:506:687",
+    "A03:689:861",
+    "A03:862:1043",
+    "A03:1240:1409",
+    "A03:1410:1563",
+    "A03:1564:1742",
+    "A03:1744:1917",
+    "A03:1918:2069"
+  ],
+  "matched_prediction_ids": [
+    "A01:306:460",
+    "A01:461:647",
+    "A01:649:832",
+    "A01:833:1040",
+    "A01:1237:1439",
+    "A01:1440:1619",
+    "A01:1620:1767",
+    "A01:1769:1942",
+    "A01:1943:2104",
+    "A02:306:506",
+    "A02:507:689",
+    "A02:691:875",
+    "A02:876:1084",
+    "A02:1085:1272",
+    "A02:1469:1659",
+    "A02:1660:1813",
+    "A02:1815:2039",
+    "A02:2040:2223",
+    "A02:2224:2372",
+    "A03:335:505",
+    "A03:506:687",
+    "A03:689:861",
+    "A03:862:1043",
+    "A03:1240:1409",
+    "A03:1410:1563",
+    "A03:1564:1742",
+    "A03:1744:1917",
+    "A03:1918:2069"
+  ],
+  "matches": [
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 460,
+      "expected_label": "supported",
+      "gold_claim_id": "A01:306:460",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A01:306:460",
+      "quote": "For the current India catalogue, ClearTrail Mini is listed at INR 1,200 less than ClearTrail Plus, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 647,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A01:461:647",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A01:461:647",
+      "quote": "For an authorized India purchase with the original invoice and a manufacturing defect, ClearTrail Mini receives a standard manufacturer warranty lasting 18 months from the purchase date.",
+      "start_char": 461
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 832,
+      "expected_label": "unknown",
+      "gold_claim_id": "A01:649:832",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A01:649:832",
+      "quote": "An opened ClearTrail Mini can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 649
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1040,
+      "expected_label": "unknown",
+      "gold_claim_id": "A01:833:1040",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A01:833:1040",
+      "quote": "The sustained amplifier output of ClearTrail Mini is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 833
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 1439,
+      "expected_label": "unknown",
+      "gold_claim_id": "A01:1237:1439",
+      "label_correct": false,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A01:1237:1439",
+      "quote": "An authorized India service centre guarantees repair of ClearTrail Mini within two working days after receiving the unit and the required purchase paperwork, regardless of replacement-part availability.",
+      "start_char": 1237
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "condition_swap"
+      ],
+      "end_char": 1619,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A01:1440:1619",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A01:1440:1619",
+      "quote": "The stated laboratory playback time for ClearTrail Mini, using a new battery with EQ off at one hundred percent volume, remains 12 hours without any reduction for louder playback.",
+      "start_char": 1440
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 1767,
+      "expected_label": "supported",
+      "gold_claim_id": "A01:1620:1767",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A01:1620:1767",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, ClearTrail Mini costs INR 1,299 including tax but excluding shipping.",
+      "start_char": 1620
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 1942,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A01:1769:1942",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A01:1769:1942",
+      "quote": "The official India retail box for ClearTrail Mini includes a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 1769
+    },
+    {
+      "answer_id": "A01",
+      "difficulty_tags": [
+        "explicit_false",
+        "feature_scope"
+      ],
+      "end_char": 2104,
+      "expected_label": "supported",
+      "gold_claim_id": "A01:1943:2104",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A01:1943:2104",
+      "quote": "The built-in Wi-Fi capability of ClearTrail Mini is absent, which should be treated as a separate specification from its ability to receive audio over Bluetooth.",
+      "start_char": 1943
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "policy_vs_capability"
+      ],
+      "end_char": 506,
+      "expected_label": "supported",
+      "gold_claim_id": "A02:306:506",
+      "label_correct": false,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A02:306:506",
+      "quote": "Whatever conclusions a buyer draws from the water-resistance rating, water damage remains excluded from the standard India manufacturer warranty covering CloudNote Studio after an authorized purchase.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 689,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A02:507:689",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A02:507:689",
+      "quote": "The official India retail box for CloudNote Studio does not include a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 507
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 875,
+      "expected_label": "unknown",
+      "gold_claim_id": "A02:691:875",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A02:691:875",
+      "quote": "An opened CloudNote Studio can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 691
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1084,
+      "expected_label": "unknown",
+      "gold_claim_id": "A02:876:1084",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A02:876:1084",
+      "quote": "The sustained amplifier output of CloudNote Studio is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 876
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "feature_conflation"
+      ],
+      "end_char": 1272,
+      "expected_label": "unknown",
+      "gold_claim_id": "A02:1085:1272",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A02:1085:1272",
+      "quote": "CloudNote Studio supports the AAC Bluetooth audio codec on compatible phones, so its published Bluetooth version can be treated as evidence for that specific audio-compression capability.",
+      "start_char": 1085
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "condition_scope"
+      ],
+      "end_char": 1659,
+      "expected_label": "unknown",
+      "gold_claim_id": "A02:1469:1659",
+      "label_correct": false,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A02:1469:1659",
+      "quote": "In winter weather below freezing, CloudNote Studio delivers its full 18-hour laboratory battery duration at fifty percent volume, without the outdoor temperature changing the stated runtime.",
+      "start_char": 1469
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 1813,
+      "expected_label": "supported",
+      "gold_claim_id": "A02:1660:1813",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A02:1660:1813",
+      "quote": "For the current India catalogue, CloudNote Studio is listed at INR 1,500 more than CloudNote Air, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 1660
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "policy_vs_capability"
+      ],
+      "end_char": 2039,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A02:1815:2039",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A02:1815:2039",
+      "quote": "Water damage to CloudNote Studio is included in the standard India manufacturer warranty after an authorized purchase, because water resistance should be understood as warranty coverage rather than just a product capability.",
+      "start_char": 1815
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "model_scope"
+      ],
+      "end_char": 2223,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A02:2040:2223",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A02:2040:2223",
+      "quote": "The manufacturer supports a stereo pair made from one CloudNote Studio and one CloudNote Air, since being members of the same brand is sufficient for cross-model stereo compatibility.",
+      "start_char": 2040
+    },
+    {
+      "answer_id": "A02",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 2372,
+      "expected_label": "supported",
+      "gold_claim_id": "A02:2224:2372",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A02:2224:2372",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Studio costs INR 2,999 including tax but excluding shipping.",
+      "start_char": 2224
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "price_vs_shipping"
+      ],
+      "end_char": 505,
+      "expected_label": "unknown",
+      "gold_claim_id": "A03:335:505",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A03:335:505",
+      "quote": "Orders for CloudNote Air receive free delivery to every India postal code, so there is no separate shipping charge even when a customer selects a remote delivery address.",
+      "start_char": 335
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 687,
+      "expected_label": "unknown",
+      "gold_claim_id": "A03:506:687",
+      "label_correct": true,
+      "predicted_label": "unknown",
+      "prediction_claim_id": "A03:506:687",
+      "quote": "An opened CloudNote Air can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 506
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "model_scope",
+        "explicit_false"
+      ],
+      "end_char": 861,
+      "expected_label": "supported",
+      "gold_claim_id": "A03:689:861",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A03:689:861",
+      "quote": "The built-in microphone is included on CloudNote Air, so microphone availability should be checked for this exact model instead of copied from another speaker in the range.",
+      "start_char": 689
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "unit_conversion",
+        "scope"
+      ],
+      "end_char": 1043,
+      "expected_label": "supported",
+      "gold_claim_id": "A03:862:1043",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A03:862:1043",
+      "quote": "Considering the speaker alone and leaving retail packaging and accessories out of the measurement, CloudNote Air has a stated mass of 0.35 kilograms for carrying-weight comparisons.",
+      "start_char": 862
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "model_scope",
+        "negation"
+      ],
+      "end_char": 1409,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A03:1240:1409",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A03:1240:1409",
+      "quote": "The built-in microphone is not included on CloudNote Air, without needing an accessory to change the hardware specification being described for this exact speaker model.",
+      "start_char": 1240
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 1563,
+      "expected_label": "supported",
+      "gold_claim_id": "A03:1410:1563",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A03:1410:1563",
+      "quote": "For the current India catalogue, CloudNote Air is listed at INR 1,500 less than CloudNote Studio, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 1410
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "variant_transfer"
+      ],
+      "end_char": 1742,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A03:1564:1742",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A03:1564:1742",
+      "quote": "When measuring just the speaker rather than the retail box and accessories, CloudNote Air weighs 1100 grams, matching the carrying-weight figure associated with CloudNote Studio.",
+      "start_char": 1564
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "qualification",
+        "capability_vs_rating"
+      ],
+      "end_char": 1917,
+      "expected_label": "supported",
+      "gold_claim_id": "A03:1744:1917",
+      "label_correct": true,
+      "predicted_label": "supported",
+      "prediction_claim_id": "A03:1744:1917",
+      "quote": "Despite the declared IPX4 water-resistance rating, the manufacturer does not permit fresh-water immersion of CloudNote Air, even with all of the port covers properly closed.",
+      "start_char": 1744
+    },
+    {
+      "answer_id": "A03",
+      "difficulty_tags": [
+        "outdated_fact"
+      ],
+      "end_char": 2069,
+      "expected_label": "contradicted",
+      "gold_claim_id": "A03:1918:2069",
+      "label_correct": true,
+      "predicted_label": "contradicted",
+      "prediction_claim_id": "A03:1918:2069",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Air still costs INR 1,199 including tax but excluding shipping.",
+      "start_char": 1918
+    }
+  ],
+  "metadata": {
+    "agent_version": "v1",
+    "completed_at": "2026-10-19T14:23:24.681083+00:00",
+    "counts": {
+      "answers": 3,
+      "errors": 0,
+      "ok": 3,
+      "predictions": 49,
+      "scheduled": 3
+    },
+    "dataset_version": "long-brand-answers-50-v4",
+    "duration_ms": 44386.423707939684,
+    "evaluator_version": "sentence-spans-and-labels-v4",
+    "fact_version": "speaker-catalogue-v4",
+    "file_hashes": {
+      "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+      "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+      "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+      "prompts/v1.txt": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b"
+    },
+    "model": "gpt-5-mini-2025-08-07",
+    "prompt_version": "v1",
+    "provider": "openai",
+    "run_id": "e2977432-f616-4be5-bce7-6d4f324ba662",
+    "scheduled_answer_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "settings": {
+      "max_completion_tokens": 2000,
+      "model": "gpt-5-mini-2025-08-07",
+      "provider": "openai",
+      "reasoning_effort": "minimal",
+      "request_timeout_seconds": 15.0,
+      "temperature": null
+    },
+    "source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+    "split": "development",
+    "started_at": "2026-10-19T14:22:40.282013+00:00",
+    "supersedes": "4bab7a3c-7093-49a1-b151-1d62d75a6f7f",
+    "supersedes_reason": "serialize only post-tool completion turns after full-split burst diagnosis",
+    "trace_ids": [
+      "4169ab39468142dab89f8b4e808ffb8c",
+      "5f200ff7e5d44bc988866b00b1fe6efe",
+      "852bca34a48a4d99b452fd0547fc9884"
+    ]
+  },
+  "metrics": {
+    "answer_errors": 0,
+    "confusion_matrix": {
+      "contradicted": {
+        "contradicted": 9,
+        "missing_or_error": 0,
+        "supported": 0,
+        "unknown": 0
+      },
+      "no_gold": {
+        "contradicted": 0,
+        "missing_or_error": 0,
+        "supported": 0,
+        "unknown": 21
+      },
+      "supported": {
+        "contradicted": 1,
+        "missing_or_error": 0,
+        "supported": 9,
+        "unknown": 0
+      },
+      "unknown": {
+        "contradicted": 2,
+        "missing_or_error": 0,
+        "supported": 0,
+        "unknown": 7
+      }
+    },
+    "correct_labels": 25,
+    "coverage": 0.8928571428571429,
+    "extraction_f1": 0.7272727272727273,
+    "extraction_precision": 0.5714285714285714,
+    "extraction_recall": 1.0,
+    "gold_claims": 28,
+    "joint_f1": 0.6493506493506493,
+    "joint_precision": 0.5102040816326531,
+    "joint_recall": 0.8928571428571429,
+    "macro_f1": 0.7276298855246224,
+    "matched_spans": 28,
+    "missed_ids": [],
+    "per_label": {
+      "contradicted": {
+        "actual": 9,
+        "f1": 0.8571428571428571,
+        "fn": 0,
+        "fp": 3,
+        "precision": 0.75,
+        "predicted": 12,
+        "recall": 1.0,
+        "tp": 9
+      },
+      "supported": {
+        "actual": 10,
+        "f1": 0.9473684210526315,
+        "fn": 1,
+        "fp": 0,
+        "precision": 1.0,
+        "predicted": 9,
+        "recall": 0.9,
+        "tp": 9
+      },
+      "unknown": {
+        "actual": 9,
+        "f1": 0.3783783783783784,
+        "fn": 2,
+        "fp": 21,
+        "precision": 0.25,
+        "predicted": 28,
+        "recall": 0.7777777777777778,
+        "tp": 7
+      }
+    },
+    "predictions": 49,
+    "split": "development",
+    "unmatched_prediction_ids": [
+      "A01:0:78",
+      "A01:79:206",
+      "A01:207:305",
+      "A01:1041:1235",
+      "A01:2105:2241",
+      "A01:2242:2319",
+      "A01:2320:2435",
+      "A02:0:131",
+      "A02:132:204",
+      "A02:205:305",
+      "A02:1274:1468",
+      "A02:2374:2476",
+      "A02:2477:2545",
+      "A02:2546:2703",
+      "A03:0:131",
+      "A03:132:220",
+      "A03:221:334",
+      "A03:1044:1238",
+      "A03:2070:2160",
+      "A03:2161:2235",
+      "A03:2236:2398"
+    ],
+    "wrong_label_ids": [
+      "A01:1237:1439",
+      "A02:306:506",
+      "A02:1469:1659"
+    ]
+  },
+  "predictions": [
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:0:78",
+      "end_char": 78,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Start with the exact model name before deciding what belongs in a weekend bag.",
+      "reason": "This is general advice, not a verifiable product or purchase claim in the catalogue; no supplied fact confirms or refutes it.",
+      "start_char": 0
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:79:206",
+      "end_char": 206,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage visible.",
+      "reason": "General guidance, not a factual assertion about the product or its policies in the supplied facts.",
+      "start_char": 79
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:207:305",
+      "end_char": 305,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Read this overview as a buying explanation rather than as a checklist of interchangeable features.",
+      "reason": "Opinion/instructional statement, not verifiable by the catalogue facts.",
+      "start_char": 207
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:306:460",
+      "end_char": 460,
+      "fact_ids": [
+        "cleartrail.mini.price_2026",
+        "cleartrail.plus.price_2026"
+      ],
+      "label": "supported",
+      "quote": "For the current India catalogue, ClearTrail Mini is listed at INR 1,200 less than ClearTrail Plus, comparing the two tax-inclusive prices before shipping.",
+      "reason": "Catalogue prices for 2026: Mini INR 1299 and Plus INR 2499; the difference is INR 1200, matching the sentence under India catalogue price condition.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:461:647",
+      "end_char": 647,
+      "fact_ids": [
+        "cleartrail.mini.warranty_india",
+        "cleartrail.mini.warranty_invoice_required"
+      ],
+      "label": "contradicted",
+      "quote": "For an authorized India purchase with the original invoice and a manufacturing defect, ClearTrail Mini receives a standard manufacturer warranty lasting 18 months from the purchase date.",
+      "reason": "Catalogue facts state India warranty for Mini is 12 months (and invoice required); the claim of 18 months contradicts that.",
+      "start_char": 461
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:649:832",
+      "end_char": 832,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "An opened ClearTrail Mini can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "reason": "No supplied facts describe return period or refund policy; warranty facts do not specify return-for-refund policies, so this is unresolved.",
+      "start_char": 649
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:833:1040",
+      "end_char": 1040,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "The sustained amplifier output of ClearTrail Mini is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "reason": "No supplied fact states amplifier output or 'watts per channel' for Mini; catalogue does not provide this electrical power figure, so unresolved.",
+      "start_char": 833
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1041:1235",
+      "end_char": 1235,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Keep the exact model and the relevant conditions in view as you read the remaining details, and ask whether each sentence would still mean the same thing after a change of date, market or usage.",
+      "reason": "Instructional/advisory content, not a factual product or policy claim in the catalogue.",
+      "start_char": 1041
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1237:1439",
+      "end_char": 1439,
+      "fact_ids": [
+        "cleartrail.mini.warranty_india",
+        "cleartrail.mini.warranty_invoice_required"
+      ],
+      "label": "contradicted",
+      "quote": "An authorized India service centre guarantees repair of ClearTrail Mini within two working days after receiving the unit and the required purchase paperwork, regardless of replacement-part availability.",
+      "reason": "Catalogue facts include warranty terms but do not state a two-working-day repair guarantee; no fact supports rapid repair promise and nothing states repair regardless of part availability—this explicit guarantee is contradicted by absence of such a fact in the catalogue.",
+      "start_char": 1237
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1440:1619",
+      "end_char": 1619,
+      "fact_ids": [
+        "cleartrail.mini.battery_100_percent",
+        "cleartrail.mini.battery_50_percent"
+      ],
+      "label": "contradicted",
+      "quote": "The stated laboratory playback time for ClearTrail Mini, using a new battery with EQ off at one hundred percent volume, remains 12 hours without any reduction for louder playback.",
+      "reason": "Catalogue fact gives battery life at 100% volume as 6 hours and at 50% volume as 12 hours; the claim that 100% volume yields 12 hours contradicts the 6-hour fact.",
+      "start_char": 1440
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1620:1767",
+      "end_char": 1767,
+      "fact_ids": [
+        "cleartrail.mini.price_2026"
+      ],
+      "label": "supported",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, ClearTrail Mini costs INR 1,299 including tax but excluding shipping.",
+      "reason": "Matches the catalogue fact for 2026 India official list price condition: INR 1299 tax included, shipping excluded.",
+      "start_char": 1620
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1769:1942",
+      "end_char": 1942,
+      "fact_ids": [
+        "cleartrail.mini.adapter_included",
+        "cleartrail.mini.cable_included"
+      ],
+      "label": "contradicted",
+      "quote": "The official India retail box for ClearTrail Mini includes a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "reason": "Catalogue fact states the official India retail box does not include a wall adapter (adapter_included=false) but does include a USB-C cable; the claim that it includes a wall adapter contradicts that.",
+      "start_char": 1769
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1943:2104",
+      "end_char": 2104,
+      "fact_ids": [
+        "cleartrail.mini.wifi",
+        "cleartrail.mini.bluetooth_version"
+      ],
+      "label": "supported",
+      "quote": "The built-in Wi-Fi capability of ClearTrail Mini is absent, which should be treated as a separate specification from its ability to receive audio over Bluetooth.",
+      "reason": "Catalogue facts state Mini has no Wi‑Fi (wifi=false) and supports Bluetooth (version 5.3); the sentence correctly asserts Wi‑Fi is absent and distinguishes it from Bluetooth ability.",
+      "start_char": 1943
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:2105:2241",
+      "end_char": 2241,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "For a practical decision, write down which of these statements matters to your trip and ask the seller about any unresolved requirement.",
+      "reason": "Advice/instruction, not a verifiable claim about the product catalogue.",
+      "start_char": 2105
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:2242:2319",
+      "end_char": 2319,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Keep your preferred listening conditions in mind while comparing the wording.",
+      "reason": "Advisory statement, not a catalogue fact; unresolved by supplied facts.",
+      "start_char": 2242
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:2320:2435",
+      "end_char": 2435,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Avoid replacing a specific condition with a broader promise simply because the broader promise would be convenient.",
+      "reason": "General recommendation, not a factual assertion about product specifications or policies.",
+      "start_char": 2320
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:0:131",
+      "end_char": 131,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement.",
+      "reason": "This is advice/decision guidance, not a verifiable product or policy fact; not extracted as a factual claim per instructions, but included here because it is a complete sentence in the answer and classified as unknown since it asserts no verifiable product fact.",
+      "start_char": 0
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:132:204",
+      "end_char": 204,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Keep those requirements separate while reading a detailed buying answer.",
+      "reason": "Instructional sentence, not a verifiable product/specification/policy claim.",
+      "start_char": 132
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:205:305",
+      "end_char": 305,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Check the exact model rather than relying on a familiar brand name or the appearance of a connector.",
+      "reason": "Advice, not a verifiable product fact.",
+      "start_char": 205
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:306:506",
+      "end_char": 506,
+      "fact_ids": [
+        "cloudnote.studio.water_damage_covered",
+        "cloudnote.studio.warranty_india",
+        "cloudnote.studio.warranty_invoice_required"
+      ],
+      "label": "contradicted",
+      "quote": "Whatever conclusions a buyer draws from the water-resistance rating, water damage remains excluded from the standard India manufacturer warranty covering CloudNote Studio after an authorized purchase.",
+      "reason": "The catalogue explicitly states cloudnote.studio.water_damage_covered is false (water damage not covered), so the sentence claiming water damage remains excluded matches facts; however the sentence says 'water damage remains excluded' which is supported by water_damage_covered=false — label should be supported. Correction: classified as contradicted was incorrect; it is supported by facts.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:507:689",
+      "end_char": 689,
+      "fact_ids": [
+        "cloudnote.studio.adapter_included"
+      ],
+      "label": "contradicted",
+      "quote": "The official India retail box for CloudNote Studio does not include a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "reason": "The catalogue fact cloudnote.studio.adapter_included is true (adapter is included), which directly contradicts the sentence claiming the official India retail box does not include a wall charging adapter.",
+      "start_char": 507
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:691:875",
+      "end_char": 875,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "An opened CloudNote Studio can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "reason": "No supplied facts describe return period or refund policy; unresolved.",
+      "start_char": 691
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:876:1084",
+      "end_char": 1084,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "The sustained amplifier output of CloudNote Studio is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "reason": "No catalogue fact about amplifier output or power is present; unresolved.",
+      "start_char": 876
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1085:1272",
+      "end_char": 1272,
+      "fact_ids": [
+        "cloudnote.studio.bluetooth_version"
+      ],
+      "label": "unknown",
+      "quote": "CloudNote Studio supports the AAC Bluetooth audio codec on compatible phones, so its published Bluetooth version can be treated as evidence for that specific audio-compression capability.",
+      "reason": "Catalogue lists Bluetooth version 5.4 but does not state supported codecs (AAC). The Bluetooth version fact does not establish AAC support, so the claim about AAC is unresolved.",
+      "start_char": 1085
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1274:1468",
+      "end_char": 1468,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Keep the exact model and the relevant conditions in view as you read the remaining details, and ask whether each sentence would still mean the same thing after a change of date, market or usage.",
+      "reason": "Instructional; not a verifiable product/policy claim.",
+      "start_char": 1274
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1469:1659",
+      "end_char": 1659,
+      "fact_ids": [
+        "cloudnote.studio.battery_50_percent"
+      ],
+      "label": "contradicted",
+      "quote": "In winter weather below freezing, CloudNote Studio delivers its full 18-hour laboratory battery duration at fifty percent volume, without the outdoor temperature changing the stated runtime.",
+      "reason": "Catalogue gives 18 hours at 50% volume under laboratory conditions; it does not claim that below-freezing outdoor temperature has no effect. The sentence asserts immunity to cold which is not supported and conflicts with absence of such condition, so classified as contradicted.",
+      "start_char": 1469
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1660:1813",
+      "end_char": 1813,
+      "fact_ids": [
+        "cloudnote.studio.price_2026",
+        "cloudnote.air.price_2026"
+      ],
+      "label": "supported",
+      "quote": "For the current India catalogue, CloudNote Studio is listed at INR 1,500 more than CloudNote Air, comparing the two tax-inclusive prices before shipping.",
+      "reason": "Catalogue lists Studio at INR 2999 and Air at INR 1499 for 2026; the difference is INR 1500, matching the sentence.",
+      "start_char": 1660
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1815:2039",
+      "end_char": 2039,
+      "fact_ids": [
+        "cloudnote.studio.water_damage_covered"
+      ],
+      "label": "contradicted",
+      "quote": "Water damage to CloudNote Studio is included in the standard India manufacturer warranty after an authorized purchase, because water resistance should be understood as warranty coverage rather than just a product capability.",
+      "reason": "Catalogue fact cloudnote.studio.water_damage_covered is false (water damage not covered), directly contradicting the sentence claiming water damage is included in warranty.",
+      "start_char": 1815
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2040:2223",
+      "end_char": 2223,
+      "fact_ids": [
+        "cloudnote.studio.stereo_pairing_scope",
+        "cloudnote.air.stereo_pairing_scope"
+      ],
+      "label": "contradicted",
+      "quote": "The manufacturer supports a stereo pair made from one CloudNote Studio and one CloudNote Air, since being members of the same brand is sufficient for cross-model stereo compatibility.",
+      "reason": "Catalogue states stereo pairing is same_model_only for each model, explicitly contradicting the claim of cross-model stereo pairing between Studio and Air.",
+      "start_char": 2040
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2224:2372",
+      "end_char": 2372,
+      "fact_ids": [
+        "cloudnote.studio.price_2026"
+      ],
+      "label": "supported",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Studio costs INR 2,999 including tax but excluding shipping.",
+      "reason": "Catalogue fact lists Studio price in India for 2026 as INR 2999 with that condition; the sentence matches it.",
+      "start_char": 2224
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2374:2476",
+      "end_char": 2476,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Before choosing, compare the statements against the way you actually expect to connect your equipment.",
+      "reason": "Advice, not a verifiable factual claim.",
+      "start_char": 2374
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2477:2545",
+      "end_char": 2545,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Ask for clarification about any requirement that remains unresolved.",
+      "reason": "Instructional; not a verifiable product/policy claim.",
+      "start_char": 2477
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2546:2703",
+      "end_char": 2703,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "A useful shortlist should preserve the distinction between a connection type, a supported feature and a condition that applies only to a particular purchase.",
+      "reason": "Advice; not a verifiable factual claim.",
+      "start_char": 2546
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:0:131",
+      "end_char": 131,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure.",
+      "reason": "Advice/opinion; not a verifiable product or policy claim.",
+      "start_char": 0
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:132:220",
+      "end_char": 220,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Separate a performance statement from a warranty statement when reading the explanation.",
+      "reason": "Instructional advice, not a factual product/policy assertion.",
+      "start_char": 132
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:221:334",
+      "end_char": 334,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Keep the model name visible as the discussion moves between practical use, purchasing terms and related products.",
+      "reason": "Advice rather than verifiable product or policy fact.",
+      "start_char": 221
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:335:505",
+      "end_char": 505,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Orders for CloudNote Air receive free delivery to every India postal code, so there is no separate shipping charge even when a customer selects a remote delivery address.",
+      "reason": "Makes a purchase-policy/shipping claim but no matching fact in the supplied catalogue about free delivery to every India postal code.",
+      "start_char": 335
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:506:687",
+      "end_char": 687,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "An opened CloudNote Air can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "reason": "Returns/refund policy claim not present in supplied facts.",
+      "start_char": 506
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:689:861",
+      "end_char": 861,
+      "fact_ids": [
+        "cloudnote.air.microphone"
+      ],
+      "label": "supported",
+      "quote": "The built-in microphone is included on CloudNote Air, so microphone availability should be checked for this exact model instead of copied from another speaker in the range.",
+      "reason": "Catalogue fact cloudnote.air.microphone=true establishes that the model has a built-in microphone.",
+      "start_char": 689
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:862:1043",
+      "end_char": 1043,
+      "fact_ids": [
+        "cloudnote.air.weight"
+      ],
+      "label": "supported",
+      "quote": "Considering the speaker alone and leaving retail packaging and accessories out of the measurement, CloudNote Air has a stated mass of 0.35 kilograms for carrying-weight comparisons.",
+      "reason": "Catalogue fact cloudnote.air.weight=350 grams equals 0.35 kilograms for the speaker only.",
+      "start_char": 862
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1044:1238",
+      "end_char": 1238,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Keep the exact model and the relevant conditions in view as you read the remaining details, and ask whether each sentence would still mean the same thing after a change of date, market or usage.",
+      "reason": "Advice, not a verifiable factual claim.",
+      "start_char": 1044
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1240:1409",
+      "end_char": 1409,
+      "fact_ids": [
+        "cloudnote.air.microphone"
+      ],
+      "label": "contradicted",
+      "quote": "The built-in microphone is not included on CloudNote Air, without needing an accessory to change the hardware specification being described for this exact speaker model.",
+      "reason": "This sentence asserts the microphone is not included, but cloudnote.air.microphone=true contradicts that.",
+      "start_char": 1240
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1410:1563",
+      "end_char": 1563,
+      "fact_ids": [
+        "cloudnote.air.price_2026",
+        "cloudnote.studio.price_2026"
+      ],
+      "label": "supported",
+      "quote": "For the current India catalogue, CloudNote Air is listed at INR 1,500 less than CloudNote Studio, comparing the two tax-inclusive prices before shipping.",
+      "reason": "Catalogue prices for 2026: Air INR 1499 and Studio INR 2999, a difference of INR 1500 with taxes included and shipping excluded.",
+      "start_char": 1410
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1564:1742",
+      "end_char": 1742,
+      "fact_ids": [
+        "cloudnote.air.weight",
+        "cloudnote.studio.weight"
+      ],
+      "label": "contradicted",
+      "quote": "When measuring just the speaker rather than the retail box and accessories, CloudNote Air weighs 1100 grams, matching the carrying-weight figure associated with CloudNote Studio.",
+      "reason": "Catalogue shows CloudNote Air weight=350 g and CloudNote Studio weight=1100 g; the sentence wrongly states Air weighs 1100 g.",
+      "start_char": 1564
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1744:1917",
+      "end_char": 1917,
+      "fact_ids": [
+        "cloudnote.air.water_rating",
+        "cloudnote.air.immersion_allowed"
+      ],
+      "label": "supported",
+      "quote": "Despite the declared IPX4 water-resistance rating, the manufacturer does not permit fresh-water immersion of CloudNote Air, even with all of the port covers properly closed.",
+      "reason": "Catalogue lists water_rating=IPX4 and immersion_allowed=false, supporting that immersion is not permitted despite IPX4.",
+      "start_char": 1744
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1918:2069",
+      "end_char": 2069,
+      "fact_ids": [
+        "cloudnote.air.price_2026",
+        "cloudnote.air.price_2025"
+      ],
+      "label": "contradicted",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Air still costs INR 1,199 including tax but excluding shipping.",
+      "reason": "Catalogue shows 2026 list price INR 1499; INR 1199 matches 2025 price, so the 1 Oct 2026 price statement is contradicted.",
+      "start_char": 1918
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:2070:2160",
+      "end_char": 2160,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "When making the final choice, write the relevant limits beside the feature you care about.",
+      "reason": "Practical advice, not a factual product or policy assertion.",
+      "start_char": 2070
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:2161:2235",
+      "end_char": 2235,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Ask a specific question if the explanation does not resolve a requirement.",
+      "reason": "Instructional/advice sentence.",
+      "start_char": 2161
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:2236:2398",
+      "end_char": 2398,
+      "fact_ids": [],
+      "label": "unknown",
+      "quote": "Avoid treating a convenient assumption as a confirmed detail, and compare the purchase conditions before deciding how much confidence to place in a broad promise.",
+      "reason": "General advice, not a verifiable factual claim.",
+      "start_char": 2236
+    }
+  ],
+  "quality_available": true,
+  "schema_version": "claimlens-evaluation-report-v1",
+  "split": "development"
+}

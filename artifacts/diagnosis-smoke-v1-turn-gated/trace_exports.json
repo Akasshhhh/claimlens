@@ -1,0 +1,33 @@
+[
+  {
+    "elapsed_seconds": 0.99,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "4169ab39468142dab89f8b4e808ffb8c"
+  },
+  {
+    "elapsed_seconds": 1.273,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "5f200ff7e5d44bc988866b00b1fe6efe"
+  },
+  {
+    "elapsed_seconds": 0.946,
+    "observation_count": 4,
+    "observation_names": [
+      "model-turn-2",
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "852bca34a48a4d99b452fd0547fc9884"
+  }
+]
