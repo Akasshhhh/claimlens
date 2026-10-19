@@ -1,5 +1,18 @@
 # Assessment audit
 
+## Final-sequence addendum
+
+The audit was refreshed after the corrected controlled sequence. The required
+artifact set is now `v1-development-final-turn-gated`, `v2-development-final`,
+`v1-check-final`, and `v2-check-final`. All four have complete terminal
+outcomes, generation/tool evidence, per-attempt diagnostics, and fetched trace
+receipts. v1 and v2 are separately frozen at `v1-final-frozen` and
+`v2-final-frozen`; their source revisions and prompt hashes are recorded in
+`evidence/MANIFEST.json`. The refreshed offline audit reports complete for
+required receipts, trace diagnostics, development comparability, and manifest
+prompt-hash agreement. Exploratory superseded directories remain untracked and
+are not part of the final required artifact set.
+
 Audit date: 2026-10-19. Scope is the current worktree, `HEAD` commit
 `9de1a5e` (`fix: serialize post-tool completion turns`), the two frozen tags,
 and the saved artifacts. No provider, database, Docker, or Langfuse experiment

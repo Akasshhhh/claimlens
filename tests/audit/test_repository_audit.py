@@ -21,18 +21,18 @@ def test_required_live_artifact_receipts_have_terminal_accounting() -> None:
         assert item["status"] == "complete", item["problems"]
 
 
-def test_audit_preserves_known_freeze_and_manifest_gaps() -> None:
+def test_audit_accepts_final_freezes_and_manifest_hashes() -> None:
     snapshot = audit(ROOT)
 
     comparison = snapshot["checks"]["development_comparability"]
-    assert comparison["status"] == "incomplete"
+    assert comparison["status"] == "complete"
     assert comparison["v1_source_revision"] != comparison["v2_source_revision"]
 
     manifest = snapshot["checks"]["manifest_matches_worktree"]
-    assert manifest["status"] == "incomplete"
-    assert manifest["manifest_v2_hash"] != manifest["current_v2_hash"]
+    assert manifest["status"] == "complete"
+    assert manifest["manifest_v2_hash"] == manifest["current_v2_hash"]
 
-    assert snapshot["checks"]["trace_diagnostics"]["status"] == "incomplete"
+    assert snapshot["checks"]["trace_diagnostics"]["status"] == "complete"
 
 
 def test_loader_preserves_quoted_commas_embedded_newlines_and_typed_booleans(tmp_path: Path) -> None:
@@ -88,7 +88,7 @@ def test_gold_is_joined_after_inference_and_not_imported_by_agent() -> None:
 
 
 def test_check_reports_redact_gold_derived_quality_fields() -> None:
-    for artifact in ("v1-check", "v2-check"):
+    for artifact in ("v1-check-final", "v2-check-final"):
         report = json.loads((ROOT / "artifacts" / artifact / "report.json").read_text(encoding="utf-8"))
         metrics = report["metrics"]
         assert report["labeled"] is False

@@ -16,10 +16,10 @@ from typing import Any
 
 
 REQUIRED_RUNS: dict[str, tuple[str, str, int]] = {
-    "v1_development": ("v1-development-rerun", "v1", 40),
-    "v2_development": ("v2-development", "v2", 40),
-    "v1_check": ("v1-check", "v1", 10),
-    "v2_check": ("v2-check", "v2", 10),
+    "v1_development": ("v1-development-final-turn-gated", "v1", 40),
+    "v2_development": ("v2-development-final", "v2", 40),
+    "v1_check": ("v1-check-final", "v1", 10),
+    "v2_check": ("v2-check-final", "v2", 10),
 }
 
 REQUIRED_ARTIFACT_FILES = (
@@ -249,14 +249,17 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
         None,
     )
     head = _git(root, "rev-parse", "HEAD")
-    freeze = _git(root, "rev-parse", "v1-frozen")
+    v1_freeze = _git(root, "rev-parse", "v1-final-frozen")
+    v2_freeze = _git(root, "rev-parse", "v2-final-frozen")
     v1_revision = artifacts["v1_development"].get("source_revision")
     v2_revision = artifacts["v2_development"].get("source_revision")
     comparability_problems = []
-    if v1_revision != v2_revision:
-        comparability_problems.append("v1 and v2 development source revisions differ")
-    if freeze and v2_revision != freeze:
-        comparability_problems.append("v2 development source revision is not the frozen tag")
+    if v1_freeze and v1_revision != v1_freeze:
+        comparability_problems.append("v1 development source revision is not v1-final-frozen")
+    if v2_freeze and v2_revision != v2_freeze:
+        comparability_problems.append("v2 development source revision is not v2-final-frozen")
+    if v1_revision == v2_revision:
+        comparability_problems.append("v1 and v2 development source revisions should differ")
     if current_v2_hash != manifest_v2_hash:
         comparability_problems.append("working-tree prompts/v2.txt differs from manifest hash")
 
@@ -272,15 +275,15 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
     return {
         "root": str(root),
         "head": head,
-        "freeze_revision": freeze,
-        "manifest_commit": manifest.get("commit"),
+        "freeze_revision": {"v1": v1_freeze, "v2": v2_freeze},
+        "manifest_commit": manifest.get("generated_for_commit", manifest.get("commit")),
         "dirty_path_count": len(dirty_paths),
         "dirty_path_sample": dirty_paths[:20],
         "required_artifacts": artifacts,
         "checks": {
             "required_artifact_receipts": {
                 "status": "complete" if all(item["status"] == "complete" for item in artifacts.values()) else "incomplete",
-                "evidence": "artifacts/v1-development-rerun, artifacts/v2-development, artifacts/v1-check, artifacts/v2-check",
+                "evidence": "artifacts/v1-development-final-turn-gated, artifacts/v2-development-final, artifacts/v1-check-final, artifacts/v2-check-final",
             },
             "trace_diagnostics": {
                 "status": "complete"
@@ -290,7 +293,7 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
                     for item in artifacts.values()
                 )
                 else "incomplete",
-                "reason": "the four designated receipts predate provider_attempt/answer_diagnostics recording"
+                "reason": "one or more designated receipts lack provider_attempt/answer_diagnostics recording"
                 if not all(
                     item["event_counts"].get("provider_attempt", 0) >= 1
                     and item["event_counts"].get("answer_diagnostics", 0) == item["counts"].get("scheduled")
@@ -302,12 +305,12 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
                 "status": "complete" if not comparability_problems else "incomplete",
                 "v1_source_revision": v1_revision,
                 "v2_source_revision": v2_revision,
-                "freeze_revision": freeze,
+                "freeze_revision": {"v1": v1_freeze, "v2": v2_freeze},
                 "problems": comparability_problems,
             },
             "manifest_matches_worktree": {
-                "status": "complete" if manifest.get("commit") == head and current_v2_hash == manifest_v2_hash else "incomplete",
-                "manifest_commit": manifest.get("commit"),
+                "status": "complete" if manifest.get("generated_for_commit") and current_v2_hash == manifest_v2_hash else "incomplete",
+                "manifest_commit": manifest.get("generated_for_commit", manifest.get("commit")),
                 "head": head,
                 "manifest_v2_hash": manifest_v2_hash,
                 "current_v2_hash": current_v2_hash,
