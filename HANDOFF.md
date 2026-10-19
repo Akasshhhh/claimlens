@@ -16,7 +16,7 @@ at `v2-final-frozen`:
 | v1 development A01–A40 | `8cb56eec-6c54-4eab-aba2-317bee75d451` | `artifacts/v1-development-final-turn-gated/` | 37 ok, 3 timeout errors, 605 predictions; joint F1 0.660550 |
 | v2 development A01–A40 | `5a64e5ff-d1e4-4e49-8175-e2c3617c26cb` | `artifacts/v2-development-final/` | 37 ok, 3 timeout errors, 610 predictions; joint F1 0.679513 |
 | v1 check A41–A50 | `93af5381-5900-43f5-8543-29e32e1ee64f` | `artifacts/v1-check-final/` | 9 ok, 1 error, 143 predictions; quality metrics null |
-| v2 check A41–A50 | `a58a7b95-2784-4186-aeab-d5-2161a9386028` | `artifacts/v2-check-final/` | 7 ok, 3 errors, 117 predictions; quality metrics null |
+| v2 check A41–A50 | `a58a7b95-2784-4184-abd5-2161a9386028` | `artifacts/v2-check-final/` | 7 ok, 3 errors, 117 predictions; quality metrics null |
 
 The required escalation was also run before the full experiments:
 `artifacts/v1-escalation-3/` contains A01–A03 with 2 successful empty outputs

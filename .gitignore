@@ -1,13 +1,34 @@
 .env
+.env.*
+!.env.example
+Assessment.docx
 HANDOFF_STATE.md
+.DS_Store
 .venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+build/
+dist/
+*.egg-info/
+*.swp
+*.swo
+*.tmp
+tmp/
+temp/
+.omnirush/
 evidence/runs/
 *.log
+
+# Superseded exploratory artifacts; required final evidence remains tracked.
+artifacts/diagnosis-*/
+artifacts/v1-development-final-2000/
+artifacts/v1-development-final/
 
 # The supplied assessment inputs stay outside the public repository.
 answers.csv
