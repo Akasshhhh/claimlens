@@ -30,18 +30,30 @@
     },
     "manifest_matches_worktree": {
       "current_v2_hash": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
-      "head": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
+      "head": "4a21631734a24b8bbcd1fd18de7a858b4fc86928",
       "manifest_commit": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
       "manifest_v2_hash": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
-      "problems": [],
+      "problems": [
+        "manifest hashes or sizes differ: 1"
+      ],
       "selected_file_scope": {
         "entry_count": 274,
-        "mismatches": [],
+        "mismatches": [
+          {
+            "actual_bytes": 20141,
+            "actual_sha256": "08028918b89173f4a43b8cc90cfbd7ce59396430e0501caeb57d45af7f0bf46f",
+            "manifest_bytes": 20274,
+            "manifest_sha256": "d4bd4611a3d8e3b367f8a87b99a6a74199a6a0975cac2a4f5536992442c85128",
+            "path": "evidence/audit/repository_audit.py"
+          }
+        ],
         "missing": [],
-        "problems": [],
-        "status": "complete"
+        "problems": [
+          "manifest hashes or sizes differ: 1"
+        ],
+        "status": "incomplete"
       },
-      "status": "complete"
+      "status": "incomplete"
     },
     "prompt_provenance": {
       "current_worktree_hashes": {
@@ -72,21 +84,16 @@
       "verification_process_status": "complete"
     }
   },
-  "dirty_path_count": 7,
+  "dirty_path_count": 2,
   "dirty_path_sample": [
-    "evidence/MANIFEST.json",
     "evidence/audit/current-audit.json",
-    "evidence/audit/regenerate_evidence.py",
-    "evidence/final-run-summary.json",
-    "evidence/langfuse-investigation/audit-report.json",
-    "evidence/pytest-output.txt",
-    "evidence/submission/final-provenance.json"
+    "evidence/audit/repository_audit.py"
   ],
   "freeze_revision": {
     "v1": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
     "v2": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
   },
-  "head": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
+  "head": "4a21631734a24b8bbcd1fd18de7a858b4fc86928",
   "manifest_commit": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
   "required_artifacts": {
     "v1_check": {

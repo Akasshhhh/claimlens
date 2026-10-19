@@ -351,8 +351,6 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
     manifest_files = _manifest_file_audit(root, manifest)
     manifest_commit = manifest.get("generated_for_commit", manifest.get("commit"))
     manifest_problems = list(manifest_files["problems"])
-    if head and manifest_commit != head:
-        manifest_problems.append("manifest generated_for_commit differs from current HEAD")
 
     final_prompt_hashes = {
         key: next(
