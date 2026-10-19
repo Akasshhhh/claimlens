@@ -65,6 +65,13 @@ class _ProviderTurn:
     tool_calls: tuple[_ToolCall, ...]
 
 
+@dataclass
+class _RunStats:
+    attempts_used: int = 0
+    completed_turns: int = 0
+    attempted_turns: int = 0
+
+
 def _get(value: Any, key: str, default: Any = None) -> Any:
     if isinstance(value, Mapping):
         return value.get(key, default)
@@ -405,15 +412,53 @@ class ClaimAgent:
             # hide the original provider/validation outcome.
             return None
 
-    async def _complete(self, messages: list[dict[str, Any]], tools: list[dict[str, Any]]) -> Any:
+    async def _complete(
+        self,
+        messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+        *,
+        turn_number: int,
+        trace_id: str | None,
+        metadata: dict[str, Any],
+        stats: _RunStats,
+    ) -> Any:
         last: BaseException | None = None
+        stats.attempted_turns = max(stats.attempted_turns, turn_number)
         for attempt in range(MAX_ATTEMPTS_PER_TURN):
+            stats.attempts_used += 1
+            await self._trace(
+                "provider_attempt",
+                trace_id,
+                phase="start",
+                turn=turn_number,
+                attempt=attempt + 1,
+                metadata=metadata,
+            )
             try:
-                return await asyncio.wait_for(
+                response = await asyncio.wait_for(
                     self.provider.complete(messages, tools), timeout=self.request_timeout
                 )
+                await self._trace(
+                    "provider_attempt",
+                    trace_id,
+                    phase="success",
+                    turn=turn_number,
+                    attempt=attempt + 1,
+                    metadata=metadata,
+                )
+                return response
             except (ProviderTimeoutError, asyncio.TimeoutError, TimeoutError, ProviderTransientError) as exc:
                 last = exc
+                await self._trace(
+                    "provider_attempt",
+                    trace_id,
+                    phase="error",
+                    turn=turn_number,
+                    attempt=attempt + 1,
+                    error_type=type(exc).__name__,
+                    error_message=str(exc),
+                    metadata=metadata,
+                )
                 if attempt + 1 < MAX_ATTEMPTS_PER_TURN:
                     if self.retry_delay:
                         await asyncio.sleep(self.retry_delay)
@@ -422,9 +467,29 @@ class ClaimAgent:
                     raise _AgentError("provider_timeout", "provider request timed out") from exc
                 raise _AgentError("provider_failure", f"provider request failed: {exc}") from exc
             except ProviderAuthError as exc:
+                await self._trace(
+                    "provider_attempt",
+                    trace_id,
+                    phase="error",
+                    turn=turn_number,
+                    attempt=attempt + 1,
+                    error_type=type(exc).__name__,
+                    error_message=str(exc),
+                    metadata=metadata,
+                )
                 raise _AgentError("provider_failure", f"provider authentication failed: {exc}") from exc
             except Exception as exc:
                 last = exc
+                await self._trace(
+                    "provider_attempt",
+                    trace_id,
+                    phase="error",
+                    turn=turn_number,
+                    attempt=attempt + 1,
+                    error_type=type(exc).__name__,
+                    error_message=str(exc),
+                    metadata=metadata,
+                )
                 if _retryable(exc) and attempt + 1 < MAX_ATTEMPTS_PER_TURN:
                     if self.retry_delay:
                         await asyncio.sleep(self.retry_delay)
@@ -462,6 +527,7 @@ class ClaimAgent:
         started = time.perf_counter()
         trace_id: str | None = None
         known_fact_ids: set[str] = set()
+        stats = _RunStats()
         outcome: AnswerOutcome | None = None
         metadata = {
             **self.run_metadata,
@@ -477,8 +543,16 @@ class ClaimAgent:
             messages = _initial_messages(input_data, get_prompt(self.agent_version))
             tools = _tool_schema()
             for turn_number in range(1, self.max_turns + 1):
-                response = await self._complete(messages, tools)
+                response = await self._complete(
+                    messages,
+                    tools,
+                    turn_number=turn_number,
+                    trace_id=trace_id,
+                    metadata=metadata,
+                    stats=stats,
+                )
                 turn = _provider_turn(response)
+                stats.completed_turns += 1
                 await self._trace(
                     "generation",
                     trace_id,
@@ -560,6 +634,16 @@ class ClaimAgent:
                 trace_id,
                 output_data=outcome,
                 metadata={**metadata, "status": outcome.status, "error_type": outcome.error_type},
+            )
+            await self._trace(
+                "answer_diagnostics",
+                trace_id,
+                attempts_used=stats.attempts_used,
+                turns_used=stats.completed_turns,
+                attempted_turns=stats.attempted_turns,
+                error_type=outcome.error_type,
+                error_message=outcome.error_message,
+                metadata=metadata,
             )
             await self._trace("flush")
         return outcome

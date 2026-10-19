@@ -125,6 +125,38 @@ class RecordingTracer(Tracer):
             }
         )
 
+    async def provider_attempt(self, trace_id: str | None, **kwargs: Any) -> None:
+        """Store request lifecycle diagnostics without sending raw prompts."""
+
+        self.events.append(
+            {
+                "kind": "provider_attempt",
+                "trace_id": trace_id,
+                "phase": kwargs.get("phase"),
+                "turn": kwargs.get("turn"),
+                "attempt": kwargs.get("attempt"),
+                "error_type": kwargs.get("error_type"),
+                "error_message": str(kwargs.get("error_message", ""))[:500]
+                if kwargs.get("error_message")
+                else None,
+            }
+        )
+
+    async def answer_diagnostics(self, trace_id: str | None, **kwargs: Any) -> None:
+        self.events.append(
+            {
+                "kind": "answer_diagnostics",
+                "trace_id": trace_id,
+                "attempts_used": kwargs.get("attempts_used"),
+                "turns_used": kwargs.get("turns_used"),
+                "attempted_turns": kwargs.get("attempted_turns"),
+                "error_type": kwargs.get("error_type"),
+                "error_message": str(kwargs.get("error_message", ""))[:500]
+                if kwargs.get("error_message")
+                else None,
+            }
+        )
+
     async def score(self, trace_id: str | None, *, name: str, value: float, metadata: dict[str, Any]) -> None:
         await self.base.score(trace_id, name=name, value=value, metadata=metadata)
         self.events.append({"kind": "score", "trace_id": trace_id, "name": name, "value": value, "metadata": metadata})

@@ -21,7 +21,8 @@ from claimlens.contracts import (
 
 
 DEFAULT_REQUEST_TIMEOUT = 15.0
-DEFAULT_REASONING_EFFORT = "low"
+DEFAULT_REASONING_EFFORT = "minimal"
+DEFAULT_MAX_COMPLETION_TOKENS = 5000
 
 
 def _status_code(exc: BaseException) -> int | None:
@@ -51,6 +52,8 @@ class OpenAIProvider:
         *,
         client: Any | None = None,
         request_timeout: float = DEFAULT_REQUEST_TIMEOUT,
+        reasoning_effort: str = DEFAULT_REASONING_EFFORT,
+        max_completion_tokens: int = DEFAULT_MAX_COMPLETION_TOKENS,
     ) -> None:
         if request_timeout <= 0:
             raise ValueError("request_timeout must be positive")
@@ -63,6 +66,10 @@ class OpenAIProvider:
             raise ProviderAuthError("OPENAI_API_KEY is not set")
 
         self.request_timeout = float(request_timeout)
+        if max_completion_tokens <= 0:
+            raise ValueError("max_completion_tokens must be positive")
+        self.reasoning_effort = reasoning_effort
+        self.max_completion_tokens = int(max_completion_tokens)
         self._client = client or openai.AsyncOpenAI(
             api_key=self.api_key,
             timeout=self.request_timeout,
@@ -78,6 +85,7 @@ class OpenAIProvider:
             "reasoning_effort": self.reasoning_effort,
             "temperature": None,
             "request_timeout_seconds": self.request_timeout,
+            "max_completion_tokens": self.max_completion_tokens,
         }
 
     @property
@@ -99,6 +107,7 @@ class OpenAIProvider:
                 messages=messages,
                 tools=tools,
                 reasoning_effort=self.reasoning_effort,
+                max_completion_tokens=self.max_completion_tokens,
                 timeout=self.request_timeout,
             )
         except ProviderAuthError:

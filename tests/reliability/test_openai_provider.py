@@ -33,10 +33,12 @@ async def test_openai_request_uses_exact_model_settings(monkeypatch) -> None:
         "model": "o4-mini",
         "messages": [{"role": "user", "content": "hello"}],
         "tools": [],
-        "reasoning_effort": "low",
+        "reasoning_effort": "minimal",
+        "max_completion_tokens": 5000,
         "timeout": 15.0,
     }
     assert "temperature" not in client.chat.completions.kwargs
     assert provider.metadata["model"] == "o4-mini"
-    assert provider.metadata["reasoning_effort"] == "low"
+    assert provider.metadata["reasoning_effort"] == "minimal"
+    assert provider.metadata["max_completion_tokens"] == 5000
     assert provider.metadata["temperature"] is None
