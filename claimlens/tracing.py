@@ -7,9 +7,10 @@ import base64
 import json
 import os
 import time
+import urllib.error
+import urllib.parse
 import urllib.request
 import uuid
-import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -69,7 +70,7 @@ class LangfuseTracer(Tracer):
         public_key: str | None = None,
         secret_key: str | None = None,
         host: str | None = None,
-        request_timeout: float = 10.0,
+        request_timeout: float = 45.0,
     ) -> None:
         self.public_key = public_key or os.getenv("LANGFUSE_PUBLIC_KEY", "")
         self.secret_key = secret_key or os.getenv("LANGFUSE_SECRET_KEY", "")
@@ -255,6 +256,34 @@ class LangfuseTracer(Tracer):
         with urllib.request.urlopen(request, timeout=self.request_timeout) as response:
             return response.read()
 
+    def _request_with_status(
+        self,
+        method: str,
+        path: str,
+        payload: Any = None,
+        extra_headers: dict[str, str] | None = None,
+    ) -> tuple[int, bytes]:
+        """Return HTTP status and body so verification can classify responses."""
+
+        token = base64.b64encode(f"{self.public_key}:{self.secret_key}".encode()).decode()
+        body = None if payload is None else json.dumps(payload, ensure_ascii=False).encode()
+        headers = {
+            "Authorization": f"Basic {token}",
+            "Content-Type": "application/json",
+        }
+        headers.update(extra_headers or {})
+        request = urllib.request.Request(
+            f"{self.host}{path}",
+            data=body,
+            method=method,
+            headers=headers,
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=self.request_timeout) as response:
+                return response.status, response.read()
+        except urllib.error.HTTPError as exc:
+            return exc.code, exc.read()
+
     async def flush(self) -> None:
         if not self.configured:
             return
@@ -295,28 +324,72 @@ class LangfuseTracer(Tracer):
             except Exception as exc:
                 self.last_error = f"{type(exc).__name__}: {str(exc)[:300]}"
 
-    async def fetch_trace(self, trace_id: str) -> dict[str, Any]:
+    async def verify_trace(
+        self,
+        trace_id: str,
+        *,
+        max_wait_seconds: float = 120.0,
+        poll_seconds: float = 5.0,
+    ) -> dict[str, Any]:
+        """Poll the supported observations API without weakening the gate."""
+
         if not self.configured:
             raise RuntimeError("Langfuse credentials are not configured")
-        for _ in range(10):
-            now = datetime.now(timezone.utc)
-            query = urllib.parse.urlencode(
-                {
-                    "traceId": trace_id,
-                    "fields": "core,basic,io,metadata,model,usage,trace_context",
-                    "limit": "100",
-                    "fromStartTime": (now - timedelta(minutes=5)).isoformat().replace("+00:00", "Z"),
-                    "toStartTime": (now + timedelta(minutes=5)).isoformat().replace("+00:00", "Z"),
-                }
-            )
-            raw = await asyncio.to_thread(
-                self._request, "GET", f"/api/public/v2/observations?{query}"
-            )
-            payload = json.loads(raw)
-            if payload.get("data"):
-                return payload
-            await asyncio.sleep(1)
-        raise RuntimeError(f"Langfuse trace not visible through observations API: {trace_id}")
+        deadline = time.monotonic() + max_wait_seconds
+        now = datetime.now(timezone.utc)
+        query = urllib.parse.urlencode(
+            {
+                "traceId": trace_id,
+                "fromStartTime": (now - timedelta(minutes=5))
+                .isoformat()
+                .replace("+00:00", "Z"),
+                "toStartTime": (now + timedelta(minutes=5))
+                .isoformat()
+                .replace("+00:00", "Z"),
+                "limit": "10",
+                "fields": "core,basic",
+            }
+        )
+        path = f"/api/public/v2/observations?{query}"
+        last_response = "no response"
+        while True:
+            try:
+                status, raw = await asyncio.to_thread(self._request_with_status, "GET", path)
+                last_response = f"status={status} body={raw.decode('utf-8', errors='replace')[:500]}"
+            except (TimeoutError, urllib.error.URLError) as exc:
+                if isinstance(exc, urllib.error.URLError) and not isinstance(exc.reason, TimeoutError):
+                    raise RuntimeError(f"Langfuse trace fetch failed: {exc}") from exc
+                status, raw = None, b""
+                last_response = f"request timeout: {type(exc).__name__}: {exc}"
+            else:
+                if 200 <= status < 300:
+                    try:
+                        payload = json.loads(raw)
+                    except json.JSONDecodeError as exc:
+                        raise RuntimeError(
+                            f"Langfuse trace fetch returned invalid JSON: {last_response}"
+                        ) from exc
+                    observations = payload.get("data")
+                    if isinstance(observations, list) and observations:
+                        return payload
+                elif 500 <= status < 600:
+                    pass
+                elif 400 <= status < 500:
+                    raise RuntimeError(f"Langfuse trace fetch failed: {last_response}")
+                else:
+                    raise RuntimeError(f"Langfuse trace fetch failed: {last_response}")
+
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError(
+                    f"Langfuse trace not ingested after {max_wait_seconds:.0f}s: {last_response}"
+                )
+            await asyncio.sleep(min(poll_seconds, remaining))
+
+    async def fetch_trace(self, trace_id: str) -> dict[str, Any]:
+        """Backward-compatible name for the strict polling verifier."""
+
+        return await self.verify_trace(trace_id)
 
 
 def time_ns() -> int:
