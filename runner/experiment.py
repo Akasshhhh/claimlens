@@ -482,8 +482,8 @@ async def run_split(
             verification = await _verify_traces(
                 base_tracer,
                 trace_ids,
-                from_start_time=started_window.isoformat(),
-                to_start_time=completed_window.isoformat(),
+                from_start_time=started_window,
+                to_start_time=completed_window,
             )
             if len(verification) != len(trace_ids):
                 raise RuntimeError("Langfuse trace verification returned incomplete results")
