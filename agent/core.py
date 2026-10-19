@@ -11,6 +11,7 @@ import asyncio
 import json
 import re
 import time
+import weakref
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
@@ -42,6 +43,18 @@ MAX_TURNS = 3
 MAX_ATTEMPTS_PER_TURN = 2
 DEFAULT_REQUEST_TIMEOUT = 15.0
 DEFAULT_RETRY_DELAY = 0.05
+
+
+_SECOND_TURN_SEMAPHORES: weakref.WeakKeyDictionary[Any, asyncio.Semaphore] = weakref.WeakKeyDictionary()
+
+
+def _second_turn_semaphore() -> asyncio.Semaphore:
+    loop = asyncio.get_running_loop()
+    semaphore = _SECOND_TURN_SEMAPHORES.get(loop)
+    if semaphore is None:
+        semaphore = asyncio.Semaphore(1)
+        _SECOND_TURN_SEMAPHORES[loop] = semaphore
+    return semaphore
 
 
 class _AgentError(Exception):
@@ -438,6 +451,43 @@ class ClaimAgent:
             return None
 
     async def _complete(
+        self,
+        messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+        *,
+        turn_number: int,
+        trace_id: str | None,
+        metadata: dict[str, Any],
+        stats: _RunStats,
+    ) -> Any:
+        # The first tool-request turn remains concurrent.  Serializing only
+        # post-tool completion turns avoids a provider-side burst when a full
+        # split reaches the same large catalogue context simultaneously, while
+        # the executor's provider-attempt semaphore remains the hard ceiling.
+        if turn_number <= 1:
+            return await self._complete_attempts(
+                messages,
+                tools,
+                turn_number=turn_number,
+                trace_id=trace_id,
+                metadata=metadata,
+                stats=stats,
+            )
+        semaphore = _second_turn_semaphore()
+        await semaphore.acquire()
+        try:
+            return await self._complete_attempts(
+                messages,
+                tools,
+                turn_number=turn_number,
+                trace_id=trace_id,
+                metadata=metadata,
+                stats=stats,
+            )
+        finally:
+            semaphore.release()
+
+    async def _complete_attempts(
         self,
         messages: list[dict[str, Any]],
         tools: list[dict[str, Any]],
