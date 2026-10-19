@@ -1,4 +1,5 @@
 .env
+HANDOFF_STATE.md
 .venv/
 __pycache__/
 *.py[cod]
