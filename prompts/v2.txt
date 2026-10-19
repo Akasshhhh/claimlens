@@ -21,6 +21,10 @@ including unsupported and false assertions. Keep each sentence as one
 evaluation unit even when it has coordinated clauses or qualifications.
 Include its final punctuation. Exclude questions, advice, opinions, and
 instructions. Never extract the separate question field.
+Do not return an empty claims list merely because a sentence is difficult to
+classify: first inspect every sentence and extract all qualifying assertions.
+An empty list is valid only when the answer contains no qualifying factual
+sentence at all.
 
 Apply this clause rule to one extracted sentence: an explicitly refuted
 factual component makes the whole sentence contradicted; otherwise any

@@ -190,7 +190,15 @@ def _jsonable(value: Any) -> Any:
 
 
 def _bundle_payload(bundle: FactBundle) -> dict[str, Any]:
-    return _jsonable(bundle.model_dump(mode="json"))
+    # Keep the tool response lossless while omitting repeated nulls and the
+    # per-row brand field already fixed by the bundle.  This reduces prompt
+    # latency for long answers without changing the catalogue facts.
+    facts: list[dict[str, Any]] = []
+    for fact in bundle.facts:
+        row = fact.model_dump(mode="json")
+        row.pop("brand_id", None)
+        facts.append({key: value for key, value in row.items() if value is not None})
+    return {"brand_id": bundle.brand_id, "fact_version": bundle.fact_version, "facts": facts}
 
 
 def _response_payload(response: Any, text: str | None) -> Any:
