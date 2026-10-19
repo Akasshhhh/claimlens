@@ -97,12 +97,62 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _manifest_file_audit(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+    """Check the selected manifest scope without claiming whole-tree coverage."""
+
+    missing: list[str] = []
+    mismatches: list[dict[str, Any]] = []
+    entries = manifest.get("files", [])
+    if not isinstance(entries, list):
+        return {
+            "status": "incomplete",
+            "entry_count": 0,
+            "missing": [],
+            "mismatches": [],
+            "problems": ["manifest files field is not a list"],
+        }
+    for item in entries:
+        if not isinstance(item, dict) or not isinstance(item.get("path"), str):
+            mismatches.append({"path": None, "problem": "invalid manifest file entry"})
+            continue
+        relative = item["path"]
+        path = root / relative
+        if not path.is_file():
+            missing.append(relative)
+            continue
+        actual_bytes = path.stat().st_size
+        actual_sha = _sha256(path)
+        if item.get("bytes") != actual_bytes or item.get("sha256") != actual_sha:
+            mismatches.append(
+                {
+                    "path": relative,
+                    "manifest_bytes": item.get("bytes"),
+                    "actual_bytes": actual_bytes,
+                    "manifest_sha256": item.get("sha256"),
+                    "actual_sha256": actual_sha,
+                }
+            )
+    problems = []
+    if missing:
+        problems.append(f"manifest paths missing: {len(missing)}")
+    if mismatches:
+        problems.append(f"manifest hashes or sizes differ: {len(mismatches)}")
+    return {
+        "status": "complete" if not problems else "incomplete",
+        "entry_count": len(entries),
+        "missing": missing,
+        "mismatches": mismatches,
+        "problems": problems,
+    }
+
+
 def _artifact_audit(root: Path, name: str, version: str, scheduled: int) -> dict[str, Any]:
     directory = root / "artifacts" / name
+    relative_directory = directory.relative_to(root).as_posix()
     problems: list[str] = []
     missing = [filename for filename in REQUIRED_ARTIFACT_FILES if not (directory / filename).exists()]
     if missing:
-        return {"status": "incomplete", "artifact": str(directory), "missing": missing, "problems": missing}
+        return {"status": "incomplete", "artifact": relative_directory, "missing": missing, "problems": missing}
 
     try:
         run = _json(directory / "run.json")
@@ -115,7 +165,7 @@ def _artifact_audit(root: Path, name: str, version: str, scheduled: int) -> dict
     except (OSError, json.JSONDecodeError, TypeError) as exc:
         return {
             "status": "incomplete",
-            "artifact": str(directory),
+            "artifact": relative_directory,
             "missing": [],
             "problems": [f"invalid JSON: {type(exc).__name__}: {exc}"],
         }
@@ -214,11 +264,16 @@ def _artifact_audit(root: Path, name: str, version: str, scheduled: int) -> dict
 
     return {
         "status": "complete" if not problems else "incomplete",
-        "artifact": str(directory),
+        "artifact": relative_directory,
         "split": run.get("split"),
         "agent_version": run.get("agent_version"),
         "run_id": run.get("run_id"),
         "source_revision": run.get("source_revision"),
+        "prompt_sha256": (
+            run.get("file_hashes", {}).get(f"prompts/{version}.txt")
+            if isinstance(run.get("file_hashes"), dict)
+            else None
+        ),
         "counts": counts,
         "trace_count": len(trace_ids),
         "event_counts": dict(sorted(event_counts.items())),
@@ -249,8 +304,9 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
         None,
     )
     head = _git(root, "rev-parse", "HEAD")
-    v1_freeze = _git(root, "rev-parse", "v1-final-frozen")
-    v2_freeze = _git(root, "rev-parse", "v2-final-frozen")
+    manifest_tags = manifest.get("tags") if isinstance(manifest.get("tags"), dict) else {}
+    v1_freeze = _git(root, "rev-parse", "v1-final-frozen") or manifest_tags.get("v1-final-frozen")
+    v2_freeze = _git(root, "rev-parse", "v2-final-frozen") or manifest_tags.get("v2-final-frozen")
     v1_revision = artifacts["v1_development"].get("source_revision")
     v2_revision = artifacts["v2_development"].get("source_revision")
     comparability_problems = []
@@ -263,43 +319,100 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
     if current_v2_hash != manifest_v2_hash:
         comparability_problems.append("working-tree prompts/v2.txt differs from manifest hash")
 
-    status_output = _git(root, "status", "--short", "--untracked-files=all") or ""
+    try:
+        status_result = subprocess.run(
+            ["git", "status", "--short", "--untracked-files=all"],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        # Do not strip this output: Git's two-character status prefix is
+        # meaningful for the first line as well as subsequent lines.
+        status_output = status_result.stdout
+    except (OSError, subprocess.SubprocessError):
+        status_output = ""
     dirty_paths = [line[3:] for line in status_output.splitlines() if len(line) >= 4]
     late_candidate = root / "artifacts" / "v1-development-final-turn-gated"
-    late_candidate_status = "unverified"
+    late_candidate_status = "designated"
     if not late_candidate.exists():
         late_candidate_status = "not-present"
-    elif (late_candidate / "trace_verification.json").exists():
-        late_candidate_status = "complete"
+
+    manifest_files = _manifest_file_audit(root, manifest)
+    manifest_commit = manifest.get("generated_for_commit", manifest.get("commit"))
+    manifest_problems = list(manifest_files["problems"])
+    if head and manifest_commit != head:
+        manifest_problems.append("manifest generated_for_commit differs from current HEAD")
+
+    final_prompt_hashes = {
+        key: next(
+            (
+                item.get("sha256")
+                for item in manifest.get("files", [])
+                if isinstance(item, dict) and item.get("path") == path
+            ),
+            None,
+        )
+        for key, path in (("v1", "prompts/v1.txt"), ("v2", "prompts/v2.txt"))
+    }
+    current_prompt_hashes = {
+        key: _sha256(root / path) if (root / path).is_file() else None
+        for key, path in (("v1", "prompts/v1.txt"), ("v2", "prompts/v2.txt"))
+    }
+    artifact_prompt_hashes = {
+        key: artifacts[f"{key}_development"].get("prompt_sha256")
+        for key in ("v1", "v2")
+    }
+    prompt_provenance = {
+        "status": "frozen_and_current_match"
+        if current_prompt_hashes == artifact_prompt_hashes
+        else "current_source_differs_from_frozen_run",
+        "frozen_run_hashes": artifact_prompt_hashes,
+        "manifest_hashes": final_prompt_hashes,
+        "current_worktree_hashes": current_prompt_hashes,
+        "note": "A current prompt hash differing from a saved run is disclosed provenance, not a hash fabrication or a reason to rewrite the run.",
+    }
+
+    verification_error_files = [
+        artifact
+        for artifact, _version, _scheduled in REQUIRED_RUNS.values()
+        if (root / "artifacts" / artifact / "trace_verification_error.json").is_file()
+    ]
+    receipt_complete = all(
+        item["status"] == "complete" for item in artifacts.values()
+    )
+    diagnostics_complete = all(
+        item["event_counts"].get("provider_attempt", 0) >= 1
+        and item["event_counts"].get("answer_diagnostics", 0) == item["counts"].get("scheduled")
+        for item in artifacts.values()
+    )
 
     return {
-        "root": str(root),
+        "root": ".",
         "head": head,
         "freeze_revision": {"v1": v1_freeze, "v2": v2_freeze},
-        "manifest_commit": manifest.get("generated_for_commit", manifest.get("commit")),
+        "manifest_commit": manifest_commit,
         "dirty_path_count": len(dirty_paths),
         "dirty_path_sample": dirty_paths[:20],
         "required_artifacts": artifacts,
         "checks": {
             "required_artifact_receipts": {
-                "status": "complete" if all(item["status"] == "complete" for item in artifacts.values()) else "incomplete",
+                "status": "complete" if receipt_complete else "incomplete",
                 "evidence": "artifacts/v1-development-final-turn-gated, artifacts/v2-development-final, artifacts/v1-check-final, artifacts/v2-check-final",
             },
             "trace_diagnostics": {
-                "status": "complete"
-                if all(
-                    item["event_counts"].get("provider_attempt", 0) >= 1
-                    and item["event_counts"].get("answer_diagnostics", 0) == item["counts"].get("scheduled")
-                    for item in artifacts.values()
-                )
-                else "incomplete",
-                "reason": "one or more designated receipts lack provider_attempt/answer_diagnostics recording"
-                if not all(
-                    item["event_counts"].get("provider_attempt", 0) >= 1
-                    and item["event_counts"].get("answer_diagnostics", 0) == item["counts"].get("scheduled")
-                    for item in artifacts.values()
-                )
-                else None,
+                "status": "complete" if diagnostics_complete and receipt_complete else "incomplete",
+                "receipt_status": "complete" if receipt_complete else "incomplete",
+                "event_diagnostics_status": "complete" if diagnostics_complete else "incomplete",
+                "verification_process_status": "incomplete" if verification_error_files else "complete",
+                "verification_error_files": verification_error_files,
+                "reason": (
+                    "a designated run wrote trace_verification_error.json even though its saved receipt rows are present"
+                    if verification_error_files
+                    else "one or more designated receipts lack provider_attempt/answer_diagnostics recording"
+                    if not diagnostics_complete
+                    else None
+                ),
             },
             "development_comparability": {
                 "status": "complete" if not comparability_problems else "incomplete",
@@ -309,16 +422,29 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
                 "problems": comparability_problems,
             },
             "manifest_matches_worktree": {
-                "status": "complete" if manifest.get("generated_for_commit") and current_v2_hash == manifest_v2_hash else "incomplete",
-                "manifest_commit": manifest.get("generated_for_commit", manifest.get("commit")),
+                "status": "complete" if not manifest_problems else "incomplete",
+                "manifest_commit": manifest_commit,
                 "head": head,
                 "manifest_v2_hash": manifest_v2_hash,
                 "current_v2_hash": current_v2_hash,
+                "selected_file_scope": manifest_files,
+                "problems": manifest_problems,
+            },
+            "prompt_provenance": prompt_provenance,
+            "historical_artifact_policy": {
+                "status": "complete",
+                "current_artifacts": [
+                    "artifacts/v1-development-final-turn-gated",
+                    "artifacts/v2-development-final",
+                    "artifacts/v1-check-final",
+                    "artifacts/v2-check-final",
+                ],
+                "note": "All other artifact directories are retained historical or exploratory evidence and are excluded from the final comparison.",
             },
             "late_candidate_receipt": {
                 "status": late_candidate_status,
-                "artifact": str(late_candidate),
-                "reason": "the later candidate has no trace_verification.json receipt" if late_candidate_status == "unverified" else None,
+                "artifact": late_candidate.relative_to(root).as_posix(),
+                "reason": "This directory is the designated v1 development artifact; it is no longer treated as an unverified late candidate." if late_candidate_status == "designated" else None,
             },
         },
     }

@@ -1,0 +1,212 @@
+{
+  "checks": {
+    "development_comparability": {
+      "freeze_revision": {
+        "v1": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+        "v2": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
+      },
+      "problems": [],
+      "status": "complete",
+      "v1_source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+      "v2_source_revision": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
+    },
+    "historical_artifact_policy": {
+      "current_artifacts": [
+        "artifacts/v1-development-final-turn-gated",
+        "artifacts/v2-development-final",
+        "artifacts/v1-check-final",
+        "artifacts/v2-check-final"
+      ],
+      "note": "All other artifact directories are retained historical or exploratory evidence and are excluded from the final comparison.",
+      "status": "complete"
+    },
+    "late_candidate_receipt": {
+      "artifact": "artifacts/v1-development-final-turn-gated",
+      "reason": "This directory is the designated v1 development artifact; it is no longer treated as an unverified late candidate.",
+      "status": "designated"
+    },
+    "manifest_matches_worktree": {
+      "current_v2_hash": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62",
+      "head": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
+      "manifest_commit": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
+      "manifest_v2_hash": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62",
+      "problems": [],
+      "selected_file_scope": {
+        "entry_count": 223,
+        "mismatches": [],
+        "missing": [],
+        "problems": [],
+        "status": "complete"
+      },
+      "status": "complete"
+    },
+    "prompt_provenance": {
+      "current_worktree_hashes": {
+        "v1": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
+        "v2": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62"
+      },
+      "frozen_run_hashes": {
+        "v1": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
+        "v2": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf"
+      },
+      "manifest_hashes": {
+        "v1": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
+        "v2": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62"
+      },
+      "note": "A current prompt hash differing from a saved run is disclosed provenance, not a hash fabrication or a reason to rewrite the run.",
+      "status": "current_source_differs_from_frozen_run"
+    },
+    "required_artifact_receipts": {
+      "evidence": "artifacts/v1-development-final-turn-gated, artifacts/v2-development-final, artifacts/v1-check-final, artifacts/v2-check-final",
+      "status": "complete"
+    },
+    "trace_diagnostics": {
+      "event_diagnostics_status": "complete",
+      "reason": "a designated run wrote trace_verification_error.json even though its saved receipt rows are present",
+      "receipt_status": "complete",
+      "status": "complete",
+      "verification_error_files": [
+        "v2-development-final"
+      ],
+      "verification_process_status": "incomplete"
+    }
+  },
+  "dirty_path_count": 25,
+  "dirty_path_sample": [
+    "HANDOFF.md",
+    "README.md",
+    "agent/core.py",
+    "claimlens/api/app.py",
+    "claimlens/db/repository.py",
+    "claimlens/tracing.py",
+    "evidence/MANIFEST.json",
+    "evidence/audit/REPORT.md",
+    "evidence/audit/repository_audit.py",
+    "evidence/final-run-summary.json",
+    "evidence/pytest-output.txt",
+    "evidence/v1-v2-final-comparison.json",
+    "evidence/verify-output.txt",
+    "runner/experiment.py",
+    "tests/agent/test_core.py",
+    "tests/reliability/test_executor.py",
+    "tests/reliability/test_openai_provider.py",
+    "evidence/audit/current-audit.json",
+    "evidence/audit/regenerate_evidence.py",
+    "evidence/langfuse-investigation/audit-report.json"
+  ],
+  "freeze_revision": {
+    "v1": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+    "v2": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
+  },
+  "head": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
+  "manifest_commit": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
+  "required_artifacts": {
+    "v1_check": {
+      "agent_version": "v1",
+      "artifact": "artifacts/v1-check-final",
+      "counts": {
+        "answers": 10,
+        "errors": 1,
+        "ok": 9,
+        "predictions": 143,
+        "scheduled": 10
+      },
+      "event_counts": {
+        "answer_diagnostics": 10,
+        "answer_end": 10,
+        "generation": 20,
+        "provider_attempt": 42,
+        "tool_observation": 10,
+        "trace_start": 10
+      },
+      "problems": [],
+      "prompt_sha256": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
+      "run_id": "93af5381-5900-43f5-8543-29e32e1ee64f",
+      "source_revision": "c76941fec1713c00502575f7e09b022c3c4c3975",
+      "split": "check",
+      "status": "complete",
+      "trace_count": 10
+    },
+    "v1_development": {
+      "agent_version": "v1",
+      "artifact": "artifacts/v1-development-final-turn-gated",
+      "counts": {
+        "answers": 40,
+        "errors": 3,
+        "ok": 37,
+        "predictions": 605,
+        "scheduled": 40
+      },
+      "event_counts": {
+        "answer_diagnostics": 40,
+        "answer_end": 40,
+        "generation": 77,
+        "provider_attempt": 196,
+        "score": 426,
+        "tool_observation": 40,
+        "trace_start": 40
+      },
+      "problems": [],
+      "prompt_sha256": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
+      "run_id": "8cb56eec-6c54-4eab-aba2-317bee75d451",
+      "source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+      "split": "development",
+      "status": "complete",
+      "trace_count": 40
+    },
+    "v2_check": {
+      "agent_version": "v2",
+      "artifact": "artifacts/v2-check-final",
+      "counts": {
+        "answers": 10,
+        "errors": 3,
+        "ok": 7,
+        "predictions": 117,
+        "scheduled": 10
+      },
+      "event_counts": {
+        "answer_diagnostics": 10,
+        "answer_end": 10,
+        "generation": 17,
+        "provider_attempt": 48,
+        "tool_observation": 10,
+        "trace_start": 10
+      },
+      "problems": [],
+      "prompt_sha256": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
+      "run_id": "a58a7b95-2784-4184-abd5-2161a9386028",
+      "source_revision": "c76941fec1713c00502575f7e09b022c3c4c3975",
+      "split": "check",
+      "status": "complete",
+      "trace_count": 10
+    },
+    "v2_development": {
+      "agent_version": "v2",
+      "artifact": "artifacts/v2-development-final",
+      "counts": {
+        "answers": 40,
+        "errors": 3,
+        "ok": 37,
+        "predictions": 610,
+        "scheduled": 40
+      },
+      "event_counts": {
+        "answer_diagnostics": 40,
+        "answer_end": 40,
+        "generation": 80,
+        "provider_attempt": 188,
+        "score": 430,
+        "tool_observation": 40,
+        "trace_start": 40
+      },
+      "problems": [],
+      "prompt_sha256": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
+      "run_id": "5a64e5ff-d1e4-4e49-8175-e2c3617c26cb",
+      "source_revision": "8293d189f9bae7619a03247acc78aa6fa1f848bc",
+      "split": "development",
+      "status": "complete",
+      "trace_count": 40
+    }
+  },
+  "root": "."
+}

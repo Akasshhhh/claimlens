@@ -23,10 +23,8 @@ Include its final punctuation. Exclude questions, advice, opinions, and
 instructions. In particular, omit any sentence whose content is only advice,
 an instruction, or an opinion and makes no verifiable factual assertion, even
 if it mentions a product, model, brand, buyer, purchase, or buying context;
-product or purchase wording alone does not qualify as a claim. Imperatives such
-as buy, check, compare, keep, choose, or ignore are not claims unless the same
-sentence independently asserts a product, specification, policy, or comparison
-fact. Never extract the separate question field.
+product or purchase wording alone does not qualify as a claim. Never extract
+the separate question field.
 Do not return an empty claims list merely because a sentence is difficult to
 classify: first inspect every sentence and extract all qualifying assertions.
 An empty list is valid only when the answer contains no qualifying factual

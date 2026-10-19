@@ -33,6 +33,10 @@ class Http429Error(Exception):
     status_code = 429
 
 
+class Http401Error(Exception):
+    status_code = 401
+
+
 @pytest.mark.asyncio
 async def test_openai_request_uses_exact_model_settings(monkeypatch) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
@@ -96,3 +100,65 @@ async def test_http_429_status_is_retried_end_to_end_through_agent(monkeypatch) 
     assert outcome.status == "ok"
     assert outcome.claims == []
     assert client.chat.completions.calls == 2
+
+
+@pytest.mark.asyncio
+async def test_openai_auth_failure_is_not_retried(monkeypatch) -> None:
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    client = FakeClient([Http401Error("unauthorized")])
+    provider = OpenAIProvider(client=client, model="o4-mini")
+
+    class EmptyFactStore:
+        brands = {"brand-a"}
+
+    outcome = (
+        await AsyncExecutor(provider, EmptyFactStore(), retry_delay=0).run(
+            [
+                AgentInput(
+                    answer_id="A01",
+                    brand_id="brand-a",
+                    question="What is stated?",
+                    ai_answer="No factual claim.",
+                )
+            ]
+        )
+    )[0]
+
+    assert outcome.status == "error"
+    assert outcome.error_type == "provider_failure"
+    assert client.chat.completions.calls == 1
+
+
+@pytest.mark.asyncio
+async def test_malformed_openai_output_is_not_retried(monkeypatch) -> None:
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    client = FakeClient(
+        [
+            {
+                "choices": [
+                    {"message": {"content": "not-json", "tool_calls": []}},
+                ]
+            }
+        ]
+    )
+    provider = OpenAIProvider(client=client, model="o4-mini")
+
+    class EmptyFactStore:
+        brands = {"brand-a"}
+
+    outcome = (
+        await AsyncExecutor(provider, EmptyFactStore(), retry_delay=0).run(
+            [
+                AgentInput(
+                    answer_id="A01",
+                    brand_id="brand-a",
+                    question="What is stated?",
+                    ai_answer="No factual claim.",
+                )
+            ]
+        )
+    )[0]
+
+    assert outcome.status == "error"
+    assert outcome.error_type == "invalid_output"
+    assert client.chat.completions.calls == 1

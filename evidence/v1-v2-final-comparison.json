@@ -2000,8 +2000,11 @@
   "joint_f1_delta": 0.018962725868582164,
   "metadata": {
     "hypothesis": "exclude advice/instruction/opinion-only sentences",
+    "offline_regeneration": true,
     "v1_report": "artifacts/v1-development-final-turn-gated/report.json",
-    "v2_report": "artifacts/v2-development-final/report.json"
+    "v1_source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+    "v2_report": "artifacts/v2-development-final/report.json",
+    "v2_source_revision": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
   },
   "paired_bootstrap_ci": {
     "answers": 40,

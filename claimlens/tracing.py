@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import hashlib
 import json
 import os
 import time
@@ -24,6 +25,103 @@ load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _utc_datetime(value: datetime | str, *, field_name: str) -> datetime:
+    if isinstance(value, datetime):
+        parsed = value
+    else:
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except (AttributeError, TypeError, ValueError) as exc:
+            raise ValueError(f"{field_name} must be an ISO-8601 datetime") from exc
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def observation_window(
+    started_at: datetime | str,
+    completed_at: datetime | str,
+    *,
+    padding: timedelta = timedelta(minutes=1),
+) -> tuple[str, str]:
+    """Return a fixed UTC query window for one completed provider run."""
+
+    if padding < timedelta(0):
+        raise ValueError("padding must not be negative")
+    started = _utc_datetime(started_at, field_name="started_at")
+    completed = _utc_datetime(completed_at, field_name="completed_at")
+    if completed < started:
+        raise ValueError("completed_at must not precede started_at")
+    return (
+        (started - padding).isoformat().replace("+00:00", "Z"),
+        (completed + padding).isoformat().replace("+00:00", "Z"),
+    )
+
+
+def observation_query(
+    trace_id: str,
+    *,
+    from_start_time: datetime | str,
+    to_start_time: datetime | str,
+    limit: int = 10,
+    fields: str = "core,basic",
+) -> str:
+    """Build the read-only observations path for one answer trace.
+
+    The experiment UUID is deliberately not accepted as a separate argument:
+    callers must pass the per-answer Langfuse trace ID and an explicit run
+    window.
+    """
+
+    if not isinstance(trace_id, str) or not trace_id.strip():
+        raise ValueError("trace_id must be a non-empty string")
+    if limit <= 0:
+        raise ValueError("limit must be positive")
+    start = _utc_datetime(from_start_time, field_name="from_start_time")
+    end = _utc_datetime(to_start_time, field_name="to_start_time")
+    if end < start:
+        raise ValueError("to_start_time must not precede from_start_time")
+    query = urllib.parse.urlencode(
+        {
+            "traceId": trace_id,
+            "fromStartTime": start.isoformat().replace("+00:00", "Z"),
+            "toStartTime": end.isoformat().replace("+00:00", "Z"),
+            "limit": str(limit),
+            "fields": fields,
+        }
+    )
+    return f"/api/public/v2/observations?{query}"
+
+
+def _safe_error_text(value: Any) -> str:
+    text = str(value).replace("\n", " ").replace("\r", " ")
+    return text[:300]
+
+
+def _response_summary(status: int | None, raw: bytes) -> dict[str, Any]:
+    """Summarize a response without retaining model data or response bodies."""
+
+    summary: dict[str, Any] = {
+        "status": status,
+        "body_sha256": hashlib.sha256(raw).hexdigest(),
+        "observation_count": None,
+        "observation_names": [],
+    }
+    try:
+        payload = json.loads(raw)
+    except (TypeError, UnicodeDecodeError, json.JSONDecodeError):
+        return summary
+    observations = payload.get("data") if isinstance(payload, dict) else None
+    if isinstance(observations, list):
+        summary["observation_count"] = len(observations)
+        summary["observation_names"] = [
+            item.get("name")
+            for item in observations
+            if isinstance(item, dict) and isinstance(item.get("name"), str)
+        ][:50]
+    return summary
 
 
 def _jsonable(value: Any) -> Any:
@@ -375,33 +473,35 @@ class LangfuseTracer(Tracer):
                 parsed = parsed.replace(tzinfo=timezone.utc)
             return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
-        query = urllib.parse.urlencode(
-            {
-                "traceId": trace_id,
-                "fromStartTime": _iso(from_start_time, now - timedelta(minutes=5)),
-                "toStartTime": _iso(to_start_time, now + timedelta(minutes=5)),
-                "limit": "10",
-                "fields": "core,basic",
-            }
+        path = observation_query(
+            trace_id,
+            from_start_time=_iso(from_start_time, now - timedelta(minutes=5)),
+            to_start_time=_iso(to_start_time, now + timedelta(minutes=5)),
         )
-        path = f"/api/public/v2/observations?{query}"
-        last_response = "no response"
+        last_response: dict[str, Any] = {"status": None, "body_sha256": None}
         while True:
             try:
                 status, raw = await asyncio.to_thread(self._request_with_status, "GET", path)
-                last_response = f"status={status} body={raw.decode('utf-8', errors='replace')[:500]}"
+                last_response = _response_summary(status, raw)
             except (TimeoutError, urllib.error.URLError) as exc:
                 if isinstance(exc, urllib.error.URLError) and not isinstance(exc.reason, TimeoutError):
-                    raise RuntimeError(f"Langfuse trace fetch failed: {exc}") from exc
+                    raise RuntimeError(
+                        f"Langfuse trace fetch failed: {_safe_error_text(exc)}"
+                    ) from exc
                 status, raw = None, b""
-                last_response = f"request timeout: {type(exc).__name__}: {exc}"
+                last_response = {
+                    "status": None,
+                    "error_type": type(exc).__name__,
+                    "error_message": _safe_error_text(exc),
+                }
             else:
                 if 200 <= status < 300:
                     try:
                         payload = json.loads(raw)
                     except json.JSONDecodeError as exc:
                         raise RuntimeError(
-                            f"Langfuse trace fetch returned invalid JSON: {last_response}"
+                            "Langfuse trace fetch returned invalid JSON: "
+                            f"{json.dumps(last_response, sort_keys=True)}"
                         ) from exc
                     observations = payload.get("data")
                     if isinstance(observations, list) and observations:
@@ -409,14 +509,21 @@ class LangfuseTracer(Tracer):
                 elif 500 <= status < 600:
                     pass
                 elif 400 <= status < 500:
-                    raise RuntimeError(f"Langfuse trace fetch failed: {last_response}")
+                    raise RuntimeError(
+                        "Langfuse trace fetch failed: "
+                        f"{json.dumps(last_response, sort_keys=True)}"
+                    )
                 else:
-                    raise RuntimeError(f"Langfuse trace fetch failed: {last_response}")
+                    raise RuntimeError(
+                        "Langfuse trace fetch failed: "
+                        f"{json.dumps(last_response, sort_keys=True)}"
+                    )
 
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise TimeoutError(
-                    f"Langfuse trace not ingested after {max_wait_seconds:.0f}s: {last_response}"
+                    f"Langfuse trace not ingested after {max_wait_seconds:.0f}s: "
+                    f"{json.dumps(last_response, sort_keys=True)}"
                 )
             await asyncio.sleep(min(poll_seconds, remaining))
 
@@ -428,3 +535,6 @@ class LangfuseTracer(Tracer):
 
 def time_ns() -> int:
     return time.time_ns()
+
+
+__all__ = ["LangfuseTracer", "NoOpTracer", "observation_query", "observation_window"]

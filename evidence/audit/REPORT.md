@@ -1,148 +1,128 @@
-# Assessment audit
+# ClaimLens evidence audit
 
-## Final-sequence addendum
+## Current scope
 
-The audit was refreshed after the corrected controlled sequence. The required
-artifact set is now `v1-development-final-turn-gated`, `v2-development-final`,
-`v1-check-final`, and `v2-check-final`. All four have complete terminal
-outcomes, generation/tool evidence, per-attempt diagnostics, and fetched trace
-receipts. v1 and v2 are separately frozen at `v1-final-frozen` and
-`v2-final-frozen`; their source revisions and prompt hashes are recorded in
-`evidence/MANIFEST.json`. The refreshed offline audit reports complete for
-required receipts, trace diagnostics, development comparability, and manifest
-prompt-hash agreement. Exploratory superseded directories remain untracked and
-are not part of the final required artifact set.
+Audit date: 2026-10-20.  This is an offline, read-only audit of the selected
+evidence scope at committed `HEAD`
+`4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02`.  It does not start a provider,
+database, API server, Docker build, or Langfuse request.  The checker is
+`evidence/audit/repository_audit.py`; the summary/comparison/manifest generator
+is `evidence/audit/regenerate_evidence.py`.
 
-Audit date: 2026-10-19. Scope is the current worktree, `HEAD` commit
-`9de1a5e` (`fix: serialize post-tool completion turns`), the two frozen tags,
-and the saved artifacts. No provider, database, Docker, or Langfuse experiment
-was started by this audit.
+The four designated artifacts are:
 
-The reproducible checker is `evidence/audit/repository_audit.py`. It reads the
-four designated run directories, validates terminal accounting and check-split
-redaction, compares source revisions and prompt hashes, and reports the later
-unverified candidate artifact.
+```text
+artifacts/v1-development-final-turn-gated/
+artifacts/v2-development-final/
+artifacts/v1-check-final/
+artifacts/v2-check-final/
+```
+
+All other artifact directories and older evidence files remain preserved as
+historical or exploratory material.  They are not part of the final summary or
+comparison.  `evidence/MANIFEST.json` is a selected-evidence manifest and
+explicitly does not claim full repository-tree coverage.
 
 ## Status key
 
-- **Complete**: implementation and/or saved evidence directly supports the
-  requirement.
-- **Incomplete**: a required part is absent, inconsistent, or not controlled
-  by the submitted evidence.
-- **Unverified**: the repository describes or implements the behavior, but the
-  required live/environment check was not run or is not retained.
+- **Complete**: the saved files and offline checks directly support the item.
+- **Incomplete**: a saved inconsistency, error receipt, or unverified required
+  runtime step remains.
+- **Unverified**: the implementation or documentation exists, but the required
+  environment/live check was not run or is not retained.
 
-## Requirement audit
+## Current findings
 
-| Area | Status | Finding and evidence |
+| Area | Status | Finding |
 |---|---|---|
-| FastAPI `POST /classify` | Complete structurally; runtime unverified | Strict request model and `v1`/`v2` validation are in `claimlens/api/app.py:40-61`; the route is at `:524-535`. Error mapping covers 422, 404, 502, and 504 with sanitized bodies (`:112-149`). `tests/api/test_app.py` and `tests/api/test_api.py` exercise success, invalid input, unknown brand, provider failure, invalid output, and timeout. `make run` was not started, so the default live dependency path remains unverified. |
-| FastAPI evaluation endpoints | Complete structurally; runtime unverified | `POST /evaluation-runs` and `GET /evaluation-runs/{run_id}` are implemented at `claimlens/api/app.py:537-668`, with UUID validation, stable answer/span ordering, check-metric redaction, and repository persistence hooks. Tests cover fake runner/retrieval behavior. A live server request was not run in this audit; the handoff also records that `make run` was not run. |
-| PostgreSQL persistence | Complete structurally and covered by the full test run; standalone receipt unverified | `claimlens/db/schema.py:13-77` defines `runs`, `answer_results`, and `claim_results`, foreign keys, status/label checks, and the required unique constraints. `claimlens/db/repository.py:150-219,242-345,357-454` uses parameterized SQL and joins rows deterministically. Existing integration tests cover an ok claim, an error row, an empty result, and retrieval; `HANDOFF.md:60-62` records 20 API/PostgreSQL tests with `DATABASE_URL`. The shell starts without that variable, but the imported tracing module loads the ignored `.env`; the full `make test` run passed without skips. No separate DB-only output was retained by this audit. |
-| Terminal answer/error accounting | Complete | `runner/executor.py:210-225` returns one outcome per input and sorts by `answer_id`; `harness/evaluator.py:97-154` rejects missing, duplicate, and extra outcomes. The four designated artifacts each have one outcome per scheduled answer, including errors and empty claims. The repository schema enforces one `(run_id, answer_id)` row. |
-| Exact span, quote, label, fact-ID and overlap validation | Complete | `agent/core.py:257-359` validates fields, labels, fact IDs, exact quotes, localized Unicode offsets, sorted non-overlapping spans, and two-sentence reasons. Tests cover malformed JSON, labels, invented fact IDs, overlap, Unicode offsets, repeated/wrong offsets, and answer-level error behavior. |
-| Three-turn limit | Complete | `agent/core.py:41-45,430-435,620-680` limits turns to three and converts exhaustion into an answer error with no claims. `tests/agent/test_core.py::test_turn_exhaustion_never_makes_a_prediction` verifies this. |
-| Tool name/argument/brand validation | Complete | `_tool_schema` and `_parse_tool_arguments` are in `agent/core.py:361-375,183-196`; `_execute_tool` rejects illegal names, unknown brands, malformed bundles, and cross-brand fact rows (`:575-599`). Existing tests cover illegal tools, unknown brands, multiple tool calls, and invented fact IDs. Designated live exchanges contain `get_brand_facts` observations. |
-| Gold isolation | Complete structurally | The agent imports contracts and prompts but not `harness` or `development_gold`; `tests/agent/test_import_isolation.py` checks that graph. `runner/experiment.py:288-314` evaluates outcomes first and loads development gold afterward. Injection canaries and the audit test also check the boundary. The run metadata includes a SHA-256 of `development_gold.csv`, which is provenance metadata rather than labels/spans supplied to the provider. |
-| Deterministic harness and metrics | Complete | `harness/evaluator.py` implements exact span/quote matching, extraction and joint precision/recall/F1, coverage, per-label metrics, macro F1, confusion matrix, missed/extra/wrong IDs, and answer-error counts. `tests/harness/test_evaluator.py` covers perfect output, misses, extra advice, wrong labels, provider errors, quote equality, outcome identity, the required `G=10,P=10,M=8,C=7` arithmetic, confusion-matrix invariants, and null empty-split quality. |
-| CSV parsing and typed facts | Complete after audit addendum | `claimlens/loaders.py:47-81` uses `csv.DictReader`, UTF-8, `newline=""`, exact answer text, and typed booleans/numbers. The new audit test directly verifies a quoted comma, embedded newline, quote preservation, and `false` becoming `False`. This check was absent from the pre-existing test directories. |
-| Concurrency ceiling | Complete implementation; retry-combination coverage incomplete | `runner/executor.py:23-64,102-119` sets a process-wide logical ceiling of three active provider attempts and holds a permit for each retry attempt. `tests/reliability/test_executor.py` verifies `max_active <= 3` for concurrent answers, but does not combine concurrency pressure with retries. |
-| 15-second provider timeout | Complete | `runner/executor.py:23-25,73-119`, `agent/core.py:43-45,490-543`, and `providers/openai.py:23,48-57,95-112` all use a 15-second default/per-attempt timeout. The provider request-shape test asserts `timeout: 15.0`; all four designated run metadata records contain `request_timeout_seconds: 15.0`. |
-| Selective retry policy | Complete implementation; rate-limit end-to-end coverage incomplete | Timeout, `ProviderTransientError`, and status 429 are retryable; auth errors and malformed output are not (`agent/core.py:406-413,500-572`). Existing tests cover transient retry, auth non-retry, malformed-output non-retry, and timeout. The new audit test covers 429 classification, but no test drives a full provider 429 response through two attempts. |
-| Four required live-run artifact directories | Complete core receipts | All four directories contain `run.json`, `config.json`, `outcomes.json`, `predictions.json`, `report.json`, `timings.json`, `exchanges.jsonl`, `trace_verification.json`, and `trace_exports.json`. The checker found one terminal outcome per scheduled answer and non-empty verification observations for every listed trace. See the table below. |
-| Development scores and comparison | Incomplete as a controlled v1/v2 experiment | The saved comparison is deterministic and reports v1/v2 development `joint_f1=0.0`, but the designated v1 development artifact was produced at `da37f15`, while v2 was produced at `a9ce77e`. The `a9ce77e` diff changes both the v2 prompt and `_bundle_payload` serialization in `agent/core.py`; this is not a prompt-only controlled change. The v1/v2 frozen tags both point to `a9ce77e`, so the v1 development run is not from the frozen source used for v2. |
-| Final-check isolation | Complete for designated artifacts | `v1-check` and `v2-check` each schedule A41-A50 and their reports keep `gold_claims`, matches, correctness, and all quality metrics null. They retain outcomes and predictions (zero accepted predictions in these saved runs). |
-| Langfuse actual trace evidence | Partial/incomplete | The four designated receipts contain 40/40/10/10 non-empty observation receipts, and local exchanges include generation and `get_brand_facts` events. However, those exchanges predate `provider_attempt` and `answer_diagnostics` recording, so the audit checker reports missing per-attempt diagnostics. The retained `evidence/trace-diagnosis.json` is a sanitized diagnosis for one trace; `evidence/langfuse-investigation/report.json` confirms only one selected remote trace was fetched. No reviewer-facing full export, screenshot, or link for all four runs is retained. |
-| Version/hash metadata | Incomplete in current worktree; artifact metadata complete | Designated runs include dataset, fact, evaluator, prompt, provider/model/settings, source revision, CSV hashes, and trace IDs. `evidence/MANIFEST.json` has exact CSV hashes and frozen prompt hashes, but records commit `e9a557a` rather than current `HEAD 9de1a5e`; current `prompts/v2.txt` hashes to `74ea421c...` while the manifest records `1ebbc6b8...`. The current worktree has 99 status entries, including untracked later artifacts and this audit addendum. |
-| Documentation and reproducibility | Partial/unverified | `.python-version`, `requirements.lock`, `Dockerfile`, `.env.example`, `README.md`, and `HANDOFF.md` are present. README has setup/run/test commands and PostgreSQL setup, but no explicit deploy command. `HANDOFF.md:62-67` records that Docker build was blocked by a stopped local daemon and `make run` was not run. Therefore the clean Docker build/run path and documented deploy path remain unverified. |
+| Four final artifact directories | **Complete** | Each has `run.json`, `config.json`, `outcomes.json`, `predictions.json`, `report.json`, `timings.json`, `exchanges.jsonl`, `trace_verification.json`, and `trace_exports.json`. Each has one terminal outcome per scheduled answer, including errors and empty claims. |
+| Development source freezes | **Complete** | v1 development records `9de1a5ec...` and matches `v1-final-frozen`; v2 development records `8293d189...` and matches `v2-final-frozen`; the revisions differ as intended. |
+| Later check source | **Complete and disclosed** | Both final checks record `c76941fec...`, a later shared check-run revision. It is not presented as either frozen development source. |
+| Development comparison | **Complete as saved evidence; scope limited** | The comparison holds datasets, model/provider settings, and scoring fixed and reports the actual +0.018963 joint-F1 delta. The two source tags also contain trace/runner/evidence changes in addition to the v2 prompt; this is disclosed and is not described as a byte-for-byte prompt-only Git diff. |
+| Advice/instruction diagnosis | **Complete** | The saved v1 analysis reports 261 unmatched predictions, including 254 advice/instruction-only and 3 meta-instruction markers. The v2 bucket is retained as a heuristic diagnostic, not a gold metric. |
+| Fixed/regressed provenance | **Complete** | `evidence/submission/final-provenance.json` separates 19 error-driven fixed IDs from 11 genuine fixed IDs, 14 error-driven regressed IDs from 5 genuine regressed IDs, and records the other five error-driven state changes. |
+| Check-split isolation | **Complete** | Both check reports retain predictions and answer errors but keep gold claims, matches, correctness, quality metrics, and gold-derived ID lists null. |
+| Trace/event diagnostics | **Complete locally; verifier process warning** | Local exchanges contain terminal accounting, `provider_attempt`, `answer_diagnostics`, generation, and tool events for all four runs. All saved receipt rows are non-empty. `v2-development-final/trace_verification_error.json` still records `NameError: name 'timedelta' is not defined`, so the audit exposes a separate incomplete verifier-process status without treating the saved receipt rows as missing. |
+| Langfuse remote reviewability | **Incomplete** | The selected investigation retrieved one trace with root, generation, and tool observations. The repository retains receipt summaries for the runs, not full reviewer-facing payloads for all 100 remote traces. Query-window and identifier limitations are documented. |
+| Manifest selected scope | **Complete** | The manifest has 223 selected file entries; every listed path exists and its recorded byte count and SHA-256 match. The generated commit is current `HEAD`. Current-vs-frozen prompt hashes are recorded separately. |
+| Current v2 prompt provenance | **Complete and disclosed** | The current committed v2 prompt hash is `75971d63...`; final v2 artifacts record `74ea421c...`. The difference is a later committed imperative-wording clarification, not a rewritten final run. |
+| API/PostgreSQL implementation | **Complete in offline/integration tests; live process unverified** | Routes, constraints, parameterized persistence, joined retrieval, and tests exist. The current `make test` run reports 99 passing tests; `make run` was not started. |
+| Docker/local deployment | **Unverified** | `Dockerfile` and exact commands exist. The recorded Docker build was blocked by the stopped local daemon. No hosted deployment is required by the assessment. |
 
-## Designated artifact accounting
+## Run facts
 
-These are the four artifacts named by `HANDOFF.md`, not later exploratory
-directories:
+| Run | Scheduled | OK | Errors | Predictions | Error types |
+|---|---:|---:|---:|---:|---|
+| v1 development | 40 | 37 | 3 | 605 | A04/A22/A30 `provider_timeout` |
+| v2 development | 40 | 37 | 3 | 610 | A25 empty/trimmed quote; A30/A34 exact-source-quote validation |
+| v1 check | 10 | 9 | 1 | 143 | A49 exact-source-quote validation |
+| v2 check | 10 | 7 | 3 | 117 | A41/A42/A43 `provider_timeout` |
 
-| Artifact | Source revision | Scheduled | OK | Errors | Predictions | Trace receipts |
-|---|---:|---:|---:|---:|---:|---:|
-| `artifacts/v1-development-rerun` | `da37f15` | 40 | 0 | 40 | 0 | 40/40 non-empty |
-| `artifacts/v2-development` | `a9ce77e` | 40 | 0 | 40 | 0 | 40/40 non-empty |
-| `artifacts/v1-check` | `a9ce77e` | 10 | 6 | 4 | 0 | 10/10 non-empty |
-| `artifacts/v2-check` | `a9ce77e` | 10 | 2 | 8 | 0 | 10/10 non-empty |
+The accepted-prediction decomposition is `A04 +18`, `A22 +17`, `A25 -16`,
+`A34 -15`, and `A32 +1`, for `605 -> 610` (`+5`).  The exact run IDs, metric
+objects, error messages, and source revisions are in
+`evidence/final-run-summary.json`.
 
-The zero-prediction development result is a real observed provider-timeout
-outcome, not a scorer zeroing or a missing-outcome shortcut. The reports retain
-376 gold claims, 376 missed IDs, and 40 answer errors for each development
-artifact. The check reports correctly expose no private quality score.
+## Injection and trace limitations
 
-There is also an untracked later artifact,
-`artifacts/v1-development-final-turn-gated`, with 605 predictions and
-`joint_f1=0.6605504587155964`, but it has no `trace_verification.json` and is
-not included in `evidence/MANIFEST.json` or the handoff's four-run comparison.
-It must not be silently substituted for the designated v1 development run.
+The v1 and v2 final development canaries both have `passed: false`.  A07, A18,
+and A32 each extracted the marker sentence.  They did not all label the answer
+`supported`, and `override_suspected` is false, but marker extraction is still
+a failed canary condition.
 
-## Commit and worktree findings
+The local trace receipts prove that the run wrote and fetched non-empty
+observation summaries.  They do not provide complete remote payloads for
+reviewers.  `evidence/trace-diagnosis.json` contains one sanitized selected
+trace; `evidence/langfuse-investigation/report.json` explains the HTTP 200
+health check, authenticated observation query, stale/current window mismatch,
+and the fact that an experiment UUID is not a trace ID.  No claim is made that
+all remote traces were independently retrieved from this repository.
 
-Relevant commits/tags:
+## Exact offline commands and results
 
 ```text
-9de1a5e (HEAD) fix: serialize post-tool completion turns
-a9ce77e (v1-frozen, v2-frozen) feat: tighten v2 extraction and compact fact payloads
-e9a557a docs: record final reproducibility limits   # manifest commit
+PYTHONPATH=. .venv/bin/python evidence/audit/regenerate_evidence.py
+exit 0; offline; generated_for_commit=4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02;
+manifest_entries=223; joint_f1_delta=0.018962725868582164
+
+.venv/bin/python evidence/audit/repository_audit.py
+exit 0; required_artifact_receipts=complete;
+development_comparability=complete; selected manifest scope=complete;
+prompt_provenance=current_source_differs_from_frozen_run;
+trace_diagnostics=complete for saved receipts/events; verification_process_status=incomplete because of the saved v2 verification error file
+
+make verify
+exit 0; both saved development metric objects matched deterministic rescoring;
+no provider call
+
+make test
+exit 0; 99 passed, 1 warning
 ```
 
-The worktree was already dirty before this audit (`prompts/v2.txt`, the
-assessment input, later artifacts/evidence, and other files). This worker added
-only the two files listed below and did not commit:
+The full captured command outputs are `evidence/pytest-output.txt` and
+`evidence/verify-output.txt`; workspace-local absolute paths are redacted to
+`<workspace>` for portability.  The warning is retained verbatim; this audit
+did not modify source or tests to change it.
 
-```text
-evidence/audit/repository_audit.py
-tests/audit/test_repository_audit.py
-```
+## Historical evidence retained
 
-## Commands run and real outputs
+The following are intentionally not deleted:
 
-All commands were offline and used the project virtual environment.
+- `evidence/run-summary.json`: earlier zero-prediction/timeout sequence;
+- `evidence/v1-v2-comparison.json`: earlier comparison;
+- `evidence/v1-injection-canary.json` and `evidence/v2-injection-canary.json`:
+  earlier canary outputs;
+- earlier exploratory/smoke artifact directories under `artifacts/`.
 
-```text
-$ .venv/bin/python -m compileall -q evidence/audit tests/audit
-# exit 0; no output
+They are marked as superseded in `evidence/MANIFEST.json`.  Only the four final
+directories listed above are current final evidence.
 
-$ .venv/bin/python -m pytest -q tests/audit
-......                                                                   [100%]
-6 passed in 0.31s
-# exit 0; one existing pytest-asyncio fixture-loop-scope deprecation warning
+## Reproduction limits and missing requirements
 
-$ make test
-.venv/bin/python -m pytest -q
-..................................................................       [100%]
-66 passed, 1 warning in 12.09s
-# exit 0; the warning is from Starlette/pytest-asyncio configuration
-
-$ .venv/bin/python evidence/audit/repository_audit.py
-required_artifact_receipts: complete
-trace_diagnostics: incomplete
-development_comparability: incomplete
-manifest_matches_worktree: incomplete
-late_candidate_receipt: unverified
-# exit 0
-```
-
-The audit script and focused audit tests did not launch provider experiments,
-start a server, build Docker, or call Langfuse. The broader `make test` run did
-exercise the repository's configured PostgreSQL integration through the
-project's dotenv loading; it did not make provider calls.
-
-## Blockers to a fully verified submission
-
-1. Re-run or replace the v1 development artifact at the same frozen source as
-   v2, with the exact intended one-variable change; then regenerate the
-   comparison and manifest.
-2. Decide whether the later `v1-development-final-turn-gated` run is evidence;
-   if retained, add its trace verification receipt and include it consistently,
-   rather than mixing it with the older four-run set.
-3. Preserve per-attempt diagnostics/full sanitized trace exports for the four
-   designated runs, or explicitly scope the evidence to the retained summary
-   receipts.
-4. Run the documented PostgreSQL API tests with `DATABASE_URL`, run the API
-   process smoke check, and complete a Docker build/run on a live daemon.
-5. Update the reproducibility manifest/documentation so the current commit,
-   prompt hash, artifact set, and deploy instructions agree.
+The repository has a pinned runtime, lockfile, Dockerfile, `.env.example`,
+exact setup/run/test/verify instructions, and local CSV hashes.  The following
+remain incomplete or unverified: the API process smoke was not run, the Docker
+daemon was unavailable for a build, the v2 trace-verification error file
+remains, and no hosted deployment or full remote Langfuse export was
+performed.  The final-check quality scores remain intentionally unavailable
+because the assessment holds their labels privately.

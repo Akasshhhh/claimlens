@@ -14,8 +14,6 @@ htmlcov/
 build/
 dist/
 *.egg-info/
-artifacts/
-evidence/
 *.log
 *.tmp
 tmp/

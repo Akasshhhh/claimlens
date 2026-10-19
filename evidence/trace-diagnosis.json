@@ -1,12 +1,85 @@
 {
-  "trace_id": "fc84b86f755e403cb33a03bfc5dd5ab6",
-  "verified_via": "GET /api/public/v2/observations",
-  "observation_count": 4,
-  "observation_names": [
-    "model-turn-2",
-    "get_brand_facts",
-    "model-turn-1",
-    "claimlens.answer"
-  ],
-  "diagnosis": "The baseline trace shows a real catalogue tool call followed by a valid JSON answer with an empty claims list; the dominant failure is extraction omission, not a scorer or span-validation failure. v2 changed only the prompt to require a complete sentence-boundary pass and forbid an empty list when qualifying factual sentences exist."
+  "schema_version": "claimlens-trace-diagnosis-v2",
+  "diagnosis": "The verifier failure was an implementation NameError in the recorded v2 artifact, followed by a query design risk: a run UUID is not a per-answer Langfuse trace ID and a now-relative five-minute window cannot find historical observations. Verification must query each answer trace ID in the completed run window and remain outside provider outcome correctness.",
+  "source_fix": {
+    "historical_artifact": "artifacts/v2-development-final/trace_verification_error.json",
+    "historical_error": "NameError: name 'timedelta' is not defined",
+    "current_source": "runner/experiment.py",
+    "window_helper": "claimlens.tracing.observation_window",
+    "error_isolation": "per-trace verification receipts record verified, empty, timeout, or error without changing answer outcomes, metrics, or completed run status"
+  },
+  "locally_recorded_receipts": {
+    "status": "recorded_locally",
+    "artifacts": [
+      {
+        "path": "artifacts/v1-development-final",
+        "split": "development",
+        "agent_version": "v1",
+        "scheduled_answers": 40,
+        "trace_ids": 40,
+        "trace_verification_rows": 40,
+        "trace_export_rows": 40
+      },
+      {
+        "path": "artifacts/v2-development-final",
+        "split": "development",
+        "agent_version": "v2",
+        "scheduled_answers": 40,
+        "trace_ids": 40,
+        "trace_verification_rows": 40,
+        "trace_export_rows": 40,
+        "historical_verification_error": "NameError: name 'timedelta' is not defined"
+      },
+      {
+        "path": "artifacts/v1-check-final",
+        "split": "check",
+        "agent_version": "v1",
+        "scheduled_answers": 10,
+        "trace_ids": 10,
+        "trace_verification_rows": 10,
+        "trace_export_rows": 10,
+        "score_events": 0
+      },
+      {
+        "path": "artifacts/v2-check-final",
+        "split": "check",
+        "agent_version": "v2",
+        "scheduled_answers": 10,
+        "trace_ids": 10,
+        "trace_verification_rows": 10,
+        "trace_export_rows": 10,
+        "score_events": 0
+      }
+    ]
+  },
+  "remotely_verified_traces": {
+    "status": "partial_with_rate_limits_and_timeouts",
+    "audit_report": "evidence/langfuse-investigation/audit-report.json",
+    "health_http_status": 200,
+    "health_version": "4.64.0",
+    "trace_ids_queried": 100,
+    "verified_nonempty_observations": 49,
+    "http_429_responses": 39,
+    "transport_timeouts": 12,
+    "credentials_values_printed": false,
+    "provider_runs_started": false,
+    "model_calls_started": 0
+  },
+  "historical_baseline": {
+    "artifact": "artifacts/v1-development-final-turn-gated",
+    "trace_id": "dc8e8ee41ef74834a52ed449edc783d6",
+    "verified_via": "GET /api/public/v2/observations",
+    "historical_run_window_observation_count": 4,
+    "observation_names": [
+      "model-turn-2",
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "interpretation": "The selected baseline shows a real tool call followed by a valid JSON answer with an empty claims list; it informed the v2 extraction change. It does not establish remote existence for every saved trace."
+  },
+  "full_exports": {
+    "status": "not_collected",
+    "reason": "Only sanitized counts, observation names, HTTP statuses, fixed windows, and body hashes are retained."
+  }
 }
