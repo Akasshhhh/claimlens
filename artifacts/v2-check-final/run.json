@@ -1,0 +1,62 @@
+{
+  "agent_version": "v2",
+  "completed_at": "2026-10-19T17:44:25.497167+00:00",
+  "counts": {
+    "answers": 10,
+    "errors": 3,
+    "ok": 7,
+    "predictions": 117,
+    "scheduled": 10
+  },
+  "dataset_version": "long-brand-answers-50-v4",
+  "duration_ms": 198643.47845804878,
+  "evaluator_version": "sentence-spans-and-labels-v4",
+  "fact_version": "speaker-catalogue-v4",
+  "file_hashes": {
+    "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+    "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+    "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+    "prompts/v2.txt": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf"
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "prompt_version": "v2",
+  "provider": "openai",
+  "run_id": "a58a7b95-2784-4184-abd5-2161a9386028",
+  "scheduled_answer_ids": [
+    "A41",
+    "A42",
+    "A43",
+    "A44",
+    "A45",
+    "A46",
+    "A47",
+    "A48",
+    "A49",
+    "A50"
+  ],
+  "settings": {
+    "max_completion_tokens": 2000,
+    "model": "gpt-5-mini-2025-08-07",
+    "provider": "openai",
+    "reasoning_effort": "minimal",
+    "request_timeout_seconds": 15.0,
+    "temperature": null
+  },
+  "source_revision": "c76941fec1713c00502575f7e09b022c3c4c3975",
+  "split": "check",
+  "started_at": "2026-10-19T17:41:04.915730+00:00",
+  "supersedes": "ea08c511-28fb-4f69-a8ac-bc963417673b",
+  "supersedes_reason": "frozen v2 final-check run after real v1 analysis and advice-policy change",
+  "trace_ids": [
+    "0e09f72bf4fc433da53c07e9b3058c31",
+    "0eebefa70d4a45feb15a821b27d4b3d3",
+    "136876c6d8a44aa3a0b1075d431ff240",
+    "2092311dd3a745b6b95378b2b4de8a8d",
+    "2dce7d282eef4e02a53f446604001a7f",
+    "a731588ef97143048a4d03f6618187ed",
+    "ca35af74340f4ded943366841a0fe01e",
+    "db840b2997ac40f1a05c2fb70b37816d",
+    "dc7cd628ac5b41708c169f33cf0b0b24",
+    "ed8a07d35f7840769ffe31b708bc874a"
+  ]
+}

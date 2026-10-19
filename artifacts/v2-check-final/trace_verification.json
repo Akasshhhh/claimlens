@@ -1,0 +1,102 @@
+[
+  {
+    "elapsed_seconds": 3.785,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "0e09f72bf4fc433da53c07e9b3058c31"
+  },
+  {
+    "elapsed_seconds": 2.622,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "0eebefa70d4a45feb15a821b27d4b3d3"
+  },
+  {
+    "elapsed_seconds": 2.278,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "136876c6d8a44aa3a0b1075d431ff240"
+  },
+  {
+    "elapsed_seconds": 3.801,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "2092311dd3a745b6b95378b2b4de8a8d"
+  },
+  {
+    "elapsed_seconds": 7.021,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "2dce7d282eef4e02a53f446604001a7f"
+  },
+  {
+    "elapsed_seconds": 10.177,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "a731588ef97143048a4d03f6618187ed"
+  },
+  {
+    "elapsed_seconds": 2.137,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "ca35af74340f4ded943366841a0fe01e"
+  },
+  {
+    "elapsed_seconds": 4.412,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "db840b2997ac40f1a05c2fb70b37816d"
+  },
+  {
+    "elapsed_seconds": 3.013,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "dc7cd628ac5b41708c169f33cf0b0b24"
+  },
+  {
+    "elapsed_seconds": 3.022,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "ed8a07d35f7840769ffe31b708bc874a"
+  }
+]

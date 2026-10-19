@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "agent_version": "v1",
+    "completed_at": "2026-10-19T17:38:51.513988+00:00",
+    "counts": {
+      "answers": 10,
+      "errors": 1,
+      "ok": 9,
+      "predictions": 143,
+      "scheduled": 10
+    },
+    "dataset_version": "long-brand-answers-50-v4",
+    "duration_ms": 147436.25445803627,
+    "evaluator_version": "sentence-spans-and-labels-v4",
+    "fact_version": "speaker-catalogue-v4",
+    "file_hashes": {
+      "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+      "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+      "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+      "prompts/v1.txt": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b"
+    },
+    "model": "gpt-5-mini-2025-08-07",
+    "prompt_version": "v1",
+    "provider": "openai",
+    "run_id": "93af5381-5900-43f5-8543-29e32e1ee64f",
+    "scheduled_answer_ids": [
+      "A41",
+      "A42",
+      "A43",
+      "A44",
+      "A45",
+      "A46",
+      "A47",
+      "A48",
+      "A49",
+      "A50"
+    ],
+    "settings": {
+      "max_completion_tokens": 2000,
+      "model": "gpt-5-mini-2025-08-07",
+      "provider": "openai",
+      "reasoning_effort": "minimal",
+      "request_timeout_seconds": 15.0,
+      "temperature": null
+    },
+    "source_revision": "c76941fec1713c00502575f7e09b022c3c4c3975",
+    "split": "check",
+    "started_at": "2026-10-19T17:36:22.158779+00:00",
+    "supersedes": "200802cf-9bc8-4186-ae9a-9a95533fbf8d",
+    "supersedes_reason": "frozen v1 final-check run after real v1 analysis and verifier repair",
+    "trace_ids": [
+      "0fa2d05b504841f4ba122cf954aa4103",
+      "28fc16d1a77f45a7bd35b6be79972dea",
+      "43c251b9a2a449ba8978e01b9441f7f2",
+      "571b0cb055fc4e23ad558f963ca5dd5a",
+      "9c66bc9595c646ed8a06c69b2cdd8626",
+      "b31cab603ec44d26a2b6d0d4993223e6",
+      "d62c5d562fd0495f98045227899a00e9",
+      "da17a51be2ae43248ab752fef86f4e07",
+      "f88ca32797c8416c914cfe69310cac17",
+      "fdb20865c19c45a491760e5bd6af2d7e"
+    ]
+  },
+  "provider_settings": {
+    "max_completion_tokens": 2000,
+    "model": "gpt-5-mini-2025-08-07",
+    "provider": "openai",
+    "reasoning_effort": "minimal",
+    "request_timeout_seconds": 15.0,
+    "temperature": null
+  }
+}
