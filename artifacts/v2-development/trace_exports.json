@@ -1,0 +1,372 @@
+[
+  {
+    "elapsed_seconds": 1.687,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "08db675df8d84b1fa32ae4ce284ebce3"
+  },
+  {
+    "elapsed_seconds": 1.333,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "0df2f52ee75f48b59abb1aa25aeeeb38"
+  },
+  {
+    "elapsed_seconds": 1.88,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "1a698e7ec73d418186597861ca44ec2a"
+  },
+  {
+    "elapsed_seconds": 1.325,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "1ecea31d8d1e41b4bb4fcfa80b43db43"
+  },
+  {
+    "elapsed_seconds": 1.243,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "20f06d6149e94fa1859cc7693533fefc"
+  },
+  {
+    "elapsed_seconds": 2.2,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "21db6b0f6f3e4de39c2e2443105910ef"
+  },
+  {
+    "elapsed_seconds": 1.046,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "2924c94fc484429a8c8ea7eebd117426"
+  },
+  {
+    "elapsed_seconds": 1.813,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "3c0a11f61e204a8c84ff0668aa370e2f"
+  },
+  {
+    "elapsed_seconds": 1.25,
+    "observation_count": 3,
+    "observation_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "claimlens.answer"
+    ],
+    "trace_id": "3d7389285a9545cab7d3d2e547e7b036"
+  },
+  {
+    "elapsed_seconds": 1.254,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "4194ea732bad4324a1f3f7f6b013e973"
+  },
+  {
+    "elapsed_seconds": 1.485,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "4802954eb95f4d7eab51639f407f622f"
+  },
+  {
+    "elapsed_seconds": 1.039,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "5680f49c2ab341dd8867ae6c3ad31d31"
+  },
+  {
+    "elapsed_seconds": 1.877,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "5ac8c564773242cfb4937543eb5e822d"
+  },
+  {
+    "elapsed_seconds": 1.739,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "5d1e7d5c5108494f98d18426aa8a7c8e"
+  },
+  {
+    "elapsed_seconds": 2.553,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "5d5f52dc185148c68dc907facdd89a94"
+  },
+  {
+    "elapsed_seconds": 1.486,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "62488c0aef1548eabae9d9270f623f6f"
+  },
+  {
+    "elapsed_seconds": 1.688,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "6518843799184ff2a365cbeb340ddd7a"
+  },
+  {
+    "elapsed_seconds": 1.011,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "687d15d963c843e28e4c7d2272021b5f"
+  },
+  {
+    "elapsed_seconds": 1.276,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "695ecf538fae4da5af4856c4ffbad861"
+  },
+  {
+    "elapsed_seconds": 1.054,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "8c80f4e5870d4c58b6f7007a97cdbe2c"
+  },
+  {
+    "elapsed_seconds": 1.172,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "8d30b739b6d3477588d77a6394855e54"
+  },
+  {
+    "elapsed_seconds": 1.57,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "8fa1c5e1e89840b982adb88d667e79fe"
+  },
+  {
+    "elapsed_seconds": 0.974,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "971446f0b6a3421a9e233137b2b17b5d"
+  },
+  {
+    "elapsed_seconds": 1.738,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "a4307fbe9f894490a5674127e3b70f57"
+  },
+  {
+    "elapsed_seconds": 1.435,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "a9e1159558d84682a26ce4709fa86f28"
+  },
+  {
+    "elapsed_seconds": 1.329,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "aac8e9807bee4c2f84f0dd14e2d87c73"
+  },
+  {
+    "elapsed_seconds": 1.014,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "b4f16c7bd19140599eecddcda0b0b8a6"
+  },
+  {
+    "elapsed_seconds": 1.182,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "b612e0e3144c44ebb69531007ffbd1f6"
+  },
+  {
+    "elapsed_seconds": 1.174,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "b998e8074de742ada00bfa5d8e117be6"
+  },
+  {
+    "elapsed_seconds": 1.347,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "bde316d18e00473691ac51bd302a1a78"
+  },
+  {
+    "elapsed_seconds": 1.294,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "c277124b9ae2490e968f38b59faf1032"
+  },
+  {
+    "elapsed_seconds": 1.209,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "d515eb1bd8774eb6a0f975d5cfc87859"
+  },
+  {
+    "elapsed_seconds": 1.219,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "d9c78323c66e46cb975cab30aa4abf20"
+  },
+  {
+    "elapsed_seconds": 1.184,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "e536f5d68ebb4f16951e6af268504d08"
+  },
+  {
+    "elapsed_seconds": 1.418,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "e9b89824886549aca00e921ae67182eb"
+  },
+  {
+    "elapsed_seconds": 1.026,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "ec38d8f4e43047b2ba96a17a3aca380e"
+  },
+  {
+    "elapsed_seconds": 1.169,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "ec774c9f52c24e6d96057cbe21073694"
+  },
+  {
+    "elapsed_seconds": 2.068,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "ed449486fd51413a8d98c18d483ccd00"
+  },
+  {
+    "elapsed_seconds": 1.145,
+    "observation_count": 1,
+    "observation_names": [
+      "claimlens.answer"
+    ],
+    "trace_id": "f3ded5209aab405e8606545aa94a3155"
+  },
+  {
+    "elapsed_seconds": 1.789,
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "fcaed5e487274d5eacec10114780d925"
+  }
+]

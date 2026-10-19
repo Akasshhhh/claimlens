@@ -1,0 +1,12 @@
+{
+  "trace_id": "fc84b86f755e403cb33a03bfc5dd5ab6",
+  "verified_via": "GET /api/public/v2/observations",
+  "observation_count": 4,
+  "observation_names": [
+    "model-turn-2",
+    "get_brand_facts",
+    "model-turn-1",
+    "claimlens.answer"
+  ],
+  "diagnosis": "The baseline trace shows a real catalogue tool call followed by a valid JSON answer with an empty claims list; the dominant failure is extraction omission, not a scorer or span-validation failure. v2 changed only the prompt to require a complete sentence-boundary pass and forbid an empty list when qualifying factual sentences exist."
+}

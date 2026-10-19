@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "agent_version": "v1",
+    "completed_at": "2026-10-19T12:48:47.109739+00:00",
+    "counts": {
+      "answers": 1,
+      "errors": 0,
+      "ok": 1,
+      "predictions": 0,
+      "scheduled": 1
+    },
+    "dataset_version": "long-brand-answers-50-v4",
+    "duration_ms": 8397.663790965453,
+    "evaluator_version": "sentence-spans-and-labels-v4",
+    "fact_version": "speaker-catalogue-v4",
+    "file_hashes": {
+      "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+      "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+      "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+      "prompts/v1.txt": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b"
+    },
+    "model": "gpt-5-mini-2025-08-07",
+    "prompt_version": "v1",
+    "provider": "openai",
+    "run_id": "c2a4f339-e77c-463f-b1b0-6dd8a4b52f3c",
+    "scheduled_answer_ids": [
+      "A01"
+    ],
+    "settings": {
+      "model": "gpt-5-mini-2025-08-07",
+      "provider": "openai",
+      "reasoning_effort": "low",
+      "request_timeout_seconds": 15.0,
+      "temperature": null
+    },
+    "source_revision": "a9ce77e84ab3bff9522d91304c926d5b30056924",
+    "split": "development",
+    "started_at": "2026-10-19T12:48:38.706199+00:00",
+    "supersedes": "23b3e271-2677-4969-bf53-3790665c6b1a",
+    "supersedes_reason": "provider payload compaction after extraction timeout/empty-output diagnosis",
+    "trace_ids": [
+      "fc84b86f755e403cb33a03bfc5dd5ab6"
+    ]
+  },
+  "provider_settings": {
+    "model": "gpt-5-mini-2025-08-07",
+    "provider": "openai",
+    "reasoning_effort": "low",
+    "request_timeout_seconds": 15.0,
+    "temperature": null
+  }
+}

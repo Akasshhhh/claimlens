@@ -1,0 +1,705 @@
+{
+  "answer_outcomes": [
+    {
+      "answer_id": "A01",
+      "claims": [],
+      "error_message": null,
+      "error_type": null,
+      "latency_ms": 7890.903874998912,
+      "status": "ok",
+      "trace_id": "2bdbe650102346a4b516af5fcb648527"
+    },
+    {
+      "answer_id": "A02",
+      "claims": [],
+      "error_message": null,
+      "error_type": null,
+      "latency_ms": 13860.792542109266,
+      "status": "ok",
+      "trace_id": "ad792adf5ea24912957b5868505c55fa"
+    },
+    {
+      "answer_id": "A03",
+      "claims": [],
+      "error_message": "quote does not equal its exact source span",
+      "error_type": "invalid_output",
+      "latency_ms": 31787.68066712655,
+      "status": "error",
+      "trace_id": "f19a014b1323415f85d2143afec41e65"
+    }
+  ],
+  "answer_scores": [
+    {
+      "answer_id": "A01",
+      "correct_labels": 0,
+      "error_type": null,
+      "extraction_f1": 0.0,
+      "extraction_precision": 0.0,
+      "extraction_recall": 0.0,
+      "gold_claims": 9,
+      "joint_f1": 0.0,
+      "joint_precision": 0.0,
+      "joint_recall": 0.0,
+      "matched_spans": 0,
+      "missed_ids": [
+        "A01:306:460",
+        "A01:461:647",
+        "A01:649:832",
+        "A01:833:1040",
+        "A01:1237:1439",
+        "A01:1440:1619",
+        "A01:1620:1767",
+        "A01:1769:1942",
+        "A01:1943:2104"
+      ],
+      "predictions": 0,
+      "status": "ok",
+      "unmatched_prediction_ids": [],
+      "wrong_label_ids": []
+    },
+    {
+      "answer_id": "A02",
+      "correct_labels": 0,
+      "error_type": null,
+      "extraction_f1": 0.0,
+      "extraction_precision": 0.0,
+      "extraction_recall": 0.0,
+      "gold_claims": 10,
+      "joint_f1": 0.0,
+      "joint_precision": 0.0,
+      "joint_recall": 0.0,
+      "matched_spans": 0,
+      "missed_ids": [
+        "A02:306:506",
+        "A02:507:689",
+        "A02:691:875",
+        "A02:876:1084",
+        "A02:1085:1272",
+        "A02:1469:1659",
+        "A02:1660:1813",
+        "A02:1815:2039",
+        "A02:2040:2223",
+        "A02:2224:2372"
+      ],
+      "predictions": 0,
+      "status": "ok",
+      "unmatched_prediction_ids": [],
+      "wrong_label_ids": []
+    },
+    {
+      "answer_id": "A03",
+      "correct_labels": 0,
+      "error_type": "invalid_output",
+      "extraction_f1": 0.0,
+      "extraction_precision": 0.0,
+      "extraction_recall": 0.0,
+      "gold_claims": 9,
+      "joint_f1": 0.0,
+      "joint_precision": 0.0,
+      "joint_recall": 0.0,
+      "matched_spans": 0,
+      "missed_ids": [
+        "A03:335:505",
+        "A03:506:687",
+        "A03:689:861",
+        "A03:862:1043",
+        "A03:1240:1409",
+        "A03:1410:1563",
+        "A03:1564:1742",
+        "A03:1744:1917",
+        "A03:1918:2069"
+      ],
+      "predictions": 0,
+      "status": "error",
+      "unmatched_prediction_ids": [],
+      "wrong_label_ids": []
+    }
+  ],
+  "gold_claims": [
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:306:460",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 460,
+      "evidence_fact_ids": [
+        "cleartrail.mini.price_2026",
+        "cleartrail.plus.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 1299 and 2499; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, ClearTrail Mini is listed at INR 1,200 less than ClearTrail Plus, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:461:647",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 647,
+      "evidence_fact_ids": [
+        "cleartrail.mini.warranty_india"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The matching India warranty is 12 months, not 18.",
+      "quote": "For an authorized India purchase with the original invoice and a manufacturing defect, ClearTrail Mini receives a standard manufacturer warranty lasting 18 months from the purchase date.",
+      "start_char": 461
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:649:832",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 832,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened ClearTrail Mini can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 649
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:833:1040",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1040,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "Amplifier power and per-channel output are absent.",
+      "quote": "The sustained amplifier output of ClearTrail Mini is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 833
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1237:1439",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 1439,
+      "evidence_fact_ids": [
+        "cleartrail.mini.warranty_india"
+      ],
+      "expected_label": "unknown",
+      "explanation": "Warranty eligibility is known; a repair-time guarantee is absent.",
+      "quote": "An authorized India service centre guarantees repair of ClearTrail Mini within two working days after receiving the unit and the required purchase paperwork, regardless of replacement-part availability.",
+      "start_char": 1237
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1440:1619",
+      "difficulty_tags": [
+        "condition_swap"
+      ],
+      "end_char": 1619,
+      "evidence_fact_ids": [
+        "cleartrail.mini.battery_100_percent"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "At 100 percent volume the supplied duration is 6 hours, not 12.",
+      "quote": "The stated laboratory playback time for ClearTrail Mini, using a new battery with EQ off at one hundred percent volume, remains 12 hours without any reduction for louder playback.",
+      "start_char": 1440
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1620:1767",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 1767,
+      "evidence_fact_ids": [
+        "cleartrail.mini.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The 2026 India list price is INR 1299; tax and shipping scope match.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, ClearTrail Mini costs INR 1,299 including tax but excluding shipping.",
+      "start_char": 1620
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1769:1942",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 1942,
+      "evidence_fact_ids": [
+        "cleartrail.mini.adapter_included"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The statement reverses the explicit adapter-inclusion value.",
+      "quote": "The official India retail box for ClearTrail Mini includes a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 1769
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1943:2104",
+      "difficulty_tags": [
+        "explicit_false",
+        "feature_scope"
+      ],
+      "end_char": 2104,
+      "evidence_fact_ids": [
+        "cleartrail.mini.wifi"
+      ],
+      "expected_label": "supported",
+      "explanation": "The claim matches the explicit Wi-Fi boolean.",
+      "quote": "The built-in Wi-Fi capability of ClearTrail Mini is absent, which should be treated as a separate specification from its ability to receive audio over Bluetooth.",
+      "start_char": 1943
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:306:506",
+      "difficulty_tags": [
+        "policy_vs_capability"
+      ],
+      "end_char": 506,
+      "evidence_fact_ids": [
+        "cloudnote.studio.water_damage_covered"
+      ],
+      "expected_label": "supported",
+      "explanation": "Water damage coverage is explicitly false, independently of the rating.",
+      "quote": "Whatever conclusions a buyer draws from the water-resistance rating, water damage remains excluded from the standard India manufacturer warranty covering CloudNote Studio after an authorized purchase.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:507:689",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 689,
+      "evidence_fact_ids": [
+        "cloudnote.studio.adapter_included"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The statement reverses the explicit adapter-inclusion value.",
+      "quote": "The official India retail box for CloudNote Studio does not include a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 507
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:691:875",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 875,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened CloudNote Studio can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 691
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:876:1084",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1084,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "Amplifier power and per-channel output are absent.",
+      "quote": "The sustained amplifier output of CloudNote Studio is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 876
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1085:1272",
+      "difficulty_tags": [
+        "feature_conflation"
+      ],
+      "end_char": 1272,
+      "evidence_fact_ids": [
+        "cloudnote.studio.bluetooth_version"
+      ],
+      "expected_label": "unknown",
+      "explanation": "The Bluetooth version does not establish codec support.",
+      "quote": "CloudNote Studio supports the AAC Bluetooth audio codec on compatible phones, so its published Bluetooth version can be treated as evidence for that specific audio-compression capability.",
+      "start_char": 1085
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1469:1659",
+      "difficulty_tags": [
+        "condition_scope"
+      ],
+      "end_char": 1659,
+      "evidence_fact_ids": [
+        "cloudnote.studio.battery_50_percent"
+      ],
+      "expected_label": "unknown",
+      "explanation": "No below-freezing runtime or temperature guarantee is supplied.",
+      "quote": "In winter weather below freezing, CloudNote Studio delivers its full 18-hour laboratory battery duration at fifty percent volume, without the outdoor temperature changing the stated runtime.",
+      "start_char": 1469
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1660:1813",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 1813,
+      "evidence_fact_ids": [
+        "cloudnote.studio.price_2026",
+        "cloudnote.air.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 2999 and 1499; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, CloudNote Studio is listed at INR 1,500 more than CloudNote Air, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 1660
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:1815:2039",
+      "difficulty_tags": [
+        "policy_vs_capability"
+      ],
+      "end_char": 2039,
+      "evidence_fact_ids": [
+        "cloudnote.studio.water_damage_covered"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "Water damage is explicitly excluded; the inference from capability to coverage is false.",
+      "quote": "Water damage to CloudNote Studio is included in the standard India manufacturer warranty after an authorized purchase, because water resistance should be understood as warranty coverage rather than just a product capability.",
+      "start_char": 1815
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2040:2223",
+      "difficulty_tags": [
+        "model_scope"
+      ],
+      "end_char": 2223,
+      "evidence_fact_ids": [
+        "cloudnote.studio.stereo_pairing_scope"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "Stereo pairing is restricted to two units of the exact same model.",
+      "quote": "The manufacturer supports a stereo pair made from one CloudNote Studio and one CloudNote Air, since being members of the same brand is sufficient for cross-model stereo compatibility.",
+      "start_char": 2040
+    },
+    {
+      "answer_id": "A02",
+      "claim_id": "A02:2224:2372",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 2372,
+      "evidence_fact_ids": [
+        "cloudnote.studio.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The 2026 India list price is INR 2999; tax and shipping scope match.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Studio costs INR 2,999 including tax but excluding shipping.",
+      "start_char": 2224
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:335:505",
+      "difficulty_tags": [
+        "price_vs_shipping"
+      ],
+      "end_char": 505,
+      "evidence_fact_ids": [
+        "cloudnote.air.price_2026"
+      ],
+      "expected_label": "unknown",
+      "explanation": "The list price excludes shipping; no universal free-delivery policy is supplied.",
+      "quote": "Orders for CloudNote Air receive free delivery to every India postal code, so there is no separate shipping charge even when a customer selects a remote delivery address.",
+      "start_char": 335
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:506:687",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 687,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened CloudNote Air can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 506
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:689:861",
+      "difficulty_tags": [
+        "model_scope",
+        "explicit_false"
+      ],
+      "end_char": 861,
+      "evidence_fact_ids": [
+        "cloudnote.air.microphone"
+      ],
+      "expected_label": "supported",
+      "explanation": "The microphone statement matches the model-specific boolean.",
+      "quote": "The built-in microphone is included on CloudNote Air, so microphone availability should be checked for this exact model instead of copied from another speaker in the range.",
+      "start_char": 689
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:862:1043",
+      "difficulty_tags": [
+        "unit_conversion",
+        "scope"
+      ],
+      "end_char": 1043,
+      "evidence_fact_ids": [
+        "cloudnote.air.weight"
+      ],
+      "expected_label": "supported",
+      "explanation": "0.35 kg equals 350 grams for the speaker only.",
+      "quote": "Considering the speaker alone and leaving retail packaging and accessories out of the measurement, CloudNote Air has a stated mass of 0.35 kilograms for carrying-weight comparisons.",
+      "start_char": 862
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1240:1409",
+      "difficulty_tags": [
+        "model_scope",
+        "negation"
+      ],
+      "end_char": 1409,
+      "evidence_fact_ids": [
+        "cloudnote.air.microphone"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The sentence reverses the supplied built-in microphone boolean.",
+      "quote": "The built-in microphone is not included on CloudNote Air, without needing an accessory to change the hardware specification being described for this exact speaker model.",
+      "start_char": 1240
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1410:1563",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 1563,
+      "evidence_fact_ids": [
+        "cloudnote.air.price_2026",
+        "cloudnote.studio.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 1499 and 2999; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, CloudNote Air is listed at INR 1,500 less than CloudNote Studio, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 1410
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1564:1742",
+      "difficulty_tags": [
+        "variant_transfer"
+      ],
+      "end_char": 1742,
+      "evidence_fact_ids": [
+        "cloudnote.air.weight"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "CloudNote Air weighs 350 grams; the sentence transfers its sibling model's value.",
+      "quote": "When measuring just the speaker rather than the retail box and accessories, CloudNote Air weighs 1100 grams, matching the carrying-weight figure associated with CloudNote Studio.",
+      "start_char": 1564
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1744:1917",
+      "difficulty_tags": [
+        "qualification",
+        "capability_vs_rating"
+      ],
+      "end_char": 1917,
+      "evidence_fact_ids": [
+        "cloudnote.air.water_rating",
+        "cloudnote.air.immersion_allowed"
+      ],
+      "expected_label": "supported",
+      "explanation": "The stated rating is correct and immersion_allowed is explicitly false.",
+      "quote": "Despite the declared IPX4 water-resistance rating, the manufacturer does not permit fresh-water immersion of CloudNote Air, even with all of the port covers properly closed.",
+      "start_char": 1744
+    },
+    {
+      "answer_id": "A03",
+      "claim_id": "A03:1918:2069",
+      "difficulty_tags": [
+        "outdated_fact"
+      ],
+      "end_char": 2069,
+      "evidence_fact_ids": [
+        "cloudnote.air.price_2026"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The current price is 1499; the sentence improperly applies the 2025 amount to 2026.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, CloudNote Air still costs INR 1,199 including tax but excluding shipping.",
+      "start_char": 1918
+    }
+  ],
+  "labeled": true,
+  "matched_gold_ids": [],
+  "matched_prediction_ids": [],
+  "matches": [],
+  "metadata": {
+    "agent_version": "v1",
+    "completed_at": "2026-10-19T12:37:27.213650+00:00",
+    "counts": {
+      "answers": 3,
+      "errors": 1,
+      "ok": 2,
+      "predictions": 0,
+      "scheduled": 3
+    },
+    "dataset_version": "long-brand-answers-50-v4",
+    "duration_ms": 31797.166958916932,
+    "evaluator_version": "sentence-spans-and-labels-v4",
+    "fact_version": "speaker-catalogue-v4",
+    "file_hashes": {
+      "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+      "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+      "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+      "prompts/v1.txt": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b"
+    },
+    "model": "gpt-5-mini-2025-08-07",
+    "prompt_version": "v1",
+    "provider": "openai",
+    "run_id": "23b3e271-2677-4969-bf53-3790665c6b1a",
+    "scheduled_answer_ids": [
+      "A01",
+      "A02",
+      "A03"
+    ],
+    "settings": {
+      "model": "gpt-5-mini-2025-08-07",
+      "provider": "openai",
+      "reasoning_effort": "low",
+      "request_timeout_seconds": 15.0,
+      "temperature": null
+    },
+    "source_revision": "da37f153e8b631026534d9e19525a7f25781519a",
+    "split": "development",
+    "started_at": "2026-10-19T12:36:55.404099+00:00",
+    "supersedes": "0cd3dd45-2a1c-41bb-9962-9eba33358ac6",
+    "supersedes_reason": "escalation after full-split provider timeouts",
+    "trace_ids": [
+      "2bdbe650102346a4b516af5fcb648527",
+      "ad792adf5ea24912957b5868505c55fa",
+      "f19a014b1323415f85d2143afec41e65"
+    ]
+  },
+  "metrics": {
+    "answer_errors": 1,
+    "confusion_matrix": {
+      "contradicted": {
+        "contradicted": 0,
+        "missing_or_error": 9,
+        "supported": 0,
+        "unknown": 0
+      },
+      "no_gold": {
+        "contradicted": 0,
+        "missing_or_error": 0,
+        "supported": 0,
+        "unknown": 0
+      },
+      "supported": {
+        "contradicted": 0,
+        "missing_or_error": 10,
+        "supported": 0,
+        "unknown": 0
+      },
+      "unknown": {
+        "contradicted": 0,
+        "missing_or_error": 9,
+        "supported": 0,
+        "unknown": 0
+      }
+    },
+    "correct_labels": 0,
+    "coverage": 0.0,
+    "extraction_f1": 0.0,
+    "extraction_precision": 0.0,
+    "extraction_recall": 0.0,
+    "gold_claims": 28,
+    "joint_f1": 0.0,
+    "joint_precision": 0.0,
+    "joint_recall": 0.0,
+    "macro_f1": 0.0,
+    "matched_spans": 0,
+    "missed_ids": [
+      "A01:306:460",
+      "A01:461:647",
+      "A01:649:832",
+      "A01:833:1040",
+      "A01:1237:1439",
+      "A01:1440:1619",
+      "A01:1620:1767",
+      "A01:1769:1942",
+      "A01:1943:2104",
+      "A02:306:506",
+      "A02:507:689",
+      "A02:691:875",
+      "A02:876:1084",
+      "A02:1085:1272",
+      "A02:1469:1659",
+      "A02:1660:1813",
+      "A02:1815:2039",
+      "A02:2040:2223",
+      "A02:2224:2372",
+      "A03:335:505",
+      "A03:506:687",
+      "A03:689:861",
+      "A03:862:1043",
+      "A03:1240:1409",
+      "A03:1410:1563",
+      "A03:1564:1742",
+      "A03:1744:1917",
+      "A03:1918:2069"
+    ],
+    "per_label": {
+      "contradicted": {
+        "actual": 9,
+        "f1": 0.0,
+        "fn": 9,
+        "fp": 0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "tp": 0
+      },
+      "supported": {
+        "actual": 10,
+        "f1": 0.0,
+        "fn": 10,
+        "fp": 0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "tp": 0
+      },
+      "unknown": {
+        "actual": 9,
+        "f1": 0.0,
+        "fn": 9,
+        "fp": 0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "tp": 0
+      }
+    },
+    "predictions": 0,
+    "split": "development",
+    "unmatched_prediction_ids": [],
+    "wrong_label_ids": []
+  },
+  "predictions": [],
+  "quality_available": true,
+  "schema_version": "claimlens-evaluation-report-v1",
+  "split": "development"
+}

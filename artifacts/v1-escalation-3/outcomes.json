@@ -1,0 +1,29 @@
+[
+  {
+    "answer_id": "A01",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 7890.903874998912,
+    "status": "ok",
+    "trace_id": "2bdbe650102346a4b516af5fcb648527"
+  },
+  {
+    "answer_id": "A02",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 13860.792542109266,
+    "status": "ok",
+    "trace_id": "ad792adf5ea24912957b5868505c55fa"
+  },
+  {
+    "answer_id": "A03",
+    "claims": [],
+    "error_message": "quote does not equal its exact source span",
+    "error_type": "invalid_output",
+    "latency_ms": 31787.68066712655,
+    "status": "error",
+    "trace_id": "f19a014b1323415f85d2143afec41e65"
+  }
+]

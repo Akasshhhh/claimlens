@@ -1,0 +1,11 @@
+[
+  {
+    "answer_id": "A01",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 5629.795292159542,
+    "status": "ok",
+    "trace_id": "e9755f276d3a4df8944b9de60e728184"
+  }
+]

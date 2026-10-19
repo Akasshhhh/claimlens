@@ -1,0 +1,13 @@
+[
+  {
+    "elapsed_seconds": 11.262,
+    "observation_count": 4,
+    "observation_names": [
+      "model-turn-2",
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "trace_id": "fc84b86f755e403cb33a03bfc5dd5ab6"
+  }
+]

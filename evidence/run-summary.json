@@ -1,0 +1,40 @@
+{
+  "runs": [
+    {
+      "name": "v1-development",
+      "run_id": "30beb6e6-a7e3-4a2b-8a15-9f682b3cd076",
+      "artifact": "artifacts/v1-development-rerun",
+      "joint_f1": 0.0,
+      "answer_errors": 40,
+      "predictions": 0
+    },
+    {
+      "name": "v2-development",
+      "run_id": "916ec3da-3b4a-49e2-9fd7-1efa4386ca0e",
+      "artifact": "artifacts/v2-development",
+      "joint_f1": 0.0,
+      "answer_errors": 40,
+      "predictions": 0
+    },
+    {
+      "name": "v1-check",
+      "run_id": "200802cf-9bc8-4186-ae9a-9a95533fbf8d",
+      "artifact": "artifacts/v1-check",
+      "quality_metrics": null,
+      "ok": 6,
+      "errors": 4
+    },
+    {
+      "name": "v2-check",
+      "run_id": "ea08c511-28fb-4f69-a8ac-bc963417673b",
+      "artifact": "artifacts/v2-check",
+      "quality_metrics": null,
+      "ok": 2,
+      "errors": 8
+    }
+  ],
+  "model": "gpt-5-mini-2025-08-07",
+  "provider": "openai",
+  "reasoning_effort": "low",
+  "temperature": null
+}\n

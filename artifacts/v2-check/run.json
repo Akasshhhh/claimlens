@@ -1,0 +1,61 @@
+{
+  "agent_version": "v2",
+  "completed_at": "2026-10-19T12:59:17.488781+00:00",
+  "counts": {
+    "answers": 10,
+    "errors": 8,
+    "ok": 2,
+    "predictions": 0,
+    "scheduled": 10
+  },
+  "dataset_version": "long-brand-answers-50-v4",
+  "duration_ms": 35241.99149990454,
+  "evaluator_version": "sentence-spans-and-labels-v4",
+  "fact_version": "speaker-catalogue-v4",
+  "file_hashes": {
+    "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+    "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+    "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+    "prompts/v2.txt": "1ebbc6b87ec48f34ad6f023688865c489eb4ffdb64b77ca3b1292ff9baf068fe"
+  },
+  "model": "gpt-5-mini-2025-08-07",
+  "prompt_version": "v2",
+  "provider": "openai",
+  "run_id": "ea08c511-28fb-4f69-a8ac-bc963417673b",
+  "scheduled_answer_ids": [
+    "A41",
+    "A42",
+    "A43",
+    "A44",
+    "A45",
+    "A46",
+    "A47",
+    "A48",
+    "A49",
+    "A50"
+  ],
+  "settings": {
+    "model": "gpt-5-mini-2025-08-07",
+    "provider": "openai",
+    "reasoning_effort": "low",
+    "request_timeout_seconds": 15.0,
+    "temperature": null
+  },
+  "source_revision": "a9ce77e84ab3bff9522d91304c926d5b30056924",
+  "split": "check",
+  "started_at": "2026-10-19T12:58:42.243639+00:00",
+  "supersedes": "916ec3da-3b4a-49e2-9fd7-1efa4386ca0e",
+  "supersedes_reason": "frozen final-check run",
+  "trace_ids": [
+    "211b90a1dfc34220ab06417f67b942cf",
+    "2302243bde014d619863dc1b258eb8b4",
+    "254cb4bc1fe54692a7dc896aa716fb0e",
+    "2ec25706f6e6403e9acc1ca8b7a12b8f",
+    "2fb458a688244133a04a9e6eb7b7feae",
+    "753b7a91140c47edb10a39a62e414e0e",
+    "79b6b2b0ecb84fdb97683fbe8bc540c0",
+    "8d802dc2c85440419be89066850940b2",
+    "c845d157ef5a402d8552ed5d6847274c",
+    "e416c7c82328495caf561b335091a231"
+  ]
+}

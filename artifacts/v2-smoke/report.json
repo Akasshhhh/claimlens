@@ -1,0 +1,318 @@
+{
+  "answer_outcomes": [
+    {
+      "answer_id": "A01",
+      "claims": [],
+      "error_message": null,
+      "error_type": null,
+      "latency_ms": 5629.795292159542,
+      "status": "ok",
+      "trace_id": "e9755f276d3a4df8944b9de60e728184"
+    }
+  ],
+  "answer_scores": [
+    {
+      "answer_id": "A01",
+      "correct_labels": 0,
+      "error_type": null,
+      "extraction_f1": 0.0,
+      "extraction_precision": 0.0,
+      "extraction_recall": 0.0,
+      "gold_claims": 9,
+      "joint_f1": 0.0,
+      "joint_precision": 0.0,
+      "joint_recall": 0.0,
+      "matched_spans": 0,
+      "missed_ids": [
+        "A01:306:460",
+        "A01:461:647",
+        "A01:649:832",
+        "A01:833:1040",
+        "A01:1237:1439",
+        "A01:1440:1619",
+        "A01:1620:1767",
+        "A01:1769:1942",
+        "A01:1943:2104"
+      ],
+      "predictions": 0,
+      "status": "ok",
+      "unmatched_prediction_ids": [],
+      "wrong_label_ids": []
+    }
+  ],
+  "gold_claims": [
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:306:460",
+      "difficulty_tags": [
+        "comparison",
+        "arithmetic"
+      ],
+      "end_char": 460,
+      "evidence_fact_ids": [
+        "cleartrail.mini.price_2026",
+        "cleartrail.plus.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The two 2026 list prices are 1299 and 2499; the stated direction and difference are correct.",
+      "quote": "For the current India catalogue, ClearTrail Mini is listed at INR 1,200 less than ClearTrail Plus, comparing the two tax-inclusive prices before shipping.",
+      "start_char": 306
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:461:647",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 647,
+      "evidence_fact_ids": [
+        "cleartrail.mini.warranty_india"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The matching India warranty is 12 months, not 18.",
+      "quote": "For an authorized India purchase with the original invoice and a manufacturing defect, ClearTrail Mini receives a standard manufacturer warranty lasting 18 months from the purchase date.",
+      "start_char": 461
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:649:832",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 832,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "No retailer return or refund policy is supplied.",
+      "quote": "An opened ClearTrail Mini can be returned to any authorized India seller within thirty days for a full refund, even when the speaker has no manufacturing defect or functional problem.",
+      "start_char": 649
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:833:1040",
+      "difficulty_tags": [
+        "missing_fact"
+      ],
+      "end_char": 1040,
+      "evidence_fact_ids": [],
+      "expected_label": "unknown",
+      "explanation": "Amplifier power and per-channel output are absent.",
+      "quote": "The sustained amplifier output of ClearTrail Mini is forty watts per channel during ordinary playback, which allows a direct loudness comparison with other speakers advertised using electrical power figures.",
+      "start_char": 833
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1237:1439",
+      "difficulty_tags": [
+        "policy_scope"
+      ],
+      "end_char": 1439,
+      "evidence_fact_ids": [
+        "cleartrail.mini.warranty_india"
+      ],
+      "expected_label": "unknown",
+      "explanation": "Warranty eligibility is known; a repair-time guarantee is absent.",
+      "quote": "An authorized India service centre guarantees repair of ClearTrail Mini within two working days after receiving the unit and the required purchase paperwork, regardless of replacement-part availability.",
+      "start_char": 1237
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1440:1619",
+      "difficulty_tags": [
+        "condition_swap"
+      ],
+      "end_char": 1619,
+      "evidence_fact_ids": [
+        "cleartrail.mini.battery_100_percent"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "At 100 percent volume the supplied duration is 6 hours, not 12.",
+      "quote": "The stated laboratory playback time for ClearTrail Mini, using a new battery with EQ off at one hundred percent volume, remains 12 hours without any reduction for louder playback.",
+      "start_char": 1440
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1620:1767",
+      "difficulty_tags": [
+        "date_scope",
+        "price"
+      ],
+      "end_char": 1767,
+      "evidence_fact_ids": [
+        "cleartrail.mini.price_2026"
+      ],
+      "expected_label": "supported",
+      "explanation": "The 2026 India list price is INR 1299; tax and shipping scope match.",
+      "quote": "For an India purchase at the official catalogue list price on 1 October 2026, ClearTrail Mini costs INR 1,299 including tax but excluding shipping.",
+      "start_char": 1620
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1769:1942",
+      "difficulty_tags": [
+        "box_scope"
+      ],
+      "end_char": 1942,
+      "evidence_fact_ids": [
+        "cleartrail.mini.adapter_included"
+      ],
+      "expected_label": "contradicted",
+      "explanation": "The statement reverses the explicit adapter-inclusion value.",
+      "quote": "The official India retail box for ClearTrail Mini includes a wall charging adapter, even though separate accessory lists may make the charging arrangement look less obvious.",
+      "start_char": 1769
+    },
+    {
+      "answer_id": "A01",
+      "claim_id": "A01:1943:2104",
+      "difficulty_tags": [
+        "explicit_false",
+        "feature_scope"
+      ],
+      "end_char": 2104,
+      "evidence_fact_ids": [
+        "cleartrail.mini.wifi"
+      ],
+      "expected_label": "supported",
+      "explanation": "The claim matches the explicit Wi-Fi boolean.",
+      "quote": "The built-in Wi-Fi capability of ClearTrail Mini is absent, which should be treated as a separate specification from its ability to receive audio over Bluetooth.",
+      "start_char": 1943
+    }
+  ],
+  "labeled": true,
+  "matched_gold_ids": [],
+  "matched_prediction_ids": [],
+  "matches": [],
+  "metadata": {
+    "agent_version": "v2",
+    "completed_at": "2026-10-19T12:50:19.774568+00:00",
+    "counts": {
+      "answers": 1,
+      "errors": 0,
+      "ok": 1,
+      "predictions": 0,
+      "scheduled": 1
+    },
+    "dataset_version": "long-brand-answers-50-v4",
+    "duration_ms": 5630.755040794611,
+    "evaluator_version": "sentence-spans-and-labels-v4",
+    "fact_version": "speaker-catalogue-v4",
+    "file_hashes": {
+      "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+      "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+      "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+      "prompts/v2.txt": "1ebbc6b87ec48f34ad6f023688865c489eb4ffdb64b77ca3b1292ff9baf068fe"
+    },
+    "model": "gpt-5-mini-2025-08-07",
+    "prompt_version": "v2",
+    "provider": "openai",
+    "run_id": "10c4da2b-8e80-42e7-aa06-a203d213d343",
+    "scheduled_answer_ids": [
+      "A01"
+    ],
+    "settings": {
+      "model": "gpt-5-mini-2025-08-07",
+      "provider": "openai",
+      "reasoning_effort": "low",
+      "request_timeout_seconds": 15.0,
+      "temperature": null
+    },
+    "source_revision": "a9ce77e84ab3bff9522d91304c926d5b30056924",
+    "split": "development",
+    "started_at": "2026-10-19T12:50:14.137687+00:00",
+    "supersedes": "c2a4f339-e77c-463f-b1b0-6dd8a4b52f3c",
+    "supersedes_reason": "targeted v2 extraction obligation prompt change",
+    "trace_ids": [
+      "e9755f276d3a4df8944b9de60e728184"
+    ]
+  },
+  "metrics": {
+    "answer_errors": 0,
+    "confusion_matrix": {
+      "contradicted": {
+        "contradicted": 0,
+        "missing_or_error": 3,
+        "supported": 0,
+        "unknown": 0
+      },
+      "no_gold": {
+        "contradicted": 0,
+        "missing_or_error": 0,
+        "supported": 0,
+        "unknown": 0
+      },
+      "supported": {
+        "contradicted": 0,
+        "missing_or_error": 3,
+        "supported": 0,
+        "unknown": 0
+      },
+      "unknown": {
+        "contradicted": 0,
+        "missing_or_error": 3,
+        "supported": 0,
+        "unknown": 0
+      }
+    },
+    "correct_labels": 0,
+    "coverage": 0.0,
+    "extraction_f1": 0.0,
+    "extraction_precision": 0.0,
+    "extraction_recall": 0.0,
+    "gold_claims": 9,
+    "joint_f1": 0.0,
+    "joint_precision": 0.0,
+    "joint_recall": 0.0,
+    "macro_f1": 0.0,
+    "matched_spans": 0,
+    "missed_ids": [
+      "A01:306:460",
+      "A01:461:647",
+      "A01:649:832",
+      "A01:833:1040",
+      "A01:1237:1439",
+      "A01:1440:1619",
+      "A01:1620:1767",
+      "A01:1769:1942",
+      "A01:1943:2104"
+    ],
+    "per_label": {
+      "contradicted": {
+        "actual": 3,
+        "f1": 0.0,
+        "fn": 3,
+        "fp": 0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "tp": 0
+      },
+      "supported": {
+        "actual": 3,
+        "f1": 0.0,
+        "fn": 3,
+        "fp": 0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "tp": 0
+      },
+      "unknown": {
+        "actual": 3,
+        "f1": 0.0,
+        "fn": 3,
+        "fp": 0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "tp": 0
+      }
+    },
+    "predictions": 0,
+    "split": "development",
+    "unmatched_prediction_ids": [],
+    "wrong_label_ids": []
+  },
+  "predictions": [],
+  "quality_available": true,
+  "schema_version": "claimlens-evaluation-report-v1",
+  "split": "development"
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "answer_id": "A01",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 32184.42045804113,
+    "status": "error",
+    "trace_id": "5d1e7d5c5108494f98d18426aa8a7c8e"
+  },
+  {
+    "answer_id": "A02",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 31531.411374919116,
+    "status": "error",
+    "trace_id": "21db6b0f6f3e4de39c2e2443105910ef"
+  },
+  {
+    "answer_id": "A03",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 31531.786791980267,
+    "status": "error",
+    "trace_id": "6518843799184ff2a365cbeb340ddd7a"
+  },
+  {
+    "answer_id": "A04",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 32980.100041022524,
+    "status": "error",
+    "trace_id": "d9c78323c66e46cb975cab30aa4abf20"
+  },
+  {
+    "answer_id": "A05",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 33072.541542118415,
+    "status": "error",
+    "trace_id": "3d7389285a9545cab7d3d2e547e7b036"
+  },
+  {
+    "answer_id": "A06",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 33356.15179198794,
+    "status": "error",
+    "trace_id": "d515eb1bd8774eb6a0f975d5cfc87859"
+  },
+  {
+    "answer_id": "A07",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 34405.29187512584,
+    "status": "error",
+    "trace_id": "08db675df8d84b1fa32ae4ce284ebce3"
+  },
+  {
+    "answer_id": "A08",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 34414.836791111156,
+    "status": "error",
+    "trace_id": "8fa1c5e1e89840b982adb88d667e79fe"
+  },
+  {
+    "answer_id": "A09",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 34642.9000410717,
+    "status": "error",
+    "trace_id": "4802954eb95f4d7eab51639f407f622f"
+  },
+  {
+    "answer_id": "A10",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 35628.556583076715,
+    "status": "error",
+    "trace_id": "695ecf538fae4da5af4856c4ffbad861"
+  },
+  {
+    "answer_id": "A11",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 35925.25008297525,
+    "status": "error",
+    "trace_id": "8d30b739b6d3477588d77a6394855e54"
+  },
+  {
+    "answer_id": "A12",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 35915.91712483205,
+    "status": "error",
+    "trace_id": "fcaed5e487274d5eacec10114780d925"
+  },
+  {
+    "answer_id": "A13",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 37050.164124928415,
+    "status": "error",
+    "trace_id": "b4f16c7bd19140599eecddcda0b0b8a6"
+  },
+  {
+    "answer_id": "A14",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 37150.05125012249,
+    "status": "error",
+    "trace_id": "ec774c9f52c24e6d96057cbe21073694"
+  },
+  {
+    "answer_id": "A15",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 37227.10904106498,
+    "status": "error",
+    "trace_id": "bde316d18e00473691ac51bd302a1a78"
+  },
+  {
+    "answer_id": "A16",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 38396.60400012508,
+    "status": "error",
+    "trace_id": "20f06d6149e94fa1859cc7693533fefc"
+  },
+  {
+    "answer_id": "A17",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 38406.4439998474,
+    "status": "error",
+    "trace_id": "8c80f4e5870d4c58b6f7007a97cdbe2c"
+  },
+  {
+    "answer_id": "A18",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 38468.20158301853,
+    "status": "error",
+    "trace_id": "971446f0b6a3421a9e233137b2b17b5d"
+  },
+  {
+    "answer_id": "A19",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 40387.43287487887,
+    "status": "error",
+    "trace_id": "ed449486fd51413a8d98c18d483ccd00"
+  },
+  {
+    "answer_id": "A20",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 39605.962541885674,
+    "status": "error",
+    "trace_id": "5680f49c2ab341dd8867ae6c3ad31d31"
+  },
+  {
+    "answer_id": "A21",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 39647.902250057086,
+    "status": "error",
+    "trace_id": "0df2f52ee75f48b59abb1aa25aeeeb38"
+  },
+  {
+    "answer_id": "A22",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 41361.594166141,
+    "status": "error",
+    "trace_id": "a9e1159558d84682a26ce4709fa86f28"
+  },
+  {
+    "answer_id": "A23",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 42178.9409162011,
+    "status": "error",
+    "trace_id": "c277124b9ae2490e968f38b59faf1032"
+  },
+  {
+    "answer_id": "A24",
+    "claims": [],
+    "error_message": "unknown brand: RivalSound",
+    "error_type": "unknown_brand",
+    "latency_ms": 12712.47445885092,
+    "status": "error",
+    "trace_id": "5d5f52dc185148c68dc907facdd89a94"
+  },
+  {
+    "answer_id": "A25",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 42461.712084012106,
+    "status": "error",
+    "trace_id": "ec38d8f4e43047b2ba96a17a3aca380e"
+  },
+  {
+    "answer_id": "A26",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 43460.20924998447,
+    "status": "error",
+    "trace_id": "1ecea31d8d1e41b4bb4fcfa80b43db43"
+  },
+  {
+    "answer_id": "A27",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 43516.94375020452,
+    "status": "error",
+    "trace_id": "4194ea732bad4324a1f3f7f6b013e973"
+  },
+  {
+    "answer_id": "A28",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 44422.854291973636,
+    "status": "error",
+    "trace_id": "e9b89824886549aca00e921ae67182eb"
+  },
+  {
+    "answer_id": "A29",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 44573.640084126964,
+    "status": "error",
+    "trace_id": "5ac8c564773242cfb4937543eb5e822d"
+  },
+  {
+    "answer_id": "A30",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 44552.09895782173,
+    "status": "error",
+    "trace_id": "62488c0aef1548eabae9d9270f623f6f"
+  },
+  {
+    "answer_id": "A31",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30055.6117920205,
+    "status": "error",
+    "trace_id": "687d15d963c843e28e4c7d2272021b5f"
+  },
+  {
+    "answer_id": "A32",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30055.590375093743,
+    "status": "error",
+    "trace_id": "a4307fbe9f894490a5674127e3b70f57"
+  },
+  {
+    "answer_id": "A33",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30054.81820786372,
+    "status": "error",
+    "trace_id": "1a698e7ec73d418186597861ca44ec2a"
+  },
+  {
+    "answer_id": "A34",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30054.247291991487,
+    "status": "error",
+    "trace_id": "2924c94fc484429a8c8ea7eebd117426"
+  },
+  {
+    "answer_id": "A35",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30053.11766709201,
+    "status": "error",
+    "trace_id": "aac8e9807bee4c2f84f0dd14e2d87c73"
+  },
+  {
+    "answer_id": "A36",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30053.087207954377,
+    "status": "error",
+    "trace_id": "b998e8074de742ada00bfa5d8e117be6"
+  },
+  {
+    "answer_id": "A37",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30053.0086660292,
+    "status": "error",
+    "trace_id": "f3ded5209aab405e8606545aa94a3155"
+  },
+  {
+    "answer_id": "A38",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30052.922209026292,
+    "status": "error",
+    "trace_id": "3c0a11f61e204a8c84ff0668aa370e2f"
+  },
+  {
+    "answer_id": "A39",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30052.834291942418,
+    "status": "error",
+    "trace_id": "e536f5d68ebb4f16951e6af268504d08"
+  },
+  {
+    "answer_id": "A40",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 30052.88741691038,
+    "status": "error",
+    "trace_id": "b612e0e3144c44ebb69531007ffbd1f6"
+  }
+]

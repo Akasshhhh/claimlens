@@ -1,0 +1,92 @@
+[
+  {
+    "answer_id": "A41",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 13639.914500061423,
+    "status": "ok",
+    "trace_id": "91cd41934f424fd8a8ada644fdcc364f"
+  },
+  {
+    "answer_id": "A42",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 8003.932083956897,
+    "status": "ok",
+    "trace_id": "00f0647d07fe48998b162e6a58995e6b"
+  },
+  {
+    "answer_id": "A43",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 9654.474375071004,
+    "status": "ok",
+    "trace_id": "9f1adf078aea4ad98afbf68bb0096c13"
+  },
+  {
+    "answer_id": "A44",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 33436.663875123486,
+    "status": "error",
+    "trace_id": "1d5a42b6c656459bad9971359577053e"
+  },
+  {
+    "answer_id": "A45",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 31986.939208116382,
+    "status": "ok",
+    "trace_id": "6b3ca5c290ff4c1cb5afd6ae634bb12f"
+  },
+  {
+    "answer_id": "A46",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 15570.248124888167,
+    "status": "ok",
+    "trace_id": "6b7e79dde77a4ced86e54ac79018cfa4"
+  },
+  {
+    "answer_id": "A47",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 34416.27037501894,
+    "status": "error",
+    "trace_id": "9e7841c4cbb14dbdb64ca487004e968c"
+  },
+  {
+    "answer_id": "A48",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 34871.207459131256,
+    "status": "error",
+    "trace_id": "07aad4d0e9874901ae0d68db01c6b760"
+  },
+  {
+    "answer_id": "A49",
+    "claims": [],
+    "error_message": "provider request timed out",
+    "error_type": "provider_timeout",
+    "latency_ms": 34880.14854188077,
+    "status": "error",
+    "trace_id": "1c9b9574433d437d920eb6304166a8d6"
+  },
+  {
+    "answer_id": "A50",
+    "claims": [],
+    "error_message": null,
+    "error_type": null,
+    "latency_ms": 37080.87104209699,
+    "status": "ok",
+    "trace_id": "365b12d5896d41179ece23dc69d0fbe1"
+  }
+]
