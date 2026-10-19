@@ -22,7 +22,7 @@ from claimlens.contracts import (
 
 DEFAULT_REQUEST_TIMEOUT = 15.0
 DEFAULT_REASONING_EFFORT = "minimal"
-DEFAULT_MAX_COMPLETION_TOKENS = 2500
+DEFAULT_MAX_COMPLETION_TOKENS = 2000
 
 
 def _status_code(exc: BaseException) -> int | None:
