@@ -272,10 +272,43 @@ def test_unicode_code_point_offsets_are_used() -> None:
             }
         ],
     }
-    outcome = run(ClaimAgent(FakeProvider({"content": json.dumps(payload)}), FakeStore()).run(data))
+    outcome = run(
+        ClaimAgent(
+            FakeProvider(tool_call(), {"content": json.dumps(payload)}),
+            FakeStore(),
+        ).run(data)
+    )
     assert outcome.status == "ok"
     assert outcome.claims[0].start_char == 2
     assert outcome.claims[0].quote == "The model weighs 2 kg."
+
+
+def test_python_localizes_exact_quote_when_model_offset_is_wrong() -> None:
+    data = answer("The model weighs 2 kg.")
+    quote = data.ai_answer
+    payload = {
+        "answer_id": data.answer_id,
+        "claims": [
+            {
+                "claim_id": f"{data.answer_id}:999:1000",
+                "start_char": 999,
+                "end_char": 1000,
+                "quote": quote,
+                "label": "supported",
+                "fact_ids": ["fact-a-weight"],
+                "reason": "The supplied row establishes the stated weight.",
+            }
+        ],
+    }
+    outcome = run(
+        ClaimAgent(
+            FakeProvider(tool_call(), {"content": json.dumps(payload)}),
+            FakeStore(),
+        ).run(data)
+    )
+    assert outcome.status == "ok"
+    assert outcome.claims[0].start_char == 0
+    assert outcome.claims[0].claim_id == f"{data.answer_id}:0:{len(quote)}"
 
 
 def test_v1_and_v2_are_distinct_checked_in_prompts() -> None:

@@ -289,17 +289,33 @@ def validate_output(
         if any(fact_id not in known_fact_ids for fact_id in claim_raw["fact_ids"]):
             raise _AgentError("invalid_output", "claim cites a fact ID not returned by the tool")
 
-        start = claim_raw["start_char"]
-        end = claim_raw["end_char"]
-        expected_id = f"{input_data.answer_id}:{start}:{end}"
-        if claim_raw["claim_id"] != expected_id:
-            raise _AgentError("invalid_output", "claim_id must derive from answer_id and offsets")
-        if start < 0 or end <= start or end > len(input_data.ai_answer):
-            raise _AgentError("invalid_output", "claim offsets are out of bounds")
+        raw_start = claim_raw["start_char"]
+        raw_end = claim_raw["end_char"]
+        quote = claim_raw["quote"]
+        if quote != quote.strip() or not quote:
+            raise _AgentError("invalid_output", "quote must be non-empty and trimmed")
+
+        # The model is not a reliable Unicode offset counter.  Use its exact
+        # quote as the source of truth and resolve the occurrence in Python,
+        # preferring the model's proposed location when it is one of several
+        # repeated occurrences.  This is the contract's permitted offset
+        # localization step, not fuzzy matching or gold-assisted correction.
+        candidates: list[int] = []
+        cursor = input_data.ai_answer.find(quote, max(previous_end, 0))
+        while cursor >= 0:
+            candidates.append(cursor)
+            cursor = input_data.ai_answer.find(quote, cursor + 1)
+        if not candidates:
+            raise _AgentError("invalid_output", "quote does not occur exactly in source answer")
+        start = min(candidates, key=lambda candidate: abs(candidate - raw_start))
+        end = start + len(quote)
         if start < previous_end:
             raise _AgentError("invalid_output", "claims overlap or are not sorted")
+        claim_raw["start_char"] = start
+        claim_raw["end_char"] = end
+        claim_raw["claim_id"] = f"{input_data.answer_id}:{start}:{end}"
         exact_quote = input_data.ai_answer[start:end]
-        if claim_raw["quote"] != exact_quote or claim_raw["quote"] != claim_raw["quote"].strip():
+        if quote != exact_quote:
             raise _AgentError("invalid_output", "quote does not equal its exact source span")
         if start == previous_end and claims and start <= claims[-1].start_char:
             raise _AgentError("invalid_output", "claims must increase by start offset")
@@ -593,7 +609,12 @@ class ClaimAgent:
                             "role": "tool",
                             "tool_call_id": call.call_id,
                             "name": TOOL_NAME,
-                            "content": json.dumps(tool_payload, ensure_ascii=False, sort_keys=True),
+                            "content": json.dumps(
+                                tool_payload,
+                                ensure_ascii=False,
+                                sort_keys=True,
+                                separators=(",", ":"),
+                            ),
                         }
                     )
                 if turn_number == self.max_turns:
