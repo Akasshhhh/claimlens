@@ -1,0 +1,6 @@
+$ curl -sS $LANGFUSE_HOST/api/public/health
+{"status":"OK","version":"4.63.0"}
+HTTP_STATUS=200
+
+The final polling verifier used GET /api/public/v2/observations with a trace
+ID, limit=10, fields=core,basic, and the required time-window parameters.

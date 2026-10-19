@@ -59,8 +59,12 @@ was run and produced the CSV hashes recorded in `evidence/MANIFEST.json`.
 
 The API uses PostgreSQL only. With the configured `DATABASE_URL`,
 `set -a; . ./.env; set +a; .venv/bin/pytest -q tests/api` passed **20 tests**.
-No SQLite substitute was used. `make run` and a Docker build were not run in
-this session; the Dockerfile and API target are present for the next operator.
+No SQLite substitute was used. `make run` was not run in this session. A
+Docker build was attempted with Docker 27.5.1 but could not start because the
+local Docker daemon was not running (`Cannot connect to the Docker daemon at
+unix:///Users/akash/.docker/run/docker.sock`). The Dockerfile and API target
+are present; rerun `docker build --tag claimlens:local .` after starting Docker
+Desktop.
 
 ## Langfuse verification
 
@@ -122,5 +126,5 @@ and the offline metric re-score myself in this session.
 - Reliability/tests (15): **verified** — `providers/`, `runner/executor.py`,
   reliability tests, and 57 passing pytest tests.
 - Reproducibility (5): **partially verified** — pinned setup, README,
-  Dockerfile, hashes, manifest, and handoff are present; Docker build and
-  `make run` remain unexecuted.
+  Dockerfile, hashes, manifest, and handoff are present; Docker build was
+  blocked by the stopped local daemon and `make run` remains unexecuted.
