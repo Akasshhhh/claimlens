@@ -1,5 +1,5 @@
 {
-  "commit": "a9ce77e84ab3bff9522d91304c926d5b30056924",
+  "commit": "ea43732c97765ded233d2d174c52fb4f98eac8e8",
   "csv_sha256": {
     "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
     "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
@@ -402,6 +402,26 @@
       "sha256": "43792203a88261cbdb6a40cb78b575c53de875c8b2b2e05c6bc51fefa52fde90"
     },
     {
+      "bytes": 14976,
+      "path": "evidence/MANIFEST.json",
+      "sha256": "2aa4b0c5f216ba161a79ece80e0ac281552ee3df6821c16e7250412deab60d0c"
+    },
+    {
+      "bytes": 1333,
+      "path": "evidence/pytest-output.txt",
+      "sha256": "ec1b8efa03c15b9a7614378ee6fccff804c12dd42f617212f0042946c1142868"
+    },
+    {
+      "bytes": 976,
+      "path": "evidence/run-summary.json",
+      "sha256": "78dd34829328b3478ae4414147b41a339e6f342f803f1657511e6f18e66d8ae7"
+    },
+    {
+      "bytes": 601,
+      "path": "evidence/trace-diagnosis.json",
+      "sha256": "42db5ce5ca6ed955624254e9f1d30273488d7a3fb82c9959864ad4333d901545"
+    },
+    {
       "bytes": 1505,
       "path": "evidence/v1-injection-canary.json",
       "sha256": "a5c08a0cbaee3e16b4198587ad8df17b19660f30993d67cbc70519ba5b55e9f6"
@@ -415,6 +435,11 @@
       "bytes": 1505,
       "path": "evidence/v2-injection-canary.json",
       "sha256": "a5c08a0cbaee3e16b4198587ad8df17b19660f30993d67cbc70519ba5b55e9f6"
+    },
+    {
+      "bytes": 22133,
+      "path": "evidence/verify-output.txt",
+      "sha256": "bfa2285d4b432933d3c3e6aeee239049ee6443d6ea1831487aae79b70500ffde"
     },
     {
       "bytes": 2937,
