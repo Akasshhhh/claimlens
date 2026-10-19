@@ -1290,9 +1290,9 @@
       "sha256": "236cb842214bfdbb8c31bcbc1852ae3437d8562c53586a31717d645f14a3828d"
     },
     {
-      "bytes": 8482,
+      "bytes": 5096,
       "path": "evidence/audit/REPORT.md",
-      "sha256": "a867cb5a6f96a70c2d0e8eda79ae58e89e08cf4351ae46c1072bdb4984aff955"
+      "sha256": "761b91e7fff550d7781eb4df29aa5dc28afa5787868c663c53725d1a13129899"
     },
     {
       "bytes": 28579,
@@ -1305,9 +1305,9 @@
       "sha256": "d2caf149512e3e8c137756e6f561b4e1aaf40208b79cb2eba380e826a7cdf596"
     },
     {
-      "bytes": 22490,
+      "bytes": 22404,
       "path": "evidence/audit/regenerate_evidence.py",
-      "sha256": "6e756f4bd4c56e20c1bab6e25066bfba718f835f7a8b6537c9bcdf3f46586fe5"
+      "sha256": "b176bfa03a25f0bb1a16de3adf434b82cd4701e88b4f55aafea16ffab8aa1e9b"
     },
     {
       "bytes": 20274,
@@ -1317,7 +1317,7 @@
     {
       "bytes": 25528,
       "path": "evidence/final-run-summary.json",
-      "sha256": "562ba7100840baf004f0e92664a02dc67d480f070ac1559e4bd60527551b1f70"
+      "sha256": "6672f01da545db4af8820381a31d0537e901abe49c6d525fb6efd8f8314f92d5"
     },
     {
       "bytes": 247,
@@ -1325,9 +1325,9 @@
       "sha256": "18180144e14d879efa6dab543febd6980df3f051aae4707f9ed02a1b914b1677"
     },
     {
-      "bytes": 3387,
+      "bytes": 2573,
       "path": "evidence/langfuse-investigation/README.md",
-      "sha256": "d97f9ec898bbd92fe2ef24d02a6dec390289969cddd12455f9f8cde03cab160a"
+      "sha256": "b61660a7307ec2ddc0be4d6cbc38007841ca9f01a9e875c24f27b96841473fa4"
     },
     {
       "bytes": 4306,
@@ -1337,7 +1337,7 @@
     {
       "bytes": 761,
       "path": "evidence/pytest-output.txt",
-      "sha256": "14623a6064776aa17e8a6c883879a6101a0e5a158361ffdec2c5e22f0d95a515"
+      "sha256": "b97951c4e732bd2c89aefb5f8213e50bfde511bad0cc028479260903396cfbe3"
     },
     {
       "bytes": 976,
@@ -1347,7 +1347,7 @@
     {
       "bytes": 21203,
       "path": "evidence/submission/final-provenance.json",
-      "sha256": "977a06e3f0829ba44cb4da73bbf806c3d9d3f13ce2a83510d6acbce3770d5e17"
+      "sha256": "46a0681961c82ac71a2e68e1aa39e8e57f14cf07de4174f35fa9871dc5d562f6"
     },
     {
       "bytes": 3386,
@@ -1406,7 +1406,7 @@
     "v2-check": "2f8469ef-e735-4eee-bb01-9b9a8dff7865",
     "v2-development": "4ade6dff-2f02-40b3-8b25-72985c0ca141"
   },
-  "generated_for_commit": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+  "generated_for_commit": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
   "historical_status": {
     "artifact_policy": "Only the four final artifact directories named by final_runs feed final-run-summary.json and v1-v2-final-comparison.json. Other artifact directories are retained historical/exploratory evidence.",
     "superseded_evidence": {
@@ -1433,5 +1433,5 @@
     "v2-final-frozen": "8293d189f9bae7619a03247acc78aa6fa1f848bc",
     "v2-frozen": "a9ce77e84ab3bff9522d91304c926d5b30056924"
   },
-  "working_tree_status": "dirty"
+  "working_tree_status": "generated_snapshot"
 }

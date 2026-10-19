@@ -427,9 +427,7 @@ def _manifest(summary: dict[str, Any], comparison: dict[str, Any]) -> dict[str, 
     return {
         "schema_version": "claimlens-manifest-v3",
         "generated_for_commit": summary["generated_for_commit"],
-        "working_tree_status": "dirty"
-        if (_git("status", "--short", "--untracked-files=all") or "").strip()
-        else "clean",
+        "working_tree_status": "generated_snapshot",
         "coverage": {
             "included": [
                 "all currently existing files below artifacts/",

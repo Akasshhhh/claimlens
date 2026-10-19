@@ -168,7 +168,7 @@
       "output": "evidence/pytest-output.txt",
       "status": "passed",
       "summary_lines": [
-        "102 passed, 1 warning in 28.81s"
+        "102 passed, 1 warning in 29.06s"
       ]
     },
     "make_verify": {
@@ -383,7 +383,7 @@
     ]
   },
   "final_run_summary": "evidence/final-run-summary.json",
-  "generated_for_commit": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+  "generated_for_commit": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
   "injection_canaries": {
     "v1": {
       "answer_ids": [

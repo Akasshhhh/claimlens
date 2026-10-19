@@ -5,34 +5,37 @@
         "v1": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
         "v2": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
       },
+      "mode": "clean_corrected_rerun",
       "problems": [],
       "status": "complete",
-      "v1_source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
-      "v2_source_revision": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
+      "v1_prompt_sha256": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
+      "v1_source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+      "v2_prompt_sha256": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
+      "v2_source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6"
     },
     "historical_artifact_policy": {
       "current_artifacts": [
-        "artifacts/v1-development-final-turn-gated",
-        "artifacts/v2-development-final",
-        "artifacts/v1-check-final",
-        "artifacts/v2-check-final"
+        "artifacts/v1-development-corrected-final",
+        "artifacts/v2-development-corrected-final",
+        "artifacts/v1-check-corrected-final",
+        "artifacts/v2-check-corrected-final"
       ],
       "note": "All other artifact directories are retained historical or exploratory evidence and are excluded from the final comparison.",
       "status": "complete"
     },
     "late_candidate_receipt": {
-      "artifact": "artifacts/v1-development-final-turn-gated",
+      "artifact": "artifacts/v1-development-corrected-final",
       "reason": "This directory is the designated v1 development artifact; it is no longer treated as an unverified late candidate.",
       "status": "designated"
     },
     "manifest_matches_worktree": {
-      "current_v2_hash": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62",
-      "head": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
-      "manifest_commit": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
-      "manifest_v2_hash": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62",
+      "current_v2_hash": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
+      "head": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
+      "manifest_commit": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
+      "manifest_v2_hash": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
       "problems": [],
       "selected_file_scope": {
-        "entry_count": 223,
+        "entry_count": 274,
         "mismatches": [],
         "missing": [],
         "problems": [],
@@ -43,7 +46,7 @@
     "prompt_provenance": {
       "current_worktree_hashes": {
         "v1": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
-        "v2": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62"
+        "v2": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf"
       },
       "frozen_run_hashes": {
         "v1": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
@@ -51,158 +54,143 @@
       },
       "manifest_hashes": {
         "v1": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
-        "v2": "75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62"
+        "v2": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf"
       },
       "note": "A current prompt hash differing from a saved run is disclosed provenance, not a hash fabrication or a reason to rewrite the run.",
-      "status": "current_source_differs_from_frozen_run"
+      "status": "frozen_and_current_match"
     },
     "required_artifact_receipts": {
-      "evidence": "artifacts/v1-development-final-turn-gated, artifacts/v2-development-final, artifacts/v1-check-final, artifacts/v2-check-final",
+      "evidence": "artifacts/v1-development-corrected-final, artifacts/v2-development-corrected-final, artifacts/v1-check-corrected-final, artifacts/v2-check-corrected-final",
       "status": "complete"
     },
     "trace_diagnostics": {
       "event_diagnostics_status": "complete",
-      "reason": "a designated run wrote trace_verification_error.json even though its saved receipt rows are present",
+      "reason": null,
       "receipt_status": "complete",
       "status": "complete",
-      "verification_error_files": [
-        "v2-development-final"
-      ],
-      "verification_process_status": "incomplete"
+      "verification_error_files": [],
+      "verification_process_status": "complete"
     }
   },
-  "dirty_path_count": 25,
+  "dirty_path_count": 7,
   "dirty_path_sample": [
-    "HANDOFF.md",
-    "README.md",
-    "agent/core.py",
-    "claimlens/api/app.py",
-    "claimlens/db/repository.py",
-    "claimlens/tracing.py",
     "evidence/MANIFEST.json",
-    "evidence/audit/REPORT.md",
-    "evidence/audit/repository_audit.py",
-    "evidence/final-run-summary.json",
-    "evidence/pytest-output.txt",
-    "evidence/v1-v2-final-comparison.json",
-    "evidence/verify-output.txt",
-    "runner/experiment.py",
-    "tests/agent/test_core.py",
-    "tests/reliability/test_executor.py",
-    "tests/reliability/test_openai_provider.py",
     "evidence/audit/current-audit.json",
     "evidence/audit/regenerate_evidence.py",
-    "evidence/langfuse-investigation/audit-report.json"
+    "evidence/final-run-summary.json",
+    "evidence/langfuse-investigation/audit-report.json",
+    "evidence/pytest-output.txt",
+    "evidence/submission/final-provenance.json"
   ],
   "freeze_revision": {
     "v1": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
     "v2": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
   },
-  "head": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
-  "manifest_commit": "4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02",
+  "head": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
+  "manifest_commit": "6a731f5302be8342ee403223a41dcd5b8427a9bd",
   "required_artifacts": {
     "v1_check": {
       "agent_version": "v1",
-      "artifact": "artifacts/v1-check-final",
+      "artifact": "artifacts/v1-check-corrected-final",
       "counts": {
         "answers": 10,
-        "errors": 1,
-        "ok": 9,
-        "predictions": 143,
+        "errors": 5,
+        "ok": 5,
+        "predictions": 44,
         "scheduled": 10
       },
       "event_counts": {
         "answer_diagnostics": 10,
         "answer_end": 10,
-        "generation": 20,
-        "provider_attempt": 42,
+        "generation": 15,
+        "provider_attempt": 54,
         "tool_observation": 10,
         "trace_start": 10
       },
       "problems": [],
       "prompt_sha256": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
-      "run_id": "93af5381-5900-43f5-8543-29e32e1ee64f",
-      "source_revision": "c76941fec1713c00502575f7e09b022c3c4c3975",
+      "run_id": "cbcc20f2-b4c8-4c2d-8718-76bd3a69002a",
+      "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
       "split": "check",
       "status": "complete",
       "trace_count": 10
     },
     "v1_development": {
       "agent_version": "v1",
-      "artifact": "artifacts/v1-development-final-turn-gated",
+      "artifact": "artifacts/v1-development-corrected-final",
       "counts": {
         "answers": 40,
-        "errors": 3,
-        "ok": 37,
-        "predictions": 605,
+        "errors": 18,
+        "ok": 22,
+        "predictions": 201,
         "scheduled": 40
       },
       "event_counts": {
         "answer_diagnostics": 40,
         "answer_end": 40,
-        "generation": 77,
-        "provider_attempt": 196,
-        "score": 426,
+        "generation": 62,
+        "provider_attempt": 220,
+        "score": 283,
         "tool_observation": 40,
         "trace_start": 40
       },
       "problems": [],
       "prompt_sha256": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b",
-      "run_id": "8cb56eec-6c54-4eab-aba2-317bee75d451",
-      "source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
       "split": "development",
       "status": "complete",
       "trace_count": 40
     },
     "v2_check": {
       "agent_version": "v2",
-      "artifact": "artifacts/v2-check-final",
+      "artifact": "artifacts/v2-check-corrected-final",
       "counts": {
         "answers": 10,
-        "errors": 3,
-        "ok": 7,
-        "predictions": 117,
+        "errors": 1,
+        "ok": 9,
+        "predictions": 83,
         "scheduled": 10
       },
       "event_counts": {
         "answer_diagnostics": 10,
         "answer_end": 10,
-        "generation": 17,
-        "provider_attempt": 48,
+        "generation": 19,
+        "provider_attempt": 44,
         "tool_observation": 10,
         "trace_start": 10
       },
       "problems": [],
       "prompt_sha256": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
-      "run_id": "a58a7b95-2784-4184-abd5-2161a9386028",
-      "source_revision": "c76941fec1713c00502575f7e09b022c3c4c3975",
+      "run_id": "2f8469ef-e735-4eee-bb01-9b9a8dff7865",
+      "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
       "split": "check",
       "status": "complete",
       "trace_count": 10
     },
     "v2_development": {
       "agent_version": "v2",
-      "artifact": "artifacts/v2-development-final",
+      "artifact": "artifacts/v2-development-corrected-final",
       "counts": {
         "answers": 40,
-        "errors": 3,
-        "ok": 37,
-        "predictions": 610,
+        "errors": 14,
+        "ok": 26,
+        "predictions": 231,
         "scheduled": 40
       },
       "event_counts": {
         "answer_diagnostics": 40,
         "answer_end": 40,
-        "generation": 80,
-        "provider_attempt": 188,
-        "score": 430,
+        "generation": 67,
+        "provider_attempt": 212,
+        "score": 313,
         "tool_observation": 40,
         "trace_start": 40
       },
       "problems": [],
       "prompt_sha256": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
-      "run_id": "5a64e5ff-d1e4-4e49-8175-e2c3617c26cb",
-      "source_revision": "8293d189f9bae7619a03247acc78aa6fa1f848bc",
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
       "split": "development",
       "status": "complete",
       "trace_count": 40
