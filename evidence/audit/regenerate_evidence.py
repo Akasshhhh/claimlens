@@ -19,10 +19,10 @@ from harness.comparison import compare_versions
 
 ROOT = Path(__file__).resolve().parents[2]
 FINAL_RUNS = {
-    "v1-development": "v1-development-final-turn-gated",
-    "v2-development": "v2-development-final",
-    "v1-check": "v1-check-final",
-    "v2-check": "v2-check-final",
+    "v1-development": "v1-development-corrected-final",
+    "v2-development": "v2-development-corrected-final",
+    "v1-check": "v1-check-corrected-final",
+    "v2-check": "v2-check-corrected-final",
 }
 DEVELOPMENT_RUNS = ("v1-development", "v2-development")
 CHECK_RUNS = ("v1-check", "v2-check")
@@ -123,9 +123,9 @@ def _summary(runs: list[dict[str, Any]]) -> dict[str, Any]:
             "check_source_revisions": {name: revisions[name] for name in CHECK_RUNS},
             "prompt_hashes_by_run": prompt_hashes,
             "note": (
-                "Development runs are the two frozen revisions recorded in their artifacts. "
-                "Both final checks were run later from the shared check-run revision; "
-                "current HEAD is later still."
+                "These corrected v1/v2 development runs share one post-fix source revision "
+                "and differ only by prompt version. Both final checks were run from the same "
+                "corrected source revision. Current HEAD may be later due to evidence-only changes."
             ),
         },
         "comparison": "evidence/v1-v2-final-comparison.json",
@@ -313,10 +313,10 @@ def _provenance_payload(
             row["name"]: row["source_revision"] for row in summary["runs"]
         },
         "source_revision_interpretation": {
-            "v1_development": "v1-final-frozen tag / final development source",
-            "v2_development": "v2-final-frozen tag / final development source",
-            "checks": "Both final-check artifacts use the later shared check-run revision recorded in their run metadata.",
-            "current_head": "Current committed HEAD is later than all four live runs; a fresh run is not an exact replay of the saved runs.",
+            "development": "Corrected v1/v2 runs share one post-fix source revision; the prompt version is the controlled model-behavior change.",
+            "checks": "Both corrected final-check artifacts use the same post-fix source revision as development.",
+            "historical_runs": "The prior frozen-tag runs remain preserved under their original artifact directories.",
+            "current_head": "Current committed HEAD may be later than the live runs because evidence-only changes do not alter their provenance.",
         },
         "prediction_count_decomposition": _prediction_decomposition(reports),
         "advice_instruction_diagnostics": {
@@ -493,8 +493,8 @@ def main() -> int:
     comparison["schema_version"] = "claimlens-comparison-report-v1"
     comparison["metadata"] = {
         "hypothesis": "exclude advice/instruction/opinion-only sentences",
-        "v1_report": "artifacts/v1-development-final-turn-gated/report.json",
-        "v2_report": "artifacts/v2-development-final/report.json",
+            "v1_report": f"artifacts/{FINAL_RUNS['v1-development']}/report.json",
+            "v2_report": f"artifacts/{FINAL_RUNS['v2-development']}/report.json",
         "v1_source_revision": runs[0]["source_revision"],
         "v2_source_revision": runs[1]["source_revision"],
         "offline_regeneration": True,

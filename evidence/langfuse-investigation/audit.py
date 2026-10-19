@@ -31,10 +31,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 OUTPUT = Path(__file__).resolve().parent / "audit-report.json"
 FINAL_ARTIFACTS = {
-    "v1_development": ROOT / "artifacts" / "v1-development-final",
-    "v2_development": ROOT / "artifacts" / "v2-development-final",
-    "v1_check": ROOT / "artifacts" / "v1-check-final",
-    "v2_check": ROOT / "artifacts" / "v2-check-final",
+    "v1_development": ROOT / "artifacts" / "v1-development-corrected-final",
+    "v2_development": ROOT / "artifacts" / "v2-development-corrected-final",
+    "v1_check": ROOT / "artifacts" / "v1-check-corrected-final",
+    "v2_check": ROOT / "artifacts" / "v2-check-corrected-final",
 }
 _SENSITIVE_KEYS = {
     "ai_answer",

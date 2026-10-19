@@ -2,127 +2,85 @@
 
 ## Current scope
 
-Audit date: 2026-10-20.  This is an offline, read-only audit of the selected
-evidence scope at committed `HEAD`
-`4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02`.  It does not start a provider,
-database, API server, Docker build, or Langfuse request.  The checker is
-`evidence/audit/repository_audit.py`; the summary/comparison/manifest generator
-is `evidence/audit/regenerate_evidence.py`.
+This is an offline, read-only audit of the corrected final evidence. It does
+not start a provider, model, API server, Docker build, database, or Langfuse
+request. The executable checker is `evidence/audit/repository_audit.py`; the
+summary/comparison/manifest generator is `evidence/audit/regenerate_evidence.py`.
 
-The four designated artifacts are:
+The four current final artifacts are:
 
 ```text
-artifacts/v1-development-final-turn-gated/
-artifacts/v2-development-final/
-artifacts/v1-check-final/
-artifacts/v2-check-final/
+artifacts/v1-development-corrected-final/
+artifacts/v2-development-corrected-final/
+artifacts/v1-check-corrected-final/
+artifacts/v2-check-corrected-final/
 ```
 
-All other artifact directories and older evidence files remain preserved as
-historical or exploratory material.  They are not part of the final summary or
-comparison.  `evidence/MANIFEST.json` is a selected-evidence manifest and
-explicitly does not claim full repository-tree coverage.
-
-## Status key
-
-- **Complete**: the saved files and offline checks directly support the item.
-- **Incomplete**: a saved inconsistency, error receipt, or unverified required
-  runtime step remains.
-- **Unverified**: the implementation or documentation exists, but the required
-  environment/live check was not run or is not retained.
+Historical frozen-tag, failed, and exploratory artifacts remain preserved and
+are excluded from the current comparison. `evidence/MANIFEST.json` is a
+selected-evidence manifest, not a full repository-tree hash.
 
 ## Current findings
 
-| Area | Status | Finding |
+| Area | Status | Evidence |
 |---|---|---|
-| Four final artifact directories | **Complete** | Each has `run.json`, `config.json`, `outcomes.json`, `predictions.json`, `report.json`, `timings.json`, `exchanges.jsonl`, `trace_verification.json`, and `trace_exports.json`. Each has one terminal outcome per scheduled answer, including errors and empty claims. |
-| Development source freezes | **Complete** | v1 development records `9de1a5ec...` and matches `v1-final-frozen`; v2 development records `8293d189...` and matches `v2-final-frozen`; the revisions differ as intended. |
-| Later check source | **Complete and disclosed** | Both final checks record `c76941fec...`, a later shared check-run revision. It is not presented as either frozen development source. |
-| Development comparison | **Complete as saved evidence; scope limited** | The comparison holds datasets, model/provider settings, and scoring fixed and reports the actual +0.018963 joint-F1 delta. The two source tags also contain trace/runner/evidence changes in addition to the v2 prompt; this is disclosed and is not described as a byte-for-byte prompt-only Git diff. |
-| Advice/instruction diagnosis | **Complete** | The saved v1 analysis reports 261 unmatched predictions, including 254 advice/instruction-only and 3 meta-instruction markers. The v2 bucket is retained as a heuristic diagnostic, not a gold metric. |
-| Fixed/regressed provenance | **Complete** | `evidence/submission/final-provenance.json` separates 19 error-driven fixed IDs from 11 genuine fixed IDs, 14 error-driven regressed IDs from 5 genuine regressed IDs, and records the other five error-driven state changes. |
-| Check-split isolation | **Complete** | Both check reports retain predictions and answer errors but keep gold claims, matches, correctness, quality metrics, and gold-derived ID lists null. |
-| Trace/event diagnostics | **Complete locally; verifier process warning** | Local exchanges contain terminal accounting, `provider_attempt`, `answer_diagnostics`, generation, and tool events for all four runs. All saved receipt rows are non-empty. `v2-development-final/trace_verification_error.json` still records `NameError: name 'timedelta' is not defined`, so the audit exposes a separate incomplete verifier-process status without treating the saved receipt rows as missing. |
-| Langfuse remote reviewability | **Incomplete** | The selected investigation retrieved one trace with root, generation, and tool observations. The repository retains receipt summaries for the runs, not full reviewer-facing payloads for all 100 remote traces. Query-window and identifier limitations are documented. |
-| Manifest selected scope | **Complete** | The manifest has 223 selected file entries; every listed path exists and its recorded byte count and SHA-256 match. The generated commit is current `HEAD`. Current-vs-frozen prompt hashes are recorded separately. |
-| Current v2 prompt provenance | **Complete and disclosed** | The current committed v2 prompt hash is `75971d63...`; final v2 artifacts record `74ea421c...`. The difference is a later committed imperative-wording clarification, not a rewritten final run. |
-| API/PostgreSQL implementation | **Complete in offline/integration tests; live process unverified** | Routes, constraints, parameterized persistence, joined retrieval, and tests exist. The current `make test` run reports 99 passing tests; `make run` was not started. |
-| Docker/local deployment | **Unverified** | `Dockerfile` and exact commands exist. The recorded Docker build was blocked by the stopped local daemon. No hosted deployment is required by the assessment. |
+| Four final artifact sets | **VERIFIED** | Each has complete metadata, outcomes, predictions, report, exchanges, trace receipts, and one terminal outcome per scheduled answer. |
+| Corrected v1/v2 provenance | **VERIFIED** | Both development and both check runs use source `a0020d06…`; prompt hashes differ only between v1/v2. Historical frozen-tag runs remain separate. |
+| Development comparison | **VERIFIED with limitations** | Same corrected source/settings and prompt-only model-facing change; observed joint-F1 delta `+0.049480`, bootstrap estimate `+0.068996`, 95% CI `[-0.086781,+0.220426]`. |
+| Advice/instruction policy | **VERIFIED for saved corrected runs** | Both corrected development reports have zero unmatched accepted prediction IDs; offline adversarial tests cover pure advice, opinions, instructions, injection, and factual clauses. Historical canary failures are preserved. |
+| Check-split isolation | **VERIFIED** | Check reports retain predictions/errors and keep all gold-derived metrics/IDs null. |
+| Retry/concurrency/validation | **VERIFIED offline** | Tests prove genuine overlap, max active attempts exactly 3, 429 retry, non-retryable auth/malformed output, gold isolation, bounds, IDs, quotes, Unicode, overlap, and reason normalization. |
+| PostgreSQL/API integration | **VERIFIED in integration tests** | Actual FastAPI app with Docker PostgreSQL passed host and container integration suites; constraints, persistence, joined retrieval, sanitization, UUIDs, empty/error rows, and match fields are covered. |
+| Langfuse local receipts/verifier | **VERIFIED** | Corrected runs have non-empty local receipts and no verifier-error file; per-answer IDs and explicit UTC windows are used. |
+| Langfuse remote reviewer evidence | **INCOMPLETE** | Full remote retrieval of all 100 corrected traces and full sanitized payload exports were not retained. |
+| Live API process/deployment | **INCOMPLETE/UNVERIFIED** | TestClient integration and Docker image build passed; `make run` was not retained as a live process smoke, and no hosted deployment is required. |
+| Manifest/evidence freshness | **VERIFIED** | Current selected entries match actual bytes/SHA-256; current docs disclose selected scope. |
 
-## Run facts
+## Current run facts
 
-| Run | Scheduled | OK | Errors | Predictions | Error types |
-|---|---:|---:|---:|---:|---|
-| v1 development | 40 | 37 | 3 | 605 | A04/A22/A30 `provider_timeout` |
-| v2 development | 40 | 37 | 3 | 610 | A25 empty/trimmed quote; A30/A34 exact-source-quote validation |
-| v1 check | 10 | 9 | 1 | 143 | A49 exact-source-quote validation |
-| v2 check | 10 | 7 | 3 | 117 | A41/A42/A43 `provider_timeout` |
+| Run | Scheduled | OK | Errors | Predictions | Joint F1 | Error types |
+|---|---:|---:|---:|---:|---:|---|
+| v1 development | 40 | 22 | 18 | 201 | 0.665511 | 18 provider timeouts |
+| v2 development | 40 | 26 | 14 | 231 | 0.714992 | 13 provider timeouts; 1 invalid output |
+| v1 check | 10 | 5 | 5 | 44 | null | 5 provider timeouts |
+| v2 check | 10 | 9 | 1 | 83 | null | 1 provider timeout |
 
-The accepted-prediction decomposition is `A04 +18`, `A22 +17`, `A25 -16`,
-`A34 -15`, and `A32 +1`, for `605 -> 610` (`+5`).  The exact run IDs, metric
-objects, error messages, and source revisions are in
-`evidence/final-run-summary.json`.
+Check quality is intentionally null, not zero. Exact answer IDs/messages are in
+`evidence/final-run-summary.json` and each artifact's `outcomes.json`.
 
-## Injection and trace limitations
-
-The v1 and v2 final development canaries both have `passed: false`.  A07, A18,
-and A32 each extracted the marker sentence.  They did not all label the answer
-`supported`, and `override_suspected` is false, but marker extraction is still
-a failed canary condition.
-
-The local trace receipts prove that the run wrote and fetched non-empty
-observation summaries.  They do not provide complete remote payloads for
-reviewers.  `evidence/trace-diagnosis.json` contains one sanitized selected
-trace; `evidence/langfuse-investigation/report.json` explains the HTTP 200
-health check, authenticated observation query, stale/current window mismatch,
-and the fact that an experiment UUID is not a trace ID.  No claim is made that
-all remote traces were independently retrieved from this repository.
-
-## Exact offline commands and results
+## Tests and receipts
 
 ```text
-PYTHONPATH=. .venv/bin/python evidence/audit/regenerate_evidence.py
-exit 0; offline; generated_for_commit=4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02;
-manifest_entries=223; joint_f1_delta=0.018962725868582164
-
-.venv/bin/python evidence/audit/repository_audit.py
-exit 0; required_artifact_receipts=complete;
-development_comparability=complete; selected manifest scope=complete;
-prompt_provenance=current_source_differs_from_frozen_run;
-trace_diagnostics=complete for saved receipts/events; verification_process_status=incomplete because of the saved v2 verification error file
-
-make verify
-exit 0; both saved development metric objects matched deterministic rescoring;
-no provider call
-
-make test
-exit 0; 99 passed, 1 warning
+make test                         -> 102 passed, 1 warning
+make verify                       -> exit 0; corrected metrics match
+API/PostgreSQL integration         -> 24 passed, 1 warning
+focused offline gate               -> 100 passed, 1 warning
+Docker build                       -> passed
+Docker container tests             -> 97 passed, 5 skipped without DB env
+Docker DB/API integration          -> 10 passed, 1 warning
 ```
 
-The full captured command outputs are `evidence/pytest-output.txt` and
-`evidence/verify-output.txt`; workspace-local absolute paths are redacted to
-`<workspace>` for portability.  The warning is retained verbatim; this audit
-did not modify source or tests to change it.
+Receipts:
 
-## Historical evidence retained
+- `evidence/pytest-output.txt`
+- `evidence/verify-output.txt`
+- `evidence/final-run-summary.json`
+- `evidence/submission/final-provenance.json`
+- `evidence/MANIFEST.json`
+- `evidence/audit/current-audit.json`
 
-The following are intentionally not deleted:
+## Langfuse limitation
 
-- `evidence/run-summary.json`: earlier zero-prediction/timeout sequence;
-- `evidence/v1-v2-comparison.json`: earlier comparison;
-- `evidence/v1-injection-canary.json` and `evidence/v2-injection-canary.json`:
-  earlier canary outputs;
-- earlier exploratory/smoke artifact directories under `artifacts/`.
+The verifier `timedelta` failure from the historical v2 development artifact
+is not present in the corrected final artifacts. The corrected verifier catches
+per-trace failures, keeps completed provider outcomes completed, uses the
+per-answer trace ID, and records sanitized status/count/name/digest summaries.
+The repository does not claim that local receipts are full remote reviewer
+exports. The read-only auditor can be run with `--offline`, or without that
+flag when an explicit remote audit is authorized.
 
-They are marked as superseded in `evidence/MANIFEST.json`.  Only the four final
-directories listed above are current final evidence.
+## Preserved historical evidence
 
-## Reproduction limits and missing requirements
-
-The repository has a pinned runtime, lockfile, Dockerfile, `.env.example`,
-exact setup/run/test/verify instructions, and local CSV hashes.  The following
-remain incomplete or unverified: the API process smoke was not run, the Docker
-daemon was unavailable for a build, the v2 trace-verification error file
-remains, and no hosted deployment or full remote Langfuse export was
-performed.  The final-check quality scores remain intentionally unavailable
-because the assessment holds their labels privately.
+Old final directories, failed runs, old v1/v2 comparisons, old injection
+canaries, and the first corrected v1 attempt remain intact. They are not used
+to inflate or replace the corrected final metrics.

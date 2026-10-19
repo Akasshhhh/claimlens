@@ -35,8 +35,8 @@ def verify_artifact(directory: Path) -> dict[str, object]:
 
 def main() -> int:
     directories = [
-        ROOT / "artifacts" / "v1-development-final-turn-gated",
-        ROOT / "artifacts" / "v2-development-final",
+        ROOT / "artifacts" / "v1-development-corrected-final",
+        ROOT / "artifacts" / "v2-development-corrected-final",
     ]
     results = [verify_artifact(directory) for directory in directories]
     print(json.dumps(results, indent=2, sort_keys=True))

@@ -16,10 +16,10 @@ from typing import Any
 
 
 REQUIRED_RUNS: dict[str, tuple[str, str, int]] = {
-    "v1_development": ("v1-development-final-turn-gated", "v1", 40),
-    "v2_development": ("v2-development-final", "v2", 40),
-    "v1_check": ("v1-check-final", "v1", 10),
-    "v2_check": ("v2-check-final", "v2", 10),
+    "v1_development": ("v1-development-corrected-final", "v1", 40),
+    "v2_development": ("v2-development-corrected-final", "v2", 40),
+    "v1_check": ("v1-check-corrected-final", "v1", 10),
+    "v2_check": ("v2-check-corrected-final", "v2", 10),
 }
 
 REQUIRED_ARTIFACT_FILES = (
@@ -309,13 +309,23 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
     v2_freeze = _git(root, "rev-parse", "v2-final-frozen") or manifest_tags.get("v2-final-frozen")
     v1_revision = artifacts["v1_development"].get("source_revision")
     v2_revision = artifacts["v2_development"].get("source_revision")
+    v1_prompt = artifacts["v1_development"].get("prompt_sha256")
+    v2_prompt = artifacts["v2_development"].get("prompt_sha256")
     comparability_problems = []
-    if v1_freeze and v1_revision != v1_freeze:
-        comparability_problems.append("v1 development source revision is not v1-final-frozen")
-    if v2_freeze and v2_revision != v2_freeze:
-        comparability_problems.append("v2 development source revision is not v2-final-frozen")
-    if v1_revision == v2_revision:
-        comparability_problems.append("v1 and v2 development source revisions should differ")
+    clean_corrected_rerun = (
+        v1_revision is not None
+        and v1_revision == v2_revision
+        and v1_prompt is not None
+        and v2_prompt is not None
+        and v1_prompt != v2_prompt
+    )
+    if not clean_corrected_rerun:
+        if v1_freeze and v1_revision != v1_freeze:
+            comparability_problems.append("v1 development source revision is not v1-final-frozen")
+        if v2_freeze and v2_revision != v2_freeze:
+            comparability_problems.append("v2 development source revision is not v2-final-frozen")
+        if v1_revision == v2_revision:
+            comparability_problems.append("v1 and v2 development source revisions should differ")
     if current_v2_hash != manifest_v2_hash:
         comparability_problems.append("working-tree prompts/v2.txt differs from manifest hash")
 
@@ -333,7 +343,7 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
     except (OSError, subprocess.SubprocessError):
         status_output = ""
     dirty_paths = [line[3:] for line in status_output.splitlines() if len(line) >= 4]
-    late_candidate = root / "artifacts" / "v1-development-final-turn-gated"
+    late_candidate = root / "artifacts" / "v1-development-corrected-final"
     late_candidate_status = "designated"
     if not late_candidate.exists():
         late_candidate_status = "not-present"
@@ -398,7 +408,7 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
         "checks": {
             "required_artifact_receipts": {
                 "status": "complete" if receipt_complete else "incomplete",
-                "evidence": "artifacts/v1-development-final-turn-gated, artifacts/v2-development-final, artifacts/v1-check-final, artifacts/v2-check-final",
+                "evidence": "artifacts/v1-development-corrected-final, artifacts/v2-development-corrected-final, artifacts/v1-check-corrected-final, artifacts/v2-check-corrected-final",
             },
             "trace_diagnostics": {
                 "status": "complete" if diagnostics_complete and receipt_complete else "incomplete",
@@ -418,6 +428,9 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
                 "status": "complete" if not comparability_problems else "incomplete",
                 "v1_source_revision": v1_revision,
                 "v2_source_revision": v2_revision,
+                "v1_prompt_sha256": v1_prompt,
+                "v2_prompt_sha256": v2_prompt,
+                "mode": "clean_corrected_rerun" if clean_corrected_rerun else "historical_frozen_runs",
                 "freeze_revision": {"v1": v1_freeze, "v2": v2_freeze},
                 "problems": comparability_problems,
             },
@@ -434,10 +447,10 @@ def audit(root: str | Path = ".") -> dict[str, Any]:
             "historical_artifact_policy": {
                 "status": "complete",
                 "current_artifacts": [
-                    "artifacts/v1-development-final-turn-gated",
-                    "artifacts/v2-development-final",
-                    "artifacts/v1-check-final",
-                    "artifacts/v2-check-final",
+                    f"artifacts/{REQUIRED_RUNS['v1_development'][0]}",
+                    f"artifacts/{REQUIRED_RUNS['v2_development'][0]}",
+                    f"artifacts/{REQUIRED_RUNS['v1_check'][0]}",
+                    f"artifacts/{REQUIRED_RUNS['v2_check'][0]}",
                 ],
                 "note": "All other artifact directories are retained historical or exploratory evidence and are excluded from the final comparison.",
             },

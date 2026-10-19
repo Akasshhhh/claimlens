@@ -25,9 +25,9 @@ def test_audit_matches_final_freezes_and_reports_manifest_state() -> None:
     snapshot = audit(ROOT)
 
     comparison = snapshot["checks"]["development_comparability"]
-    assert comparison["v1_source_revision"] == comparison["freeze_revision"]["v1"]
-    assert comparison["v2_source_revision"] == comparison["freeze_revision"]["v2"]
-    assert comparison["v1_source_revision"] != comparison["v2_source_revision"]
+    assert comparison["status"] == "complete"
+    assert comparison["v1_source_revision"] == comparison["v2_source_revision"]
+    assert comparison["v1_prompt_sha256"] != comparison["v2_prompt_sha256"]
 
     manifest = snapshot["checks"]["manifest_matches_worktree"]
     assert manifest["manifest_v2_hash"]

@@ -1,44 +1,53 @@
 # ClaimLens handoff
 
-## Reviewer entry point
+## Current submission set
 
-The current final evidence is summarized in:
+The shared agent/validation fixes invalidated the prior controlled experiment,
+so four new final runs were produced. All prior frozen-tag and failed artifacts
+remain in `artifacts/`; none were overwritten.
 
-- `evidence/final-run-summary.json`
-- `evidence/v1-v2-final-comparison.json`
-- `evidence/submission/final-provenance.json`
-- `evidence/audit/current-audit.json`
-- `evidence/MANIFEST.json`
+| Run | Run ID | Source | Result | Errors |
+|---|---|---|---|---|
+| v1 development | `1d30770a-933b-4982-83be-875d24c02682` | `a0020d0` | 40 scheduled, 22 ok, 201 predictions, joint F1 `0.665511` | 18 provider timeouts |
+| v2 development | `4ade6dff-2f02-40b3-8b25-72985c0ca141` | `a0020d0` | 40 scheduled, 26 ok, 231 predictions, joint F1 `0.714992` | 13 provider timeouts; one invalid output |
+| v1 check | `cbcc20f2-b4c8-4c2d-8718-76bd3a69002a` | `a0020d0` | 10 scheduled, 5 ok, 44 predictions, quality `null` | A43/A44/A46/A48/A50 timeouts |
+| v2 check | `2f8469ef-e735-4eee-bb01-9b9a8dff7865` | `a0020d0` | 10 scheduled, 9 ok, 83 predictions, quality `null` | A46 timeout |
 
-Only these four directories feed the final summary and comparison:
+Final artifact locations:
 
 ```text
-artifacts/v1-development-final-turn-gated/
-artifacts/v2-development-final/
-artifacts/v1-check-final/
-artifacts/v2-check-final/
+artifacts/v1-development-corrected-final/
+artifacts/v2-development-corrected-final/
+artifacts/v1-check-corrected-final/
+artifacts/v2-check-corrected-final/
 ```
 
-Every other `artifacts/*` directory is retained historical or exploratory
-evidence.  It is not deleted and is not silently substituted into the final
-comparison.
+The corrected v1 and v2 development runs use identical post-fix source,
+dataset, evaluator, provider, model, timeout, retry, turn, and concurrency
+settings. The sole model-facing behavior change is the v2 prompt policy for
+excluding pure advice, opinions, instructions, and injected instructions.
 
-## Exact setup and operation commands
-
-From the repository root:
+## Exact commands
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.lock
 cp .env.example .env
-# Place answers.csv, brand_facts.csv, and development_gold.csv here,
-# or set CLAIMLENS_DATA_DIR in .env.
 make test
 make verify
 make hash
+PYTHONPATH=. .venv/bin/python evidence/audit/regenerate_evidence.py
+PYTHONPATH=. .venv/bin/python evidence/audit/repository_audit.py
 ```
 
-For the PostgreSQL-backed API:
+PostgreSQL API tests:
+
+```bash
+set -a; . ./.env; set +a
+.venv/bin/pytest -q tests/integration/test_api_postgres.py tests/api/test_api.py tests/api/test_app.py
+```
+
+API operation:
 
 ```bash
 createdb claimlens
@@ -46,143 +55,131 @@ set -a; . ./.env; set +a
 make run
 ```
 
-For the local container path:
+Docker:
 
 ```bash
 docker build --tag claimlens:local .
 docker run --rm --env-file .env -p 8000:8000 claimlens:local
 ```
 
-The assessment requires no hosted deployment.  The Docker commands are the
-documented local deployment path.  The recorded session could not complete a
-Docker build because the local Docker daemon was not running, and `make run`
-was not started.
+## Verification receipts
 
-## Final run accounting
+Recorded after the corrected artifacts were created:
 
-| Run | Run ID | Source revision | Result | Error rows |
-|---|---|---|---|---|
-| v1 development | `8cb56eec-6c54-4eab-aba2-317bee75d451` | `9de1a5ec5575109b8b395f5645fbc4bdf474c692` (`v1-final-frozen`) | 40 scheduled, 37 ok, 605 predictions, joint F1 `0.660550` | A04/A22/A30 `provider_timeout` |
-| v2 development | `5a64e5ff-d1e4-4e49-8175-e2c3617c26cb` | `8293d189f9bae7619a03247acc78aa6fa1f848bc` (`v2-final-frozen`) | 40 scheduled, 37 ok, 610 predictions, joint F1 `0.679513` | A25 empty/trimmed quote, A30/A34 exact-source-quote validation |
-| v1 check | `93af5381-5900-43f5-8543-29e32e1ee64f` | `c76941fec1713c00502575f7e09b022c3c4c3975` | 10 scheduled, 9 ok, 143 predictions, quality `null` | A49 exact-source-quote validation |
-| v2 check | `a58a7b95-2784-4184-abd5-2161a9386028` | `c76941fec1713c00502575f7e09b022c3c4c3975` | 10 scheduled, 7 ok, 117 predictions, quality `null` | A41/A42/A43 `provider_timeout` |
+- `make test`: **102 passed, 1 warning**;
+- `make verify`: exit 0, both corrected development metric objects matched;
+- API/PostgreSQL tests with the running Docker PostgreSQL container:
+  **24 passed, 1 warning**;
+- focused agent/reliability/Langfuse/API/integration gate: **100 passed, 1
+  warning**;
+- Docker build: passed;
+- Docker container test suite without `DATABASE_URL`: **97 passed, 5 skipped**;
+- Docker container integration/API suite with PostgreSQL via
+  `host.docker.internal`: **10 passed, 1 warning**.
 
-The development source revisions are frozen separately for v1 and v2.  Both
-final checks were run later from the shared check-run revision `c76941f`, which
-must not be described as either frozen development source.  Current committed
-`HEAD` is `4711df54bcf55ec1ef9ef50ae6cd43ec9cfbef02`, later than all four live
-runs.  The current `prompts/v2.txt` hash is
-`75971d636ef45536e14025d93f27ca40b3affd3bfe1211f9384158a408761a62`; the v2
-development and v2 check artifacts record the frozen-run hash
-`74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf`.
+Raw current command receipts are in:
 
-## 605 to 610 decomposition
+- `evidence/pytest-output.txt`
+- `evidence/verify-output.txt`
+- `evidence/final-run-summary.json`
+- `evidence/submission/final-provenance.json`
+- `evidence/audit/current-audit.json`
+- `evidence/MANIFEST.json`
 
-The saved answer-score tables give this exact accepted-prediction change:
+## Assessment behavior and reliability
 
-```text
-A04  +18  provider_timeout -> ok
-A22  +17  provider_timeout -> ok
-A25  -16  ok -> invalid_output
-A34  -15  ok -> invalid_output
-A32   +1  ok -> ok
-                  +5 net
+Offline tests now prove:
+
+- genuine async overlap and a hard maximum of three active provider attempts;
+- retry attempts share that global ceiling;
+- OpenAI-compatible HTTP 429 retries once end-to-end;
+- authentication and malformed-output failures are not retried;
+- 15-second request timeout, maximum two attempts per turn, and maximum three
+  model turns;
+- duplicate raw/canonical IDs, invalid bounds, quote mismatch, overlap,
+  Unicode offsets, and reason normalization;
+- provider messages and tool arguments exclude gold labels, spans,
+  explanations, difficulty tags, and scores;
+- pure advice/opinion/instruction/meta-instruction filtering while an
+  independent factual clause remains extractable.
+
+The exact tests are in `tests/agent/`, `tests/reliability/`, and
+`tests/langfuse/`.
+
+## API and PostgreSQL evidence
+
+The real PostgreSQL integration covers all three routes through the actual
+FastAPI application, stable joined retrieval, sanitized errors, UUID handling,
+empty and error answer rows, claim rows and development match fields. It also
+checks PostgreSQL uniqueness and foreign-key rejection in the integration
+coverage. SQL remains parameterized and existing data is not deleted.
+
+The tests use a Docker Desktop PostgreSQL container exposed at
+`127.0.0.1:55433` for the host run. No test database data is part of the
+repository deliverable.
+
+`make run` itself was not left running as a background process; a live process
+smoke remains a separate **INCOMPLETE** item. TestClient integration is not
+being misrepresented as a deployed service.
+
+## Langfuse evidence
+
+`claimlens.tracing` now constructs explicit UTC run windows and
+`runner/experiment.py` verifies per-answer trace IDs without allowing a
+verification failure to erase completed provider outcomes. The historical
+v2-development `timedelta` error is preserved in its old artifact; corrected
+final runs have no verifier-error file.
+
+The read-only auditor is:
+
+```bash
+PYTHONPATH=. .venv/bin/python evidence/langfuse-investigation/audit.py --offline
 ```
 
-The comparison helper reports 30 fixed and 19 regressed claim IDs.  The
-provenance split is retained in `evidence/submission/final-provenance.json`:
+It records local receipt counts and, when explicitly run without `--offline`,
+sanitized remote status/count/name/digest results only. It does not export raw
+prompts, model outputs, tool payloads, scores, credentials, or private
+Langfuse data. Full remote verification of all corrected trace IDs and full
+reviewer-facing exports remain **INCOMPLETE**.
 
-- 19 fixed IDs are error-driven A04/A22 recoveries; 11 fixed IDs are genuine
-  changes on otherwise successful answers.
-- 14 regressed IDs are error-driven A25/A34 misses; 5 regressed IDs are
-  genuine changes on otherwise successful answers.
-- Two `missed -> wrong_label` and three `wrong_label -> missed` transitions
-  caused by those answer errors are listed separately because they are not
-  included in the comparison helper's fixed/regressed counters.
+## Metrics and interpretation
 
-The v1 diagnosis found 261 unmatched predictions: 254 advice/instruction-only
-sentences, 3 explicit meta-instruction markers, 2 factual-looking supported
-sentences, and 2 unsupported/unresolved sentences.  The 254 figure is from
-the saved offline analysis; the v2 advice bucket is a separately labelled
-text/reason diagnostic and is not a new score.
+| Metric | v1 | v2 | Delta |
+|---|---:|---:|---:|
+| Extraction F1 | 0.696707 | 0.761120 | +0.064413 |
+| Joint F1 | 0.665511 | 0.714992 | +0.049480 |
+| Macro label F1 | 0.665583 | 0.714444 | +0.048861 |
+| Correct-label coverage | 0.510638 | 0.577128 | +0.066489 |
+| Predictions | 201 | 231 | +30 |
+| Matched spans | 201 | 231 | +30 |
 
-The v2 change targeted advice/instruction/opinion-only extraction.  Joint F1
-rose by `+0.018963`; the paired bootstrap estimate was `+0.015324` with 95% CI
-`[-0.046936, +0.083638]`, which includes zero.
+The corrected reports have zero unmatched accepted prediction IDs in both
+development runs. This is the evidence-based result of the new deterministic
+filter plus the live runs; the old historical advice counts and failed canary
+outputs remain available for comparison.
 
-## Canaries and Langfuse limits
+The paired bootstrap estimate and 95% interval are in
+`evidence/v1-v2-final-comparison.json`. The interval must be read before
+claiming generalization. No check labels were loaded or inspected.
 
-Both final development injection canary reports are failed outputs.  For each
-of A07, A18, and A32, the marker sentence was extracted in v1 and v2.  The
-marker did not cause an all-`supported` override (`override_suspected: false`),
-but extraction of the marker is itself a canary failure.  These results are
-preserved in `evidence/v1-final-injection-canary.json` and
-`evidence/v2-final-injection-canary.json`.
+## Status checklist
 
-Each final artifact has one trace receipt per scheduled answer and non-empty
-observation counts in the saved receipt files.  The evidence limitation is
-important:
+| Requirement | Status | Evidence / remaining action |
+|---|---|---|
+| Concurrency ceiling and overlap | **VERIFIED** | `tests/reliability/test_executor.py`; max active exactly 3 |
+| Selective retries including 429 | **VERIFIED** | `tests/reliability/test_openai_provider.py`, `tests/reliability/test_executor.py` |
+| Gold isolation | **VERIFIED** | `tests/agent/test_core.py`; captured provider/tool payload assertions |
+| Claim validation | **VERIFIED** | duplicate IDs, bounds, Unicode, quote, overlap, reason tests |
+| Corrected v2 behavior | **VERIFIED** for representative offline/live evidence | corrected reports have zero unmatched predictions; historical canaries remain failed evidence |
+| Live API process | **INCOMPLETE** | actual app + real DB TestClient integration passed; `make run` smoke not retained |
+| PostgreSQL constraints/persistence | **VERIFIED** | host and Docker integration tests passed |
+| Offline verification | **VERIFIED** | current corrected artifacts, `make verify`, manifest |
+| Langfuse | **INCOMPLETE** | verifier fixed and local receipts complete; all-remote retrieval/full exports not retained |
+| Documentation/manifests | **VERIFIED** after regeneration | current selected manifest has matching hashes; evidence scope is explicitly selected, not full-tree |
 
-1. `trace_verification.json` and `trace_exports.json` are sanitized local
-   summaries, not full remote observation payloads for all 100 traces.
-2. The retained Langfuse investigation fetched one selected trace and showed
-   authenticated HTTP 200 retrieval, health HTTP 200, and a trace-ID/run-window
-   mismatch.  It does not prove independent remote retrieval of every trace.
-3. `artifacts/v2-development-final/trace_verification_error.json` records
-   `NameError: name 'timedelta' is not defined`.  The 40 receipt rows remain
-   present and non-empty; the verifier-process error is disclosed, not hidden.
-4. No credentials, model costs, or unavailable remote payloads are fabricated.
+## Disclosure
 
-## Current checks and exact outputs
-
-Commands run during this documentation refresh:
-
-```text
-PYTHONPATH=. .venv/bin/python evidence/audit/regenerate_evidence.py
-  exit 0; offline; generated manifest with 223 selected file entries;
-  joint_f1_delta=0.018962725868582164
-
-.venv/bin/python evidence/audit/repository_audit.py
-  exit 0; required artifact receipts, development comparability, saved
-  trace/event diagnostics, and selected manifest hashes complete;
-  current-vs-frozen v2 prompt provenance differs as disclosed; the separate
-  v2 verifier-process status remains incomplete.
-
-make verify
-  exit 0; v1 and v2 saved development metric objects matched deterministic
-  rescoring; no provider call.
-
-make test
-  exit 0; 99 passed, 1 warning.
-```
-
-The full captured outputs are `evidence/pytest-output.txt` and
-`evidence/verify-output.txt`; workspace-local absolute paths are redacted to
-`<workspace>` for portability.  No source or test file was changed by T4.
-
-## Checklist
-
-- **VERIFIED** — Python version, dependency lockfile, Dockerfile, and
-  secret-free environment template are present.
-- **VERIFIED** — deterministic evaluator and offline saved-run verification.
-- **VERIFIED** — terminal accounting and check-split null quality fields in all
-  four designated artifacts.
-- **VERIFIED** — selected manifest entries, local CSV hashes, frozen prompt
-  hashes, run IDs, and source revisions are actual values.
-- **VERIFIED** — v1 diagnosis, v2 comparison, 605→610 decomposition, canary
-  failures, and fixed/regressed provenance are retained.
-- **VERIFIED** — current full `make test` reports 99 passing tests with one
-  deprecation warning; see `evidence/pytest-output.txt`.
-- **INCOMPLETE** — v2 development has a saved trace-verification error file
-  even though receipt rows are present.
-- **UNVERIFIED** — Docker build, live API smoke, hosted deployment, and a
-  full reviewer-facing Langfuse export.
-
-## Disclosure and ownership
-
-The assessment inputs remain local ignored files; only hashes are recorded.
-Credentials remain in `.env` and are never written to this handoff.  OmniRush.ai
-and delegated coding agents assisted with implementation and test writing.  T4
-ran only offline audit, manifest, summary, comparison, verification, and test
-commands; it did not run provider experiments or spend API credits.  T4 changed
-only the documentation/evidence paths assigned to it and did not commit.
+OmniRush.ai and delegated coding agents assisted with implementation and test
+writing. Credentials remain only in the ignored `.env`; local CSV inputs remain
+ignored and only their hashes are recorded. Historical and superseded evidence
+is preserved.

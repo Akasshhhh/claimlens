@@ -1,13 +1,11 @@
-# Workspace-local absolute paths are redacted to <workspace> for portability; command results are unchanged.
 .venv/bin/python -m pytest -q
-........................................................................ [ 72%]
-...........................                                              [100%]
+........................................................................ [ 70%]
+..............................                                           [100%]
 =============================== warnings summary ===============================
 .venv/lib/python3.12/site-packages/starlette/testclient.py:40
-  <workspace>/.venv/lib/python3.12/site-packages/starlette/testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+  /Users/akash/Desktop/kasparro-assessment/.venv/lib/python3.12/site-packages/starlette/testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
     _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-99 passed, 1 warning in 29.02s
-
+102 passed, 1 warning in 28.81s
 exit=0
