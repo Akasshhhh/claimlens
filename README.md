@@ -211,11 +211,12 @@ PYTHONPATH=. .venv/bin/python evidence/langfuse-investigation/audit.py \
   --offline --output evidence/langfuse-investigation/audit-report.json
 ```
 
-The audit preserves only sanitized counts, names, status codes, and body
-digests. It never writes credentials or raw model/tool payloads. Remote
-Langfuse access was not re-run during this final offline pass; therefore full
-remote verification of all 100 corrected traces and reviewer-facing full
-exports remains **INCOMPLETE**, not silently assumed from local receipts.
+The final read-only remote audit queried all 100 corrected trace IDs: 86
+returned observations and 14 returned HTTP 429 responses. The 429s are recorded
+as rate-limit blockers, not interpreted as missing traces. The audit preserves
+only sanitized counts, names, status codes, and body digests; it never writes
+credentials or raw model/tool payloads. Full reviewer-facing exports remain
+**INCOMPLETE**.
 
 ## Reproducibility and status
 

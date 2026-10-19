@@ -136,11 +136,12 @@ The read-only auditor is:
 PYTHONPATH=. .venv/bin/python evidence/langfuse-investigation/audit.py --offline
 ```
 
-It records local receipt counts and, when explicitly run without `--offline`,
-sanitized remote status/count/name/digest results only. It does not export raw
-prompts, model outputs, tool payloads, scores, credentials, or private
-Langfuse data. Full remote verification of all corrected trace IDs and full
-reviewer-facing exports remain **INCOMPLETE**.
+The final read-only remote audit queried all 100 corrected trace IDs and found
+86 non-empty observation responses plus 14 HTTP 429 responses. The 429s are
+recorded rate-limit blockers, not treated as missing ingestion. The tool records
+only sanitized status/count/name/digest results; it does not export raw prompts,
+model outputs, tool payloads, scores, credentials, or private Langfuse data.
+Full reviewer-facing exports remain **INCOMPLETE**.
 
 ## Metrics and interpretation
 
