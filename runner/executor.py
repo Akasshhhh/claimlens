@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import time
 import weakref
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from threading import Lock
 from typing import Any, Callable
 
@@ -170,6 +170,7 @@ class AsyncExecutor:
         max_turns: int = 3,
         retry_delay: float = DEFAULT_RETRY_DELAY,
         agent_factory: Callable[..., Any] = ClaimAgent,
+        run_metadata: Mapping[str, Any] | None = None,
     ) -> None:
         self.request_timeout = float(request_timeout)
         if self.request_timeout <= 0:
@@ -180,6 +181,7 @@ class AsyncExecutor:
         self.tracer = tracer
         self.agent_version = agent_version
         self.max_turns = max_turns
+        self.run_metadata = dict(run_metadata or {})
         self.agent = agent_factory(
             self.provider,
             fact_store,
@@ -188,6 +190,7 @@ class AsyncExecutor:
             request_timeout=self.request_timeout,
             max_turns=max_turns,
             retry_delay=self.retry_delay,
+            run_metadata=self.run_metadata,
         )
 
     @property

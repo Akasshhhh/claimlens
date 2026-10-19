@@ -9,6 +9,7 @@ from .executor import (
     execute_batch,
     run_batch,
 )
+from .experiment import RecordingTracer, run_split
 
 __all__ = [
     "AsyncExecutor",
@@ -18,4 +19,6 @@ __all__ = [
     "MAX_PROVIDER_CONCURRENCY",
     "execute_batch",
     "run_batch",
+    "RecordingTracer",
+    "run_split",
 ]

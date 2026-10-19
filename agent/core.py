@@ -372,6 +372,7 @@ class ClaimAgent:
         request_timeout: float = DEFAULT_REQUEST_TIMEOUT,
         max_turns: int = MAX_TURNS,
         retry_delay: float = DEFAULT_RETRY_DELAY,
+        run_metadata: Mapping[str, Any] | None = None,
     ) -> None:
         if agent_version not in {"v1", "v2"}:
             raise ValueError(f"unsupported agent version: {agent_version!r}")
@@ -386,6 +387,7 @@ class ClaimAgent:
         self.request_timeout = request_timeout
         self.max_turns = max_turns
         self.retry_delay = max(0.0, retry_delay)
+        self.run_metadata = dict(run_metadata or {})
 
     async def _trace(self, method: str, *args: Any, **kwargs: Any) -> Any:
         try:
@@ -454,6 +456,7 @@ class ClaimAgent:
         known_fact_ids: set[str] = set()
         outcome: AnswerOutcome | None = None
         metadata = {
+            **self.run_metadata,
             "agent_version": self.agent_version,
             "prompt_version": self.agent_version,
             "dataset_version": DATASET_VERSION,
@@ -570,6 +573,7 @@ async def run_agent(
     request_timeout: float = DEFAULT_REQUEST_TIMEOUT,
     max_turns: int = MAX_TURNS,
     retry_delay: float = DEFAULT_RETRY_DELAY,
+    run_metadata: Mapping[str, Any] | None = None,
 ) -> AnswerOutcome:
     """Convenience entry point used by the integration runner."""
 
@@ -581,6 +585,7 @@ async def run_agent(
         request_timeout=request_timeout,
         max_turns=max_turns,
         retry_delay=retry_delay,
+        run_metadata=run_metadata,
     ).run(input_data)
 
 
@@ -594,6 +599,7 @@ async def classify_answer(
     request_timeout: float = DEFAULT_REQUEST_TIMEOUT,
     max_turns: int = MAX_TURNS,
     retry_delay: float = DEFAULT_RETRY_DELAY,
+    run_metadata: Mapping[str, Any] | None = None,
 ) -> AnswerOutcome:
     """Alias with a route-friendly name for the main integration."""
 
@@ -606,6 +612,7 @@ async def classify_answer(
         request_timeout=request_timeout,
         max_turns=max_turns,
         retry_delay=retry_delay,
+        run_metadata=run_metadata,
     )
 
 

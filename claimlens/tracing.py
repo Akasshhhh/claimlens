@@ -57,6 +57,9 @@ class NoOpTracer(Tracer):
     async def flush(self) -> None:
         return None
 
+    async def wait_for_flush(self) -> None:
+        return None
+
 
 class LangfuseTracer(Tracer):
     """Small OTLP/HTTP adapter for Langfuse Cloud v4+.
@@ -83,6 +86,7 @@ class LangfuseTracer(Tracer):
         self.request_timeout = request_timeout
         self._traces: dict[str, dict[str, Any]] = {}
         self._score_events: list[dict[str, Any]] = []
+        self._pending_flushes: set[asyncio.Task[Any]] = set()
         self.last_error: str | None = None
 
     @property
@@ -284,11 +288,11 @@ class LangfuseTracer(Tracer):
         except urllib.error.HTTPError as exc:
             return exc.code, exc.read()
 
-    async def flush(self) -> None:
-        if not self.configured:
-            return
-        traces, self._traces = self._traces, {}
-        score_events, self._score_events = self._score_events, []
+    async def _send_pending(
+        self,
+        traces: dict[str, dict[str, Any]],
+        score_events: list[dict[str, Any]],
+    ) -> None:
         if traces:
             payload = {
                 "resourceSpans": [
@@ -323,6 +327,26 @@ class LangfuseTracer(Tracer):
                 )
             except Exception as exc:
                 self.last_error = f"{type(exc).__name__}: {str(exc)[:300]}"
+
+    async def flush(self) -> None:
+        """Schedule ingestion and return without blocking the model run."""
+
+        if not self.configured:
+            return
+        traces, self._traces = self._traces, {}
+        score_events, self._score_events = self._score_events, []
+        if not traces and not score_events:
+            return
+        task = asyncio.create_task(self._send_pending(traces, score_events))
+        self._pending_flushes.add(task)
+        task.add_done_callback(self._pending_flushes.discard)
+
+    async def wait_for_flush(self) -> None:
+        """Wait only at run teardown, before trace verification."""
+
+        while self._pending_flushes:
+            pending = tuple(self._pending_flushes)
+            await asyncio.gather(*pending, return_exceptions=True)
 
     async def verify_trace(
         self,
