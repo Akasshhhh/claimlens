@@ -45,6 +45,28 @@ DEFAULT_REQUEST_TIMEOUT = 15.0
 DEFAULT_RETRY_DELAY = 0.05
 
 
+_IMPERATIVE_START = re.compile(
+    r"^(?:please\s+)?(?:buy|check|compare|consider|choose|keep|read|start|ask|look|use|make|ensure|avoid|remember|tell|ignore|label|follow|do|don't|don’t)\b",
+    re.IGNORECASE,
+)
+_OPINION_ONLY = re.compile(
+    r"\b(?:best|ideal|great|excellent|perfect|useful|worth(?:while)?|recommend(?:ed)?|right choice|good choice)\b",
+    re.IGNORECASE,
+)
+_FACTUAL_PREDICATE = re.compile(
+    r"\b(?:is|are|has|have|includes?|contains?|comes with|offers?|supports?|costs?|priced?|listed|weighs?|measures?|lasts?|runs? for|charges?|returns?|refunds?|ships?|delivers?|covered|available|compatible|connects?|uses?|provides?|requires?|will|can|cannot|does not|doesn't|doesn’t|true|false)\b",
+    re.IGNORECASE,
+)
+_OBJECTIVE_PREDICATE = re.compile(
+    r"\b(?:has|have|includes?|contains?|comes with|offers?|supports?|costs?|priced?|listed|weighs?|measures?|lasts?|runs? for|charges?|returns?|refunds?|ships?|delivers?|covered|available|compatible|connects?|uses?|provides?|requires?|will|can|cannot|does not|doesn't|doesn’t|true|false)\b",
+    re.IGNORECASE,
+)
+_NONFACTUAL_REASON = re.compile(
+    r"\b(?:advice|instruction(?:al)?|opinion|recommendation|guidance|not a (?:verifiable|factual|product|specific)|buying explanation)\b",
+    re.IGNORECASE,
+)
+
+
 _SECOND_TURN_SEMAPHORES: weakref.WeakKeyDictionary[Any, asyncio.Semaphore] = weakref.WeakKeyDictionary()
 
 
@@ -254,6 +276,22 @@ def _validate_reason(reason: str) -> None:
         raise _AgentError("invalid_output", "claim reason must contain at most two sentences")
 
 
+def _is_nonfactual_sentence(quote: str, reason: str) -> bool:
+    """Reject pure advice/instructions while retaining factual clauses.
+
+    This is deliberately conservative: an imperative or opinion sentence is
+    filtered only when it has no ordinary factual predicate. A sentence such
+    as ``Compare the prices: Mini costs INR 1,299`` remains an evaluation unit.
+    """
+
+    text = quote.strip()
+    if _IMPERATIVE_START.match(text) and not _FACTUAL_PREDICATE.search(text):
+        return True
+    if _OPINION_ONLY.search(text) and not _OBJECTIVE_PREDICATE.search(text):
+        return True
+    return bool(_NONFACTUAL_REASON.search(reason) and not _FACTUAL_PREDICATE.search(text))
+
+
 def validate_output(
     payload: Any,
     input_data: AgentInput,
@@ -276,6 +314,7 @@ def validate_output(
 
     claims: list[Claim] = []
     seen_ids: set[str] = set()
+    seen_raw_ids: set[str] = set()
     previous_end = -1
     for item in raw["claims"]:
         if not isinstance(item, Mapping):
@@ -286,6 +325,9 @@ def validate_output(
             raise _AgentError("invalid_output", "claim fields are incomplete or unknown")
         if not isinstance(claim_raw["claim_id"], str):
             raise _AgentError("invalid_output", "claim_id must be a string")
+        if claim_raw["claim_id"] in seen_raw_ids:
+            raise _AgentError("invalid_output", "claim IDs must be unique")
+        seen_raw_ids.add(claim_raw["claim_id"])
         for field in ("start_char", "end_char"):
             if _is_bool(claim_raw[field]) or not isinstance(claim_raw[field], int):
                 raise _AgentError("invalid_output", f"{field} must be an integer")
@@ -344,6 +386,8 @@ def validate_output(
             reason = reason[: endings[1].end()]
         claim_raw["reason"] = reason
         _validate_reason(claim_raw["reason"])
+        if _is_nonfactual_sentence(quote, claim_raw["reason"]):
+            continue
         try:
             claim = Claim.model_validate(claim_raw)
         except Exception as exc:

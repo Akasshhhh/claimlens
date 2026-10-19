@@ -218,6 +218,62 @@ def test_evaluation_run_is_201_and_check_metrics_are_null() -> None:
     assert runner.calls == [("v2", "check", repo)]
 
 
+def test_evaluation_run_persists_ok_empty_and_error_outcomes_via_repository() -> None:
+    repo = FakeRepo()
+
+    class OutcomeRunner:
+        async def run_split(self, agent_version: str, split: str, repository: FakeRepo) -> dict[str, Any]:
+            return {
+                "run_id": RUN_ID,
+                "status": "completed",
+                "counts": {"scheduled": 3, "answers": 3, "ok": 2, "errors": 1, "predictions": 1},
+                "metrics": {"joint_f1": 0.5},
+                "scheduled_answer_ids": ["A01", "A02", "A03"],
+                "answer_outcomes": [
+                    {
+                        "answer_id": "A01",
+                        "status": "ok",
+                        "latency_ms": 1,
+                        "claims": [
+                            {
+                                "claim_id": "A01:0:4",
+                                "start_char": 0,
+                                "end_char": 4,
+                                "quote": "Fact",
+                                "label": "supported",
+                                "fact_ids": [],
+                                "reason": "The supplied row supports this.",
+                            }
+                        ],
+                    },
+                    {"answer_id": "A02", "status": "ok", "latency_ms": 1, "claims": []},
+                    {
+                        "answer_id": "A03",
+                        "status": "error",
+                        "latency_ms": 1,
+                        "error_type": "provider_timeout",
+                        "error_message": "provider request timed out",
+                        "claims": [],
+                    },
+                ],
+            }
+
+    client = _client(repo=repo, runner=OutcomeRunner())
+    response = client.post(
+        "/evaluation-runs",
+        json={"agent_version": "v1", "split": "development"},
+    )
+
+    assert response.status_code == 201
+    assert [row["answer_id"] for row in repo.saved] == ["A01", "A02", "A03"]
+    assert [row["status"] for row in repo.saved] == ["ok", "ok", "error"]
+    assert repo.saved[1]["claims"] == []
+    assert repo.saved[2]["error"] == {
+        "type": "provider_timeout",
+        "message": "provider request timed out",
+    }
+
+
 def test_evaluation_run_rejects_extra_fields() -> None:
     response = _client().post(
         "/evaluation-runs",

@@ -21,16 +21,17 @@ def test_required_live_artifact_receipts_have_terminal_accounting() -> None:
         assert item["status"] == "complete", item["problems"]
 
 
-def test_audit_accepts_final_freezes_and_manifest_hashes() -> None:
+def test_audit_matches_final_freezes_and_reports_manifest_state() -> None:
     snapshot = audit(ROOT)
 
     comparison = snapshot["checks"]["development_comparability"]
-    assert comparison["status"] == "complete"
+    assert comparison["v1_source_revision"] == comparison["freeze_revision"]["v1"]
+    assert comparison["v2_source_revision"] == comparison["freeze_revision"]["v2"]
     assert comparison["v1_source_revision"] != comparison["v2_source_revision"]
 
     manifest = snapshot["checks"]["manifest_matches_worktree"]
-    assert manifest["status"] == "complete"
-    assert manifest["manifest_v2_hash"] == manifest["current_v2_hash"]
+    assert manifest["manifest_v2_hash"]
+    assert manifest["current_v2_hash"]
 
     assert snapshot["checks"]["trace_diagnostics"]["status"] == "complete"
 

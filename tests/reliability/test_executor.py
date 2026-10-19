@@ -75,6 +75,23 @@ async def test_global_attempt_concurrency_is_three() -> None:
     outcomes = await executor.run([_input(f"A{index:02d}") for index in range(8)])
 
     assert all(outcome.status == "ok" for outcome in outcomes)
+    assert provider.max_active >= 2
+    assert provider.max_active <= MAX_PROVIDER_CONCURRENCY
+
+
+@pytest.mark.asyncio
+async def test_retry_attempts_share_global_concurrency_ceiling() -> None:
+    provider = FakeProvider(
+        delay=0.02,
+        failures={"A01": [ProviderTransientError("temporary")]},
+    )
+    executor = AsyncExecutor(provider, EmptyFactStore(), retry_delay=0.001)
+
+    outcomes = await executor.run([_input(f"A{index:02d}") for index in range(8)])
+
+    assert all(outcome.status == "ok" for outcome in outcomes)
+    assert provider.calls.count("A01") == 2
+    assert provider.max_active >= 2
     assert provider.max_active <= MAX_PROVIDER_CONCURRENCY
 
 

@@ -8,6 +8,7 @@ import json
 import subprocess
 import time
 import uuid
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -176,6 +177,42 @@ def _write_json(path: Path, value: Any) -> None:
 
 def _outcome_dict(outcome: AnswerOutcome) -> dict[str, Any]:
     return outcome.model_dump(mode="json")
+
+
+def _enrich_trace_receipts(
+    receipts: list[dict[str, Any]], events: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Attach sanitized local event/score evidence to remote receipts."""
+
+    by_trace: dict[str, list[Mapping[str, Any]]] = {}
+    for event in events:
+        trace_id = event.get("trace_id")
+        if isinstance(trace_id, str) and trace_id:
+            by_trace.setdefault(trace_id, []).append(event)
+    enriched: list[dict[str, Any]] = []
+    for receipt in receipts:
+        trace_id = receipt.get("trace_id")
+        local_events = by_trace.get(trace_id, [])
+        names = [str(event.get("name")) for event in local_events if event.get("name")]
+        scores = [
+            {
+                "name": event.get("name"),
+                "value": event.get("value"),
+                "metadata": event.get("metadata", {}),
+            }
+            for event in local_events
+            if event.get("kind") == "score"
+        ]
+        row = dict(receipt)
+        row.update(
+            {
+                "local_event_counts": dict(Counter(event.get("kind", "") for event in local_events)),
+                "local_event_names": names,
+                "local_scores": scores,
+            }
+        )
+        enriched.append(row)
+    return enriched
 
 
 async def _verify_trace(
@@ -384,6 +421,8 @@ async def run_split(
         "".join(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n" for event in recorder.events),
         encoding="utf-8",
     )
+    score_events = [event for event in recorder.events if event.get("kind") == "score"]
+    _write_json(directory / "scores.json", score_events)
 
     if repository is not None:
         for outcome in outcomes:
@@ -405,6 +444,7 @@ async def run_split(
             )
             if len(verification) != len(trace_ids):
                 raise RuntimeError("Langfuse trace verification returned incomplete results")
+            verification = _enrich_trace_receipts(verification, recorder.events)
     except Exception as exc:
         verification_error = {"type": type(exc).__name__, "message": str(exc)[:1000]}
         _write_json(directory / "trace_verification_error.json", verification_error)
@@ -425,6 +465,7 @@ async def run_split(
         "trace_ids": trace_ids,
         "trace_verification": verification,
         "trace_verification_error": verification_error,
+        "scores": score_events,
     }
 
 
