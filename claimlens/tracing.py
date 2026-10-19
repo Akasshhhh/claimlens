@@ -352,24 +352,34 @@ class LangfuseTracer(Tracer):
         self,
         trace_id: str,
         *,
-        max_wait_seconds: float = 120.0,
+        max_wait_seconds: float = 1200.0,
         poll_seconds: float = 5.0,
+        from_start_time: datetime | str | None = None,
+        to_start_time: datetime | str | None = None,
     ) -> dict[str, Any]:
-        """Poll the supported observations API without weakening the gate."""
+        """Poll observations by trace ID over the trace's actual run window."""
 
         if not self.configured:
             raise RuntimeError("Langfuse credentials are not configured")
         deadline = time.monotonic() + max_wait_seconds
         now = datetime.now(timezone.utc)
+
+        def _iso(value: datetime | str | None, default: datetime) -> str:
+            if value is None:
+                parsed = default
+            elif isinstance(value, datetime):
+                parsed = value
+            else:
+                parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
         query = urllib.parse.urlencode(
             {
                 "traceId": trace_id,
-                "fromStartTime": (now - timedelta(minutes=5))
-                .isoformat()
-                .replace("+00:00", "Z"),
-                "toStartTime": (now + timedelta(minutes=5))
-                .isoformat()
-                .replace("+00:00", "Z"),
+                "fromStartTime": _iso(from_start_time, now - timedelta(minutes=5)),
+                "toStartTime": _iso(to_start_time, now + timedelta(minutes=5)),
                 "limit": "10",
                 "fields": "core,basic",
             }

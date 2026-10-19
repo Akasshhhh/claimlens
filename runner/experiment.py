@@ -178,9 +178,19 @@ def _outcome_dict(outcome: AnswerOutcome) -> dict[str, Any]:
     return outcome.model_dump(mode="json")
 
 
-async def _verify_trace(trace: LangfuseTracer, trace_id: str) -> dict[str, Any]:
+async def _verify_trace(
+    trace: LangfuseTracer,
+    trace_id: str,
+    *,
+    from_start_time: str | None = None,
+    to_start_time: str | None = None,
+) -> dict[str, Any]:
     started = time.monotonic()
-    payload = await trace.verify_trace(trace_id)
+    payload = await trace.verify_trace(
+        trace_id,
+        from_start_time=from_start_time,
+        to_start_time=to_start_time,
+    )
     observations = payload.get("data", []) if isinstance(payload, Mapping) else []
     return {
         "trace_id": trace_id,
@@ -197,6 +207,8 @@ async def _verify_traces(
     trace_ids: Sequence[str],
     *,
     spacing_seconds: float = 2.1,
+    from_start_time: str | None = None,
+    to_start_time: str | None = None,
 ) -> list[dict[str, Any]]:
     """Verify traces sequentially to stay below Langfuse's read rate limit."""
 
@@ -204,7 +216,14 @@ async def _verify_traces(
     for index, trace_id in enumerate(trace_ids):
         if index:
             await asyncio.sleep(spacing_seconds)
-        verified.append(await _verify_trace(trace, trace_id))
+        verified.append(
+            await _verify_trace(
+                trace,
+                trace_id,
+                from_start_time=from_start_time,
+                to_start_time=to_start_time,
+            )
+        )
     return verified
 
 
@@ -373,16 +392,22 @@ async def run_split(
     await recorder.flush()
     await recorder.wait_for_flush()
     verification: list[dict[str, Any]] = []
+    verification_error: dict[str, str] | None = None
     try:
         if verify_traces and isinstance(base_tracer, LangfuseTracer):
-            verification = await _verify_traces(base_tracer, trace_ids)
+            started_window = datetime.fromisoformat(metadata["started_at"].replace("Z", "+00:00")) - timedelta(minutes=1)
+            completed_window = datetime.fromisoformat(metadata["completed_at"].replace("Z", "+00:00")) + timedelta(minutes=1)
+            verification = await _verify_traces(
+                base_tracer,
+                trace_ids,
+                from_start_time=started_window.isoformat(),
+                to_start_time=completed_window.isoformat(),
+            )
             if len(verification) != len(trace_ids):
                 raise RuntimeError("Langfuse trace verification returned incomplete results")
     except Exception as exc:
-        _write_json(directory / "trace_verification_error.json", {"type": type(exc).__name__, "message": str(exc)})
-        if repository is not None:
-            repository.finish_run(run_id, "failed", metadata["counts"], None)
-        raise
+        verification_error = {"type": type(exc).__name__, "message": str(exc)[:1000]}
+        _write_json(directory / "trace_verification_error.json", verification_error)
     if repository is not None:
         repository.finish_run(run_id, "completed", metadata["counts"], result.metrics.model_dump(mode="json"))
     _write_json(directory / "trace_verification.json", verification)
@@ -399,6 +424,7 @@ async def run_split(
         "counts": metadata["counts"],
         "trace_ids": trace_ids,
         "trace_verification": verification,
+        "trace_verification_error": verification_error,
     }
 
 

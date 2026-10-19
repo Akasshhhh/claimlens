@@ -1,0 +1,328 @@
+{
+  "schema_version": "claimlens-langfuse-investigation-v1",
+  "observed_at_utc": "2026-10-19T15:48:26Z",
+  "requested_run_id": "8cb56eec-6c54-4eab-aba2-317bee75d451",
+  "scope": {
+    "artifact": "artifacts/v1-development-final-turn-gated",
+    "provider_run_started": false,
+    "full_provider_run_started": false,
+    "api_probe_used_existing_trace_only": true,
+    "trace_id_probed": "dc8e8ee41ef74834a52ed449edc783d6",
+    "other_run_trace_ids_checked_remotely": 0,
+    "credentials_values_printed": false,
+    "environment_presence": {
+      "LANGFUSE_PUBLIC_KEY": true,
+      "LANGFUSE_SECRET_KEY": true,
+      "LANGFUSE_BASE_URL": true,
+      "LANGFUSE_HOST": false
+    },
+    "presence_check_command": "command -v python3 && python3 -c 'from pathlib import Path; from dotenv import dotenv_values; import os; names=(\"LANGFUSE_PUBLIC_KEY\",\"LANGFUSE_SECRET_KEY\",\"LANGFUSE_BASE_URL\",\"LANGFUSE_HOST\"); values=dotenv_values(Path(\".env\")); print({name: bool(values.get(name) or os.environ.get(name)) for name in names})'",
+    "presence_check_output": "/usr/local/bin/python3\n{'LANGFUSE_PUBLIC_KEY': True, 'LANGFUSE_SECRET_KEY': True, 'LANGFUSE_BASE_URL': True, 'LANGFUSE_HOST': False}"
+  },
+  "local_artifact": {
+    "run_json_run_id": "8cb56eec-6c54-4eab-aba2-317bee75d451",
+    "run_json_counts": {
+      "scheduled": 40,
+      "answers": 40,
+      "ok": 37,
+      "errors": 3,
+      "predictions": 605
+    },
+    "run_json_trace_ids": 40,
+    "exchange_rows": 859,
+    "trace_start_rows": 40,
+    "unique_local_trace_ids": 40,
+    "event_kinds": {
+      "answer_diagnostics": 40,
+      "answer_end": 40,
+      "generation": 77,
+      "provider_attempt": 196,
+      "score": 426,
+      "tool_observation": 40,
+      "trace_start": 40
+    },
+    "exchange_rows_with_requested_run_id": 543,
+    "exchange_rows_with_other_run_id": 0,
+    "probed_trace_local_event_names": [
+      "trace_start",
+      "provider_attempt",
+      "provider_attempt",
+      "model-turn-1",
+      "get_brand_facts",
+      "provider_attempt",
+      "provider_attempt",
+      "provider_attempt",
+      "provider_attempt",
+      "model-turn-2",
+      "answer_end",
+      "answer_diagnostics",
+      "extraction_f1",
+      "joint_f1",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "label_correct",
+      "aggregate_extraction_f1",
+      "aggregate_joint_f1"
+    ],
+    "persisted_trace_verification_files": []
+  },
+  "implementation_inspection": {
+    "source": "claimlens/tracing.py",
+    "host_resolution": [
+      "LANGFUSE_BASE_URL",
+      "LANGFUSE_HOST",
+      "https://cloud.langfuse.com"
+    ],
+    "configured_property": "public key, secret key, and non-empty host",
+    "trace_creation": "start_answer creates a 32-character trace ID, a root span, and stores it in _traces",
+    "observation_creation": "generation/tool_observation append child spans under the root span",
+    "flush": "flush snapshots pending traces/scores and schedules _send_pending as an asyncio task",
+    "flush_wait": "wait_for_flush gathers every tracked pending task before verification",
+    "run_teardown_order": "runner/experiment.py calls recorder.flush() then recorder.wait_for_flush() before trace verification",
+    "ingestion_endpoint": "/api/public/otel/v1/traces",
+    "query_endpoint": "/api/public/v2/observations",
+    "query_parameters": [
+      "traceId",
+      "fromStartTime",
+      "toStartTime",
+      "limit=10",
+      "fields=core,basic"
+    ],
+    "verification_behavior": "verify_trace raises on timeout or non-2xx failures; run_split catches that error, writes trace_verification_error.json, marks a repository run failed when present, and re-raises"
+  },
+  "api_checks": [
+    {
+      "name": "health_authenticated_request",
+      "command": "set -a; . ./.env; set +a; curl -sS --user \"$LANGFUSE_PUBLIC_KEY:$LANGFUSE_SECRET_KEY\" -w '\\nHTTP_STATUS=%{http_code}\\n' \"$LANGFUSE_BASE_URL/api/public/health\"",
+      "curl_rc": 0,
+      "status": 200,
+      "body": "{\"status\":\"OK\",\"version\":\"4.63.0\"}",
+      "stderr": ""
+    },
+    {
+      "name": "unauthenticated_run_window_actual_trace",
+      "method": "GET",
+      "path": "/api/public/v2/observations?traceId=dc8e8ee41ef74834a52ed449edc783d6&fromStartTime=2026-10-19T14:20:00Z&toStartTime=2026-10-19T14:40:00Z&limit=10&fields=core,basic",
+      "curl_rc": 0,
+      "status": 401,
+      "body": "{\"message\":\"Invalid credentials. Confirm that you've configured the correct host.\",\"error\":\"UnauthorizedError\"}",
+      "stderr": ""
+    },
+    {
+      "name": "probe_current_five_minute_window",
+      "method": "GET",
+      "path": "/api/public/v2/observations?traceId=dc8e8ee41ef74834a52ed449edc783d6&fromStartTime=2026-10-19T15:43:00Z&toStartTime=2026-10-19T15:53:00Z&limit=10&fields=core,basic",
+      "curl_rc": 0,
+      "status": 200,
+      "body": "{\"data\":[],\"meta\":{}}",
+      "sanitized_body": "{\"data\":[],\"meta\":{}}",
+      "raw_body_sha256": "e5c0644466f49dfb193a225e813eb639bd14b0933eaa4cf457688ba716d49d95",
+      "observation_count": 0,
+      "observation_names": [],
+      "stderr": ""
+    },
+    {
+      "name": "probe_run_window_actual_trace",
+      "method": "GET",
+      "path": "/api/public/v2/observations?traceId=dc8e8ee41ef74834a52ed449edc783d6&fromStartTime=2026-10-19T14:20:00Z&toStartTime=2026-10-19T14:40:00Z&limit=10&fields=core,basic",
+      "curl_rc": 0,
+      "status": 200,
+      "sanitized_body": {
+        "data": [
+          {
+            "id": "fd88c023165e4b19",
+            "traceId": "dc8e8ee41ef74834a52ed449edc783d6",
+            "startTime": "2026-10-19T14:25:26.355Z",
+            "endTime": "2026-10-19T14:25:26.355Z",
+            "projectId": "<redacted>",
+            "parentObservationId": "bb91aeaa12ea4dd1",
+            "type": "GENERATION",
+            "name": "model-turn-2",
+            "level": "DEFAULT",
+            "statusMessage": "",
+            "version": "",
+            "environment": "default",
+            "isRootObservation": false,
+            "latency": 0,
+            "timeToFirstToken": null,
+            "userId": "",
+            "sessionId": "",
+            "bookmarked": false,
+            "public": false,
+            "modelId": null,
+            "inputPrice": null,
+            "outputPrice": null,
+            "totalPrice": null
+          },
+          {
+            "id": "ef484e485d99432d",
+            "traceId": "dc8e8ee41ef74834a52ed449edc783d6",
+            "startTime": "2026-10-19T14:24:57.922Z",
+            "endTime": "2026-10-19T14:24:57.922Z",
+            "projectId": "<redacted>",
+            "parentObservationId": "bb91aeaa12ea4dd1",
+            "type": "TOOL",
+            "name": "get_brand_facts",
+            "level": "DEFAULT",
+            "statusMessage": "",
+            "version": "",
+            "environment": "default",
+            "isRootObservation": false,
+            "latency": 0,
+            "timeToFirstToken": null,
+            "userId": "",
+            "sessionId": "",
+            "bookmarked": false,
+            "public": false,
+            "modelId": null,
+            "inputPrice": null,
+            "outputPrice": null,
+            "totalPrice": null
+          },
+          {
+            "id": "5eab00f31b5245be",
+            "traceId": "dc8e8ee41ef74834a52ed449edc783d6",
+            "startTime": "2026-10-19T14:24:57.920Z",
+            "endTime": "2026-10-19T14:24:57.920Z",
+            "projectId": "<redacted>",
+            "parentObservationId": "bb91aeaa12ea4dd1",
+            "type": "GENERATION",
+            "name": "model-turn-1",
+            "level": "DEFAULT",
+            "statusMessage": "",
+            "version": "",
+            "environment": "default",
+            "isRootObservation": false,
+            "latency": 0,
+            "timeToFirstToken": null,
+            "userId": "",
+            "sessionId": "",
+            "bookmarked": false,
+            "public": false,
+            "modelId": null,
+            "inputPrice": null,
+            "outputPrice": null,
+            "totalPrice": null
+          },
+          {
+            "id": "bb91aeaa12ea4dd1",
+            "traceId": "dc8e8ee41ef74834a52ed449edc783d6",
+            "startTime": "2026-10-19T14:24:55.241Z",
+            "endTime": "2026-10-19T14:25:26.356Z",
+            "projectId": "<redacted>",
+            "parentObservationId": null,
+            "type": "SPAN",
+            "name": "claimlens.answer",
+            "level": "DEFAULT",
+            "statusMessage": "",
+            "version": "",
+            "environment": "default",
+            "isRootObservation": true,
+            "latency": 31.115,
+            "timeToFirstToken": null,
+            "userId": "",
+            "sessionId": "",
+            "bookmarked": false,
+            "public": false,
+            "modelId": null,
+            "inputPrice": null,
+            "outputPrice": null,
+            "totalPrice": null
+          }
+        ],
+        "meta": {}
+      },
+      "redactions": ["projectId"],
+      "raw_body_sha256": "c24ea0d557cb305a8e9101d40337514b3117648de171e0f482f477f76a5c14b6",
+      "observation_count": 4,
+      "observation_names": [
+        "model-turn-2",
+        "get_brand_facts",
+        "model-turn-1",
+        "claimlens.answer"
+      ],
+      "stderr": ""
+    },
+    {
+      "name": "probe_run_window_experiment_id_as_trace_id",
+      "method": "GET",
+      "path": "/api/public/v2/observations?traceId=8cb56eec-6c54-4eab-aba2-317bee75d451&fromStartTime=2026-10-19T14:20:00Z&toStartTime=2026-10-19T14:40:00Z&limit=10&fields=core,basic",
+      "curl_rc": 0,
+      "status": 200,
+      "body": "{\"data\":[],\"meta\":{}}",
+      "sanitized_body": "{\"data\":[],\"meta\":{}}",
+      "raw_body_sha256": "e5c0644466f49dfb193a225e813eb639bd14b0933eaa4cf457688ba716d49d95",
+      "observation_count": 0,
+      "observation_names": [],
+      "stderr": ""
+    }
+  ],
+  "errors_and_blockers": [
+    {
+      "source": "direct claimlens.tracing._request_with_status probe",
+      "error": "URLError <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>",
+      "impact": "Python urllib verification could not be used from this machine; the same authenticated GETs succeeded with curl. No production TLS weakening was introduced."
+    },
+    {
+      "source": "artifacts/v1-development-final-2000/trace_verification_error.json",
+      "type": "TimeoutError",
+      "message": "Langfuse trace not ingested after 120s: status=200 body={\"data\":[],\"meta\":{}}",
+      "impact": "Historical run evidence records an empty 200 response, which is consistent with a query/window mismatch but is not by itself proof of missing ingestion."
+    },
+    {
+      "source": "focused test command",
+      "command": "python3 -m pytest -q tests/reliability/test_executor.py tests/reliability/test_openai_provider.py",
+      "output": "/usr/local/bin/python3: No module named pytest",
+      "impact": "Focused pytest checks could not run in the available global interpreter; compileall did pass."
+    }
+  ],
+  "findings": {
+    "host_project_credentials": {
+      "status": "not_root_cause",
+      "basis": "Required public/secret/base-url variable names are present; health is HTTP 200; unauthenticated v2 access is HTTP 401; authenticated v2 access returns the selected trace."
+    },
+    "missing_async_flush_shutdown": {
+      "status": "not_indicated",
+      "basis": "The current implementation tracks scheduled flush tasks and awaits them at teardown. The selected trace was retrieved remotely with its root, tool, and generation observations."
+    },
+    "trace_creation": {
+      "status": "confirmed_for_selected_trace",
+      "basis": "The local run has 40 trace_start rows and the selected remote trace contains the root claimlens.answer observation plus three child observations. This does not prove all 40 traces were remotely retrieved."
+    },
+    "ingestion_delay": {
+      "status": "not_indicated_for_selected_trace",
+      "basis": "The authenticated run-window GET returned four observations on the first probe. No persisted verification receipt exists for the requested run, so a per-trace ingestion latency cannot be reconstructed for the entire run."
+    },
+    "query_identifier_mismatch": {
+      "status": "confirmed",
+      "basis": "The same actual trace ID returns HTTP 200 with data=4 in the run window and HTTP 200 with data=0 in the current five-minute window. The experiment run UUID also returns data=0 when incorrectly supplied as traceId."
+    }
+  },
+  "conclusion": "The evidence supports a verifier query/identifier mismatch, not a Langfuse host, project, credential, trace-creation, flush, or ingestion failure. The requested experiment run ID is not a Langfuse trace ID. The current verifier also freezes a now-relative five-minute query window; a post-run check of an older trace therefore receives an empty 200 response. Only dc8e8ee41ef74834a52ed449edc783d6 was actually retrieved in this investigation; no claim is made about the other 39 traces.",
+  "non_blocking_verifier_recommendation": {
+    "status": "recommended_not_integrated",
+    "reason": "The permitted files exclude runner/experiment.py, where the current strict verification exception can mark a completed run failed.",
+    "design": [
+      "Finalize and persist provider outcomes before starting verification.",
+      "Run verification as a separate post-run task/process so it cannot raise into provider execution or change a completed run status.",
+      "Read actual per-answer trace IDs from run.json/exchanges.jsonl; never use the experiment run UUID as traceId.",
+      "Use a fixed window covering the run (started_at minus one minute through completed_at plus one minute), or an explicit per-run window; do not freeze now minus five minutes for a historical receipt.",
+      "Poll the observations endpoint for at most 1200 seconds, preserving every sanitized status/body/error receipt.",
+      "Write verified only when data is a non-empty list. At deadline write timeout with the last exact sanitized response and leave the provider experiment completed."
+    ]
+  },
+  "checks": {
+    "command": "python3 -m compileall -q claimlens/tracing.py",
+    "result": "passed; no output",
+    "pytest_command": "python3 -m pytest -q tests/reliability/test_executor.py tests/reliability/test_openai_provider.py",
+    "pytest_result": "blocked: /usr/local/bin/python3: No module named pytest",
+    "source_files_changed": [],
+    "provider_runs_started": 0
+  }
+}
