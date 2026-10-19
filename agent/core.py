@@ -321,6 +321,15 @@ def validate_output(
             raise _AgentError("invalid_output", "claims must increase by start offset")
         if claim_raw["claim_id"] in seen_ids:
             raise _AgentError("invalid_output", "claim IDs must be unique")
+        # Reasons are explanatory metadata, not scored text.  Keep the first
+        # two complete sentences when a model adds a trailing third sentence;
+        # this preserves the contract without discarding an otherwise valid
+        # extraction solely for verbosity in its explanation.
+        reason = claim_raw["reason"].strip()
+        endings = list(re.finditer(r"[.!?]+(?=\s|$)", reason))
+        if len(endings) > 2:
+            reason = reason[: endings[1].end()]
+        claim_raw["reason"] = reason
         _validate_reason(claim_raw["reason"])
         try:
             claim = Claim.model_validate(claim_raw)
