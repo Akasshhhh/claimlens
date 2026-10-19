@@ -48,6 +48,7 @@ The v2 result was extraction F1 `0.705882`, joint F1 `0.679513`, macro F1
 
 The v1/v2 comparison, per-answer deltas, per-label regressions, difficulty-tag
 recall, claim flip table, and bootstrap result are in
+`evidence/v1-v2-final-comparison.json`.
 The development-only canaries for A07, A18, and A32 are in
 `evidence/v1-final-injection-canary.json` and
 `evidence/v2-final-injection-canary.json`.
@@ -132,19 +133,20 @@ and the offline metric re-score myself in this session.
 ## Evidence checklist
 
 - Evaluator (20): **verified** — `harness/`, `tests/harness/`,
-  `evidence/v1-v2-comparison.json`, and `make verify` output.
+  `evidence/v1-v2-final-comparison.json`, and `make verify` output.
 - Agent (15): **verified structurally** — `agent/`, `prompts/`,
-  `tests/agent/`, and live traces in all four artifact directories; live
-  quality is zero and is disclosed above.
+  `tests/agent/`, and live traces in all four final artifact directories; the
+  measured development results are disclosed above.
 - Improvement (15): **verified** — frozen prompt files, `v1-frozen`/
-  `v2-frozen`, `evidence/v1-v2-comparison.json`, and diagnosis evidence;
-  measured gain was zero.
+  `v2-frozen`, `v1-final-frozen`/`v2-final-frozen`,
+  `evidence/v1-v2-final-comparison.json`, and diagnosis evidence; measured
+  joint-F1 delta was +0.018963 with the CI reported above.
 - API/DB (15): **verified** — `claimlens/api/`, `claimlens/db/`,
   `tests/api/`, and 20 passing API/PostgreSQL tests with `DATABASE_URL`.
 - Langfuse (15): **verified** — `claimlens/tracing.py`, four
   `trace_verification.json` files, and `evidence/trace-diagnosis.json`.
 - Reliability/tests (15): **verified** — `providers/`, `runner/executor.py`,
-  reliability tests, and 57 passing pytest tests.
+  reliability tests, audit tests, and 66 passing pytest tests.
 - Reproducibility (5): **partially verified** — pinned setup, README,
   Dockerfile, hashes, manifest, and handoff are present; Docker build was
   blocked by the stopped local daemon and `make run` remains unexecuted.
