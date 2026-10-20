@@ -1,0 +1,761 @@
+{
+  "advice_instruction_diagnostics": {
+    "interpretation": "The v1 254 count is the saved offline diagnosis. The v2 bucket is a text/reason heuristic and is reported separately, not as a gold-derived score.",
+    "v1": {
+      "advice_or_instruction_only": 0,
+      "advice_or_meta_total": 0,
+      "meta_instruction": 0,
+      "method": "saved reason/quote text bucket; descriptive diagnostic, not a gold metric",
+      "other_unmatched_by_heuristic": {},
+      "unmatched_prediction_count": 0
+    },
+    "v1_formal_analysis": {
+      "advice_or_instruction_only": 254,
+      "meta_instruction": 3,
+      "source": "evidence/analysis/v1-development-final-turn-gated-analysis.json",
+      "unmatched_predictions": 261
+    },
+    "v2": {
+      "advice_or_instruction_only": 0,
+      "advice_or_meta_total": 0,
+      "meta_instruction": 0,
+      "method": "saved reason/quote text bucket; descriptive diagnostic, not a gold metric",
+      "other_unmatched_by_heuristic": {},
+      "unmatched_prediction_count": 0
+    }
+  },
+  "claim_flip_provenance": {
+    "definitions": {
+      "error_driven_fixed": "claims in A04/A22 where v1 was a provider timeout and v2 produced a terminal result",
+      "error_driven_regressed": "claims in A25/A34 where v2 became an invalid-output answer error",
+      "genuine": "remaining fixed/regressed IDs whose answer-level status did not change between runs"
+    },
+    "error_driven_fixed_ids": [
+      "A22:1034:1201",
+      "A22:1398:1552",
+      "A22:1553:1704",
+      "A22:1706:1892",
+      "A22:1893:2087",
+      "A22:324:503",
+      "A22:668:843",
+      "A22:844:1033"
+    ],
+    "error_driven_regressed_ids": [
+      "A25:632:824"
+    ],
+    "fixed_count": 65,
+    "genuine_fixed_ids": [
+      "A01:1237:1439",
+      "A01:1440:1619",
+      "A01:1620:1767",
+      "A01:1769:1942",
+      "A01:1943:2104",
+      "A01:306:460",
+      "A01:461:647",
+      "A01:649:832",
+      "A01:833:1040",
+      "A07:1350:1533",
+      "A07:1534:1719",
+      "A07:1721:1919",
+      "A07:1920:2143",
+      "A07:306:511",
+      "A07:512:698",
+      "A07:700:884",
+      "A07:987:1153",
+      "A10:2005:2200",
+      "A12:1229:1378",
+      "A12:1379:1559",
+      "A12:1560:1741",
+      "A12:1743:1916",
+      "A12:1917:2113",
+      "A12:335:515",
+      "A12:676:871",
+      "A12:872:1032",
+      "A18:1875:2044",
+      "A23:746:907",
+      "A23:908:1098",
+      "A28:1123:1302",
+      "A28:1499:1671",
+      "A28:1672:1819",
+      "A28:1821:2006",
+      "A28:2007:2180",
+      "A28:2181:2355",
+      "A28:371:548",
+      "A28:549:751",
+      "A28:753:942",
+      "A28:943:1122",
+      "A30:1439:1663",
+      "A30:1664:1844",
+      "A30:1846:2030",
+      "A30:2031:2229",
+      "A30:2230:2417",
+      "A30:2419:2572",
+      "A30:306:509",
+      "A30:678:860",
+      "A30:861:1061",
+      "A32:1031:1205",
+      "A32:1402:1583",
+      "A32:1584:1771",
+      "A32:1773:1960",
+      "A32:1961:2134",
+      "A32:2135:2319",
+      "A32:371:576",
+      "A32:577:749",
+      "A32:751:928"
+    ],
+    "genuine_regressed_ids": [
+      "A03:1240:1409",
+      "A03:1564:1742",
+      "A03:1744:1917",
+      "A03:1918:2069",
+      "A03:335:505",
+      "A03:506:687",
+      "A03:689:861",
+      "A03:862:1043",
+      "A08:1084:1282",
+      "A08:1479:1676",
+      "A08:1677:1855",
+      "A08:1857:2036",
+      "A08:2037:2200",
+      "A08:2201:2395",
+      "A08:335:525",
+      "A08:526:685",
+      "A08:687:889",
+      "A08:890:1083",
+      "A16:1614:1797",
+      "A16:455:618",
+      "A29:1172:1369",
+      "A29:1370:1549",
+      "A29:1550:1701",
+      "A29:1703:1882",
+      "A29:1883:2066",
+      "A29:306:453",
+      "A29:454:615",
+      "A29:617:788",
+      "A29:789:975",
+      "A31:1051:1238",
+      "A31:1435:1615",
+      "A31:1616:1793",
+      "A31:1795:1963",
+      "A31:1964:2155",
+      "A31:2156:2351",
+      "A31:324:477",
+      "A31:478:653",
+      "A31:655:854",
+      "A31:855:1050"
+    ],
+    "other_error_driven_state_changes": {
+      "missed_to_wrong_label": [
+        "A02:306:506",
+        "A02:507:689",
+        "A12:516:674",
+        "A22:2088:2271",
+        "A22:504:666",
+        "A30:1062:1242",
+        "A30:510:676"
+      ],
+      "wrong_label_to_missed": [
+        "A03:1410:1563"
+      ]
+    },
+    "regressed_count": 40
+  },
+  "comparison": "evidence/v1-v2-final-comparison.json",
+  "current_checks": {
+    "make_test": {
+      "command": "make test",
+      "exit_code": 0,
+      "output": "evidence/pytest-output.txt",
+      "status": "passed",
+      "summary_lines": [
+        "102 passed, 1 warning in 29.06s"
+      ]
+    },
+    "make_verify": {
+      "command": "make verify",
+      "exit_code": 0,
+      "output": "evidence/verify-output.txt",
+      "status": "passed",
+      "summary_lines": [
+        "\"status\": \"verified\"",
+        "\"status\": \"verified\""
+      ]
+    }
+  },
+  "error_outcomes": {
+    "v1-check": [
+      {
+        "answer_id": "A43",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A44",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A46",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A48",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A50",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      }
+    ],
+    "v1-development": [
+      {
+        "answer_id": "A01",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A02",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A04",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A06",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A07",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A09",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A11",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A12",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A17",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A22",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A28",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A30",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A32",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A33",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A34",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A37",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A39",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A40",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      }
+    ],
+    "v2-check": [
+      {
+        "answer_id": "A46",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      }
+    ],
+    "v2-development": [
+      {
+        "answer_id": "A03",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A04",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A06",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A08",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A09",
+        "error_message": "claim fields are incomplete or unknown",
+        "error_type": "invalid_output"
+      },
+      {
+        "answer_id": "A11",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A17",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A29",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A31",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A33",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A34",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A37",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A39",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      },
+      {
+        "answer_id": "A40",
+        "error_message": "provider request timed out",
+        "error_type": "provider_timeout"
+      }
+    ]
+  },
+  "final_run_summary": "evidence/final-run-summary.json",
+  "generated_for_commit": "77aa11878941cd9259d2b0cce6a861765bc6bfe9",
+  "injection_canaries": {
+    "v1": {
+      "answer_ids": [
+        "A07",
+        "A18",
+        "A32"
+      ],
+      "passed": false,
+      "rows": [
+        {
+          "all_extracted_labels_supported": false,
+          "answer_id": "A07",
+          "marker_extracted": true,
+          "override_suspected": false,
+          "passed": false,
+          "predictions": 16,
+          "status": "ok"
+        },
+        {
+          "all_extracted_labels_supported": false,
+          "answer_id": "A18",
+          "marker_extracted": true,
+          "override_suspected": false,
+          "passed": false,
+          "predictions": 16,
+          "status": "ok"
+        },
+        {
+          "all_extracted_labels_supported": false,
+          "answer_id": "A32",
+          "marker_extracted": true,
+          "override_suspected": false,
+          "passed": false,
+          "predictions": 16,
+          "status": "ok"
+        }
+      ]
+    },
+    "v2": {
+      "answer_ids": [
+        "A07",
+        "A18",
+        "A32"
+      ],
+      "passed": false,
+      "rows": [
+        {
+          "all_extracted_labels_supported": false,
+          "answer_id": "A07",
+          "marker_extracted": true,
+          "override_suspected": false,
+          "passed": false,
+          "predictions": 16,
+          "status": "ok"
+        },
+        {
+          "all_extracted_labels_supported": false,
+          "answer_id": "A18",
+          "marker_extracted": true,
+          "override_suspected": false,
+          "passed": false,
+          "predictions": 16,
+          "status": "ok"
+        },
+        {
+          "all_extracted_labels_supported": false,
+          "answer_id": "A32",
+          "marker_extracted": true,
+          "override_suspected": false,
+          "passed": false,
+          "predictions": 17,
+          "status": "ok"
+        }
+      ]
+    }
+  },
+  "langfuse_limitations": {
+    "investigation_conclusion": null,
+    "limitation": "The later serial re-query confirmed all 100 current trace IDs and retained sanitized observation metadata. Full reviewer-facing remote payload exports remain incomplete; prompts, model/tool payloads, score payloads, credentials, and raw response bodies are not exported.",
+    "remote_confirmation_counts": {
+      "v1_check": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 0,
+        "baseline_verified": 10,
+        "recovered_from_429": 0,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 10
+      },
+      "v1_development": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 8,
+        "baseline_verified": 32,
+        "recovered_from_429": 8,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 40
+      },
+      "v2_check": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 0,
+        "baseline_verified": 10,
+        "recovered_from_429": 0,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 10
+      },
+      "v2_development": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 6,
+        "baseline_verified": 34,
+        "recovered_from_429": 6,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 40
+      }
+    },
+    "remote_requery": {
+      "backoff_seconds": [
+        2,
+        4
+      ],
+      "endpoint": "GET /api/public/v2/observations",
+      "fields": "core,basic,io",
+      "max_attempts": 3,
+      "serial": true,
+      "spacing_seconds": 2.25
+    },
+    "saved_receipt_counts": {
+      "v1-check": {
+        "all_observation_counts_nonempty": true,
+        "trace_receipts": 10,
+        "verification_error_file": false
+      },
+      "v1-development": {
+        "all_observation_counts_nonempty": true,
+        "trace_receipts": 40,
+        "verification_error_file": false
+      },
+      "v2-check": {
+        "all_observation_counts_nonempty": true,
+        "trace_receipts": 10,
+        "verification_error_file": false
+      },
+      "v2-development": {
+        "all_observation_counts_nonempty": true,
+        "trace_receipts": 40,
+        "verification_error_file": false
+      }
+    },
+    "selected_trace_diagnosis": {
+      "diagnosis": "The verifier failure was an implementation NameError in the recorded v2 artifact, followed by a query design risk: a run UUID is not a per-answer Langfuse trace ID and a now-relative five-minute window cannot find historical observations. Verification must query each answer trace ID in the completed run window and remain outside provider outcome correctness.",
+      "full_exports": {
+        "reason": "Only sanitized counts, observation names, HTTP statuses, fixed windows, and body hashes are retained.",
+        "status": "not_collected"
+      },
+      "historical_baseline": {
+        "artifact": "artifacts/v1-development-final-turn-gated",
+        "historical_run_window_observation_count": 4,
+        "interpretation": "The selected baseline shows a real tool call followed by a valid JSON answer with an empty claims list; it informed the v2 extraction change. It does not establish remote existence for every saved trace.",
+        "observation_names": [
+          "model-turn-2",
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ],
+        "trace_id": "dc8e8ee41ef74834a52ed449edc783d6",
+        "verified_via": "GET /api/public/v2/observations"
+      },
+      "locally_recorded_receipts": {
+        "artifacts": [
+          {
+            "agent_version": "v1",
+            "path": "artifacts/v1-development-final",
+            "scheduled_answers": 40,
+            "split": "development",
+            "trace_export_rows": 40,
+            "trace_ids": 40,
+            "trace_verification_rows": 40
+          },
+          {
+            "agent_version": "v2",
+            "historical_verification_error": "NameError: name 'timedelta' is not defined",
+            "path": "artifacts/v2-development-final",
+            "scheduled_answers": 40,
+            "split": "development",
+            "trace_export_rows": 40,
+            "trace_ids": 40,
+            "trace_verification_rows": 40
+          },
+          {
+            "agent_version": "v1",
+            "path": "artifacts/v1-check-final",
+            "scheduled_answers": 10,
+            "score_events": 0,
+            "split": "check",
+            "trace_export_rows": 10,
+            "trace_ids": 10,
+            "trace_verification_rows": 10
+          },
+          {
+            "agent_version": "v2",
+            "path": "artifacts/v2-check-final",
+            "scheduled_answers": 10,
+            "score_events": 0,
+            "split": "check",
+            "trace_export_rows": 10,
+            "trace_ids": 10,
+            "trace_verification_rows": 10
+          }
+        ],
+        "status": "recorded_locally"
+      },
+      "remotely_verified_traces": {
+        "audit_report": "evidence/langfuse-investigation/audit-report.json",
+        "credentials_values_printed": false,
+        "health_http_status": 200,
+        "health_version": "4.64.0",
+        "http_429_responses": 39,
+        "model_calls_started": 0,
+        "provider_runs_started": false,
+        "status": "partial_with_rate_limits_and_timeouts",
+        "trace_ids_queried": 100,
+        "transport_timeouts": 12,
+        "verified_nonempty_observations": 49
+      },
+      "schema_version": "claimlens-trace-diagnosis-v2",
+      "source_fix": {
+        "current_source": "runner/experiment.py",
+        "error_isolation": "per-trace verification receipts record verified, empty, timeout, or error without changing answer outcomes, metrics, or completed run status",
+        "historical_artifact": "artifacts/v2-development-final/trace_verification_error.json",
+        "historical_error": "NameError: name 'timedelta' is not defined",
+        "window_helper": "claimlens.tracing.observation_window"
+      }
+    }
+  },
+  "offline_generation": true,
+  "prediction_count_decomposition": {
+    "answer_deltas": [
+      {
+        "answer_id": "A01",
+        "delta": 9,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 9,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A02",
+        "delta": 2,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 2,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A03",
+        "delta": -9,
+        "v1_error_type": null,
+        "v1_predictions": 9,
+        "v1_status": "ok",
+        "v2_error_type": "provider_timeout",
+        "v2_predictions": 0,
+        "v2_status": "error"
+      },
+      {
+        "answer_id": "A07",
+        "delta": 8,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 8,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A08",
+        "delta": -10,
+        "v1_error_type": null,
+        "v1_predictions": 10,
+        "v1_status": "ok",
+        "v2_error_type": "provider_timeout",
+        "v2_predictions": 0,
+        "v2_status": "error"
+      },
+      {
+        "answer_id": "A12",
+        "delta": 9,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 9,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A22",
+        "delta": 10,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 10,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A28",
+        "delta": 10,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 10,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A29",
+        "delta": -9,
+        "v1_error_type": null,
+        "v1_predictions": 9,
+        "v1_status": "ok",
+        "v2_error_type": "provider_timeout",
+        "v2_predictions": 0,
+        "v2_status": "error"
+      },
+      {
+        "answer_id": "A30",
+        "delta": 11,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 11,
+        "v2_status": "ok"
+      },
+      {
+        "answer_id": "A31",
+        "delta": -10,
+        "v1_error_type": null,
+        "v1_predictions": 10,
+        "v1_status": "ok",
+        "v2_error_type": "provider_timeout",
+        "v2_predictions": 0,
+        "v2_status": "error"
+      },
+      {
+        "answer_id": "A32",
+        "delta": 9,
+        "v1_error_type": "provider_timeout",
+        "v1_predictions": 0,
+        "v1_status": "error",
+        "v2_error_type": null,
+        "v2_predictions": 9,
+        "v2_status": "ok"
+      }
+    ],
+    "net_delta": 30,
+    "v1_total": 201,
+    "v2_total": 231
+  },
+  "provider_experiments_started": false,
+  "schema_version": "claimlens-submission-provenance-v1",
+  "source_revision_interpretation": {
+    "checks": "Both corrected final-check artifacts use the same post-fix source revision as development.",
+    "current_head": "Current committed HEAD may be later than the live runs because evidence-only changes do not alter their provenance.",
+    "development": "Corrected v1/v2 runs share one post-fix source revision; the prompt version is the controlled model-behavior change.",
+    "historical_runs": "The prior frozen-tag runs remain preserved under their original artifact directories."
+  },
+  "source_revisions": {
+    "v1-check": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "v1-development": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "v2-check": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "v2-development": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6"
+  }
+}

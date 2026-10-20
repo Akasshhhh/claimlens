@@ -1,0 +1,1113 @@
+{
+  "previous_audit_http_status": 429,
+  "previous_audit_receipt_count": 14,
+  "requery": [
+    {
+      "answer_id": "A07",
+      "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "cf3cd5eb000302ffa62aa925b92b1d46ca5298dfad2f823134275c5f0492f859",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "cf3cd5eb000302ffa62aa925b92b1d46ca5298dfad2f823134275c5f0492f859",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:06.341Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "938c5e3a87e54b29",
+          "parent_observation_id": "0d81aa8c4c7c40c0",
+          "span_id": "938c5e3a87e54b29",
+          "start_time": "2026-10-19T21:34:06.341Z",
+          "trace_id": "c549e7db787c4e13ac39ca9545027305",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:06.340Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "d1549277a1244048",
+          "parent_observation_id": "0d81aa8c4c7c40c0",
+          "span_id": "d1549277a1244048",
+          "start_time": "2026-10-19T21:34:06.340Z",
+          "trace_id": "c549e7db787c4e13ac39ca9545027305",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.141Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "0d81aa8c4c7c40c0",
+          "parent_observation_id": null,
+          "span_id": "0d81aa8c4c7c40c0",
+          "start_time": "2026-10-19T21:34:02.141Z",
+          "trace_id": "c549e7db787c4e13ac39ca9545027305",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "c549e7db787c4e13ac39ca9545027305"
+    },
+    {
+      "answer_id": "A12",
+      "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "094f894f8ce4d8cdd19c6732834de0084d931dd10e7f92a881b9050ddb16c010",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "094f894f8ce4d8cdd19c6732834de0084d931dd10e7f92a881b9050ddb16c010",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:07.575Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "912f2beab3c848fa",
+          "parent_observation_id": "dbddb1b987d64172",
+          "span_id": "912f2beab3c848fa",
+          "start_time": "2026-10-19T21:34:07.575Z",
+          "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:07.574Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "4027c2d63be24815",
+          "parent_observation_id": "dbddb1b987d64172",
+          "span_id": "4027c2d63be24815",
+          "start_time": "2026-10-19T21:34:07.574Z",
+          "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.142Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "dbddb1b987d64172",
+          "parent_observation_id": null,
+          "span_id": "dbddb1b987d64172",
+          "start_time": "2026-10-19T21:34:02.142Z",
+          "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5"
+    },
+    {
+      "answer_id": "A16",
+      "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "e4c40e3fab9bed99e5bcb6a8e092dfacebdca972754fde67b46b5f3e3e80f96c",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "e4c40e3fab9bed99e5bcb6a8e092dfacebdca972754fde67b46b5f3e3e80f96c",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:10.051Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "aa06c3099b82407d",
+          "parent_observation_id": "50e1355de31e429e",
+          "span_id": "aa06c3099b82407d",
+          "start_time": "2026-10-19T21:34:10.051Z",
+          "trace_id": "cfb5664e448146e9aac8b252963ac385",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:10.050Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "a485f1e89f8b403c",
+          "parent_observation_id": "50e1355de31e429e",
+          "span_id": "a485f1e89f8b403c",
+          "start_time": "2026-10-19T21:34:10.050Z",
+          "trace_id": "cfb5664e448146e9aac8b252963ac385",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.143Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "50e1355de31e429e",
+          "parent_observation_id": null,
+          "span_id": "50e1355de31e429e",
+          "start_time": "2026-10-19T21:34:02.143Z",
+          "trace_id": "cfb5664e448146e9aac8b252963ac385",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "cfb5664e448146e9aac8b252963ac385"
+    },
+    {
+      "answer_id": "A35",
+      "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "e04c13ee9fc1bb6e8efaec2646e8b561938b18569a94eef7a6bccc987c1d409f",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "model-turn-1",
+            "get_brand_facts",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "e04c13ee9fc1bb6e8efaec2646e8b561938b18569a94eef7a6bccc987c1d409f",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "model-turn-1",
+          "get_brand_facts",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:21.502Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "4bad825391ac4207",
+          "parent_observation_id": "2dcd6cb019414cc3",
+          "span_id": "4bad825391ac4207",
+          "start_time": "2026-10-19T21:34:21.502Z",
+          "trace_id": "d23618a261924f1fb57c2d14aedcf5e7",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:21.502Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "20f47783de184ea9",
+          "parent_observation_id": "2dcd6cb019414cc3",
+          "span_id": "20f47783de184ea9",
+          "start_time": "2026-10-19T21:34:21.502Z",
+          "trace_id": "d23618a261924f1fb57c2d14aedcf5e7",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.162Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "2dcd6cb019414cc3",
+          "parent_observation_id": null,
+          "span_id": "2dcd6cb019414cc3",
+          "start_time": "2026-10-19T21:34:02.162Z",
+          "trace_id": "d23618a261924f1fb57c2d14aedcf5e7",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "d23618a261924f1fb57c2d14aedcf5e7"
+    },
+    {
+      "answer_id": "A09",
+      "answer_text_truncated": "When buying a gift, begin with the intended use and check the exact model name on the order. Read the accessories, connection details and purchase terms as separate subjects. Keep an older price compa",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "4a0a7b126343ba2df4e824668f4aa973dd3127293d8e788c67646f8460494020",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "4a0a7b126343ba2df4e824668f4aa973dd3127293d8e788c67646f8460494020",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:06.333Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "c0c3d6c017f749f9",
+          "parent_observation_id": "c10cf81e8bc34ee9",
+          "span_id": "c0c3d6c017f749f9",
+          "start_time": "2026-10-19T21:34:06.333Z",
+          "trace_id": "ddce780300a547e8aba6fede42869c5e",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:06.333Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "842d83af704749c8",
+          "parent_observation_id": "c10cf81e8bc34ee9",
+          "span_id": "842d83af704749c8",
+          "start_time": "2026-10-19T21:34:06.333Z",
+          "trace_id": "ddce780300a547e8aba6fede42869c5e",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.142Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "c10cf81e8bc34ee9",
+          "parent_observation_id": null,
+          "span_id": "c10cf81e8bc34ee9",
+          "start_time": "2026-10-19T21:34:02.142Z",
+          "trace_id": "ddce780300a547e8aba6fede42869c5e",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "ddce780300a547e8aba6fede42869c5e"
+    },
+    {
+      "answer_id": "A22",
+      "answer_text_truncated": "When buying a gift, begin with the intended use and check the exact model name on the order. Read the accessories, connection details and purchase terms as separate subjects. Keep an older price compa",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "2486ac8a2fa231a2de3fcb9185a0e36c3ecaebd01d08809ea4e6c81280116d3c",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "model-turn-1",
+            "get_brand_facts",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "2486ac8a2fa231a2de3fcb9185a0e36c3ecaebd01d08809ea4e6c81280116d3c",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "model-turn-1",
+          "get_brand_facts",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:12.642Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "abffc27014b94b77",
+          "parent_observation_id": "f84f174d8cfa4c2c",
+          "span_id": "abffc27014b94b77",
+          "start_time": "2026-10-19T21:34:12.642Z",
+          "trace_id": "de9cc44308af4cd08858f0ea19127a15",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:12.642Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "96322741f2ce4cb2",
+          "parent_observation_id": "f84f174d8cfa4c2c",
+          "span_id": "96322741f2ce4cb2",
+          "start_time": "2026-10-19T21:34:12.642Z",
+          "trace_id": "de9cc44308af4cd08858f0ea19127a15",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.143Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "f84f174d8cfa4c2c",
+          "parent_observation_id": null,
+          "span_id": "f84f174d8cfa4c2c",
+          "start_time": "2026-10-19T21:34:02.143Z",
+          "trace_id": "de9cc44308af4cd08858f0ea19127a15",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "de9cc44308af4cd08858f0ea19127a15"
+    },
+    {
+      "answer_id": "A31",
+      "answer_text_truncated": "When buying a gift, begin with the intended use and check the exact model name on the order. Read the accessories, connection details and purchase terms as separate subjects. Keep an older price compa",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "6c75171cd02fe8666b395aaec801db8b3d8d936f48be0980a57dee0a79560dc3",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "6c75171cd02fe8666b395aaec801db8b3d8d936f48be0980a57dee0a79560dc3",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:16.068Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "461a91c7c69d4dc1",
+          "parent_observation_id": "c33744ce8f1f4e20",
+          "span_id": "461a91c7c69d4dc1",
+          "start_time": "2026-10-19T21:34:16.068Z",
+          "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:16.067Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "9dc07459503643f8",
+          "parent_observation_id": "c33744ce8f1f4e20",
+          "span_id": "9dc07459503643f8",
+          "start_time": "2026-10-19T21:34:16.067Z",
+          "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.160Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "c33744ce8f1f4e20",
+          "parent_observation_id": null,
+          "span_id": "c33744ce8f1f4e20",
+          "start_time": "2026-10-19T21:34:02.160Z",
+          "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec"
+    },
+    {
+      "answer_id": "A32",
+      "answer_text_truncated": "For comparison shopping, start by naming the exact speaker and the particular alternative you are considering. Compare like conditions rather than collecting attractive numbers from different situatio",
+      "artifact": "artifacts/v1-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "e14398f37a4f9cc2eb755ce52df2c88ef9fdafc094f033b26f06ecfe3d15af2a",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "e14398f37a4f9cc2eb755ce52df2c88ef9fdafc094f033b26f06ecfe3d15af2a",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:33:02.119455Z",
+      "label": "v1_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:16.211Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "e7f22cf1354a4d17",
+          "parent_observation_id": "9606670d9d8d47df",
+          "span_id": "e7f22cf1354a4d17",
+          "start_time": "2026-10-19T21:34:16.211Z",
+          "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:16.210Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "e57a4cb7dbee4d3e",
+          "parent_observation_id": "9606670d9d8d47df",
+          "span_id": "e57a4cb7dbee4d3e",
+          "start_time": "2026-10-19T21:34:16.210Z",
+          "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:34:02.161Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "9606670d9d8d47df",
+          "parent_observation_id": null,
+          "span_id": "9606670d9d8d47df",
+          "start_time": "2026-10-19T21:34:02.161Z",
+          "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+      "status": "verified",
+      "to_start_time": "2026-10-19T21:50:08.635696Z",
+      "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7"
+    },
+    {
+      "answer_id": "A24",
+      "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "90957ef77b9874f15174873e2b9e6878244c9ce2ef0de584f60b134157fed45a",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "90957ef77b9874f15174873e2b9e6878244c9ce2ef0de584f60b134157fed45a",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:51:01.546435Z",
+      "label": "v2_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:11.798Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "fad45af4658840c2",
+          "parent_observation_id": "00995d578c934437",
+          "span_id": "fad45af4658840c2",
+          "start_time": "2026-10-19T21:52:11.798Z",
+          "trace_id": "af591f25021a43e8b4ddc8e3d889f331",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:11.798Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "0313597ab47b441e",
+          "parent_observation_id": "00995d578c934437",
+          "span_id": "0313597ab47b441e",
+          "start_time": "2026-10-19T21:52:11.798Z",
+          "trace_id": "af591f25021a43e8b4ddc8e3d889f331",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:01.568Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "00995d578c934437",
+          "parent_observation_id": null,
+          "span_id": "00995d578c934437",
+          "start_time": "2026-10-19T21:52:01.568Z",
+          "trace_id": "af591f25021a43e8b4ddc8e3d889f331",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "status": "verified",
+      "to_start_time": "2026-10-19T22:07:31.598651Z",
+      "trace_id": "af591f25021a43e8b4ddc8e3d889f331"
+    },
+    {
+      "answer_id": "A30",
+      "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "ff7e7c1dfa062f0ce464530de8a21375ee92192d8e8080c41ea2a76755e49db1",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "ff7e7c1dfa062f0ce464530de8a21375ee92192d8e8080c41ea2a76755e49db1",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:51:01.546435Z",
+      "label": "v2_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:14.230Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "e4a65f22e9cd4f1b",
+          "parent_observation_id": "642ccc8c004643c1",
+          "span_id": "e4a65f22e9cd4f1b",
+          "start_time": "2026-10-19T21:52:14.230Z",
+          "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:14.229Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "2774e229e6b24b6d",
+          "parent_observation_id": "642ccc8c004643c1",
+          "span_id": "2774e229e6b24b6d",
+          "start_time": "2026-10-19T21:52:14.229Z",
+          "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:01.576Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "642ccc8c004643c1",
+          "parent_observation_id": null,
+          "span_id": "642ccc8c004643c1",
+          "start_time": "2026-10-19T21:52:01.576Z",
+          "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "status": "verified",
+      "to_start_time": "2026-10-19T22:07:31.598651Z",
+      "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef"
+    },
+    {
+      "answer_id": "A25",
+      "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "de616e3b68c7eb81754447a8593eed84163cb7d025fcc78ed6a23b5d46ae87cc",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "de616e3b68c7eb81754447a8593eed84163cb7d025fcc78ed6a23b5d46ae87cc",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:51:01.546435Z",
+      "label": "v2_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:13.019Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "78df72c1fe0e4ff5",
+          "parent_observation_id": "6df9563096cc4a17",
+          "span_id": "78df72c1fe0e4ff5",
+          "start_time": "2026-10-19T21:52:13.019Z",
+          "trace_id": "c595acc03d324639a41e83561f70e1ab",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:13.018Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "dde0b711e6714648",
+          "parent_observation_id": "6df9563096cc4a17",
+          "span_id": "dde0b711e6714648",
+          "start_time": "2026-10-19T21:52:13.018Z",
+          "trace_id": "c595acc03d324639a41e83561f70e1ab",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:01.568Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "6df9563096cc4a17",
+          "parent_observation_id": null,
+          "span_id": "6df9563096cc4a17",
+          "start_time": "2026-10-19T21:52:01.568Z",
+          "trace_id": "c595acc03d324639a41e83561f70e1ab",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "status": "verified",
+      "to_start_time": "2026-10-19T22:07:31.598651Z",
+      "trace_id": "c595acc03d324639a41e83561f70e1ab"
+    },
+    {
+      "answer_id": "A26",
+      "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "dae1d9a1cb7e6dc5ebc282511e798e0807509b1f6a69387e3e20db9254aef77c",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "dae1d9a1cb7e6dc5ebc282511e798e0807509b1f6a69387e3e20db9254aef77c",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:51:01.546435Z",
+      "label": "v2_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:13.027Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "c4fc19fd1a6244eb",
+          "parent_observation_id": "95d6f1e441e64b8f",
+          "span_id": "c4fc19fd1a6244eb",
+          "start_time": "2026-10-19T21:52:13.027Z",
+          "trace_id": "ce3d881597b94437834bbbfae9afb73f",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:13.026Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "0f6b5d4bbe054646",
+          "parent_observation_id": "95d6f1e441e64b8f",
+          "span_id": "0f6b5d4bbe054646",
+          "start_time": "2026-10-19T21:52:13.026Z",
+          "trace_id": "ce3d881597b94437834bbbfae9afb73f",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:01.572Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "95d6f1e441e64b8f",
+          "parent_observation_id": null,
+          "span_id": "95d6f1e441e64b8f",
+          "start_time": "2026-10-19T21:52:01.572Z",
+          "trace_id": "ce3d881597b94437834bbbfae9afb73f",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "status": "verified",
+      "to_start_time": "2026-10-19T22:07:31.598651Z",
+      "trace_id": "ce3d881597b94437834bbbfae9afb73f"
+    },
+    {
+      "answer_id": "A39",
+      "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "8c05325a735687a5b93674e5d692ef2b5ed667ec7675f1a4f5c00b8fda9252fc",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "8c05325a735687a5b93674e5d692ef2b5ed667ec7675f1a4f5c00b8fda9252fc",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:51:01.546435Z",
+      "label": "v2_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:18.137Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "13be44f90d044b27",
+          "parent_observation_id": "a4e459bc31ed41b5",
+          "span_id": "13be44f90d044b27",
+          "start_time": "2026-10-19T21:52:18.137Z",
+          "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:18.136Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "374826096303426f",
+          "parent_observation_id": "a4e459bc31ed41b5",
+          "span_id": "374826096303426f",
+          "start_time": "2026-10-19T21:52:18.136Z",
+          "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:01.577Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "a4e459bc31ed41b5",
+          "parent_observation_id": null,
+          "span_id": "a4e459bc31ed41b5",
+          "start_time": "2026-10-19T21:52:01.577Z",
+          "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "status": "verified",
+      "to_start_time": "2026-10-19T22:07:31.598651Z",
+      "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3"
+    },
+    {
+      "answer_id": "A28",
+      "answer_text_truncated": "For comparison shopping, start by naming the exact speaker and the particular alternative you are considering. Compare like conditions rather than collecting attractive numbers from different situatio",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "attempt_count": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "body_sha256": "a03431af1d451747ec0942aa69c240ce9bf9f7bcbf260c4d4fe188caa349d333",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        }
+      ],
+      "final": {
+        "attempt": 1,
+        "body_sha256": "a03431af1d451747ec0942aa69c240ce9bf9f7bcbf260c4d4fe188caa349d333",
+        "http_status": 200,
+        "observation_count": 3,
+        "observation_names": [
+          "get_brand_facts",
+          "model-turn-1",
+          "claimlens.answer"
+        ]
+      },
+      "from_start_time": "2026-10-19T21:51:01.546435Z",
+      "label": "v2_development",
+      "observations": [
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:14.145Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "get_brand_facts",
+          "observation_id": "083d6f168cd94777",
+          "parent_observation_id": "3be0e9fafc554263",
+          "span_id": "083d6f168cd94777",
+          "start_time": "2026-10-19T21:52:14.145Z",
+          "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32",
+          "type": "TOOL"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:14.144Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "model-turn-1",
+          "observation_id": "a46daaed8a1d4626",
+          "parent_observation_id": "3be0e9fafc554263",
+          "span_id": "a46daaed8a1d4626",
+          "start_time": "2026-10-19T21:52:14.144Z",
+          "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32",
+          "type": "GENERATION"
+        },
+        {
+          "duration_ms": 0.0,
+          "end_time": "2026-10-19T21:52:01.576Z",
+          "latency_ms": 0,
+          "level": "DEFAULT",
+          "name": "claimlens.answer",
+          "observation_id": "3be0e9fafc554263",
+          "parent_observation_id": null,
+          "span_id": "3be0e9fafc554263",
+          "start_time": "2026-10-19T21:52:01.576Z",
+          "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32",
+          "type": "SPAN"
+        }
+      ],
+      "recovered_from_429": false,
+      "recovered_from_prior_429": true,
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "status": "verified",
+      "to_start_time": "2026-10-19T22:07:31.598651Z",
+      "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32"
+    }
+  ],
+  "schema_version": "claimlens-langfuse-review-evidence-v1"
+}

@@ -1,0 +1,137 @@
+{
+  "behavior_change": {
+    "corrected_v2_result": {
+      "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+      "artifact": "artifacts/v2-development-corrected-final",
+      "finding": "The corrected v2 run produced a remotely confirmed trace and the saved local development score events; across the run it recorded the corrected development metrics without exporting check gold labels.",
+      "local_scores": [
+        {
+          "name": "extraction_f1",
+          "value": 1.0
+        },
+        {
+          "name": "joint_f1",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:306:460",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:461:647",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:649:832",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:833:1040",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:1237:1439",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:1440:1619",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:1620:1767",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:1769:1942",
+          "value": 1.0
+        },
+        {
+          "name": "label_correct",
+          "span_id": "A01:1943:2104",
+          "value": 1.0
+        },
+        {
+          "name": "aggregate_extraction_f1",
+          "value": 0.7611202635914333
+        },
+        {
+          "name": "aggregate_joint_f1",
+          "value": 0.71499176276771
+        }
+      ],
+      "observation_names": [
+        "model-turn-2",
+        "get_brand_facts",
+        "model-turn-1",
+        "claimlens.answer"
+      ],
+      "remote_status": "verified",
+      "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+      "run_metrics": {
+        "answer_errors": 14,
+        "counts": {
+          "answers": 40,
+          "errors": 14,
+          "ok": 26,
+          "predictions": 231,
+          "scheduled": 40
+        },
+        "coverage": 0.5771276595744681,
+        "extraction_f1": 0.7611202635914333,
+        "joint_f1": 0.71499176276771,
+        "macro_f1": 0.7144441342515044,
+        "predictions": 231
+      },
+      "trace_id": "0c5e1d78d67a493386e8b19f80dc89a7"
+    },
+    "v1_observation": "The historical v1 trace made a genuine get_brand_facts call and completed the answer path. Its saved local receipt recorded advice/instruction/opinion-only spans as unknown claims, matching the broader historical advice/instruction extraction failure mode.",
+    "v2_change": "The v2 model-facing policy excludes pure advice, opinions, imperative instructions, and injected instructions while retaining a sentence when it has an independent factual clause."
+  },
+  "historical_trace": {
+    "answer_id": "A01",
+    "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+    "artifact": "artifacts/v1-development-final-turn-gated",
+    "finding": "The real historical v1 trace shows a tool observation and two model turns. Its saved local answer receipt recorded advice/instruction/opinion-only spans as claims marked unknown; this trace is historical evidence, not a corrected final run.",
+    "local_answer_diagnostic": {
+      "advice_instruction_or_opinion_reason_count": 7,
+      "claim_id_count": 16,
+      "label_counts": {
+        "contradicted": 3,
+        "supported": 3,
+        "unknown": 10
+      },
+      "source": "artifacts/v1-development-final-turn-gated/outcomes.json",
+      "status": "ok"
+    },
+    "historical": true,
+    "observation_names": [
+      "model-turn-2",
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "observation_types": [
+      "GENERATION",
+      "TOOL",
+      "GENERATION",
+      "SPAN"
+    ],
+    "remote_status": "verified",
+    "run_id": "8cb56eec-6c54-4eab-aba2-317bee75d451",
+    "trace_id": "dc8e8ee41ef74834a52ed449edc783d6"
+  },
+  "interpretation_limits": [
+    "The historical trace is explicitly not a corrected run and must not be presented as one.",
+    "Check traces are evidence of remote observations only; no gold-derived check scores are included.",
+    "The observed v1/v2 development gain is descriptive; the saved comparison reports that its bootstrap interval includes zero."
+  ],
+  "schema_version": "claimlens-langfuse-diagnosis-v1"
+}

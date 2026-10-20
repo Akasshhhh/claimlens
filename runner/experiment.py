@@ -5,10 +5,12 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import re
 import subprocess
 import time
 import uuid
-from datetime import datetime, timedelta, timezone
+from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -22,7 +24,7 @@ from claimlens.contracts import (
     Tracer,
 )
 from claimlens.loaders import csv_hashes, load_answers, load_facts, load_gold, sha256_file
-from claimlens.tracing import LangfuseTracer, NoOpTracer
+from claimlens.tracing import LangfuseTracer, NoOpTracer, observation_window
 from harness.evaluator import EvaluationResult, evaluate_split
 from harness.reports import write_report
 from providers.openai import OpenAIProvider
@@ -59,6 +61,17 @@ def _summary(value: Any) -> dict[str, Any]:
     if callable(dump):
         return _summary(dump(mode="python"))
     return {"type": type(value).__name__}
+
+
+def _safe_verification_message(value: Any) -> str:
+    text = str(value).replace("\n", " ").replace("\r", " ")
+    text = re.sub(
+        r"(?i)(authorization|bearer|password|secret(?:_key)?|api[_-]?key|token)"
+        r"\s*(?:[:=]\s*|\s+)[^\s,;]+",
+        r"\1=<redacted>",
+        text,
+    )
+    return text[:500]
 
 
 class RecordingTracer(Tracer):
@@ -178,6 +191,50 @@ def _outcome_dict(outcome: AnswerOutcome) -> dict[str, Any]:
     return outcome.model_dump(mode="json")
 
 
+def _enrich_trace_receipts(
+    receipts: list[dict[str, Any]], events: Sequence[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Attach sanitized local event/score evidence to remote receipts."""
+
+    by_trace: dict[str, list[Mapping[str, Any]]] = {}
+    for event in events:
+        trace_id = event.get("trace_id")
+        if isinstance(trace_id, str) and trace_id:
+            by_trace.setdefault(trace_id, []).append(event)
+    enriched: list[dict[str, Any]] = []
+    for receipt in receipts:
+        trace_id = receipt.get("trace_id")
+        local_events = by_trace.get(trace_id, [])
+        names = [str(event.get("name")) for event in local_events if event.get("name")]
+        scores = [
+            {
+                "name": event.get("name"),
+                "value": event.get("value"),
+                "metadata": event.get("metadata", {}),
+            }
+            for event in local_events
+            if event.get("kind") == "score"
+        ]
+        row = dict(receipt)
+        answer_ids = sorted(
+            {
+                str(event.get("answer_id"))
+                for event in local_events
+                if event.get("kind") == "trace_start" and event.get("answer_id")
+            }
+        )
+        row.update(
+            {
+                "answer_id": answer_ids[0] if len(answer_ids) == 1 else None,
+                "local_event_counts": dict(Counter(event.get("kind", "") for event in local_events)),
+                "local_event_names": names,
+                "local_scores": scores,
+            }
+        )
+        enriched.append(row)
+    return enriched
+
+
 async def _verify_trace(
     trace: LangfuseTracer,
     trace_id: str,
@@ -186,14 +243,36 @@ async def _verify_trace(
     to_start_time: str | None = None,
 ) -> dict[str, Any]:
     started = time.monotonic()
-    payload = await trace.verify_trace(
-        trace_id,
-        from_start_time=from_start_time,
-        to_start_time=to_start_time,
-    )
+    try:
+        payload = await trace.verify_trace(
+            trace_id,
+            from_start_time=from_start_time,
+            to_start_time=to_start_time,
+        )
+    except TimeoutError as exc:
+        return {
+            "trace_id": trace_id,
+            "status": "timeout",
+            "observation_count": 0,
+            "elapsed_seconds": round(time.monotonic() - started, 3),
+            "observation_names": [],
+            "error_type": type(exc).__name__,
+            "error_message": _safe_verification_message(exc),
+        }
+    except Exception as exc:
+        return {
+            "trace_id": trace_id,
+            "status": "error",
+            "observation_count": 0,
+            "elapsed_seconds": round(time.monotonic() - started, 3),
+            "observation_names": [],
+            "error_type": type(exc).__name__,
+            "error_message": _safe_verification_message(exc),
+        }
     observations = payload.get("data", []) if isinstance(payload, Mapping) else []
     return {
         "trace_id": trace_id,
+        "status": "verified" if isinstance(observations, list) and observations else "empty",
         "observation_count": len(observations) if isinstance(observations, list) else 0,
         "elapsed_seconds": round(time.monotonic() - started, 3),
         "observation_names": [
@@ -384,6 +463,8 @@ async def run_split(
         "".join(json.dumps(event, ensure_ascii=False, sort_keys=True) + "\n" for event in recorder.events),
         encoding="utf-8",
     )
+    score_events = [event for event in recorder.events if event.get("kind") == "score"]
+    _write_json(directory / "scores.json", score_events)
 
     if repository is not None:
         for outcome in outcomes:
@@ -395,18 +476,31 @@ async def run_split(
     verification_error: dict[str, str] | None = None
     try:
         if verify_traces and isinstance(base_tracer, LangfuseTracer):
-            started_window = datetime.fromisoformat(metadata["started_at"].replace("Z", "+00:00")) - timedelta(minutes=1)
-            completed_window = datetime.fromisoformat(metadata["completed_at"].replace("Z", "+00:00")) + timedelta(minutes=1)
+            started_window, completed_window = observation_window(
+                metadata["started_at"], metadata["completed_at"]
+            )
             verification = await _verify_traces(
                 base_tracer,
                 trace_ids,
-                from_start_time=started_window.isoformat(),
-                to_start_time=completed_window.isoformat(),
+                from_start_time=started_window,
+                to_start_time=completed_window,
             )
             if len(verification) != len(trace_ids):
                 raise RuntimeError("Langfuse trace verification returned incomplete results")
+            verification = _enrich_trace_receipts(verification, recorder.events)
+            failures = [
+                receipt
+                for receipt in verification
+                if receipt.get("status") not in {"verified", "empty"}
+            ]
+            if failures:
+                verification_error = {
+                    "type": "TraceVerificationError",
+                    "message": f"{len(failures)} of {len(verification)} trace queries failed",
+                }
+                _write_json(directory / "trace_verification_error.json", verification_error)
     except Exception as exc:
-        verification_error = {"type": type(exc).__name__, "message": str(exc)[:1000]}
+        verification_error = {"type": type(exc).__name__, "message": _safe_verification_message(exc)}
         _write_json(directory / "trace_verification_error.json", verification_error)
     if repository is not None:
         repository.finish_run(run_id, "completed", metadata["counts"], result.metrics.model_dump(mode="json"))
@@ -425,6 +519,7 @@ async def run_split(
         "trace_ids": trace_ids,
         "trace_verification": verification,
         "trace_verification_error": verification_error,
+        "scores": score_events,
     }
 
 

@@ -7,7 +7,9 @@ from typing import Any
 from uuid import UUID, uuid4
 
 import pytest
+import psycopg
 from fastapi.testclient import TestClient
+from psycopg.types.json import Jsonb
 
 from claimlens.api import create_app
 from claimlens.contracts import AnswerOutcome, Claim, ProviderTimeoutError, UnknownBrandError
@@ -136,6 +138,51 @@ def test_evaluation_run_and_uuid_lookup() -> None:
     assert client.get(f"/evaluation-runs/{uuid4()}").status_code == 404
 
 
+def test_fastapi_postgres_path_persists_all_terminal_outcomes(
+    postgres_repository: PostgresRunRepository,
+) -> None:
+    class OutcomeRunner:
+        async def run_split(self, agent_version: str, split: str, repository: PostgresRunRepository) -> dict[str, Any]:
+            return {
+                "status": "completed",
+                "counts": {"scheduled": 3, "answers": 3, "ok": 2, "errors": 1, "predictions": 1},
+                "metrics": {"joint_f1": 0.5},
+                "scheduled_answer_ids": ["A01", "A02", "A03"],
+                "answer_outcomes": [
+                    {
+                        "answer_id": "A01",
+                        "status": "ok",
+                        "latency_ms": 1,
+                        "claims": [_claim("A01").model_dump(mode="json")],
+                    },
+                    {"answer_id": "A02", "status": "ok", "latency_ms": 1, "claims": []},
+                    {
+                        "answer_id": "A03",
+                        "status": "error",
+                        "latency_ms": 1,
+                        "error_type": "provider_timeout",
+                        "error_message": "provider request timed out",
+                        "claims": [],
+                    },
+                ],
+            }
+
+    client = TestClient(create_app(runner=OutcomeRunner(), repository=postgres_repository))
+    response = client.post("/evaluation-runs", json={"agent_version": "v1", "split": "development"})
+
+    assert response.status_code == 201
+    run_id = response.json()["run_id"]
+    result = postgres_repository.get_run(run_id)
+    assert result is not None
+    assert [row["answer_id"] for row in result["answer_results"]] == ["A01", "A02", "A03"]
+    assert [row["status"] for row in result["answer_results"]] == ["ok", "ok", "error"]
+    assert result["answer_results"][1]["claims"] == []
+    assert result["answer_results"][2]["error_type"] == "provider_timeout"
+    joined = client.get(f"/evaluation-runs/{run_id}")
+    assert joined.status_code == 200
+    assert [row["answer_id"] for row in joined.json()["answer_results"]] == ["A01", "A02", "A03"]
+
+
 def _database_url() -> str:
     value = os.getenv("DATABASE_URL")
     if not value:
@@ -165,7 +212,16 @@ def test_postgres_persistence_and_stable_join(postgres_repository: PostgresRunRe
             "file_hashes": {"answers.csv": "hash"},
         }
     )
-    repository.save_answer_result(run_id, "B2", "ok", latency_ms=2, claims=[_claim("B2")])
+    matched_claim = _claim("B2").model_dump(mode="json")
+    matched_claim.update(
+        {
+            "gold_claim_id": "gold-1",
+            "expected_label": "supported",
+            "label_correct": True,
+            "match": {"gold_claim_id": "gold-1", "label_correct": True},
+        }
+    )
+    repository.save_answer_result(run_id, "B2", "ok", latency_ms=2, claims=[matched_claim])
     repository.save_answer_result(
         run_id,
         "A1",
@@ -180,7 +236,65 @@ def test_postgres_persistence_and_stable_join(postgres_repository: PostgresRunRe
     assert [row["answer_id"] for row in result["answer_results"]] == ["A1", "B2"]
     assert result["answer_results"][0]["status"] == "error"
     assert result["answer_results"][1]["claims"][0]["start_char"] == 0
+    assert result["answer_results"][1]["claims"][0]["gold_claim_id"] == "gold-1"
+    assert result["answer_results"][1]["claims"][0]["label_correct"] is True
     assert result["scores"]["joint_f1"] is None
+
+
+def test_postgres_constraints_reject_duplicate_claim_span_and_orphan_claim(
+    postgres_repository: PostgresRunRepository,
+) -> None:
+    repository = postgres_repository
+    run_id = repository.create_run({"split": "development", "agent_version": "v1"})
+    repository.save_answer_result(run_id, "A1", "ok", claims=[_claim("A1")])
+
+    with repository.connection() as connection:
+        with connection.cursor() as cursor:
+            with pytest.raises(psycopg.IntegrityError):
+                cursor.execute(
+                    """
+                    INSERT INTO claim_results (
+                        run_id, answer_id, claim_id, start_char, end_char, quote,
+                        label, fact_ids, reason
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        UUID(run_id),
+                        "A1",
+                        "duplicate-span",
+                        0,
+                        len("The model is red."),
+                        "The model is red.",
+                        "supported",
+                        Jsonb([]),
+                        "duplicate",
+                    ),
+                )
+        connection.rollback()
+
+    with repository.connection() as connection:
+        with connection.cursor() as cursor:
+            with pytest.raises(psycopg.IntegrityError):
+                cursor.execute(
+                    """
+                    INSERT INTO claim_results (
+                        run_id, answer_id, claim_id, start_char, end_char, quote,
+                        label, fact_ids, reason
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        UUID(run_id),
+                        "orphan",
+                        "orphan-claim",
+                        0,
+                        1,
+                        "x",
+                        "unknown",
+                        Jsonb([]),
+                        "orphan",
+                    ),
+                )
+        connection.rollback()
 
 
 def test_importer_preserves_empty_and_error_terminal_rows(

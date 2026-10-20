@@ -1,0 +1,137 @@
+{
+  "answer_id": "A19",
+  "answer_text_truncated": "For comparison shopping, start by naming the exact speaker and the particular alternative you are considering. Compare like conditions rather than collecting attractive numbers from different situatio",
+  "exported_at_utc": "2026-10-20T03:44:34.526257Z",
+  "gold_derived_scores_included": true,
+  "local_scores": [
+    {
+      "name": "extraction_f1",
+      "value": 1.0
+    },
+    {
+      "name": "joint_f1",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:371:555",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:556:729",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:731:902",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:903:1067",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:1068:1268",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:1465:1654",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:1655:1832",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:1834:2008",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:2009:2201",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A19:2202:2372",
+      "value": 1.0
+    }
+  ],
+  "observations": [
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T21:34:11.254Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "get_brand_facts",
+      "observation_id": "d4989e24780441a3",
+      "parent_observation_id": "0ceff680fd454622",
+      "span_id": "d4989e24780441a3",
+      "start_time": "2026-10-19T21:34:11.254Z",
+      "trace_id": "128b8c40fe8945cd9d78944d712a49e7",
+      "type": "TOOL"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T21:34:11.253Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-1",
+      "observation_id": "702e832f987d419d",
+      "parent_observation_id": "0ceff680fd454622",
+      "span_id": "702e832f987d419d",
+      "start_time": "2026-10-19T21:34:11.253Z",
+      "trace_id": "128b8c40fe8945cd9d78944d712a49e7",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T21:34:02.143Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "claimlens.answer",
+      "observation_id": "0ceff680fd454622",
+      "parent_observation_id": null,
+      "span_id": "0ceff680fd454622",
+      "start_time": "2026-10-19T21:34:02.143Z",
+      "trace_id": "128b8c40fe8945cd9d78944d712a49e7",
+      "type": "SPAN"
+    }
+  ],
+  "remote": {
+    "attempt_count": 1,
+    "final": {
+      "attempt": 1,
+      "body_sha256": "4a2627a5af7840a160d8c6b4a747f3733c7e776585aa048d2a43f4a535776a0e",
+      "http_status": 200,
+      "observation_count": 3,
+      "observation_names": [
+        "get_brand_facts",
+        "model-turn-1",
+        "claimlens.answer"
+      ]
+    },
+    "from_start_time": "2026-10-19T21:33:02.119455Z",
+    "recovered_from_429": false,
+    "status": "verified",
+    "to_start_time": "2026-10-19T21:50:08.635696Z"
+  },
+  "run": {
+    "agent_version": "v1",
+    "artifact": "artifacts/v1-development-corrected-final",
+    "completed_at": "2026-10-19T21:49:08.635696+00:00",
+    "label": "v1_development",
+    "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+    "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "split": "development",
+    "started_at": "2026-10-19T21:34:02.119455+00:00"
+  },
+  "schema_version": "claimlens-langfuse-review-evidence-v1",
+  "trace_id": "128b8c40fe8945cd9d78944d712a49e7"
+}

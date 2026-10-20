@@ -1,0 +1,104 @@
+{
+  "answer_id": "A01",
+  "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+  "exported_at_utc": "2026-10-20T03:44:48.122215Z",
+  "gold_derived_scores_included": false,
+  "local_answer_diagnostic": {
+    "advice_instruction_or_opinion_reason_count": 7,
+    "claim_id_count": 16,
+    "label_counts": {
+      "contradicted": 3,
+      "supported": 3,
+      "unknown": 10
+    },
+    "source": "artifacts/v1-development-final-turn-gated/outcomes.json",
+    "status": "ok"
+  },
+  "local_scores": [],
+  "observations": [
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T14:25:26.355Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-2",
+      "observation_id": "fd88c023165e4b19",
+      "parent_observation_id": "bb91aeaa12ea4dd1",
+      "span_id": "fd88c023165e4b19",
+      "start_time": "2026-10-19T14:25:26.355Z",
+      "trace_id": "dc8e8ee41ef74834a52ed449edc783d6",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T14:24:57.922Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "get_brand_facts",
+      "observation_id": "ef484e485d99432d",
+      "parent_observation_id": "bb91aeaa12ea4dd1",
+      "span_id": "ef484e485d99432d",
+      "start_time": "2026-10-19T14:24:57.922Z",
+      "trace_id": "dc8e8ee41ef74834a52ed449edc783d6",
+      "type": "TOOL"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T14:24:57.920Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-1",
+      "observation_id": "5eab00f31b5245be",
+      "parent_observation_id": "bb91aeaa12ea4dd1",
+      "span_id": "5eab00f31b5245be",
+      "start_time": "2026-10-19T14:24:57.920Z",
+      "trace_id": "dc8e8ee41ef74834a52ed449edc783d6",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 31115.0,
+      "end_time": "2026-10-19T14:25:26.356Z",
+      "latency_ms": 31115.0,
+      "latency_seconds": 31.115,
+      "level": "DEFAULT",
+      "name": "claimlens.answer",
+      "observation_id": "bb91aeaa12ea4dd1",
+      "parent_observation_id": null,
+      "span_id": "bb91aeaa12ea4dd1",
+      "start_time": "2026-10-19T14:24:55.241Z",
+      "trace_id": "dc8e8ee41ef74834a52ed449edc783d6",
+      "type": "SPAN"
+    }
+  ],
+  "remote": {
+    "attempt_count": 1,
+    "final": {
+      "attempt": 1,
+      "body_sha256": "40015cab75649cce01c959b5ad844842d4946b4c5479902dbc3f44aaed2fad19",
+      "http_status": 200,
+      "observation_count": 4,
+      "observation_names": [
+        "model-turn-2",
+        "get_brand_facts",
+        "model-turn-1",
+        "claimlens.answer"
+      ]
+    },
+    "from_start_time": "2026-10-19T14:23:53.371452Z",
+    "recovered_from_429": false,
+    "status": "verified",
+    "to_start_time": "2026-10-19T14:37:31.089094Z"
+  },
+  "run": {
+    "agent_version": "v1",
+    "artifact": "artifacts/v1-development-final-turn-gated",
+    "completed_at": "2026-10-19T14:36:31.089094+00:00",
+    "label": "historical_v1_diagnosis",
+    "run_id": "8cb56eec-6c54-4eab-aba2-317bee75d451",
+    "source_revision": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
+    "split": "development",
+    "started_at": "2026-10-19T14:24:53.371452+00:00"
+  },
+  "schema_version": "claimlens-langfuse-review-evidence-v1",
+  "trace_id": "dc8e8ee41ef74834a52ed449edc783d6"
+}

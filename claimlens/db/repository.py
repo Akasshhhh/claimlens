@@ -225,6 +225,7 @@ class PostgresRunRepository:
             raise TypeError("claim must be a mapping or Pydantic model")
         row = dict(raw)
         match = row.get("match")
+        match_fields = match if isinstance(match, Mapping) else {}
         return {
             "claim_id": str(row["claim_id"]),
             "start_char": int(row["start_char"]),
@@ -233,9 +234,9 @@ class PostgresRunRepository:
             "label": str(row["label"]),
             "fact_ids": list(row.get("fact_ids") or row.get("evidence_fact_ids") or []),
             "reason": str(row.get("reason", row.get("explanation", ""))),
-            "gold_claim_id": row.get("gold_claim_id"),
-            "expected_label": row.get("expected_label"),
-            "label_correct": row.get("label_correct"),
+            "gold_claim_id": row.get("gold_claim_id", match_fields.get("gold_claim_id")),
+            "expected_label": row.get("expected_label", match_fields.get("expected_label")),
+            "label_correct": row.get("label_correct", match_fields.get("label_correct")),
             "match": _jsonable(match) if match is not None else None,
         }
 

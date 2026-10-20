@@ -1,0 +1,79 @@
+{
+  "answer_id": "A47",
+  "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+  "check_score_policy": "No gold-derived scores were emitted or exported for check traces.",
+  "exported_at_utc": "2026-10-20T03:44:44.812106Z",
+  "gold_derived_scores_included": false,
+  "local_scores": [],
+  "observations": [
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T22:14:22.995Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-1",
+      "observation_id": "9da9ea52910f453c",
+      "parent_observation_id": "50ee42124edf4248",
+      "span_id": "9da9ea52910f453c",
+      "start_time": "2026-10-19T22:14:22.995Z",
+      "trace_id": "0fc42d24bbc94c7cb3f443ec163469b7",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T22:14:22.995Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "get_brand_facts",
+      "observation_id": "8c90db4ece6946fe",
+      "parent_observation_id": "50ee42124edf4248",
+      "span_id": "8c90db4ece6946fe",
+      "start_time": "2026-10-19T22:14:22.995Z",
+      "trace_id": "0fc42d24bbc94c7cb3f443ec163469b7",
+      "type": "TOOL"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T22:14:19.456Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "claimlens.answer",
+      "observation_id": "50ee42124edf4248",
+      "parent_observation_id": null,
+      "span_id": "50ee42124edf4248",
+      "start_time": "2026-10-19T22:14:19.456Z",
+      "trace_id": "0fc42d24bbc94c7cb3f443ec163469b7",
+      "type": "SPAN"
+    }
+  ],
+  "remote": {
+    "attempt_count": 1,
+    "final": {
+      "attempt": 1,
+      "body_sha256": "40a032f2e27e2e73f1cc46090fa80a41a32d0b603067773f7a0044e5b66de235",
+      "http_status": 200,
+      "observation_count": 3,
+      "observation_names": [
+        "model-turn-1",
+        "get_brand_facts",
+        "claimlens.answer"
+      ]
+    },
+    "from_start_time": "2026-10-19T22:13:19.441474Z",
+    "recovered_from_429": false,
+    "status": "verified",
+    "to_start_time": "2026-10-19T22:18:09.286259Z"
+  },
+  "run": {
+    "agent_version": "v2",
+    "artifact": "artifacts/v2-check-corrected-final",
+    "completed_at": "2026-10-19T22:17:09.286259+00:00",
+    "label": "v2_check",
+    "run_id": "2f8469ef-e735-4eee-bb01-9b9a8dff7865",
+    "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "split": "check",
+    "started_at": "2026-10-19T22:14:19.441474+00:00"
+  },
+  "schema_version": "claimlens-langfuse-review-evidence-v1",
+  "trace_id": "0fc42d24bbc94c7cb3f443ec163469b7"
+}

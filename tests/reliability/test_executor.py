@@ -50,12 +50,19 @@ class FakeProvider:
         self.calls: list[str] = []
         self.active = 0
         self.max_active = 0
+        self.overlap_observed = False
+        self.retry_overlap_observed = False
 
     async def complete(self, messages, tools):
         answer_id = messages[1]["content"].splitlines()[0].split(": ", 1)[1]
         self.calls.append(answer_id)
+        attempts = self.calls.count(answer_id)
         self.active += 1
         self.max_active = max(self.max_active, self.active)
+        if self.active >= 2:
+            self.overlap_observed = True
+        if attempts > 1 and self.active >= 2:
+            self.retry_overlap_observed = True
         try:
             if self.delay:
                 await asyncio.sleep(self.delay)
@@ -75,7 +82,25 @@ async def test_global_attempt_concurrency_is_three() -> None:
     outcomes = await executor.run([_input(f"A{index:02d}") for index in range(8)])
 
     assert all(outcome.status == "ok" for outcome in outcomes)
-    assert provider.max_active <= MAX_PROVIDER_CONCURRENCY
+    assert provider.overlap_observed is True
+    assert provider.max_active == MAX_PROVIDER_CONCURRENCY
+
+
+@pytest.mark.asyncio
+async def test_retry_attempts_share_global_concurrency_ceiling() -> None:
+    provider = FakeProvider(
+        delay=0.02,
+        failures={"A01": [ProviderTransientError("temporary")]},
+    )
+    executor = AsyncExecutor(provider, EmptyFactStore(), retry_delay=0.001)
+
+    outcomes = await executor.run([_input(f"A{index:02d}") for index in range(8)])
+
+    assert all(outcome.status == "ok" for outcome in outcomes)
+    assert provider.calls.count("A01") == 2
+    assert provider.overlap_observed is True
+    assert provider.retry_overlap_observed is True
+    assert provider.max_active == MAX_PROVIDER_CONCURRENCY
 
 
 @pytest.mark.asyncio

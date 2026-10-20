@@ -1,0 +1,79 @@
+{
+  "answer_id": "A44",
+  "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+  "check_score_policy": "No gold-derived scores were emitted or exported for check traces.",
+  "exported_at_utc": "2026-10-20T03:44:42.243389Z",
+  "gold_derived_scores_included": false,
+  "local_scores": [],
+  "observations": [
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T22:09:24.908Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "get_brand_facts",
+      "observation_id": "9f88fc5a442047a0",
+      "parent_observation_id": "f8bd1e2fa75d4919",
+      "span_id": "9f88fc5a442047a0",
+      "start_time": "2026-10-19T22:09:24.908Z",
+      "trace_id": "166ac97df9d041f3921f71beb512811b",
+      "type": "TOOL"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T22:09:24.907Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-1",
+      "observation_id": "38dac39c15544888",
+      "parent_observation_id": "f8bd1e2fa75d4919",
+      "span_id": "38dac39c15544888",
+      "start_time": "2026-10-19T22:09:24.907Z",
+      "trace_id": "166ac97df9d041f3921f71beb512811b",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T22:09:21.973Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "claimlens.answer",
+      "observation_id": "f8bd1e2fa75d4919",
+      "parent_observation_id": null,
+      "span_id": "f8bd1e2fa75d4919",
+      "start_time": "2026-10-19T22:09:21.973Z",
+      "trace_id": "166ac97df9d041f3921f71beb512811b",
+      "type": "SPAN"
+    }
+  ],
+  "remote": {
+    "attempt_count": 1,
+    "final": {
+      "attempt": 1,
+      "body_sha256": "6ef42379f14da5d99ec3ef7ad92204be247b75c0f12daad030426491670fb972",
+      "http_status": 200,
+      "observation_count": 3,
+      "observation_names": [
+        "get_brand_facts",
+        "model-turn-1",
+        "claimlens.answer"
+      ]
+    },
+    "from_start_time": "2026-10-19T22:08:21.959718Z",
+    "recovered_from_429": false,
+    "status": "verified",
+    "to_start_time": "2026-10-19T22:14:27.671657Z"
+  },
+  "run": {
+    "agent_version": "v1",
+    "artifact": "artifacts/v1-check-corrected-final",
+    "completed_at": "2026-10-19T22:13:27.671657+00:00",
+    "label": "v1_check",
+    "run_id": "cbcc20f2-b4c8-4c2d-8718-76bd3a69002a",
+    "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "split": "check",
+    "started_at": "2026-10-19T22:09:21.959718+00:00"
+  },
+  "schema_version": "claimlens-langfuse-review-evidence-v1",
+  "trace_id": "166ac97df9d041f3921f71beb512811b"
+}

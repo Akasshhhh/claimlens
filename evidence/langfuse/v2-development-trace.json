@@ -1,0 +1,155 @@
+{
+  "answer_id": "A01",
+  "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+  "exported_at_utc": "2026-10-20T03:44:39.692463Z",
+  "gold_derived_scores_included": true,
+  "local_scores": [
+    {
+      "name": "extraction_f1",
+      "value": 1.0
+    },
+    {
+      "name": "joint_f1",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:306:460",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:461:647",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:649:832",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:833:1040",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:1237:1439",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:1440:1619",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:1620:1767",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:1769:1942",
+      "value": 1.0
+    },
+    {
+      "name": "label_correct",
+      "span_id": "A01:1943:2104",
+      "value": 1.0
+    },
+    {
+      "name": "aggregate_extraction_f1",
+      "value": 0.7611202635914333
+    },
+    {
+      "name": "aggregate_joint_f1",
+      "value": 0.71499176276771
+    }
+  ],
+  "observations": [
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T21:52:32.603Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-2",
+      "observation_id": "0d0af05add104769",
+      "parent_observation_id": "67ad57a470514852",
+      "span_id": "0d0af05add104769",
+      "start_time": "2026-10-19T21:52:32.603Z",
+      "trace_id": "0c5e1d78d67a493386e8b19f80dc89a7",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T21:52:03.197Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "get_brand_facts",
+      "observation_id": "705b1b65deeb4463",
+      "parent_observation_id": "67ad57a470514852",
+      "span_id": "705b1b65deeb4463",
+      "start_time": "2026-10-19T21:52:03.197Z",
+      "trace_id": "0c5e1d78d67a493386e8b19f80dc89a7",
+      "type": "TOOL"
+    },
+    {
+      "duration_ms": 0.0,
+      "end_time": "2026-10-19T21:52:03.196Z",
+      "latency_ms": 0,
+      "level": "DEFAULT",
+      "name": "model-turn-1",
+      "observation_id": "94afe556d2a842bb",
+      "parent_observation_id": "67ad57a470514852",
+      "span_id": "94afe556d2a842bb",
+      "start_time": "2026-10-19T21:52:03.196Z",
+      "trace_id": "0c5e1d78d67a493386e8b19f80dc89a7",
+      "type": "GENERATION"
+    },
+    {
+      "duration_ms": 31056.0,
+      "end_time": "2026-10-19T21:52:32.604Z",
+      "latency_ms": 31056.0,
+      "latency_seconds": 31.056,
+      "level": "DEFAULT",
+      "name": "claimlens.answer",
+      "observation_id": "67ad57a470514852",
+      "parent_observation_id": null,
+      "span_id": "67ad57a470514852",
+      "start_time": "2026-10-19T21:52:01.548Z",
+      "trace_id": "0c5e1d78d67a493386e8b19f80dc89a7",
+      "type": "SPAN"
+    }
+  ],
+  "remote": {
+    "attempt_count": 1,
+    "final": {
+      "attempt": 1,
+      "body_sha256": "4ab23414a807bfd0949d917cb503cebf989b1ef39b20b6763c8d2abbe51b29ea",
+      "http_status": 200,
+      "observation_count": 4,
+      "observation_names": [
+        "model-turn-2",
+        "get_brand_facts",
+        "model-turn-1",
+        "claimlens.answer"
+      ]
+    },
+    "from_start_time": "2026-10-19T21:51:01.546435Z",
+    "recovered_from_429": false,
+    "status": "verified",
+    "to_start_time": "2026-10-19T22:07:31.598651Z"
+  },
+  "run": {
+    "agent_version": "v2",
+    "artifact": "artifacts/v2-development-corrected-final",
+    "completed_at": "2026-10-19T22:06:31.598651+00:00",
+    "label": "v2_development",
+    "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+    "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+    "split": "development",
+    "started_at": "2026-10-19T21:52:01.546435+00:00"
+  },
+  "schema_version": "claimlens-langfuse-review-evidence-v1",
+  "trace_id": "0c5e1d78d67a493386e8b19f80dc89a7"
+}

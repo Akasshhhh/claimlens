@@ -1,0 +1,33 @@
+No-credentials FastAPI process smoke. The environment explicitly set the
+provider/database/Langfuse variables to empty values. The classify request was
+intentionally invalid, so it exercised request validation and could not reach
+the default agent/provider. The two run requests exercised configuration
+blockers before any provider/model boundary.
+
+=== process start ===
+pid=1904
+command=env OPENAI_API_KEY= OPENAI_MODEL= DATABASE_URL= LANGFUSE_PUBLIC_KEY= LANGFUSE_SECRET_KEY= LANGFUSE_BASE_URL= LANGFUSE_HOST= CLAIMLENS_DATA_DIR=. CLAIMLENS_ARTIFACT_DIR=artifacts PYTHONPATH=. .venv/bin/python -m uvicorn claimlens.api.app:app --host 127.0.0.1 --port 8765
+=== POST /classify (invalid request; validation path; provider not reached) ===
+{"type":"validation_error","message":"invalid request"}
+HTTP_STATUS:422
+=== POST /evaluation-runs (valid shape; no DATABASE_URL; configuration path; provider not reached) ===
+{"type":"configuration_error","message":"repository dependency is not configured"}
+HTTP_STATUS:500
+=== GET /evaluation-runs/{id} (valid UUID; no DATABASE_URL; configuration path; provider not reached) ===
+{"type":"configuration_error","message":"repository dependency is not configured"}
+HTTP_STATUS:500
+=== process log ===
+INFO:     Started server process [1904]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8765 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50699 - "POST /classify HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:50700 - "POST /evaluation-runs HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:50701 - "GET /evaluation-runs/00000000-0000-0000-0000-000000000000 HTTP/1.1" 500 Internal Server Error
+=== process stop ===
+exit_code_after_stop=0
+
+Interpretation: the process started and served all three endpoint paths. No
+valid /classify payload was sent, DATABASE_URL was empty, and no OpenAI,
+Langfuse, or other provider/model call was initiated. The 422 is the expected
+request-validation response; both 500 responses are configuration blockers.

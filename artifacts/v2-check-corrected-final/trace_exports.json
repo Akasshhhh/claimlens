@@ -1,0 +1,262 @@
+[
+  {
+    "answer_id": "A47",
+    "elapsed_seconds": 2.362,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "0fc42d24bbc94c7cb3f443ec163469b7"
+  },
+  {
+    "answer_id": "A48",
+    "elapsed_seconds": 1.671,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 6,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "1f05a5a17296429180623d0ee5330338"
+  },
+  {
+    "answer_id": "A50",
+    "elapsed_seconds": 3.852,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "68fffed871b840098e9199ef990d7e02"
+  },
+  {
+    "answer_id": "A43",
+    "elapsed_seconds": 1.375,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "97528c9e11af49fdbd57b100ae0b5af9"
+  },
+  {
+    "answer_id": "A42",
+    "elapsed_seconds": 1.282,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "a2a382ece4d04b95a7cf0b1305aa0fe8"
+  },
+  {
+    "answer_id": "A45",
+    "elapsed_seconds": 1.277,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "aff6ff484ee84a3793af16ade52b3267"
+  },
+  {
+    "answer_id": "A49",
+    "elapsed_seconds": 1.383,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "c3da3094dcc44c858a231e1239d4fd7e"
+  },
+  {
+    "answer_id": "A41",
+    "elapsed_seconds": 1.319,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 4,
+    "observation_names": [
+      "model-turn-2",
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "d22f5682998447df96e54efe1a018073"
+  },
+  {
+    "answer_id": "A46",
+    "elapsed_seconds": 1.128,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 1,
+      "provider_attempt": 6,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "d4e3639bcb4140fc87c4ec46381a62e0"
+  },
+  {
+    "answer_id": "A44",
+    "elapsed_seconds": 1.175,
+    "local_event_counts": {
+      "answer_diagnostics": 1,
+      "answer_end": 1,
+      "generation": 2,
+      "provider_attempt": 4,
+      "tool_observation": 1,
+      "trace_start": 1
+    },
+    "local_event_names": [
+      "model-turn-1",
+      "get_brand_facts",
+      "model-turn-2"
+    ],
+    "local_scores": [],
+    "observation_count": 3,
+    "observation_names": [
+      "get_brand_facts",
+      "model-turn-1",
+      "claimlens.answer"
+    ],
+    "status": "verified",
+    "trace_id": "d9d29a517b304f14b407929f1297704c"
+  }
+]

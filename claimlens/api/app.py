@@ -10,6 +10,7 @@ from __future__ import annotations
 import asyncio
 import importlib
 import inspect
+import json
 import os
 import time
 from collections.abc import Mapping
@@ -410,23 +411,147 @@ def _run_envelope(value: Any, *, requested_split: RunSplit) -> dict[str, Any]:
     return result
 
 
+def _safe_persisted_error(item: Mapping[str, Any]) -> dict[str, str]:
+    """Keep answer-level errors useful without persisting provider details."""
+
+    raw_type = item.get("error_type")
+    raw_message = item.get("error_message")
+    nested = item.get("error")
+    if isinstance(nested, Mapping):
+        raw_type = raw_type or nested.get("type", nested.get("error_type"))
+        raw_message = raw_message or nested.get("message", nested.get("error_message"))
+    if raw_type == "artifact_missing_outcome":
+        return {
+            "type": "artifact_missing_outcome",
+            "message": "runner omitted terminal answer outcome",
+        }
+    _status, error_type, message = _safe_error(str(raw_type) if raw_type else None)
+    return {"type": error_type, "message": message}
+
+
+def _load_report_payload(raw: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    """Read the runner's local report when it is available.
+
+    The live runner writes development match metadata to ``report.json`` but
+    returns terminal outcomes separately.  Reading that already-produced,
+    local artifact lets the API persist the same match fields without making a
+    second model call or importing the evaluator into the HTTP layer.
+    """
+
+    report_path = raw.get("report_path")
+    if not isinstance(report_path, str) or not report_path:
+        return None
+    try:
+        payload = json.loads(Path(report_path).read_text(encoding="utf-8"))
+    except (OSError, TypeError, ValueError):
+        return None
+    return payload if isinstance(payload, Mapping) else None
+
+
+def _enriched_outcomes(raw: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Normalize runner outcomes and attach optional development matches."""
+
+    report = _load_report_payload(raw)
+    report = report or {}
+    prediction_rows: list[Mapping[str, Any]] = []
+    for source in (raw, report):
+        candidates = source.get("predictions", source.get("accepted_predictions", []))
+        if isinstance(candidates, list):
+            prediction_rows.extend(item for item in candidates if isinstance(item, Mapping))
+    matches_by_prediction: dict[str, dict[str, Any]] = {}
+    for source in (raw, report):
+        matches = source.get("matches", [])
+        if not isinstance(matches, list):
+            continue
+        for match in matches:
+            if not isinstance(match, Mapping):
+                continue
+            prediction_id = match.get("prediction_claim_id", match.get("claim_id"))
+            if isinstance(prediction_id, str):
+                matches_by_prediction[prediction_id] = {
+                    "gold_claim_id": match.get("gold_claim_id"),
+                    "expected_label": match.get("expected_label"),
+                    "label_correct": match.get("label_correct"),
+                    "match": dict(match),
+                }
+    predictions_by_answer: dict[str, list[dict[str, Any]]] = {}
+    for prediction in prediction_rows:
+        answer_id = prediction.get("answer_id")
+        claim_id = prediction.get("claim_id")
+        if not isinstance(answer_id, str) or not isinstance(claim_id, str):
+            continue
+        claim = {key: value for key, value in prediction.items() if key != "answer_id"}
+        claim.update(matches_by_prediction.get(claim_id, {}))
+        predictions_by_answer.setdefault(answer_id, []).append(claim)
+
+    candidates = raw.get("answer_outcomes", raw.get("outcomes", raw.get("answers", [])))
+    outcomes = candidates if isinstance(candidates, list) else []
+    normalized: list[Mapping[str, Any]] = []
+    for outcome in outcomes:
+        if not isinstance(outcome, Mapping):
+            continue
+        row = dict(outcome)
+        answer_id = row.get("answer_id")
+        claims = row.get("claims")
+        if isinstance(answer_id, str):
+            enriched_claims: list[dict[str, Any]] = []
+            if isinstance(claims, list):
+                for claim in claims:
+                    if not isinstance(claim, Mapping):
+                        continue
+                    enriched = dict(claim)
+                    claim_id = enriched.get("claim_id")
+                    if isinstance(claim_id, str):
+                        enriched.update(matches_by_prediction.get(claim_id, {}))
+                    enriched_claims.append(enriched)
+            if not enriched_claims and answer_id in predictions_by_answer:
+                enriched_claims = predictions_by_answer[answer_id]
+            row["claims"] = enriched_claims
+        normalized.append(row)
+    return normalized
+
+
 def _persist_runner_result(repository: Any, run_id: str, value: Any, envelope: Mapping[str, Any]) -> None:
     """Persist outcomes for a minimal runner that returned them to the API."""
 
     raw = _jsonable(value)
     if not isinstance(raw, Mapping):
         return
-    outcomes = raw.get("answer_outcomes", raw.get("outcomes", raw.get("answers", [])))
-    if not isinstance(outcomes, list):
-        outcomes = []
-    by_answer: dict[str, Mapping[str, Any]] = {
-        str(item["answer_id"]): item
-        for item in outcomes
-        if isinstance(item, Mapping) and isinstance(item.get("answer_id"), str)
-    }
+    outcomes = _enriched_outcomes(raw)
+    by_answer: dict[str, Mapping[str, Any]] = {}
+    for item in outcomes:
+        answer_id = item.get("answer_id")
+        if not isinstance(answer_id, str):
+            continue
+        if answer_id in by_answer:
+            raise ValueError("runner returned duplicate answer outcomes")
+        by_answer[answer_id] = item
     scheduled = raw.get("scheduled_answer_ids", list(by_answer))
     if not isinstance(scheduled, list):
         scheduled = list(by_answer)
+    if any(not isinstance(answer_id, str) for answer_id in scheduled):
+        raise ValueError("runner returned an invalid scheduled answer ID")
+    if len(scheduled) != len(set(scheduled)):
+        raise ValueError("runner returned duplicate scheduled answer IDs")
+    extra = sorted(set(by_answer) - set(scheduled))
+    if extra:
+        raise ValueError("runner returned an unscheduled answer outcome")
+
+    existing_by_answer: dict[str, Mapping[str, Any]] = {}
+    getter = getattr(repository, "get_run", None)
+    if callable(getter):
+        try:
+            existing = getter(run_id)
+        except Exception:
+            existing = None
+        if isinstance(existing, Mapping):
+            rows = existing.get("answer_results", existing.get("answers", []))
+            if isinstance(rows, list):
+                existing_by_answer = {
+                    str(row["answer_id"]): row
+                    for row in rows
+                    if isinstance(row, Mapping) and isinstance(row.get("answer_id"), str)
+                }
     save_outcome = getattr(repository, "save_outcome", None)
     save_answer = getattr(repository, "save_answer_result", None)
     for answer_id in sorted({item for item in scheduled if isinstance(item, str)}):
@@ -436,14 +561,34 @@ def _persist_runner_result(repository: Any, run_id: str, value: Any, envelope: M
         item.setdefault("latency_ms", 0)
         item.setdefault("claims", [])
         if item["status"] == "error":
-            item.setdefault("error_type", "artifact_missing_outcome")
-            item.setdefault("error_message", "runner omitted terminal answer outcome")
+            safe_error = (
+                _safe_persisted_error({"error_type": "artifact_missing_outcome"})
+                if not item.get("error_type") and not item.get("error_message") and not item.get("error")
+                else _safe_persisted_error(item)
+            )
+            item["error_type"] = safe_error["type"]
+            item["error_message"] = safe_error["message"]
+            item["error"] = safe_error
+        previous = existing_by_answer.get(answer_id)
+        previous_claims = {
+            str(claim["claim_id"]): claim
+            for claim in (previous.get("claims", []) if isinstance(previous, Mapping) else [])
+            if isinstance(claim, Mapping) and isinstance(claim.get("claim_id"), str)
+        }
+        claims: list[dict[str, Any]] = []
+        for claim in item.get("claims") or []:
+            if not isinstance(claim, Mapping):
+                continue
+            merged_claim = dict(previous_claims.get(str(claim.get("claim_id")), {}))
+            merged_claim.update(claim)
+            claims.append(merged_claim)
+        item["claims"] = claims
         if callable(save_outcome):
             save_outcome(run_id, item)
         elif callable(save_answer):
             error = None
-            if item.get("error_type") or item.get("error_message"):
-                error = {"type": item.get("error_type"), "message": item.get("error_message")}
+            if item.get("status") == "error":
+                error = _safe_persisted_error(item)
             save_answer(
                 run_id,
                 answer_id,
@@ -579,19 +724,26 @@ def create_app(
             create = getattr(repository_value, "create_run", None)
             if not callable(create):
                 raise _ApiError(500, "configuration_error", "repository cannot create runs")
-            envelope["run_id"] = str(
-                create(
-                    {
-                        "run_id": None,
-                        "split": request.split,
-                        "agent_version": request.agent_version,
-                        "status": envelope["status"],
-                        "counts": envelope["counts"],
-                        "metrics": envelope["metrics"],
-                    }
+            try:
+                envelope["run_id"] = str(
+                    create(
+                        {
+                            "run_id": None,
+                            "split": request.split,
+                            "agent_version": request.agent_version,
+                            "status": envelope["status"],
+                            "counts": envelope["counts"],
+                            "metrics": envelope["metrics"],
+                        }
+                    )
                 )
-            )
+            except Exception as exc:
+                raise _ApiError(500, "repository_failure", "could not create evaluation run") from exc
             created_here = True
+        try:
+            envelope["run_id"] = str(UUID(envelope["run_id"]))
+        except (ValueError, AttributeError, TypeError) as exc:
+            raise _ApiError(500, "run_failure", "evaluation run returned invalid run ID") from exc
         existing = None
         getter = getattr(repository_value, "get_run", None)
         if callable(getter) and not created_here:
@@ -614,11 +766,14 @@ def create_app(
                 created_here = True
             except Exception as exc:
                 raise _ApiError(500, "repository_failure", "could not create evaluation run") from exc
-        if created_here or (existing is None and isinstance(raw_result, Mapping)):
-            try:
-                _persist_runner_result(repository_value, envelope["run_id"], raw_result, envelope)
-            except Exception as exc:
-                raise _ApiError(500, "repository_failure", "could not persist evaluation run") from exc
+        try:
+            # Reconcile through the API even when the runner created the run.
+            # This covers runners that reserve a run row first and return
+            # outcomes afterward, while the repository's upserts keep a
+            # runner that already persisted its rows idempotent.
+            _persist_runner_result(repository_value, envelope["run_id"], raw_result, envelope)
+        except Exception as exc:
+            raise _ApiError(500, "repository_failure", "could not persist evaluation run") from exc
         return JSONResponse(status_code=201, content=envelope)
 
     @api.get("/evaluation-runs/{run_id}")

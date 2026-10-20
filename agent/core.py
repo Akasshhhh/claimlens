@@ -45,6 +45,49 @@ DEFAULT_REQUEST_TIMEOUT = 15.0
 DEFAULT_RETRY_DELAY = 0.05
 
 
+_IMPERATIVE_START = re.compile(
+    r"^(?:please\s+)?(?:buy|check|compare|consider|choose|keep|read|start|ask|look|use|make|ensure|avoid|remember|tell|ignore|label|follow|do|don't|don’t|always|never|return|output|state(?=\s+(?:that|whether|the|this|it|all|every)\b)|say|report|classify|select|pick|prefer|try|verify|separate|retain|begin|provide)\b",
+    re.IGNORECASE,
+)
+_ADVICE_START = re.compile(
+    r"^(?:you\s+(?:should|must|can|could|may\s+want\s+to|might\s+want\s+to)|"
+    r"i(?:'d| would)?\s+recommend|my\s+recommendation\s+is|in\s+my\s+opinion|personally)\b",
+    re.IGNORECASE,
+)
+_ADVICE_CONTEXT = re.compile(
+    r"^(?:before|after|when|while|if|unless)\b|"
+    r"^for\b|"
+    r"\b(?:should|must|ought\s+to|need\s+to|have\s+to)\b",
+    re.IGNORECASE,
+)
+_OPINION_ONLY = re.compile(
+    r"\b(?:best|ideal|great|excellent|perfect|useful|worth(?:while)?|recommend(?:ed)?|right choice|good choice)\b",
+    re.IGNORECASE,
+)
+_FACTUAL_PREDICATE = re.compile(
+    r"\b(?:is|are|has|have|includes|contains|comes with|offers|supports|costs|priced|listed|weighs|measures|lasts|receives|runs for|charges|returns|refunds|ships|delivers|covered|available|compatible|connects|uses|provide|provides|requires|will|can|cannot|does not|doesn't|doesn’t|true|false)\b",
+    re.IGNORECASE,
+)
+_OBJECTIVE_PREDICATE = re.compile(
+    r"\b(?:has|have|includes|contains|comes with|offers|supports|costs|priced|listed|weighs|measures|lasts|receives|runs for|charges|returns|refunds|ships|delivers|covered|available|compatible|connects|uses|provide|provides|requires|does not|doesn't|doesn’t|true|false)\b",
+    re.IGNORECASE,
+)
+_META_ACTION = re.compile(
+    r"\b(?:ignore|disregard|label|classif(?:y|ication|ied)|return|output|state(?=\s+(?:that|whether|the|this|it|all|every)\b)|say|report|claim|assert|treat|follow|reveal|obey)\b",
+    re.IGNORECASE,
+)
+_PRODUCT_CONTEXT = re.compile(
+    r"\b(?:product|speaker|model|device|unit|battery|port|connector|warranty|price|cost|weight|mass|"
+    r"adapter|microphone|bluetooth|wifi|codec|audio|water|immersion|delivery|shipping|box|brand|"
+    r"capability|firmware|assistant|specification|catalogue|manufacturer)\b",
+    re.IGNORECASE,
+)
+_NONFACTUAL_REASON = re.compile(
+    r"\b(?:advice|instruction(?:al)?|opinion|recommendation|guidance|not a (?:verifiable|factual|product|specific)|buying explanation)\b",
+    re.IGNORECASE,
+)
+
+
 _SECOND_TURN_SEMAPHORES: weakref.WeakKeyDictionary[Any, asyncio.Semaphore] = weakref.WeakKeyDictionary()
 
 
@@ -254,6 +297,90 @@ def _validate_reason(reason: str) -> None:
         raise _AgentError("invalid_output", "claim reason must contain at most two sentences")
 
 
+def _normalize_reason(reason: str) -> str:
+    """Trim and cap a model explanation at two complete sentences."""
+
+    reason = reason.strip()
+    endings = list(re.finditer(r"[.!?]+(?=\s|$)", reason))
+    if len(endings) >= 2:
+        # A third sentence may omit terminal punctuation.  The text after the
+        # second boundary is still excess explanation and is removed.
+        cutoff = endings[1].end()
+        if reason[cutoff:].strip():
+            reason = reason[:cutoff]
+    return reason
+
+
+def _strip_instruction_lead(text: str) -> str:
+    for pattern in (_IMPERATIVE_START, _ADVICE_START):
+        match = pattern.match(text)
+        if match:
+            return text[match.end() :].lstrip()
+    return text
+
+
+def _has_independent_factual_clause(text: str) -> bool:
+    """Find a factual clause outside a pure instruction/meta-instruction."""
+
+    # A hard clause boundary is enough to separate advice from a factual
+    # assertion (for example, ``Compare prices: Mini costs INR 1,299.``).
+    clauses = re.split(r"(?<=[;:])\s+", text)
+    for index, clause in enumerate(clauses):
+        # Check the original clause before stripping a leading verb.  This
+        # prevents ``Return JSON ... is supported`` from treating the copula
+        # inside the meta-instruction as an independent product assertion.
+        if _META_ACTION.search(clause):
+            continue
+        candidate = _strip_instruction_lead(clause) if index == 0 else clause
+        if _has_product_fact(candidate):
+            return True
+    return False
+
+
+def _has_product_fact(text: str) -> bool:
+    if not _FACTUAL_PREDICATE.search(text):
+        return False
+    # A named model in a later clause is enough context for a factual
+    # assertion; ignore the sentence-initial capitalized verb/article.
+    named_or_number = any(
+        match.start() > 0 and match.group() not in {"The", "A", "An", "I", "You"}
+        for match in re.finditer(r"\b[A-Z][A-Za-z0-9-]*\b", text)
+    ) or bool(re.search(r"\d", text))
+    # Generic advice often contains a copula in a subordinate clause (for
+    # example, ``the explanation does not resolve...``).  Require product
+    # context or a named/quantified target before treating it as a fact.
+    if _OBJECTIVE_PREDICATE.search(text):
+        return bool(_PRODUCT_CONTEXT.search(text) or named_or_number)
+    if _PRODUCT_CONTEXT.search(text) and not re.search(r"\b(?:you|i|we|they)\s+(?:is|are)\b", text, re.I):
+        return True
+    return named_or_number
+
+
+def _is_nonfactual_sentence(quote: str, reason: str) -> bool:
+    """Reject pure advice/instructions while retaining factual clauses.
+
+    This is deliberately conservative: an imperative or opinion sentence is
+    filtered only when it has no ordinary factual predicate. A sentence such
+    as ``Compare the prices: Mini costs INR 1,299`` remains an evaluation unit.
+    """
+
+    text = quote.strip()
+    instruction_lead = bool(_IMPERATIVE_START.match(text) or _ADVICE_START.match(text))
+    if instruction_lead:
+        # Meta-actions such as "say", "label", and "return" turn a sentence
+        # containing a predicate into an instruction rather than a product
+        # assertion.  Keep only a separate factual clause after it.
+        if _META_ACTION.search(text):
+            return not _has_independent_factual_clause(text)
+        if not _has_independent_factual_clause(text):
+            return True
+    if _ADVICE_CONTEXT.search(text) and not _has_product_fact(text):
+        return True
+    if _OPINION_ONLY.search(text) and not _OBJECTIVE_PREDICATE.search(text):
+        return True
+    return bool(_NONFACTUAL_REASON.search(reason) and not _FACTUAL_PREDICATE.search(text))
+
+
 def validate_output(
     payload: Any,
     input_data: AgentInput,
@@ -276,6 +403,7 @@ def validate_output(
 
     claims: list[Claim] = []
     seen_ids: set[str] = set()
+    seen_raw_ids: set[str] = set()
     previous_end = -1
     for item in raw["claims"]:
         if not isinstance(item, Mapping):
@@ -286,6 +414,9 @@ def validate_output(
             raise _AgentError("invalid_output", "claim fields are incomplete or unknown")
         if not isinstance(claim_raw["claim_id"], str):
             raise _AgentError("invalid_output", "claim_id must be a string")
+        if claim_raw["claim_id"] in seen_raw_ids:
+            raise _AgentError("invalid_output", "claim IDs must be unique")
+        seen_raw_ids.add(claim_raw["claim_id"])
         for field in ("start_char", "end_char"):
             if _is_bool(claim_raw[field]) or not isinstance(claim_raw[field], int):
                 raise _AgentError("invalid_output", f"{field} must be an integer")
@@ -305,6 +436,8 @@ def validate_output(
         raw_start = claim_raw["start_char"]
         raw_end = claim_raw["end_char"]
         quote = claim_raw["quote"]
+        if raw_start < 0 or raw_end <= raw_start or raw_end > len(input_data.ai_answer):
+            raise _AgentError("invalid_output", "claim offsets are out of bounds")
         if quote != quote.strip() or not quote:
             raise _AgentError("invalid_output", "quote must be non-empty and trimmed")
 
@@ -326,30 +459,29 @@ def validate_output(
             raise _AgentError("invalid_output", "claims overlap or are not sorted")
         claim_raw["start_char"] = start
         claim_raw["end_char"] = end
-        claim_raw["claim_id"] = f"{input_data.answer_id}:{start}:{end}"
+        canonical_id = f"{input_data.answer_id}:{start}:{end}"
+        if canonical_id in seen_ids:
+            raise _AgentError("invalid_output", "claim IDs must be unique")
+        claim_raw["claim_id"] = canonical_id
         exact_quote = input_data.ai_answer[start:end]
         if quote != exact_quote:
             raise _AgentError("invalid_output", "quote does not equal its exact source span")
         if start == previous_end and claims and start <= claims[-1].start_char:
             raise _AgentError("invalid_output", "claims must increase by start offset")
-        if claim_raw["claim_id"] in seen_ids:
-            raise _AgentError("invalid_output", "claim IDs must be unique")
+        seen_ids.add(canonical_id)
         # Reasons are explanatory metadata, not scored text.  Keep the first
         # two complete sentences when a model adds a trailing third sentence;
         # this preserves the contract without discarding an otherwise valid
         # extraction solely for verbosity in its explanation.
-        reason = claim_raw["reason"].strip()
-        endings = list(re.finditer(r"[.!?]+(?=\s|$)", reason))
-        if len(endings) > 2:
-            reason = reason[: endings[1].end()]
-        claim_raw["reason"] = reason
+        claim_raw["reason"] = _normalize_reason(claim_raw["reason"])
         _validate_reason(claim_raw["reason"])
+        if _is_nonfactual_sentence(quote, claim_raw["reason"]):
+            continue
         try:
             claim = Claim.model_validate(claim_raw)
         except Exception as exc:
             raise _AgentError("invalid_output", f"claim validation failed: {exc}") from exc
         claims.append(claim)
-        seen_ids.add(claim.claim_id)
         previous_end = end
 
     try:
