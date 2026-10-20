@@ -15,6 +15,8 @@
       "all currently existing files below artifacts/",
       "selected historical/current files previously listed under evidence/",
       "evidence/audit/**, evidence/analysis/**, and evidence/submission/**",
+      "evidence/diagnosis/**, evidence/exchanges/**, evidence/langfuse/**, and evidence/supplementary/**",
+      "evidence/audit-notes.md and evidence/run-smoke.txt",
       "prompts/v1.txt and prompts/v2.txt",
       "SHA-256 values for local answers.csv, brand_facts.csv, and development_gold.csv when present"
     ]
@@ -1290,9 +1292,14 @@
       "sha256": "236cb842214bfdbb8c31bcbc1852ae3437d8562c53586a31717d645f14a3828d"
     },
     {
-      "bytes": 5096,
+      "bytes": 17733,
+      "path": "evidence/audit-notes.md",
+      "sha256": "6d21fc1698a96fcb17ffc9f557ac0737c2cb93ad7a13d8a11ff7e12b057584de"
+    },
+    {
+      "bytes": 5534,
       "path": "evidence/audit/REPORT.md",
-      "sha256": "761b91e7fff550d7781eb4df29aa5dc28afa5787868c663c53725d1a13129899"
+      "sha256": "9a68da5748563c6904badcb7c914e97560bbd4fc761caf37c621d4b8c5117cfe"
     },
     {
       "bytes": 28579,
@@ -1305,9 +1312,9 @@
       "sha256": "9f871e84c9a76cf9cbbd84534af60e88783539702d1ce44c554dd73b7812982b"
     },
     {
-      "bytes": 22404,
+      "bytes": 23318,
       "path": "evidence/audit/regenerate_evidence.py",
-      "sha256": "b176bfa03a25f0bb1a16de3adf434b82cd4701e88b4f55aafea16ffab8aa1e9b"
+      "sha256": "510e45d49c7d353b564f8d1531b7e0973933f5adec6365a0100f9ebb07c178df"
     },
     {
       "bytes": 20141,
@@ -1315,9 +1322,39 @@
       "sha256": "08028918b89173f4a43b8cc90cfbd7ce59396430e0501caeb57d45af7f0bf46f"
     },
     {
+      "bytes": 4931,
+      "path": "evidence/diagnosis/langfuse-diagnosis.json",
+      "sha256": "7df902f708e69915754e0a6b2e10ec60dbd827a9c26ab48e8a16654a0e1d3650"
+    },
+    {
+      "bytes": 2814,
+      "path": "evidence/diagnosis/langfuse-diagnosis.md",
+      "sha256": "a9bf5a81a57decbef07b1976bd3e82e9066f6b675a9f29ef758425fe72a3f85c"
+    },
+    {
+      "bytes": 51149,
+      "path": "evidence/exchanges/v1-check.jsonl",
+      "sha256": "d893eb07acc8c02340227df5beec4a1925084e21bba79887ecedb4ba8fe17f5c"
+    },
+    {
+      "bytes": 207564,
+      "path": "evidence/exchanges/v1-development.jsonl",
+      "sha256": "06c5559c144bb5840cf478602c4b47949d6a1ed071dc6ca5a1b76d0d1ecead5a"
+    },
+    {
+      "bytes": 53907,
+      "path": "evidence/exchanges/v2-check.jsonl",
+      "sha256": "a8cbb3b0ab510fd541c496f3df50035c1d617bf974452d3d02145e8b89d4a89d"
+    },
+    {
+      "bytes": 212015,
+      "path": "evidence/exchanges/v2-development.jsonl",
+      "sha256": "c0f63ed4d435dcf68eef8b0743a9d0b0451a789d7a6062e32bcbe23d67da35a5"
+    },
+    {
       "bytes": 25528,
       "path": "evidence/final-run-summary.json",
-      "sha256": "84bdcf3855538bf8983ac55b0e12efad4c4db866d6f9543a46b6128e02e67288"
+      "sha256": "2fd8170da5085253ff677aeff1cc039a92a912593971a85f359ae63f8c3b5fe1"
     },
     {
       "bytes": 247,
@@ -1335,9 +1372,59 @@
       "sha256": "5528f3e222c2b86cdbc976b55010c693b9e1bbf790c0258ce0d55e83637344ac"
     },
     {
+      "bytes": 40058,
+      "path": "evidence/langfuse/429-requery.json",
+      "sha256": "0b6f32e79ea05a487eb25bba4e2b92996732707044f12064f5db58e056c7a960"
+    },
+    {
+      "bytes": 45160,
+      "path": "evidence/langfuse/collect.py",
+      "sha256": "469737b051d28ce5b91e91c46594b76514273db09970112b02cda322492f6488"
+    },
+    {
+      "bytes": 3468,
+      "path": "evidence/langfuse/historical-v1-diagnosis-trace.json",
+      "sha256": "f47080106a9e5a7b5b8b475108aa26ddda7b0031af638bb5a06c2405cd3c4ddf"
+    },
+    {
+      "bytes": 7680,
+      "path": "evidence/langfuse/langfuse-evidence.md",
+      "sha256": "3eb6e5db82baad0e965994c9d2b18075db960601be5bdf19dc37a8517982cc43"
+    },
+    {
+      "bytes": 60025,
+      "path": "evidence/langfuse/langfuse-summary.json",
+      "sha256": "dbd87917f192b7bb94953fca29bc5f6fd095a00f0099cef637760368ffe9c7fd"
+    },
+    {
+      "bytes": 2738,
+      "path": "evidence/langfuse/v1-check-trace.json",
+      "sha256": "ef692eaa634f66afd83dde4a94f899d341c425820a7cd6d6eeeaa465b186c568"
+    },
+    {
+      "bytes": 3748,
+      "path": "evidence/langfuse/v1-development-trace.json",
+      "sha256": "8d66f3d7f475312f33b8b4c5a6ed9d27043d5f0e8756abfc0c8fb4888fd0dd99"
+    },
+    {
+      "bytes": 2738,
+      "path": "evidence/langfuse/v2-check-trace.json",
+      "sha256": "2647f31ce27ede40c412f29294388d9f35f620b57256fdb302399e2896ac6587"
+    },
+    {
+      "bytes": 4312,
+      "path": "evidence/langfuse/v2-development-trace.json",
+      "sha256": "ec6e87d3999e1ea6cac46f675d0e50e0c13e95caa91d932533734fd6c43e3814"
+    },
+    {
       "bytes": 761,
       "path": "evidence/pytest-output.txt",
       "sha256": "b97951c4e732bd2c89aefb5f8213e50bfde511bad0cc028479260903396cfbe3"
+    },
+    {
+      "bytes": 2071,
+      "path": "evidence/run-smoke.txt",
+      "sha256": "952122c45ca2d7cf53b2de8a04d33827c2e9a21e8d16e9167756d1bd4450bd5a"
     },
     {
       "bytes": 976,
@@ -1345,9 +1432,19 @@
       "sha256": "78dd34829328b3478ae4414147b41a339e6f342f803f1657511e6f18e66d8ae7"
     },
     {
-      "bytes": 21203,
+      "bytes": 22474,
       "path": "evidence/submission/final-provenance.json",
-      "sha256": "0e38cb1feaecf654fc5e0906f19a1abb4edf9398f883080fe01b25c93dfbc3c3"
+      "sha256": "8371cf9305277a80d1d753b5e8cb6552c301a084440b7b4d086f4a27a438fba7"
+    },
+    {
+      "bytes": 25887,
+      "path": "evidence/supplementary/current-four-run-inventory.json",
+      "sha256": "bccfaab440bd31ce20f4ec1b3bc723825b3e5b32cac772ec9c652a90469475e1"
+    },
+    {
+      "bytes": 6220,
+      "path": "evidence/supplementary/generate_audit_artifacts.py",
+      "sha256": "e89b41288be7c8329cd48638dcfaaa8f6156040fb845c32ef6d5bec0bc1bdf12"
     },
     {
       "bytes": 3386,
@@ -1406,7 +1503,7 @@
     "v2-check": "2f8469ef-e735-4eee-bb01-9b9a8dff7865",
     "v2-development": "4ade6dff-2f02-40b3-8b25-72985c0ca141"
   },
-  "generated_for_commit": "5e70515a55b73ec97221435eead8affd128b4a1a",
+  "generated_for_commit": "3dcfb2aa092453e362fb2c2f83110acf1d307312",
   "historical_status": {
     "artifact_policy": "Only the four final artifact directories named by final_runs feed final-run-summary.json and v1-v2-final-comparison.json. Other artifact directories are retained historical/exploratory evidence.",
     "superseded_evidence": {

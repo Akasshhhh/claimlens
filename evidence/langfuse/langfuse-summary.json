@@ -1,0 +1,1662 @@
+{
+  "baseline_remote_counts": {
+    "v1_check": {
+      "other": 0,
+      "rate_limited": 0,
+      "verified": 10
+    },
+    "v1_development": {
+      "other": 0,
+      "rate_limited": 8,
+      "verified": 32
+    },
+    "v2_check": {
+      "other": 0,
+      "rate_limited": 0,
+      "verified": 10
+    },
+    "v2_development": {
+      "other": 0,
+      "rate_limited": 6,
+      "verified": 34
+    }
+  },
+  "corrected_metrics": {
+    "v1_check": {
+      "answer_errors": 5,
+      "counts": {
+        "answers": 10,
+        "errors": 5,
+        "ok": 5,
+        "predictions": 44,
+        "scheduled": 10
+      },
+      "coverage": null,
+      "extraction_f1": null,
+      "joint_f1": null,
+      "macro_f1": null,
+      "predictions": 44
+    },
+    "v1_development": {
+      "answer_errors": 18,
+      "counts": {
+        "answers": 40,
+        "errors": 18,
+        "ok": 22,
+        "predictions": 201,
+        "scheduled": 40
+      },
+      "coverage": 0.5106382978723404,
+      "extraction_f1": 0.6967071057192374,
+      "joint_f1": 0.6655112651646448,
+      "macro_f1": 0.6655826558265582,
+      "predictions": 201
+    },
+    "v2_check": {
+      "answer_errors": 1,
+      "counts": {
+        "answers": 10,
+        "errors": 1,
+        "ok": 9,
+        "predictions": 83,
+        "scheduled": 10
+      },
+      "coverage": null,
+      "extraction_f1": null,
+      "joint_f1": null,
+      "macro_f1": null,
+      "predictions": 83
+    },
+    "v2_development": {
+      "answer_errors": 14,
+      "counts": {
+        "answers": 40,
+        "errors": 14,
+        "ok": 26,
+        "predictions": 231,
+        "scheduled": 40
+      },
+      "coverage": 0.5771276595744681,
+      "extraction_f1": 0.7611202635914333,
+      "joint_f1": 0.71499176276771,
+      "macro_f1": 0.7144441342515044,
+      "predictions": 231
+    }
+  },
+  "credentials": {
+    "presence": {
+      "LANGFUSE_BASE_URL": true,
+      "LANGFUSE_HOST": false,
+      "LANGFUSE_PUBLIC_KEY": true,
+      "LANGFUSE_SECRET_KEY": true
+    },
+    "values_printed": false
+  },
+  "current_runs": {
+    "v1_check": {
+      "artifact": "artifacts/v1-check-corrected-final",
+      "run": {
+        "agent_version": "v1",
+        "completed_at": "2026-10-19T22:13:27.671657+00:00",
+        "counts": {
+          "answers": 10,
+          "errors": 5,
+          "ok": 5,
+          "predictions": 44,
+          "scheduled": 10
+        },
+        "dataset_version": "long-brand-answers-50-v4",
+        "duration_ms": 245710.24195919745,
+        "evaluator_version": "sentence-spans-and-labels-v4",
+        "fact_version": "speaker-catalogue-v4",
+        "file_hashes": {
+          "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+          "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+          "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+          "prompts/v1.txt": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b"
+        },
+        "model": "gpt-5-mini-2025-08-07",
+        "prompt_version": "v1",
+        "provider": "openai",
+        "run_id": "cbcc20f2-b4c8-4c2d-8718-76bd3a69002a",
+        "scheduled_answer_ids": [
+          "A41",
+          "A42",
+          "A43",
+          "A44",
+          "A45",
+          "A46",
+          "A47",
+          "A48",
+          "A49",
+          "A50"
+        ],
+        "settings": {
+          "max_completion_tokens": 2000,
+          "model": "gpt-5-mini-2025-08-07",
+          "provider": "openai",
+          "reasoning_effort": "minimal",
+          "request_timeout_seconds": 15.0,
+          "temperature": null
+        },
+        "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+        "split": "check",
+        "started_at": "2026-10-19T22:09:21.959718+00:00",
+        "supersedes": "93af5381-5900-43f5-8543-29e32e1ee64f",
+        "supersedes_reason": "rerun after shared validation/adversarial extraction fixes; historical check preserved",
+        "trace_ids": [
+          "166ac97df9d041f3921f71beb512811b",
+          "1de5babf7ab44803a32f0ea8ab2fa629",
+          "23d6997300bd4cec8e21f1fbac38b0bb",
+          "2dd7a51bed7948818e94e981d64ccf4c",
+          "3f5ccd6cecfb4966886cc47859fc159a",
+          "434937ed3f054f13b69a2ca59f0ac847",
+          "509e3d4711a34c8a9d5e1cc90d715389",
+          "537ee6d9ab144919be672ea9fe60f346",
+          "5b003db6c5b14425b2b4e296cbdfbdb7",
+          "c518bdee90a6421d8961a2363b69ce2c"
+        ]
+      },
+      "trace_count": 10
+    },
+    "v1_development": {
+      "artifact": "artifacts/v1-development-corrected-final",
+      "run": {
+        "agent_version": "v1",
+        "completed_at": "2026-10-19T21:49:08.635696+00:00",
+        "counts": {
+          "answers": 40,
+          "errors": 18,
+          "ok": 22,
+          "predictions": 201,
+          "scheduled": 40
+        },
+        "dataset_version": "long-brand-answers-50-v4",
+        "duration_ms": 906512.9381658044,
+        "evaluator_version": "sentence-spans-and-labels-v4",
+        "fact_version": "speaker-catalogue-v4",
+        "file_hashes": {
+          "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+          "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+          "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+          "prompts/v1.txt": "13a6c0f9ccb12eda226aa699f196366ccb1dabff4506d8f84eaafe0764d0d86b"
+        },
+        "model": "gpt-5-mini-2025-08-07",
+        "prompt_version": "v1",
+        "provider": "openai",
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "scheduled_answer_ids": [
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "A05",
+          "A06",
+          "A07",
+          "A08",
+          "A09",
+          "A10",
+          "A11",
+          "A12",
+          "A13",
+          "A14",
+          "A15",
+          "A16",
+          "A17",
+          "A18",
+          "A19",
+          "A20",
+          "A21",
+          "A22",
+          "A23",
+          "A24",
+          "A25",
+          "A26",
+          "A27",
+          "A28",
+          "A29",
+          "A30",
+          "A31",
+          "A32",
+          "A33",
+          "A34",
+          "A35",
+          "A36",
+          "A37",
+          "A38",
+          "A39",
+          "A40"
+        ],
+        "settings": {
+          "max_completion_tokens": 2000,
+          "model": "gpt-5-mini-2025-08-07",
+          "provider": "openai",
+          "reasoning_effort": "minimal",
+          "request_timeout_seconds": 15.0,
+          "temperature": null
+        },
+        "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+        "split": "development",
+        "started_at": "2026-10-19T21:34:02.119455+00:00",
+        "supersedes": "ec01ca09-4d16-4261-916f-0902d16b2e89",
+        "supersedes_reason": "rerun after trace-window string fix; prior corrected provider outputs preserved",
+        "trace_ids": [
+          "01ebb3f9025c4917b56dadb097cff63d",
+          "128b8c40fe8945cd9d78944d712a49e7",
+          "16a3d665fb4a489fb3a44f1e5494b86d",
+          "1c75f3e5aa1c478d9a2c671ef7f56511",
+          "1f1956d2529c4166a04d2768020fed5f",
+          "1ffa7fd1ca1c4feb9caed0bd7d115a74",
+          "2383629ba05e41cdba11539ffb275186",
+          "2aed43e52d794be78b6d87592119a532",
+          "34481771fee7469a824481c389243bd2",
+          "40b340ad47984e1f8d090679d7baa2f8",
+          "4627abd32bc6436e96f84ab38909761f",
+          "4e035ffcb3664339bd7faf99b78ce208",
+          "5d10d38444a8441e84f15380fd0eab74",
+          "63b9ab9aca224b8eb75d3943a7e99e9b",
+          "649e82e852874b3a95c4966905e870f8",
+          "6c1963714a464dcab7003a4f047e8d54",
+          "6c489411dfba4d3cb7e85c28a357b9b8",
+          "76c10305b9fa4d82aa63990a6bc068ee",
+          "831cc89d2224426a82491d70fef2f530",
+          "863c0157e1974890aa64acaf479f071a",
+          "8bb023ae43c64b6b9bd0305ba6860be6",
+          "915c625854c74faa83d4f89f2b4e5579",
+          "94452f61b3a044e09028ef95e4cc6100",
+          "9e8009b7c8624a3990b136951cc1db16",
+          "9fa95b6968f04b3aa26953a6f6e29703",
+          "aca60a18b63a49df857de6f1d30649aa",
+          "b209ad93013a4b28a547b8531d3a5066",
+          "b5a10a53f3724bb3b459197e306b2a0f",
+          "bd5c32bc7f0c4b75bad1959284072570",
+          "c549e7db787c4e13ac39ca9545027305",
+          "ca139fdf0f614fff8eeac7aaca7944a5",
+          "cfb5664e448146e9aac8b252963ac385",
+          "d23618a261924f1fb57c2d14aedcf5e7",
+          "ddce780300a547e8aba6fede42869c5e",
+          "de9cc44308af4cd08858f0ea19127a15",
+          "e0c22dd4f193437f9c2f5243c8c51fec",
+          "e10cf596f3da45deba3c7c3c543a1fa7",
+          "eee63e27f59d4d758decfca63e8f8474",
+          "f02a6da103b94965b9b4f07c3081a83e",
+          "f8bad5368d15483ca51344393b3e1a2c"
+        ]
+      },
+      "trace_count": 40
+    },
+    "v2_check": {
+      "artifact": "artifacts/v2-check-corrected-final",
+      "run": {
+        "agent_version": "v2",
+        "completed_at": "2026-10-19T22:17:09.286259+00:00",
+        "counts": {
+          "answers": 10,
+          "errors": 1,
+          "ok": 9,
+          "predictions": 83,
+          "scheduled": 10
+        },
+        "dataset_version": "long-brand-answers-50-v4",
+        "duration_ms": 169843.5519170016,
+        "evaluator_version": "sentence-spans-and-labels-v4",
+        "fact_version": "speaker-catalogue-v4",
+        "file_hashes": {
+          "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+          "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+          "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+          "prompts/v2.txt": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf"
+        },
+        "model": "gpt-5-mini-2025-08-07",
+        "prompt_version": "v2",
+        "provider": "openai",
+        "run_id": "2f8469ef-e735-4eee-bb01-9b9a8dff7865",
+        "scheduled_answer_ids": [
+          "A41",
+          "A42",
+          "A43",
+          "A44",
+          "A45",
+          "A46",
+          "A47",
+          "A48",
+          "A49",
+          "A50"
+        ],
+        "settings": {
+          "max_completion_tokens": 2000,
+          "model": "gpt-5-mini-2025-08-07",
+          "provider": "openai",
+          "reasoning_effort": "minimal",
+          "request_timeout_seconds": 15.0,
+          "temperature": null
+        },
+        "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+        "split": "check",
+        "started_at": "2026-10-19T22:14:19.441474+00:00",
+        "supersedes": "a58a7b95-2784-4184-abd5-2161a9386028",
+        "supersedes_reason": "rerun after shared validation/adversarial extraction fixes; historical check preserved",
+        "trace_ids": [
+          "0fc42d24bbc94c7cb3f443ec163469b7",
+          "1f05a5a17296429180623d0ee5330338",
+          "68fffed871b840098e9199ef990d7e02",
+          "97528c9e11af49fdbd57b100ae0b5af9",
+          "a2a382ece4d04b95a7cf0b1305aa0fe8",
+          "aff6ff484ee84a3793af16ade52b3267",
+          "c3da3094dcc44c858a231e1239d4fd7e",
+          "d22f5682998447df96e54efe1a018073",
+          "d4e3639bcb4140fc87c4ec46381a62e0",
+          "d9d29a517b304f14b407929f1297704c"
+        ]
+      },
+      "trace_count": 10
+    },
+    "v2_development": {
+      "artifact": "artifacts/v2-development-corrected-final",
+      "run": {
+        "agent_version": "v2",
+        "completed_at": "2026-10-19T22:06:31.598651+00:00",
+        "counts": {
+          "answers": 40,
+          "errors": 14,
+          "ok": 26,
+          "predictions": 231,
+          "scheduled": 40
+        },
+        "dataset_version": "long-brand-answers-50-v4",
+        "duration_ms": 870061.4378750324,
+        "evaluator_version": "sentence-spans-and-labels-v4",
+        "fact_version": "speaker-catalogue-v4",
+        "file_hashes": {
+          "answers.csv": "fa28e813ea54b4e5ea985585f22f084d826241e1182accbc27ace17066125724",
+          "brand_facts.csv": "2190d40fad2dd167ef2437956c43d595aaf2554ea673a4789b9343cb7e2936f2",
+          "development_gold.csv": "afe84cc78f304afb6a4aaa505dd7504af80fcbf8bc507806aa5ff0aab6bf4850",
+          "prompts/v2.txt": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf"
+        },
+        "model": "gpt-5-mini-2025-08-07",
+        "prompt_version": "v2",
+        "provider": "openai",
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "scheduled_answer_ids": [
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "A05",
+          "A06",
+          "A07",
+          "A08",
+          "A09",
+          "A10",
+          "A11",
+          "A12",
+          "A13",
+          "A14",
+          "A15",
+          "A16",
+          "A17",
+          "A18",
+          "A19",
+          "A20",
+          "A21",
+          "A22",
+          "A23",
+          "A24",
+          "A25",
+          "A26",
+          "A27",
+          "A28",
+          "A29",
+          "A30",
+          "A31",
+          "A32",
+          "A33",
+          "A34",
+          "A35",
+          "A36",
+          "A37",
+          "A38",
+          "A39",
+          "A40"
+        ],
+        "settings": {
+          "max_completion_tokens": 2000,
+          "model": "gpt-5-mini-2025-08-07",
+          "provider": "openai",
+          "reasoning_effort": "minimal",
+          "request_timeout_seconds": 15.0,
+          "temperature": null
+        },
+        "source_revision": "a0020d06e0d71fbe83fd43236cdec3b33983d8b6",
+        "split": "development",
+        "started_at": "2026-10-19T21:52:01.546435+00:00",
+        "supersedes": "5a64e5ff-d1e4-4e49-8175-e2c3617c26cb",
+        "supersedes_reason": "rerun after shared validation/adversarial extraction fixes; historical run preserved",
+        "trace_ids": [
+          "07f1edab588347a49b30f756d404e172",
+          "0c5e1d78d67a493386e8b19f80dc89a7",
+          "0ecd9162cfeb40348ba383ca2628dca3",
+          "1040c04b43d04fadbbdbf758a7978885",
+          "1ec71f2ca5cb44ebbf469ba6e8574227",
+          "22cdcd428e7c448881e0d2ba0b9e4fae",
+          "241ce7baa47449daaff2d976b7d0425c",
+          "254735face034674bdab15118977c072",
+          "37589b97c8bb4dd5b59696b0394dbf2a",
+          "38875c65e9b641778567eedf76934e6d",
+          "3e426e9b4842426dbe6ab7fb942239c6",
+          "54497fe01c4d4a66936efd2e8545e7fe",
+          "57536dbbb97943acb3c07c569c682b54",
+          "582e2e32aa47424789eaba84fa27689b",
+          "5a83eeda606e4d6c84737401c2b5f767",
+          "71187935256d4954af638ec80ddb74a5",
+          "75eb2aa60c034428b1945266dc39be2d",
+          "77c28111d4254fa0883e41e80f32cca2",
+          "86b7fdee3399408190467364ebb66047",
+          "88915e9771e549c0a7d511575d172b3b",
+          "8c7ffb793e5e48299011c35a246af077",
+          "8fce1dd598fe4d89a41f32a04e114d83",
+          "a75fe246fd39436f8e28dcab2985eed0",
+          "aa05cc7ad3324827b0e3676232d5d133",
+          "ab0949d8aa9849f4aae88af865539249",
+          "ac0ada2e4ba84b3c8b5cc8c4ded2234a",
+          "af591f25021a43e8b4ddc8e3d889f331",
+          "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+          "c595acc03d324639a41e83561f70e1ab",
+          "ce3d881597b94437834bbbfae9afb73f",
+          "d8a0873eb193488cb5bfba3fbb2d55f3",
+          "e2b89bea04d44d62add23ebbf4ac4e32",
+          "e37ec8b5e66145a3bc685e58017a0ce5",
+          "e91a9e3a7fc84a30b13117a809e4d097",
+          "eae2b2fc297942ce83164505f3ea656b",
+          "f36d10ff5974439e824e010b3ec69cb9",
+          "f583a4f2a5d24947981bf225363aaa88",
+          "f685e43a375242b79c7dd634f6fe6be2",
+          "f9578f8818d8458db44b57f8c909eda0",
+          "fc1185f914464f519e1eeca972da46e7"
+        ]
+      },
+      "trace_count": 40
+    }
+  },
+  "generated_at_utc": "2026-10-20T03:43:56.474938Z",
+  "historical_export": "evidence/langfuse/historical-v1-diagnosis-trace.json",
+  "query_policy": {
+    "backoff_seconds": [
+      2,
+      4
+    ],
+    "endpoint": "GET /api/public/v2/observations",
+    "fields": "core,basic,io",
+    "max_attempts": 3,
+    "serial": true,
+    "spacing_seconds": 2.25
+  },
+  "remaining_inaccessible_traces": [],
+  "remote_confirmation_counts": {
+    "v1_check": {
+      "baseline_other": 0,
+      "baseline_rate_limited": 0,
+      "baseline_verified": 10,
+      "recovered_from_429": 0,
+      "remaining_inaccessible": 0,
+      "remote_confirmed_total": 10
+    },
+    "v1_development": {
+      "baseline_other": 0,
+      "baseline_rate_limited": 8,
+      "baseline_verified": 32,
+      "recovered_from_429": 8,
+      "remaining_inaccessible": 0,
+      "remote_confirmed_total": 40
+    },
+    "v2_check": {
+      "baseline_other": 0,
+      "baseline_rate_limited": 0,
+      "baseline_verified": 10,
+      "recovered_from_429": 0,
+      "remaining_inaccessible": 0,
+      "remote_confirmed_total": 10
+    },
+    "v2_development": {
+      "baseline_other": 0,
+      "baseline_rate_limited": 6,
+      "baseline_verified": 34,
+      "recovered_from_429": 6,
+      "remaining_inaccessible": 0,
+      "remote_confirmed_total": 40
+    }
+  },
+  "remote_requery": {
+    "blockers": [],
+    "previous_audit_http_status": 429,
+    "prior_429_count": 14,
+    "receipts": [
+      {
+        "answer_id": "A07",
+        "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "cf3cd5eb000302ffa62aa925b92b1d46ca5298dfad2f823134275c5f0492f859",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "cf3cd5eb000302ffa62aa925b92b1d46ca5298dfad2f823134275c5f0492f859",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:06.341Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "938c5e3a87e54b29",
+            "parent_observation_id": "0d81aa8c4c7c40c0",
+            "span_id": "938c5e3a87e54b29",
+            "start_time": "2026-10-19T21:34:06.341Z",
+            "trace_id": "c549e7db787c4e13ac39ca9545027305",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:06.340Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "d1549277a1244048",
+            "parent_observation_id": "0d81aa8c4c7c40c0",
+            "span_id": "d1549277a1244048",
+            "start_time": "2026-10-19T21:34:06.340Z",
+            "trace_id": "c549e7db787c4e13ac39ca9545027305",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.141Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "0d81aa8c4c7c40c0",
+            "parent_observation_id": null,
+            "span_id": "0d81aa8c4c7c40c0",
+            "start_time": "2026-10-19T21:34:02.141Z",
+            "trace_id": "c549e7db787c4e13ac39ca9545027305",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "c549e7db787c4e13ac39ca9545027305"
+      },
+      {
+        "answer_id": "A12",
+        "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "094f894f8ce4d8cdd19c6732834de0084d931dd10e7f92a881b9050ddb16c010",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "094f894f8ce4d8cdd19c6732834de0084d931dd10e7f92a881b9050ddb16c010",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:07.575Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "912f2beab3c848fa",
+            "parent_observation_id": "dbddb1b987d64172",
+            "span_id": "912f2beab3c848fa",
+            "start_time": "2026-10-19T21:34:07.575Z",
+            "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:07.574Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "4027c2d63be24815",
+            "parent_observation_id": "dbddb1b987d64172",
+            "span_id": "4027c2d63be24815",
+            "start_time": "2026-10-19T21:34:07.574Z",
+            "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.142Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "dbddb1b987d64172",
+            "parent_observation_id": null,
+            "span_id": "dbddb1b987d64172",
+            "start_time": "2026-10-19T21:34:02.142Z",
+            "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "ca139fdf0f614fff8eeac7aaca7944a5"
+      },
+      {
+        "answer_id": "A16",
+        "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "e4c40e3fab9bed99e5bcb6a8e092dfacebdca972754fde67b46b5f3e3e80f96c",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "e4c40e3fab9bed99e5bcb6a8e092dfacebdca972754fde67b46b5f3e3e80f96c",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:10.051Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "aa06c3099b82407d",
+            "parent_observation_id": "50e1355de31e429e",
+            "span_id": "aa06c3099b82407d",
+            "start_time": "2026-10-19T21:34:10.051Z",
+            "trace_id": "cfb5664e448146e9aac8b252963ac385",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:10.050Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "a485f1e89f8b403c",
+            "parent_observation_id": "50e1355de31e429e",
+            "span_id": "a485f1e89f8b403c",
+            "start_time": "2026-10-19T21:34:10.050Z",
+            "trace_id": "cfb5664e448146e9aac8b252963ac385",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.143Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "50e1355de31e429e",
+            "parent_observation_id": null,
+            "span_id": "50e1355de31e429e",
+            "start_time": "2026-10-19T21:34:02.143Z",
+            "trace_id": "cfb5664e448146e9aac8b252963ac385",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "cfb5664e448146e9aac8b252963ac385"
+      },
+      {
+        "answer_id": "A35",
+        "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "e04c13ee9fc1bb6e8efaec2646e8b561938b18569a94eef7a6bccc987c1d409f",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "model-turn-1",
+              "get_brand_facts",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "e04c13ee9fc1bb6e8efaec2646e8b561938b18569a94eef7a6bccc987c1d409f",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "model-turn-1",
+            "get_brand_facts",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:21.502Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "4bad825391ac4207",
+            "parent_observation_id": "2dcd6cb019414cc3",
+            "span_id": "4bad825391ac4207",
+            "start_time": "2026-10-19T21:34:21.502Z",
+            "trace_id": "d23618a261924f1fb57c2d14aedcf5e7",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:21.502Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "20f47783de184ea9",
+            "parent_observation_id": "2dcd6cb019414cc3",
+            "span_id": "20f47783de184ea9",
+            "start_time": "2026-10-19T21:34:21.502Z",
+            "trace_id": "d23618a261924f1fb57c2d14aedcf5e7",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.162Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "2dcd6cb019414cc3",
+            "parent_observation_id": null,
+            "span_id": "2dcd6cb019414cc3",
+            "start_time": "2026-10-19T21:34:02.162Z",
+            "trace_id": "d23618a261924f1fb57c2d14aedcf5e7",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "d23618a261924f1fb57c2d14aedcf5e7"
+      },
+      {
+        "answer_id": "A09",
+        "answer_text_truncated": "When buying a gift, begin with the intended use and check the exact model name on the order. Read the accessories, connection details and purchase terms as separate subjects. Keep an older price compa",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "4a0a7b126343ba2df4e824668f4aa973dd3127293d8e788c67646f8460494020",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "4a0a7b126343ba2df4e824668f4aa973dd3127293d8e788c67646f8460494020",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:06.333Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "c0c3d6c017f749f9",
+            "parent_observation_id": "c10cf81e8bc34ee9",
+            "span_id": "c0c3d6c017f749f9",
+            "start_time": "2026-10-19T21:34:06.333Z",
+            "trace_id": "ddce780300a547e8aba6fede42869c5e",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:06.333Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "842d83af704749c8",
+            "parent_observation_id": "c10cf81e8bc34ee9",
+            "span_id": "842d83af704749c8",
+            "start_time": "2026-10-19T21:34:06.333Z",
+            "trace_id": "ddce780300a547e8aba6fede42869c5e",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.142Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "c10cf81e8bc34ee9",
+            "parent_observation_id": null,
+            "span_id": "c10cf81e8bc34ee9",
+            "start_time": "2026-10-19T21:34:02.142Z",
+            "trace_id": "ddce780300a547e8aba6fede42869c5e",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "ddce780300a547e8aba6fede42869c5e"
+      },
+      {
+        "answer_id": "A22",
+        "answer_text_truncated": "When buying a gift, begin with the intended use and check the exact model name on the order. Read the accessories, connection details and purchase terms as separate subjects. Keep an older price compa",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "2486ac8a2fa231a2de3fcb9185a0e36c3ecaebd01d08809ea4e6c81280116d3c",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "model-turn-1",
+              "get_brand_facts",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "2486ac8a2fa231a2de3fcb9185a0e36c3ecaebd01d08809ea4e6c81280116d3c",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "model-turn-1",
+            "get_brand_facts",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:12.642Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "abffc27014b94b77",
+            "parent_observation_id": "f84f174d8cfa4c2c",
+            "span_id": "abffc27014b94b77",
+            "start_time": "2026-10-19T21:34:12.642Z",
+            "trace_id": "de9cc44308af4cd08858f0ea19127a15",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:12.642Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "96322741f2ce4cb2",
+            "parent_observation_id": "f84f174d8cfa4c2c",
+            "span_id": "96322741f2ce4cb2",
+            "start_time": "2026-10-19T21:34:12.642Z",
+            "trace_id": "de9cc44308af4cd08858f0ea19127a15",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.143Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "f84f174d8cfa4c2c",
+            "parent_observation_id": null,
+            "span_id": "f84f174d8cfa4c2c",
+            "start_time": "2026-10-19T21:34:02.143Z",
+            "trace_id": "de9cc44308af4cd08858f0ea19127a15",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "de9cc44308af4cd08858f0ea19127a15"
+      },
+      {
+        "answer_id": "A31",
+        "answer_text_truncated": "When buying a gift, begin with the intended use and check the exact model name on the order. Read the accessories, connection details and purchase terms as separate subjects. Keep an older price compa",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "6c75171cd02fe8666b395aaec801db8b3d8d936f48be0980a57dee0a79560dc3",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "6c75171cd02fe8666b395aaec801db8b3d8d936f48be0980a57dee0a79560dc3",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:16.068Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "461a91c7c69d4dc1",
+            "parent_observation_id": "c33744ce8f1f4e20",
+            "span_id": "461a91c7c69d4dc1",
+            "start_time": "2026-10-19T21:34:16.068Z",
+            "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:16.067Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "9dc07459503643f8",
+            "parent_observation_id": "c33744ce8f1f4e20",
+            "span_id": "9dc07459503643f8",
+            "start_time": "2026-10-19T21:34:16.067Z",
+            "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.160Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "c33744ce8f1f4e20",
+            "parent_observation_id": null,
+            "span_id": "c33744ce8f1f4e20",
+            "start_time": "2026-10-19T21:34:02.160Z",
+            "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "e0c22dd4f193437f9c2f5243c8c51fec"
+      },
+      {
+        "answer_id": "A32",
+        "answer_text_truncated": "For comparison shopping, start by naming the exact speaker and the particular alternative you are considering. Compare like conditions rather than collecting attractive numbers from different situatio",
+        "artifact": "artifacts/v1-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "e14398f37a4f9cc2eb755ce52df2c88ef9fdafc094f033b26f06ecfe3d15af2a",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "e14398f37a4f9cc2eb755ce52df2c88ef9fdafc094f033b26f06ecfe3d15af2a",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:33:02.119455Z",
+        "label": "v1_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:16.211Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "e7f22cf1354a4d17",
+            "parent_observation_id": "9606670d9d8d47df",
+            "span_id": "e7f22cf1354a4d17",
+            "start_time": "2026-10-19T21:34:16.211Z",
+            "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:16.210Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "e57a4cb7dbee4d3e",
+            "parent_observation_id": "9606670d9d8d47df",
+            "span_id": "e57a4cb7dbee4d3e",
+            "start_time": "2026-10-19T21:34:16.210Z",
+            "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:34:02.161Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "9606670d9d8d47df",
+            "parent_observation_id": null,
+            "span_id": "9606670d9d8d47df",
+            "start_time": "2026-10-19T21:34:02.161Z",
+            "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "1d30770a-933b-4982-83be-875d24c02682",
+        "status": "verified",
+        "to_start_time": "2026-10-19T21:50:08.635696Z",
+        "trace_id": "e10cf596f3da45deba3c7c3c543a1fa7"
+      },
+      {
+        "answer_id": "A24",
+        "answer_text_truncated": "Start with the exact model name before deciding what belongs in a weekend bag. Compare the purchase terms separately from the technical specifications, and keep any assumptions about your own usage vi",
+        "artifact": "artifacts/v2-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "90957ef77b9874f15174873e2b9e6878244c9ce2ef0de584f60b134157fed45a",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "90957ef77b9874f15174873e2b9e6878244c9ce2ef0de584f60b134157fed45a",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:51:01.546435Z",
+        "label": "v2_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:11.798Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "fad45af4658840c2",
+            "parent_observation_id": "00995d578c934437",
+            "span_id": "fad45af4658840c2",
+            "start_time": "2026-10-19T21:52:11.798Z",
+            "trace_id": "af591f25021a43e8b4ddc8e3d889f331",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:11.798Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "0313597ab47b441e",
+            "parent_observation_id": "00995d578c934437",
+            "span_id": "0313597ab47b441e",
+            "start_time": "2026-10-19T21:52:11.798Z",
+            "trace_id": "af591f25021a43e8b4ddc8e3d889f331",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:01.568Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "00995d578c934437",
+            "parent_observation_id": null,
+            "span_id": "00995d578c934437",
+            "start_time": "2026-10-19T21:52:01.568Z",
+            "trace_id": "af591f25021a43e8b4ddc8e3d889f331",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "status": "verified",
+        "to_start_time": "2026-10-19T22:07:31.598651Z",
+        "trace_id": "af591f25021a43e8b4ddc8e3d889f331"
+      },
+      {
+        "answer_id": "A30",
+        "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+        "artifact": "artifacts/v2-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "ff7e7c1dfa062f0ce464530de8a21375ee92192d8e8080c41ea2a76755e49db1",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "ff7e7c1dfa062f0ce464530de8a21375ee92192d8e8080c41ea2a76755e49db1",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:51:01.546435Z",
+        "label": "v2_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:14.230Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "e4a65f22e9cd4f1b",
+            "parent_observation_id": "642ccc8c004643c1",
+            "span_id": "e4a65f22e9cd4f1b",
+            "start_time": "2026-10-19T21:52:14.230Z",
+            "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:14.229Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "2774e229e6b24b6d",
+            "parent_observation_id": "642ccc8c004643c1",
+            "span_id": "2774e229e6b24b6d",
+            "start_time": "2026-10-19T21:52:14.229Z",
+            "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:01.576Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "642ccc8c004643c1",
+            "parent_observation_id": null,
+            "span_id": "642ccc8c004643c1",
+            "start_time": "2026-10-19T21:52:01.576Z",
+            "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "status": "verified",
+        "to_start_time": "2026-10-19T22:07:31.598651Z",
+        "trace_id": "b98eb3fdc71f4e78b7fd59fc9f9453ef"
+      },
+      {
+        "answer_id": "A25",
+        "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+        "artifact": "artifacts/v2-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "de616e3b68c7eb81754447a8593eed84163cb7d025fcc78ed6a23b5d46ae87cc",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "de616e3b68c7eb81754447a8593eed84163cb7d025fcc78ed6a23b5d46ae87cc",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:51:01.546435Z",
+        "label": "v2_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:13.019Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "78df72c1fe0e4ff5",
+            "parent_observation_id": "6df9563096cc4a17",
+            "span_id": "78df72c1fe0e4ff5",
+            "start_time": "2026-10-19T21:52:13.019Z",
+            "trace_id": "c595acc03d324639a41e83561f70e1ab",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:13.018Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "dde0b711e6714648",
+            "parent_observation_id": "6df9563096cc4a17",
+            "span_id": "dde0b711e6714648",
+            "start_time": "2026-10-19T21:52:13.018Z",
+            "trace_id": "c595acc03d324639a41e83561f70e1ab",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:01.568Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "6df9563096cc4a17",
+            "parent_observation_id": null,
+            "span_id": "6df9563096cc4a17",
+            "start_time": "2026-10-19T21:52:01.568Z",
+            "trace_id": "c595acc03d324639a41e83561f70e1ab",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "status": "verified",
+        "to_start_time": "2026-10-19T22:07:31.598651Z",
+        "trace_id": "c595acc03d324639a41e83561f70e1ab"
+      },
+      {
+        "answer_id": "A26",
+        "answer_text_truncated": "For an outdoor gathering, think first about the conditions you expect rather than choosing a speaker from a single headline figure. Separate a performance statement from a warranty statement when read",
+        "artifact": "artifacts/v2-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "dae1d9a1cb7e6dc5ebc282511e798e0807509b1f6a69387e3e20db9254aef77c",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "dae1d9a1cb7e6dc5ebc282511e798e0807509b1f6a69387e3e20db9254aef77c",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:51:01.546435Z",
+        "label": "v2_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:13.027Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "c4fc19fd1a6244eb",
+            "parent_observation_id": "95d6f1e441e64b8f",
+            "span_id": "c4fc19fd1a6244eb",
+            "start_time": "2026-10-19T21:52:13.027Z",
+            "trace_id": "ce3d881597b94437834bbbfae9afb73f",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:13.026Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "0f6b5d4bbe054646",
+            "parent_observation_id": "95d6f1e441e64b8f",
+            "span_id": "0f6b5d4bbe054646",
+            "start_time": "2026-10-19T21:52:13.026Z",
+            "trace_id": "ce3d881597b94437834bbbfae9afb73f",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:01.572Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "95d6f1e441e64b8f",
+            "parent_observation_id": null,
+            "span_id": "95d6f1e441e64b8f",
+            "start_time": "2026-10-19T21:52:01.572Z",
+            "trace_id": "ce3d881597b94437834bbbfae9afb73f",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "status": "verified",
+        "to_start_time": "2026-10-19T22:07:31.598651Z",
+        "trace_id": "ce3d881597b94437834bbbfae9afb73f"
+      },
+      {
+        "answer_id": "A39",
+        "answer_text_truncated": "For a desk setup, begin by deciding whether you care most about a wired source, a wireless source or a simple charging arrangement. Keep those requirements separate while reading a detailed buying ans",
+        "artifact": "artifacts/v2-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "8c05325a735687a5b93674e5d692ef2b5ed667ec7675f1a4f5c00b8fda9252fc",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "8c05325a735687a5b93674e5d692ef2b5ed667ec7675f1a4f5c00b8fda9252fc",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:51:01.546435Z",
+        "label": "v2_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:18.137Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "13be44f90d044b27",
+            "parent_observation_id": "a4e459bc31ed41b5",
+            "span_id": "13be44f90d044b27",
+            "start_time": "2026-10-19T21:52:18.137Z",
+            "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:18.136Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "374826096303426f",
+            "parent_observation_id": "a4e459bc31ed41b5",
+            "span_id": "374826096303426f",
+            "start_time": "2026-10-19T21:52:18.136Z",
+            "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:01.577Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "a4e459bc31ed41b5",
+            "parent_observation_id": null,
+            "span_id": "a4e459bc31ed41b5",
+            "start_time": "2026-10-19T21:52:01.577Z",
+            "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "status": "verified",
+        "to_start_time": "2026-10-19T22:07:31.598651Z",
+        "trace_id": "d8a0873eb193488cb5bfba3fbb2d55f3"
+      },
+      {
+        "answer_id": "A28",
+        "answer_text_truncated": "For comparison shopping, start by naming the exact speaker and the particular alternative you are considering. Compare like conditions rather than collecting attractive numbers from different situatio",
+        "artifact": "artifacts/v2-development-corrected-final",
+        "attempt_count": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "body_sha256": "a03431af1d451747ec0942aa69c240ce9bf9f7bcbf260c4d4fe188caa349d333",
+            "http_status": 200,
+            "observation_count": 3,
+            "observation_names": [
+              "get_brand_facts",
+              "model-turn-1",
+              "claimlens.answer"
+            ]
+          }
+        ],
+        "final": {
+          "attempt": 1,
+          "body_sha256": "a03431af1d451747ec0942aa69c240ce9bf9f7bcbf260c4d4fe188caa349d333",
+          "http_status": 200,
+          "observation_count": 3,
+          "observation_names": [
+            "get_brand_facts",
+            "model-turn-1",
+            "claimlens.answer"
+          ]
+        },
+        "from_start_time": "2026-10-19T21:51:01.546435Z",
+        "label": "v2_development",
+        "observations": [
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:14.145Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "get_brand_facts",
+            "observation_id": "083d6f168cd94777",
+            "parent_observation_id": "3be0e9fafc554263",
+            "span_id": "083d6f168cd94777",
+            "start_time": "2026-10-19T21:52:14.145Z",
+            "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32",
+            "type": "TOOL"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:14.144Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "model-turn-1",
+            "observation_id": "a46daaed8a1d4626",
+            "parent_observation_id": "3be0e9fafc554263",
+            "span_id": "a46daaed8a1d4626",
+            "start_time": "2026-10-19T21:52:14.144Z",
+            "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32",
+            "type": "GENERATION"
+          },
+          {
+            "duration_ms": 0.0,
+            "end_time": "2026-10-19T21:52:01.576Z",
+            "latency_ms": 0,
+            "level": "DEFAULT",
+            "name": "claimlens.answer",
+            "observation_id": "3be0e9fafc554263",
+            "parent_observation_id": null,
+            "span_id": "3be0e9fafc554263",
+            "start_time": "2026-10-19T21:52:01.576Z",
+            "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32",
+            "type": "SPAN"
+          }
+        ],
+        "recovered_from_429": false,
+        "recovered_from_prior_429": true,
+        "run_id": "4ade6dff-2f02-40b3-8b25-72985c0ca141",
+        "status": "verified",
+        "to_start_time": "2026-10-19T22:07:31.598651Z",
+        "trace_id": "e2b89bea04d44d62add23ebbf4ac4e32"
+      }
+    ],
+    "status": "complete_with_rate_limit_results"
+  },
+  "schema_version": "claimlens-langfuse-review-evidence-v1",
+  "scope": {
+    "current_artifacts_inspected": [
+      "v1_development",
+      "v2_development",
+      "v1_check",
+      "v2_check"
+    ],
+    "model_calls_started": 0,
+    "previous_429_source": "evidence/langfuse-investigation/audit-report.json",
+    "provider_runs_started": false,
+    "read_only": true
+  },
+  "selected_exports": {
+    "v1_check": "evidence/langfuse/v1-check-trace.json",
+    "v1_development": "evidence/langfuse/v1-development-trace.json",
+    "v2_check": "evidence/langfuse/v2-check-trace.json",
+    "v2_development": "evidence/langfuse/v2-development-trace.json"
+  }
+}

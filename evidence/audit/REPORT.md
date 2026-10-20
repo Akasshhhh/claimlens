@@ -32,7 +32,7 @@ selected-evidence manifest, not a full repository-tree hash.
 | Retry/concurrency/validation | **VERIFIED offline** | Tests prove genuine overlap, max active attempts exactly 3, 429 retry, non-retryable auth/malformed output, gold isolation, bounds, IDs, quotes, Unicode, overlap, and reason normalization. |
 | PostgreSQL/API integration | **VERIFIED in integration tests** | Actual FastAPI app with Docker PostgreSQL passed host and container integration suites; constraints, persistence, joined retrieval, sanitization, UUIDs, empty/error rows, and match fields are covered. |
 | Langfuse local receipts/verifier | **VERIFIED** | Corrected runs have non-empty local receipts and no verifier-error file; per-answer IDs and explicit UTC windows are used. |
-| Langfuse remote reviewer evidence | **INCOMPLETE** | Full remote retrieval of all 100 corrected traces and full sanitized payload exports were not retained. |
+| Langfuse remote reviewer evidence | **VERIFIED with limitation** | A later serial re-query confirmed all 100 corrected trace IDs and retained sanitized observation metadata; full reviewer-facing payload exports remain incomplete. |
 | Live API process/deployment | **INCOMPLETE/UNVERIFIED** | TestClient integration and Docker image build passed; `make run` was not retained as a live process smoke, and no hosted deployment is required. |
 | Manifest/evidence freshness | **VERIFIED** | Current selected entries match actual bytes/SHA-256; current docs disclose selected scope. |
 
@@ -75,9 +75,14 @@ The verifier `timedelta` failure from the historical v2 development artifact
 is not present in the corrected final artifacts. The corrected verifier catches
 per-trace failures, keeps completed provider outcomes completed, uses the
 per-answer trace ID, and records sanitized status/count/name/digest summaries.
-The repository does not claim that local receipts are full remote reviewer
-exports. The read-only auditor can be run with `--offline`, or without that
-flag when an explicit remote audit is authorized.
+The later serial re-query recovered the prior 14 HTTP 429 responses: v1
+development 40/40, v2 development 40/40, v1 check 10/10, and v2 check 10/10
+were remotely confirmed. The sanitized receipt is in
+`evidence/langfuse/langfuse-summary.json`; the repository still does not claim
+that these metadata exports are full remote reviewer payloads. Prompts,
+model/tool payloads, score payloads, credentials, and raw response bodies are
+not retained. The read-only auditor can be run with `--offline`, or without
+that flag only when an explicit remote audit is authorized.
 
 ## Preserved historical evidence
 

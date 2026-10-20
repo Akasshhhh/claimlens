@@ -383,7 +383,7 @@
     ]
   },
   "final_run_summary": "evidence/final-run-summary.json",
-  "generated_for_commit": "5e70515a55b73ec97221435eead8affd128b4a1a",
+  "generated_for_commit": "3dcfb2aa092453e362fb2c2f83110acf1d307312",
   "injection_canaries": {
     "v1": {
       "answer_ids": [
@@ -462,7 +462,52 @@
   },
   "langfuse_limitations": {
     "investigation_conclusion": null,
-    "limitation": "Receipt files are local summaries of observation fetches; only one selected remote trace was retained as a sanitized API investigation. No claim is made that a reviewer can inspect all remote observation payloads from this repository alone.",
+    "limitation": "The later serial re-query confirmed all 100 current trace IDs and retained sanitized observation metadata. Full reviewer-facing remote payload exports remain incomplete; prompts, model/tool payloads, score payloads, credentials, and raw response bodies are not exported.",
+    "remote_confirmation_counts": {
+      "v1_check": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 0,
+        "baseline_verified": 10,
+        "recovered_from_429": 0,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 10
+      },
+      "v1_development": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 8,
+        "baseline_verified": 32,
+        "recovered_from_429": 8,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 40
+      },
+      "v2_check": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 0,
+        "baseline_verified": 10,
+        "recovered_from_429": 0,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 10
+      },
+      "v2_development": {
+        "baseline_other": 0,
+        "baseline_rate_limited": 6,
+        "baseline_verified": 34,
+        "recovered_from_429": 6,
+        "remaining_inaccessible": 0,
+        "remote_confirmed_total": 40
+      }
+    },
+    "remote_requery": {
+      "backoff_seconds": [
+        2,
+        4
+      ],
+      "endpoint": "GET /api/public/v2/observations",
+      "fields": "core,basic,io",
+      "max_attempts": 3,
+      "serial": true,
+      "spacing_seconds": 2.25
+    },
     "saved_receipt_counts": {
       "v1-check": {
         "all_observation_counts_nonempty": true,

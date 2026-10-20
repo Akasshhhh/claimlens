@@ -304,6 +304,7 @@ def _provenance_payload(
     }
     selected_trace = _read_json(ROOT / "evidence/trace-diagnosis.json")
     investigation = _read_json(ROOT / "evidence/langfuse-investigation/report.json")
+    langfuse_summary = _read_json(ROOT / "evidence/langfuse/langfuse-summary.json")
     return {
         "schema_version": "claimlens-submission-provenance-v1",
         "generated_for_commit": summary["generated_for_commit"],
@@ -368,7 +369,16 @@ def _provenance_payload(
             },
             "selected_trace_diagnosis": selected_trace,
             "investigation_conclusion": investigation.get("conclusion"),
-            "limitation": "Receipt files are local summaries of observation fetches; only one selected remote trace was retained as a sanitized API investigation. No claim is made that a reviewer can inspect all remote observation payloads from this repository alone.",
+            "remote_confirmation_counts": langfuse_summary.get(
+                "remote_confirmation_counts", {}
+            ),
+            "remote_requery": langfuse_summary.get("query_policy", {}),
+            "limitation": (
+                "The later serial re-query confirmed all 100 current trace IDs and "
+                "retained sanitized observation metadata. Full reviewer-facing remote "
+                "payload exports remain incomplete; prompts, model/tool payloads, score "
+                "payloads, credentials, and raw response bodies are not exported."
+            ),
         },
         "current_checks": {
             "make_test": _captured_check("evidence/pytest-output.txt", "make test"),
@@ -390,12 +400,27 @@ def _manifest_paths(previous: dict[str, Any]) -> list[str]:
         for path in (ROOT / "artifacts").rglob("*")
         if path.is_file()
     )
-    for directory in (ROOT / "evidence" / "audit", ROOT / "evidence" / "analysis", ROOT / "evidence" / "submission"):
+    for directory in (
+        ROOT / "evidence" / "audit",
+        ROOT / "evidence" / "analysis",
+        ROOT / "evidence" / "submission",
+        ROOT / "evidence" / "diagnosis",
+        ROOT / "evidence" / "exchanges",
+        ROOT / "evidence" / "langfuse",
+        ROOT / "evidence" / "supplementary",
+    ):
         if directory.exists():
             paths.update(
                 path.relative_to(ROOT).as_posix() for path in directory.rglob("*") if path.is_file()
             )
-    paths.update(("prompts/v1.txt", "prompts/v2.txt"))
+    paths.update(
+        (
+            "evidence/audit-notes.md",
+            "evidence/run-smoke.txt",
+            "prompts/v1.txt",
+            "prompts/v2.txt",
+        )
+    )
     paths.discard("evidence/MANIFEST.json")
     # The audit snapshot reports the manifest's state and therefore cannot be
     # hashed inside that same manifest without creating a self-reference.
@@ -433,6 +458,8 @@ def _manifest(summary: dict[str, Any], comparison: dict[str, Any]) -> dict[str, 
                 "all currently existing files below artifacts/",
                 "selected historical/current files previously listed under evidence/",
                 "evidence/audit/**, evidence/analysis/**, and evidence/submission/**",
+                "evidence/diagnosis/**, evidence/exchanges/**, evidence/langfuse/**, and evidence/supplementary/**",
+                "evidence/audit-notes.md and evidence/run-smoke.txt",
                 "prompts/v1.txt and prompts/v2.txt",
                 "SHA-256 values for local answers.csv, brand_facts.csv, and development_gold.csv when present",
             ],
