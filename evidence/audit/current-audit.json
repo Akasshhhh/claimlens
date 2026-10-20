@@ -30,12 +30,12 @@
     },
     "manifest_matches_worktree": {
       "current_v2_hash": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
-      "head": "11b5aa88e5aacd7ef52687d93663adb028fe76a2",
-      "manifest_commit": "5e70515a55b73ec97221435eead8affd128b4a1a",
+      "head": "56de9b2de95056348ea9672081168d6679f1f616",
+      "manifest_commit": "77aa11878941cd9259d2b0cce6a861765bc6bfe9",
       "manifest_v2_hash": "74ea421cd3f73788b82326c5f0ea621e61e5905ce9e512501add72550120bcaf",
       "problems": [],
       "selected_file_scope": {
-        "entry_count": 274,
+        "entry_count": 293,
         "mismatches": [],
         "missing": [],
         "problems": [],
@@ -80,8 +80,8 @@
     "v1": "9de1a5ec5575109b8b395f5645fbc4bdf474c692",
     "v2": "8293d189f9bae7619a03247acc78aa6fa1f848bc"
   },
-  "head": "11b5aa88e5aacd7ef52687d93663adb028fe76a2",
-  "manifest_commit": "5e70515a55b73ec97221435eead8affd128b4a1a",
+  "head": "56de9b2de95056348ea9672081168d6679f1f616",
+  "manifest_commit": "77aa11878941cd9259d2b0cce6a861765bc6bfe9",
   "required_artifacts": {
     "v1_check": {
       "agent_version": "v1",
