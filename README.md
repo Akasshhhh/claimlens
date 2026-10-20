@@ -1,65 +1,170 @@
 # ClaimLens
 
-ClaimLens extracts complete factual product sentences from long AI answers,
-looks up catalogue facts through a real `get_brand_facts` tool call, validates
-Unicode spans and labels in Python, and scores saved predictions
-deterministically. It also provides bounded async execution, selective retries,
-FastAPI/PostgreSQL persistence, Langfuse tracing, and reproducible evidence.
+ClaimLens extracts and classifies catalogue-grounded factual product claims from long AI answers.
 
-## Repository map
+## Summary
 
-```text
-answers.csv + brand_facts.csv -> loaders -> ClaimAgent
-                                       |-> get_brand_facts
-                                       |-> exact span/label validation
-                                       `-> Langfuse observations
+| Run | Answers OK | Errors | Predictions | Joint F1 |
+|---|---:|---:|---:|---:|
+| v1 development | 22/40 | 18 | 201 | 0.665511 |
+| v2 development | 26/40 | 14 | 231 | 0.714992 |
+| v1 check | 5/10 | 5 | 44 | `null` |
+| v2 check | 9/10 | 1 | 83 | `null` |
 
-OpenAIProvider -> BoundedProvider -> AnswerOutcome -> evaluator/artifacts/DB
-```
+The development headline is joint F1 `0.665511` for v1 and `0.714992` for
+v2. The paired-bootstrap 95% confidence interval for the estimated gain is
+`[-0.086781, +0.220426]`, so it includes zero.
 
-- `agent/`: tool loop, strict output validation, advice/instruction filtering,
-  retries, turn limits, and answer-level errors.
-- `providers/`: OpenAI SDK adapter and transport error mapping.
-- `runner/`: bounded concurrent execution and immutable run artifacts.
-- `harness/`: exact-span matching, extraction/joint metrics, comparisons, and
-  injection canaries.
-- `claimlens/api/`: FastAPI endpoints.
-- `claimlens/db/`: PostgreSQL schema, repository, and artifact import.
-- `evidence/`: selected manifest, audit, Langfuse, and submission evidence.
+### About the timeouts
 
-## Setup
+The timeout errors are provider-request timeouts (the model did not return
+within the specification's 15-second per-request limit); they are not
+validation, scoring or logic failures, and the code handles them as designed:
+as answer-level errors with at most one bounded retry per turn, counted as
+missed gold claims, never relabelled as unknown. The likely contributor is
+response latency on a non-premium API account; the exact cause is unproven
+(the same code earlier completed 37/40 development answers, and bounded-call
+fixes such as lower output caps and serialized post-tool turns did reduce
+timeouts). The 15-second limit was kept per the specification.
 
-Python `3.12.7` is pinned in `.python-version`; dependencies are pinned in
-`requirements.lock`. For a clean checkout, the setup commands are:
+v1 and v2 had different success counts (22/40 vs 26/40 development, 5/10 vs
+9/10 check), so part of the observed gain may come from more answers
+completing; the all-40 numbers are the official specification metrics.
+
+Start here: [Quick start](#quick-start-no-api-key-needed) ·
+[Targeted change](#the-targeted-change) · [Evidence map](#evidence-map)
+
+## Quick start (no API key needed)
+
+The saved-run verification and offline tests do not call a model or provider.
+From a clean checkout:
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.lock
-cp .env.example .env
+make test
+make verify
 ```
 
-Place the supplied `answers.csv`, `brand_facts.csv`, and
-`development_gold.csv` in the repository root, or set `CLAIMLENS_DATA_DIR`.
-Their SHA-256 values are recorded in `evidence/MANIFEST.json`; the local CSVs
-remain ignored and are not committed.
+Expected results from the saved receipts:
 
-For live operation, set these values in the ignored `.env`:
+- `make test`: **VERIFIED — 102 passed, 1 warning** (`evidence/pytest-output.txt`).
+- `make verify`: **VERIFIED — exit 0; both corrected development metric objects matched** (`evidence/verify-output.txt`).
+
+Python `3.12.7` is pinned in `.python-version`. The supplied local
+`answers.csv`, `brand_facts.csv`, and `development_gold.csv` inputs are ignored
+and are not committed; their hashes are recorded in `evidence/MANIFEST.json`.
+
+## Settings used
+
+The four corrected final artifacts use the following shared settings. The v1
+and v2 prompt hashes differ; the source revision, provider settings, dataset,
+fact catalogue, evaluator, execution limits, and concurrency settings are
+shared.
+
+| Setting | Value |
+|---|---|
+| Provider | `openai` |
+| Model ID | `gpt-5-mini-2025-08-07` |
+| Reasoning effort | `minimal` |
+| Completion-token cap | `2000` |
+| Per-request timeout | `15.0` seconds |
+| Attempts per turn | `2` maximum; one retry |
+| Maximum turns | `3` |
+| Global provider concurrency | `3` |
+| Post-tool turn serialization | Enabled for post-tool completion turns |
+| Source revision | `a0020d06e0d71fbe83fd43236cdec3b33983d8b6` |
+| Dataset version | `long-brand-answers-50-v4` |
+| Fact version | `speaker-catalogue-v4` |
+| Evaluator version | `sentence-spans-and-labels-v4` |
+
+## The targeted change
+
+### What the saved v1 analysis showed
+
+The real v1 development analysis (`artifacts/v1-development-final-turn-gated/`,
+run `8cb56eec-6c54-4eab-aba2-317bee75d451`) recorded 605 predictions and 261
+unmatched predictions. The saved diagnosis classified those unmatched rows as
+254 advice/instruction-only spans, 3 meta-instruction markers, 2
+unsupported/unresolved spans, and 2 purchase-paperwork instructions. The source
+analysis is `evidence/analysis/v1-development-final-turn-gated-analysis.json`.
+
+### What v2 changes
+
+- v1 is defined in `prompts/v1.txt`: extract complete verifiable product,
+  specification, purchase-policy, historical, and comparison sentences while
+  excluding pure advice, opinions, and instructions.
+- v2 is defined in `prompts/v2.txt`: it makes the catalogue the sole authority,
+  adds an explicit sentence-boundary pass, and says product or purchase wording
+  alone is not a claim.
+- v2 explicitly omits sentences that are only advice, instructions, or opinions,
+  while preserving a sentence containing an independent factual assertion.
+- Both prompts retain the exact JSON, Unicode-offset, non-overlap, label, and
+  catalogue-fact rules; the corrected source revision also contains shared
+  deterministic filtering and validation changes.
+
+The v2 policy hypothesis and its offline basis are recorded in
+`tests/v2_policy/report.md`. No provider experiment was launched for that
+offline policy test.
+
+### Measured effect
+
+| Metric | v1 | v2 | Delta |
+|---|---:|---:|---:|
+| Extraction F1 | 0.696707 | 0.761120 | +0.064413 |
+| Joint F1 | 0.665511 | 0.714992 | +0.049480 |
+| Macro label F1 | 0.665583 | 0.714444 | +0.048861 |
+| Correct-label coverage | 0.510638 | 0.577128 | +0.066489 |
+
+Both final development reports have extraction precision `1.000000`; there is
+therefore no extraction-precision change to attribute. The complete comparison
+is `evidence/v1-v2-final-comparison.json`.
+
+### Per-label results and regressions
+
+| Label | v1 precision | v1 recall | v1 F1 | v2 precision | v2 recall | v2 F1 |
+|---|---:|---:|---:|---:|---:|---:|
+| `contradicted` | 0.924242 | 0.508333 | 0.655914 | 0.886076 | 0.583333 | 0.703518 |
+| `supported` | 0.954545 | 0.525000 | 0.677419 | 0.944444 | 0.566667 | 0.708333 |
+| `unknown` | 0.985507 | 0.500000 | 0.663415 | 0.987500 | 0.580882 | 0.731481 |
+
+No per-label F1 regression is marked in the saved comparison. Per-label
+precision decreased for `contradicted` (`-0.038166`) and `supported`
+(`-0.010101`), while their recall and F1 increased; `unknown` precision
+increased by `+0.001993`.
+
+At claim level, the comparison contains 65 fixed claim IDs and 40 regressed
+claim IDs. The regressions occur across answers A03, A08, A16, A25, A29, and
+A31; the comparison contains claim-state transitions rather than a separate
+per-answer quality metric. The state-level details are in
+`evidence/v1-v2-final-comparison.json` and the provenance summary is in
+`evidence/submission/final-provenance.json`.
+
+### Conclusion and attribution limits
+
+The observed gain is small and descriptive: the bootstrap interval includes
+zero, and the development runs had different numbers of completed answers.
+The evidence supports that the saved v1 analysis motivated the v2
+advice/instruction policy, and that corrected runs contain no unmatched
+accepted prediction IDs. It does not isolate the causal contribution of the
+v2 prompt from the shared deterministic advice/instruction filter and
+validation changes. Because extraction precision was `1.000000` in both final
+runs, the evidence does not show that either change explains an extraction-
+precision improvement.
+
+## Run and API use
+
+The current corrected final artifacts are:
 
 ```text
-OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-5-mini-2025-08-07
-DATABASE_URL=postgresql://claimlens:claimlens@localhost:5432/claimlens
-LANGFUSE_PUBLIC_KEY=...
-LANGFUSE_SECRET_KEY=...
-LANGFUSE_BASE_URL=https://cloud.langfuse.com
+artifacts/v1-development-corrected-final/
+artifacts/v2-development-corrected-final/
+artifacts/v1-check-corrected-final/
+artifacts/v2-check-corrected-final/
 ```
 
-No model/provider call is needed for the tests, evaluator, saved-run
-verification, or offline audit commands.
-
-## Run the API
-
-ClaimLens uses PostgreSQL; SQLite is not supported.
+For live operation, PostgreSQL and provider credentials are required. Copy
+`.env.example` to `.env`, set the live values, create the database, and run:
 
 ```bash
 createdb claimlens
@@ -67,209 +172,73 @@ set -a; . ./.env; set +a
 make run
 ```
 
-The service listens on `http://127.0.0.1:8000` and exposes:
-
-- `POST /classify`
-- `POST /evaluation-runs` with `agent_version` (`v1` or `v2`) and `split`
-  (`development` or `check`)
-- `GET /evaluation-runs/{id}`
-
-The API/TestClient and PostgreSQL integration suites passed, but a persistent
-live `make run` process smoke was not retained. Therefore that smoke is
-**INCOMPLETE**, not **VERIFIED**; TestClient integration is not being called a
-deployed-process test.
+The service exposes `POST /classify`, `POST /evaluation-runs`, and
+`GET /evaluation-runs/{id}`. The no-credentials process smoke in
+`evidence/run-smoke.txt` is **VERIFIED as a configuration/validation smoke**:
+it exercised validation/configuration blockers only and did not send a valid
+provider request.
 
 ## Docker
 
-The Dockerfile uses Python `3.12.7` and the locked dependencies:
+The project pins Python `3.12.7` and dependencies in `requirements.lock`.
 
 ```bash
 docker build --tag claimlens:local .
 docker run --rm --env-file .env -p 8000:8000 claimlens:local
 ```
 
-The recorded corrected audit reports a successful image build, 97 container
-tests with 5 PostgreSQL-dependent tests skipped without a DB URL, and 10
-container DB/API integration tests with 1 warning. No hosted deployment is
-required by the assessment; hosted deployment remains **UNVERIFIED**.
+The saved **VERIFIED** receipt records a successful image build, 97 container
+tests with 5 PostgreSQL-dependent tests skipped without a database URL, and 10
+container database/API integration tests with 1 warning.
 
-## Tests and offline verification
+## Evidence map
 
-The following commands have retained receipts or are the exact offline checks
-used for the current evidence:
+| Rubric area | Implementation, tests, and evidence |
+|---|---|
+| Agent | `agent/core.py`; `tests/agent/test_core.py`; `tests/agent/test_import_isolation.py`; `artifacts/v1-development-corrected-final/outcomes.json`; `artifacts/v2-development-corrected-final/outcomes.json`; `artifacts/v1-development-corrected-final/predictions.json`; `artifacts/v2-development-corrected-final/predictions.json` |
+| Evaluation harness | `harness/evaluator.py`; `harness/reports.py`; `harness/comparison.py`; `tests/harness/test_evaluator.py`; `tests/harness/test_reports_comparison.py`; corrected `report.json` files |
+| Improvement/regression analysis | `prompts/v1.txt`; `prompts/v2.txt`; `tests/v2_policy/report.md`; `evidence/analysis/v1-development-final-turn-gated-analysis.json`; `evidence/v1-v2-final-comparison.json`; `evidence/submission/final-provenance.json` |
+| FastAPI/PostgreSQL | `claimlens/api/app.py`; `claimlens/api/deps.py`; `claimlens/db/schema.py`; `claimlens/db/repository.py`; `tests/api/`; `tests/integration/test_api_postgres.py`; `evidence/run-smoke.txt` |
+| Langfuse | `claimlens/tracing.py`; `runner/experiment.py`; `tests/langfuse/test_verifier.py`; `tests/reliability/test_tracing.py`; `artifacts/v1-development-corrected-final/trace_verification.json`; `artifacts/v2-development-corrected-final/trace_verification.json`; `artifacts/v1-check-corrected-final/trace_verification.json`; `artifacts/v2-check-corrected-final/trace_verification.json`; `evidence/langfuse/langfuse-summary.json`; `evidence/langfuse/langfuse-evidence.md` |
+| Reliability/tests | `runner/executor.py`; `providers/openai.py`; `tests/reliability/test_executor.py`; `tests/reliability/test_openai_provider.py`; `tests/agent/`; `evidence/pytest-output.txt` |
+| Reproducibility | `.python-version`; `requirements.lock`; `Dockerfile`; `Makefile`; `evidence/MANIFEST.json`; `evidence/audit/current-audit.json`; `evidence/audit/REPORT.md` |
 
-```bash
-make test
-make verify
-make hash
-PYTHONPATH=. .venv/bin/python evidence/audit/repository_audit.py
-PYTHONPATH=. .venv/bin/python evidence/langfuse-investigation/audit.py \
-  --offline --output evidence/langfuse-investigation/audit-report.json
-```
+## Disclosure
 
-Current receipts:
+AI assistance used: OmniRush with subagents. The live provider was OpenAI
+`gpt-5-mini` (`gpt-5-mini-2025-08-07`).
 
-| Check | Result | Evidence |
-|---|---|---|
-| `make test` | **VERIFIED — 102 passed, 1 warning** | `evidence/pytest-output.txt` |
-| `make verify` | **VERIFIED — exit 0; both corrected development metric objects matched** | `evidence/verify-output.txt` |
-| PostgreSQL/API integration | **VERIFIED — 24 passed, 1 warning** | `tests/integration/`, `tests/api/` and handoff receipt |
-| Docker build | **VERIFIED — passed** | `Dockerfile` and recorded build receipt |
-| Docker container tests | **VERIFIED — 97 passed, 5 skipped** without DB env | recorded container receipt |
-| Focused offline gate | **VERIFIED — 100 passed, 1 warning** | recorded focused-gate receipt |
-| No-credentials FastAPI process smoke | **VERIFIED as a configuration/validation smoke** | `evidence/run-smoke.txt` |
-| Live `make run` process smoke | **INCOMPLETE — no `make run` receipt retained** | Direct Uvicorn smoke did not send a valid provider request or reach a configured DB |
+Checks with retained receipts include:
 
-`make verify` performs no provider calls. It rescored the two corrected
-development artifacts and matched their stored metrics exactly. The selected
-manifest is not a full repository-tree hash; its scope is documented in
-`evidence/MANIFEST.json`.
+- `make test`: `evidence/pytest-output.txt` — **VERIFIED**, 102 passed and 1 warning.
+- `make verify`: `evidence/verify-output.txt` — **VERIFIED**, exit 0.
+- Docker build and container tests: the saved Docker receipts summarized in `HANDOFF.md`.
+- PostgreSQL/API integration: `tests/integration/test_api_postgres.py`, `tests/api/`, and the saved receipt summarized in `HANDOFF.md`.
+- Langfuse audit: `evidence/langfuse-investigation/audit-report.json`, `evidence/langfuse/langfuse-summary.json`, and `evidence/langfuse/langfuse-evidence.md`.
 
-## Corrected final live runs
+Elapsed time: **9:54:07.501173 wall-clock**, from the first saved run artifact
+(`artifacts/smoke-v1-A01/run.json`, `2026-10-19T12:23:01.785086Z`) to the last
+saved run artifact (`artifacts/v2-check-corrected-final/run.json`,
+`2026-10-19T22:17:09.286259Z`), including waiting.
 
-The historical frozen-tag runs remain preserved. The four corrected final
-artifacts below are new directories and new run IDs; no historical artifact was
-overwritten. All four use post-fix source revision
-`a0020d06e0d71fbe83fd43236cdec3b33983d8b6` and the same provider, model,
-dataset, evaluator, timeout, retry, turn, and concurrency settings. The v2
-prompt is the intended model-facing behavior change from v1.
+## Known limitations and unfinished work
 
-| Run | Run ID | Artifact | Answers | Errors | Predictions | Joint F1 |
-|---|---|---|---:|---:|---:|---:|
-| v1 development | `1d30770a-933b-4982-83be-875d24c02682` | `artifacts/v1-development-corrected-final/` | 22/40 ok | 18 | 201 | 0.665511 |
-| v2 development | `4ade6dff-2f02-40b3-8b25-72985c0ca141` | `artifacts/v2-development-corrected-final/` | 26/40 ok | 14 | 231 | 0.714992 |
-| v1 check | `cbcc20f2-b4c8-4c2d-8718-76bd3a69002a` | `artifacts/v1-check-corrected-final/` | 5/10 ok | 5 | 44 | `null` |
-| v2 check | `2f8469ef-e735-4eee-bb01-9b9a8dff7865` | `artifacts/v2-check-corrected-final/` | 9/10 ok | 1 | 83 | `null` |
+- **INCOMPLETE:** Full reviewer-facing Langfuse payload exports for all 100
+  corrected traces were not retained. The repository retains sanitized
+  observation metadata, local receipts, counts, names, status codes, and body
+  digests, not prompts, model/tool payloads, score payloads, credentials, or raw
+  response bodies.
+- **INCOMPLETE:** A persistent configured `make run` process smoke was not
+  retained. `evidence/run-smoke.txt` is a no-credentials validation/
+  configuration smoke and did not reach a valid provider/database path.
+- **UNVERIFIED:** Blind check quality. Check reports intentionally keep
+  gold-derived quality fields `null`; the check labels are held by the hiring
+  team.
+- **UNVERIFIED:** The exact cause of the timeout and success-rate variation.
+  The non-premium account is a documented limitation, not a proven cause.
+- **UNVERIFIED:** Hosted deployment, which is not required by the assessment.
 
-### Corrected development headline metrics
-
-The development split has 376 gold claims. `P` is accepted predictions, `M`
-is exact span matches, and `C` is exact span matches with the correct label.
-
-| Metric | v1 | v2 |
-|---|---:|---:|
-| Predictions (`P`) | 201 | 231 |
-| Matched spans (`M`) | 201 | 231 |
-| Correct labels (`C`) | 192 | 217 |
-| Extraction precision | 1.000000 | 1.000000 |
-| Extraction recall | 0.534574 | 0.614362 |
-| Extraction F1 | 0.696707 | 0.761120 |
-| Joint precision | 0.955224 | 0.939394 |
-| Joint recall / coverage (`C/G`) | 0.510638 | 0.577128 |
-| Joint F1 | 0.665511 | 0.714992 |
-| Macro label F1 | 0.665583 | 0.714444 |
-
-Observed joint-F1 delta is `+0.049480`. The paired bootstrap estimate is
-`+0.068996` with a 95% CI of `[-0.086781, +0.220426]` from 2,000 paired
-resamples over 40 answers with seed `0`; the interval includes zero. The
-comparison is therefore an observed result, not statistically conclusive
-generalization. Claim transitions are in
-`evidence/v1-v2-final-comparison.json`; no final-check gold labels were used
-or inspected.
-
-### Corrected predictions and errors
-
-- v1 development: 18 `provider_timeout` outcomes on A01, A02, A04, A06,
-  A07, A09, A11, A12, A17, A22, A28, A30, A32, A33, A34, A37, A39, and
-  A40.
-- v2 development: 13 `provider_timeout` outcomes on A03, A04, A06, A08,
-  A11, A17, A29, A31, A33, A34, A37, A39, and A40; A09 was an
-  `invalid_output` (`claim fields are incomplete or unknown`).
-- v1 check: five `provider_timeout` outcomes on A43, A44, A46, A48, and A50.
-- v2 check: one `provider_timeout` outcome on A46.
-
-These are answer-level errors. A timeout creates no accepted predictions and
-counts every gold claim for that development answer as a missed `G` claim; it
-is not converted into an `unknown` prediction. The implementation retains the
-specification's 15-second limit for each provider request, with at most two
-attempts per turn and at most three model turns. This documentation pass did
-not change timeouts, retries, artifacts, or code.
-
-Provider timeouts are not labelled as rate limits or quota exhaustion. They are
-distinct from the separate HTTP 429 responses seen by the post-run Langfuse
-audit. The live provider runs also used a non-premium account; that account
-tier is a documented limitation of this evidence, not a proven explanation for
-the answer timeouts. The cause of the run-to-run timeout variation is
-**UNVERIFIED**.
-
-### Check-score isolation
-
-The check reports retain predictions, errors, timings, and terminal answer
-outcomes, but all gold-derived fields remain `null`: `gold_claims`, matched
-spans, correct labels, extraction and joint precision/recall/F1, coverage,
-per-label metrics, macro F1, confusion matrices, and missed/unmatched/wrong
-label ID lists. Check quality is intentionally `null`, not zero. The hiring
-team holds the check labels.
-
-## Advice, instruction, and injection evidence
-
-The historical frozen v1 analysis
-(`artifacts/v1-development-final-turn-gated/`, run
-`8cb56eec-6c54-4eab-aba2-317bee75d451`) found 605 predictions and 261
-unmatched predictions: 254 advice/instruction-only spans, 3 explicit
-meta-instruction markers, 2 factual-looking supported sentences, and 2
-unsupported/unresolved sentences. The saved historical v1 and v2 injection
-canaries both failed for A07, A18, and A32 because the marker sentence was
-extracted; `override_suspected` was false and not all labels were `supported`.
-See `evidence/analysis/v1-development-final-turn-gated-analysis.json`,
-`evidence/v1-final-injection-canary.json`, and
-`evidence/v2-final-injection-canary.json`.
-
-The corrected development reports have zero unmatched accepted prediction IDs
-in both runs, and the saved corrected diagnostic advice-only count is zero.
-Offline tests cover pure advice, opinions, instructions, prompt injection,
-imperative-plus-fact sentences, Unicode spans, and exact output validation.
-Those current saved-run and offline results do not turn the historical failed
-canaries into passes; the historical canary files remain preserved.
-
-The evidence supports the narrower claim that the intended v2 prompt policy
-was based on the saved v1 development analysis, that no private check labels or
-check-quality metrics were loaded or inspected, and that no direct evidence was
-found that an individual filter token was added because of a check-split output.
-Because the answer inputs were visible and no external decision log exists, the
-repository cannot independently confirm that no undocumented human decision
-considered visible check text. It therefore does not claim a blind benchmark or
-claim that no check-informed tuning of any kind occurred.
-
-## Langfuse evidence and unfinished work
-
-Each corrected final run has one local trace receipt per scheduled answer,
-generation/tool events, answer diagnostics, and development score events where
-applicable. The corrected verifier uses each per-answer trace ID and an
-explicit UTC run window; the historical `timedelta` verifier failure is
-preserved in `artifacts/v2-development-final/trace_verification_error.json`.
-The four corrected final runs have no `trace_verification_error.json`, and
-their local receipt rows are non-empty.
-
-The later retained sanitized audit
-(`evidence/langfuse-investigation/audit-report.json`, generated at
-2026-10-19T22:46:50Z) initially queried all 100 corrected trace IDs and
-recorded 86 non-empty observation responses plus 14 HTTP 429 responses. The
-subsequent serial re-query retained in `evidence/langfuse/langfuse-evidence.md`
-and `evidence/langfuse/langfuse-summary.json` recovered all 14: final remote
-confirmation is v1 development 40/40, v2 development 40/40, v1 check 10/10,
-and v2 check 10/10, with no remaining inaccessible traces. The 429s were
-Langfuse audit responses, not provider answer timeouts or quota evidence.
-
-The current reviewer export is sanitized observation metadata, not a full raw
-payload export. It intentionally omits full prompts/answers, model outputs,
-tool payloads, score payloads, credentials, and environment values.
-
-The exact unfinished work is:
-
-- **INCOMPLETE:** retain full reviewer-facing remote Langfuse payload exports
-  for all 100 corrected traces. The repository retains only local receipts and
-  sanitized counts, observation names, status codes, and body digests; it does
-  not retain prompts, model/tool payloads, scores, or credentials.
-- **INCOMPLETE:** retain a persistent live `make run` process smoke. A direct
-  no-credentials Uvicorn process smoke is retained in `evidence/run-smoke.txt`,
-  but it stopped at request-validation/configuration blockers and was not a
-  `make run` smoke against a configured provider/database.
-- **UNVERIFIED:** hosted deployment, which the assessment does not require.
-- **UNVERIFIED:** blind check quality and the cause of the differing timeout
-  rates.
-
-## Sequence and deviations
+## Appendix: sequence and deviations
 
 The list below is chronological by saved `started_at` (UTC); all entries are
 from 2026-10-19. It includes the
